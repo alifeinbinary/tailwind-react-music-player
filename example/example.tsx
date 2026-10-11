@@ -1,16 +1,23 @@
 /* eslint-disable no-console */
 import Switch from 'rc-switch'
-import React from 'react'
-import { hot } from 'react-hot-loader/root'
+import React, { ChangeEvent } from 'react'
 import pkg from '../package.json'
-import ReactJkMusicPlayer from '../src'
+import ReactJkMusicPlayer, {
+  ReactJkMusicPlayerAudioInfo,
+  ReactJkMusicPlayerAudioListProps,
+  ReactJkMusicPlayerInstance,
+  ReactJkMusicPlayerMode,
+  ReactJkMusicPlayerPlayMode,
+  ReactJkMusicPlayerProps,
+  ReactJkMusicPlayerTheme,
+} from '../src'
 import Locale from '../src/config/locale'
 import PLAY_MODE from '../src/config/playMode'
 import '../src/styles/index.css'
 import { createRandomNum } from '../src/utils'
 import './example.css'
 
-const audioList1 = [
+const audioList1: ReactJkMusicPlayerAudioListProps[] = [
   {
     name: 'Despacito',
     singer: 'Luis Fonsi',
@@ -33,7 +40,7 @@ const audioList1 = [
   },
 ]
 
-const audioList2 = [
+const audioList2: ReactJkMusicPlayerAudioListProps[] = [
   {
     name: 'Bedtime Stories',
     singer: 'Jay Chou',
@@ -63,7 +70,7 @@ const audioList2 = [
   },
 ]
 
-const audioList3 = [
+const audioList3: ReactJkMusicPlayerAudioListProps[] = [
   {
     name: 'Despacito',
     singer: 'Luis Fonsi',
@@ -90,7 +97,7 @@ const audioList3 = [
   },
 ]
 
-const audioList4 = [
+const audioList4: ReactJkMusicPlayerAudioListProps[] = [
   {
     name: 'Bedtime Stories',
     singer: 'Jay Chou',
@@ -101,7 +108,7 @@ const audioList4 = [
   },
 ]
 
-const options = {
+const options: ReactJkMusicPlayerProps = {
   // audio lists model
   audioLists: audioList1,
 
@@ -262,8 +269,8 @@ const options = {
   },
   /**
    * Restarts the current track when trying to play previous song, if the current time of the song is more than 1 second
-      Otherwise, plays the previous song in the list
-      [type `Boolean` default `false`]
+     Otherwise, plays the previous song in the list
+     [type `Boolean` default `false`]
   */
   restartCurrentOnPrev: false,
 
@@ -306,8 +313,8 @@ const options = {
   },
 
   // audio play progress handle
-  // eslint-disable-next-line no-unused-vars
-  onAudioProgress(audioInfo) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onAudioProgress(_audioInfo) {
     // console.log('audio progress', audioInfo)
   },
 
@@ -378,7 +385,7 @@ const options = {
     console.log('onBeforeDestroy currentPlayId: ', currentPlayId)
     console.log('onBeforeDestroy audioLists: ', audioLists)
     console.log('onBeforeDestroy audioInfo: ', audioInfo)
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       // your custom validate
       // eslint-disable-next-line no-alert
       if (window.confirm('Are you confirm destroy the player?')) {
@@ -430,13 +437,13 @@ const options = {
    * @param {*} downloadInfo
    * @example
    *
-       customDownloader(downloadInfo) {
-        const link = document.createElement('a')
-        link.href = downloadInfo.src
-        link.download = downloadInfo.filename || 'test'
-        document.body.appendChild(link)
-        link.click()
-      },
+      customDownloader(downloadInfo) {
+       const link = document.createElement('a')
+       link.href = downloadInfo.src
+       link.download = downloadInfo.filename || 'test'
+       document.body.appendChild(link)
+       link.click()
+     },
    */
   // customDownloader(downloadInfo) {
   //   console.log(downloadInfo.src)
@@ -445,17 +452,19 @@ const options = {
   // },
 }
 
-class Demo extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.audio = {}
-  }
+interface DemoState {
+  unmount: boolean
+  params: ReactJkMusicPlayerProps & Record<string, any>
+}
 
-  state = {
+class Demo extends React.PureComponent<object, DemoState> {
+  private audio: ReactJkMusicPlayerInstance = {} as ReactJkMusicPlayerInstance
+
+  state: DemoState = {
     unmount: false,
     params: {
       ...options,
-      getAudioInstance: (audio) => {
+      getAudioInstance: (audio: ReactJkMusicPlayerInstance) => {
         this.audio = audio
       },
     },
@@ -558,8 +567,8 @@ class Demo extends React.PureComponent {
     this.onChangeKey('seeked')
   }
 
-  onChangeKey = (key) => {
-    const data = {
+  onChangeKey = (key: string) => {
+    const data: ReactJkMusicPlayerProps & Record<string, any> = {
       ...this.state.params,
       [key]: !this.state.params[key],
     }
@@ -569,8 +578,8 @@ class Demo extends React.PureComponent {
     if (key === 'full' || key === 'mini') {
       data.mode = key
     }
-    if (Object.values(Locale).includes(key)) {
-      data.locale = key
+    if ((Object.values(Locale) as string[]).includes(key)) {
+      data.locale = key as ReactJkMusicPlayerProps['locale']
     }
     this.setState({ params: data })
   }
@@ -595,7 +604,7 @@ class Demo extends React.PureComponent {
     })
   }
 
-  updateParams = (params) => {
+  updateParams = (params: Partial<ReactJkMusicPlayerProps>) => {
     const data = {
       ...this.state.params,
       ...params,
@@ -609,13 +618,18 @@ class Demo extends React.PureComponent {
     this.setState({ unmount: true })
   }
 
-  onPlayModeChange = (e) => {
-    this.updateParams({ playMode: e.target.value })
+  onPlayModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    this.updateParams({
+      playMode: e.target.value as ReactJkMusicPlayerPlayMode,
+    })
   }
 
   renderCustomAudioTitle = () => {
     this.updateParams({
-      renderAudioTitle: (audioInfo, isMobile) => {
+      renderAudioTitle: (
+        audioInfo: ReactJkMusicPlayerAudioInfo,
+        _isMobile: boolean,
+      ) => {
         return (
           <>
             <a href="#">{audioInfo.name}</a>
@@ -666,7 +680,7 @@ class Demo extends React.PureComponent {
         <button
           type="button"
           onClick={() => {
-            this.audio.destroy()
+            this.audio.destroy?.()
           }}
         >
           destroy player
@@ -686,7 +700,7 @@ class Demo extends React.PureComponent {
         <button
           type="button"
           onClick={() => {
-            this.audio.playByIndex(1)
+            this.audio.playByIndex?.(1)
           }}
         >
           play by index (1)
@@ -694,7 +708,7 @@ class Demo extends React.PureComponent {
         <button
           type="button"
           onClick={() => {
-            this.audio.updatePlayIndex(1)
+            this.audio.updatePlayIndex?.(1)
           }}
         >
           update play index (1)
@@ -736,7 +750,7 @@ class Demo extends React.PureComponent {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/lijinke666/react-music-player/blob/master/example/example.js"
+            href="https://github.com/alifeinbinary/react-music-player/blob/master/example/example.js"
           >
             (DEMO SOURCE)
           </a>
@@ -935,7 +949,7 @@ class Demo extends React.PureComponent {
             <input
               type="checkbox"
               id="preload"
-              checked={params.preload}
+              checked={!!params.preload}
               onChange={() => this.onChangeKey('preload')}
             />
             preload
@@ -1037,19 +1051,19 @@ class Demo extends React.PureComponent {
         {unmount ? null : (
           <ReactJkMusicPlayer
             {...params}
-            onThemeChange={(theme) => {
+            onThemeChange={(theme: ReactJkMusicPlayerTheme) => {
               console.log('onThemeChange: ', theme)
               this.updateParams({ theme })
             }}
-            onModeChange={(mode) => {
+            onModeChange={(mode: ReactJkMusicPlayerMode) => {
               console.log('onModeChange: ', mode)
               this.updateParams({ mode })
             }}
-            onPlayModeChange={(playMode) => {
+            onPlayModeChange={(playMode: ReactJkMusicPlayerPlayMode) => {
               console.log('onPlayModeChange: ', playMode)
               this.updateParams({ playMode })
             }}
-            onPlayIndexChange={(playIndex) => {
+            onPlayIndexChange={(playIndex: number) => {
               console.log('onPlayIndexChange: ', playIndex)
               this.updateParams({ playIndex })
             }}
@@ -1060,4 +1074,4 @@ class Demo extends React.PureComponent {
   }
 }
 
-export default hot(Demo)
+export default Demo
