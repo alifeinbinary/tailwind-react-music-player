@@ -1,18 +1,18 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Player custom icon test should render custom icon 1`] = `
+exports[`Player custom icon test > should render custom icon 1`] = `
 <div
-  class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme"
+  class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme"
   tabindex="-1"
 >
   <div
-    class="music-player-panel shadow-[0_0_3px_#403f3f] fixed w-full bottom-0 left-0 text-(color:--rjmp-panel-color) h-(--rjmp-panel-height) bg-(color:--rjmp-panel-bg) z-[99] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) animate-[translate_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
+    class="music-player-panel shadow-[0_0_3px_#403f3f] fixed w-full bottom-0 left-0 text-(--rjmp-panel-color) h-(--rjmp-panel-height) bg-(--rjmp-panel-bg) z-99 transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) animate-[translate_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
   >
     <section
-      class="panel-content h-full px-[30px] relative overflow-hidden flex items-center justify-center"
+      class="panel-content h-full px-7.5 relative overflow-hidden flex items-center justify-center"
     >
       <div
-        class="img-content img-rotate w-[50px] h-[50px] rounded-[50%] overflow-hidden [background-size:100%] bg-no-repeat shadow-[0_0_10px_rgba(0,34,77,0.05)] cursor-pointer animate-[imgRotate_15s_linear_infinite] max-md:w-[40px] max-md:h-[40px] img-rotate-pause [animation-play-state:paused]!"
+        class="img-content img-rotate w-12.5 h-12.5 rounded-[50%] overflow-hidden bg-size-[100%] bg-no-repeat shadow-[0_0_10px_rgba(0,34,77,0.05)] cursor-pointer animate-[imgRotate_15s_linear_infinite] max-md:w-10 max-md:h-10 img-rotate-pause [animation-play-state:paused]!"
         style="background-image: url();"
       />
       <div
@@ -34,10 +34,10 @@ exports[`Player custom icon test should render custom icon 1`] = `
             00:00
           </span>
           <div
-            class="progress-bar flex-auto w-full mx-5 mt-[2px] relative"
+            class="progress-bar flex-auto w-full mx-5 mt-0.5 relative"
           >
             <div
-              class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)_-_1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-[5px] z-[77]"
+              class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)-1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-1.25 z-77"
               style="width: 0%;"
             />
             <div
@@ -91,7 +91,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
             </div>
           </span>
           <span
-            class="group play-btn flex px-[18px] [&_svg]:text-[26px]"
+            class="group play-btn flex px-4.5 [&_svg]:text-[26px]"
             title="Click to play"
           >
             <div>
@@ -145,14 +145,14 @@ exports[`Player custom icon test should render custom icon 1`] = `
           title="Volume"
         >
           <span
-            class="sounds-icon flex mr-[15px] flex-auto"
+            class="sounds-icon flex mr-3.75 flex-auto"
           >
             <div>
               1
             </div>
           </span>
           <div
-            class="rc-slider sound-operation w-[100px]"
+            class="rc-slider sound-operation w-25"
           >
             <div
               class="rc-slider-rail"
@@ -188,7 +188,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </div>
         </span>
         <span
-          class="group cursor-pointer text-center flex-1 mx-2.5 max-md:mx-1.5 [@media_(max-width:320px)]:mx-1 inline-flex items-center justify-center [&>svg]:cursor-pointer audio-lists-btn select-none min-w-[60px] h-[28px] rounded-[40px] bg-black/30 px-2.5 shadow-[0_0_1px_1px_rgba(255,255,255,0.02)] relative [transition:color,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
+          class="group cursor-pointer text-center flex-1 mx-2.5 max-md:mx-1.5 [@media_(max-width:320px)]:mx-1 inline-flex items-center justify-center [&>svg]:cursor-pointer audio-lists-btn select-none min-w-15 h-7 rounded-[40px] bg-black/30 px-2.5 shadow-[0_0_1px_1px_rgba(255,255,255,0.02)] relative [transition:color,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
           title="Playlists"
         >
           <span
@@ -205,7 +205,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </span>
         </span>
         <span
-          class="group hide-panel cursor-pointer text-center flex-[1_1_10%] ml-[15px] mr-2.5 max-md:mr-1.5 [@media_(max-width:320px)]:mr-1 inline-flex items-center justify-center [&>svg]:cursor-pointer"
+          class="group hide-panel cursor-pointer text-center flex-[1_1_10%] ml-3.75 mr-2.5 max-md:mr-1.5 [@media_(max-width:320px)]:mr-1 inline-flex items-center justify-center [&>svg]:cursor-pointer"
           title="Minimize"
         >
           <div>
@@ -271,7 +271,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
             class="group player-status inline-flex"
           >
             <span
-              class="player-icons inline-flex w-[30px]"
+              class="player-icons inline-flex w-7.5"
             >
               <div>
                 1
@@ -304,7 +304,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
             class="group player-status inline-flex"
           >
             <span
-              class="player-icons inline-flex w-[30px]"
+              class="player-icons inline-flex w-7.5"
             />
           </span>
           <span
@@ -329,7 +329,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
     </div>
   </div>
   <div
-    class="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
+    class="play-mode-title select-none fixed right-18 bottom-(--rjmp-panel-height) px-5 py-1.25 bg-black/50 text-white leading-normal text-center origin-bottom z-1000 transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
   >
     Play in order
   </div>
@@ -341,16 +341,16 @@ exports[`Player custom icon test should render custom icon 1`] = `
 </div>
 `;
 
-exports[`Player custom icon test should render custom icon in mobile mode 1`] = `
+exports[`Player custom icon test > should render custom icon in mobile mode 1`] = `
 <div
-  class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme"
+  class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme"
   tabindex="-1"
 >
   <div
-    class="react-jinke-music-player-mobile w-full fixed z-[999] inset-0 p-5 text-white flex flex-col justify-between bg-(color:--rjmp-panel-bg-mobile) overflow-hidden [&>.group]:flex-auto default-bg"
+    class="react-jinke-music-player-mobile w-full fixed z-999 inset-0 p-5 text-white flex flex-col justify-between bg-(--rjmp-panel-bg-mobile) overflow-hidden [&>.group]:flex-auto default-bg"
   >
     <div
-      class="react-jinke-music-player-mobile-play-model-tip fixed left-0 top-0 w-full h-[35px] leading-[35px] bg-(color:--rjmp-primary-color) text-white px-5 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.1)] -translate-y-[105%] transition-transform duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) flex items-center"
+      class="react-jinke-music-player-mobile-play-model-tip fixed left-0 top-0 w-full h-8.75 leading-8.75 bg-(--rjmp-primary-color) text-white px-5 z-1000 shadow-[0_2px_20px_rgba(0,0,0,0.1)] translate-y-[-105%] transition-transform duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) flex items-center"
     >
       <span
         class="react-jinke-music-player-mobile-play-model-tip-title mr-3 [&_svg]:animate-none! [&_svg]:align-text-bottom! [&_.loop-btn]:flex max-md:[&_svg]:text-[19px] max-md:[&_svg]:text-white!"
@@ -374,13 +374,13 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       class="react-jinke-music-player-mobile-header group w-full flex justify-center items-center animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] relative"
     >
       <div
-        class="react-jinke-music-player-mobile-header-title text-center text-[20px] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) px-[30px] truncate"
+        class="react-jinke-music-player-mobile-header-title text-center text-[20px] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) px-7.5 truncate"
         title="audioName"
       >
         audioName
       </div>
       <div
-        class="react-jinke-music-player-mobile-header-right text-(color:--rjmp-base-color) cursor-pointer absolute right-0 [&_svg]:text-[25px]"
+        class="react-jinke-music-player-mobile-header-right text-(--rjmp-base-color) cursor-pointer absolute right-0 [&_svg]:text-[25px]"
       >
         <div>
           1
@@ -417,7 +417,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-cover text-center w-[300px] h-[300px] rounded-[50%] border-[5px] border-black/20 shadow-[0_0_1px_3px_rgba(0,0,0,0.1)] my-[15px] mx-auto animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] overflow-hidden [transition:box-shadow,border_var(--rjmp-animate-time)_var(--rjmp-animate-type)] [@media_(max-width:320px)]:w-[230px] [@media_(max-width:320px)]:h-[230px] [@media_(max-width:320px)]:my-2.5"
+      class="react-jinke-music-player-mobile-cover text-center w-75 h-75 rounded-[50%] border-[5px] border-black/20 shadow-[0_0_1px_3px_rgba(0,0,0,0.1)] my-3.75 mx-auto animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] overflow-hidden [transition:box-shadow,border_var(--rjmp-animate-time)_var(--rjmp-animate-type)] [@media_(max-width:320px)]:w-57.5 [@media_(max-width:320px)]:h-57.5 [@media_(max-width:320px)]:my-2.5"
     >
       <img
         alt="cover"
@@ -429,7 +429,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       class="react-jinke-music-player-mobile-progress group justify-around flex items-center animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <span
-        class="current-time inline-flex w-[55px] text-xs text-(color:--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) mr-[5px]"
+        class="current-time inline-flex w-13.75 text-xs text-(--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) mr-1.25"
       >
         00:00
       </span>
@@ -437,7 +437,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         class="react-jinke-music-player-mobile-progress-bar relative flex w-full"
       >
         <div
-          class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)_-_1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-[5px] z-[77]"
+          class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)-1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-1.25 z-77"
           style="width: 0%;"
         />
         <div
@@ -469,13 +469,13 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         </div>
       </span>
       <span
-        class="duration text-right inline-flex w-[55px] text-xs text-(color:--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) justify-end ml-[5px]"
+        class="duration text-right inline-flex w-13.75 text-xs text-(--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) justify-end ml-1.25"
       >
         00:00
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-toggle text-center group py-[17px] animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] [&_.group]:cursor-pointer [&_.group_svg]:text-[40px] [@media_(max-width:320px)]:py-2.5 [@media_(max-width:320px)]:[&>.group_svg]:text-[32px]"
+      class="react-jinke-music-player-mobile-toggle text-center group py-4.25 animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] [&_.group]:cursor-pointer [&_.group_svg]:text-10 [@media_(max-width:320px)]:py-1 [@media_(max-width:320px)]:[&>.group_svg]:text-8"
     >
       <span
         class="group prev-audio"
@@ -486,7 +486,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         </div>
       </span>
       <span
-        class="group play-btn px-10 [&_svg]:text-[45px]! [@media_(max-width:320px)]:[&_svg]:text-[40px]!"
+        class="group play-btn px-10 [&_svg]:text-11.25! [@media_(max-width:320px)]:[&_svg]:text-10!"
         title="Click to play"
       >
         <div>
@@ -509,7 +509,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         class="items flex justify-around items-center"
       >
         <li
-          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(--rjmp-base-color)"
         >
           <span
             class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer loop-btn"
@@ -521,7 +521,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(--rjmp-base-color)"
         >
           <span
             class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer audio-download"
@@ -533,7 +533,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(--rjmp-base-color)"
         >
           <span
             class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer reload-btn"
@@ -545,7 +545,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(--rjmp-base-color)"
         >
           <div>
             1
@@ -610,7 +610,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
             class="group player-status inline-flex"
           >
             <span
-              class="player-icons inline-flex w-[30px]"
+              class="player-icons inline-flex w-7.5"
             >
               <div>
                 1
@@ -643,7 +643,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
             class="group player-status inline-flex"
           >
             <span
-              class="player-icons inline-flex w-[30px]"
+              class="player-icons inline-flex w-7.5"
             />
           </span>
           <span

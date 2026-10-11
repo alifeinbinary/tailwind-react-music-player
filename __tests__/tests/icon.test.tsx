@@ -25,7 +25,7 @@ const LoadingIcon = () => <div>1</div>
 const PackUpPanelMobileIcon = () => <div>1</div>
 const EmptyIcon = () => <div>1</div>
 
-const createPlayer = (props) => (
+const createPlayer = (props?: any) => (
   <ReactJkMusicPlayer
     mode="full"
     audioLists={[
@@ -68,13 +68,13 @@ const createPlayer = (props) => (
 
 describe('Player custom icon test', () => {
   it('should render custom icon', () => {
-    const wrapper = mount(createPlayer())
+    const wrapper = mount<ReactJkMusicPlayer>(createPlayer())
     wrapper.find('.audio-lists-btn').simulate('click')
     expect(wrapper.render()).toMatchSnapshot()
   })
 
   it('should render custom icon in mobile mode', () => {
-    const wrapper = mount(createPlayer())
+    const wrapper = mount<ReactJkMusicPlayer>(createPlayer())
     wrapper.setState({ isMobile: true })
     expect(wrapper.render()).toMatchSnapshot()
   })

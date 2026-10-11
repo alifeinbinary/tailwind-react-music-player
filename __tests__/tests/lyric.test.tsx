@@ -4,7 +4,7 @@ import ReactJkMusicPlayer from '../../src'
 import lyric from '../../example/lyric'
 import { sleep } from '../utils'
 
-const createPlayer = (props) => (
+const createPlayer = (props?: any) => (
   <ReactJkMusicPlayer
     showLyric
     audioLists={[
@@ -25,18 +25,20 @@ const createPlayer = (props) => (
 
 describe('Lyric test', () => {
   it('should get initial lyric', () => {
-    const wrapper = mount(createPlayer())
+    const wrapper = mount<ReactJkMusicPlayer>(createPlayer())
     expect(wrapper.state().lyric).toEqual(lyric)
   })
   it('should active lyric button when current clicked', () => {
-    const wrapper = mount(createPlayer())
+    const wrapper = mount<ReactJkMusicPlayer>(createPlayer())
     expect(wrapper.find('.lyric-btn.lyric-btn-active')).toHaveLength(0)
     wrapper.find('.lyric-btn').simulate('click')
     expect(wrapper.find('.lyric-btn.lyric-btn-active').exists()).toBeTruthy()
   })
   it.skip('should call onAudioLyricChange when audio playing', () => {
-    const onAudioLyricChange = jest.fn()
-    const wrapper = mount(createPlayer({ onAudioLyricChange }))
+    const onAudioLyricChange = vi.fn()
+    const wrapper = mount<ReactJkMusicPlayer>(
+      createPlayer({ onAudioLyricChange }),
+    )
     wrapper.setState({ loading: false }, () => {
       wrapper.find('.play-btn').simulate('click')
 
@@ -47,16 +49,20 @@ describe('Lyric test', () => {
   })
 
   it.skip('should call onAudioLyricChange when audio auto play', () => {
-    const onAudioLyricChange = jest.fn()
-    mount(createPlayer({ autoPlay: true, onAudioLyricChange }))
+    const onAudioLyricChange = vi.fn()
+    mount<ReactJkMusicPlayer>(
+      createPlayer({ autoPlay: true, onAudioLyricChange }),
+    )
     sleep(1000).then(() => {
       expect(onAudioLyricChange).toHaveBeenCalled()
     })
   })
 
   it.skip('should toggle call onAudioLyricChange when audio pause', async () => {
-    const onAudioLyricChange = jest.fn()
-    const wrapper = mount(createPlayer({ onAudioLyricChange }))
+    const onAudioLyricChange = vi.fn()
+    const wrapper = mount<ReactJkMusicPlayer>(
+      createPlayer({ onAudioLyricChange }),
+    )
     wrapper.setState({ loading: false })
     wrapper.find('.play-btn').simulate('click')
 
@@ -69,8 +75,10 @@ describe('Lyric test', () => {
   })
 
   it.skip('should toggle call onAudioLyricChange when audio pause and select audio', async () => {
-    const onAudioLyricChange = jest.fn()
-    const wrapper = mount(createPlayer({ onAudioLyricChange }))
+    const onAudioLyricChange = vi.fn()
+    const wrapper = mount<ReactJkMusicPlayer>(
+      createPlayer({ onAudioLyricChange }),
+    )
     wrapper.setState({ audioListsPanelVisible: true })
     wrapper.find('.audio-item').first().simulate('click')
 
@@ -84,15 +92,19 @@ describe('Lyric test', () => {
   })
 
   it('should match current audio lyric', () => {
-    const onAudioLyricChange = jest.fn()
-    const wrapper = mount(createPlayer({ onAudioLyricChange }))
+    const onAudioLyricChange = vi.fn()
+    const wrapper = mount<ReactJkMusicPlayer>(
+      createPlayer({ onAudioLyricChange }),
+    )
     wrapper.find('.next-audio').simulate('click')
     expect(wrapper.state().lyric).toEqual('')
   })
 
   it('should match current audio lyric by audio item panel', () => {
-    const onAudioLyricChange = jest.fn()
-    const wrapper = mount(createPlayer({ onAudioLyricChange }))
+    const onAudioLyricChange = vi.fn()
+    const wrapper = mount<ReactJkMusicPlayer>(
+      createPlayer({ onAudioLyricChange }),
+    )
     wrapper.setState({ audioListsPanelVisible: true })
     wrapper.find('.audio-item').last().simulate('click')
     expect(wrapper.state().lyric).toEqual('')

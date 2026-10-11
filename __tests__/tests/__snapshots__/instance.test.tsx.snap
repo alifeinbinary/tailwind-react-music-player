@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AudioInstance test > should get audio instance 1`] = `
+<audio
+  class="music-player-audio hidden!"
+  src="a"
+  title=""
+/>
+`;

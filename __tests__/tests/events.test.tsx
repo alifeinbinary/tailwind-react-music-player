@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react'
-import assert from 'power-assert'
+import assert from 'assert'
 import { mount } from 'enzyme'
 
 import ReactJkMusicPlayer from '../../src'
@@ -8,7 +8,9 @@ import AudioListsPanel from '../../src/components/AudioListsPanel'
 
 describe('<ReactJkMusicPlayer/> click events tests', () => {
   it('sinon audio lists panel close events', () => {
-    const wrapper = mount(<ReactJkMusicPlayer audioLists={[]} mode="mini" />)
+    const wrapper = mount<ReactJkMusicPlayer>(
+      <ReactJkMusicPlayer audioLists={[]} mode="mini" />,
+    )
     wrapper.find('.react-jinke-music-player').simulate('click')
     wrapper.setState({ toggle: true })
     assert(wrapper.find('.music-player-panel').length >= 1)
@@ -45,7 +47,9 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
   })
 
   it('change audio lists', () => {
-    const wrapper = mount(<ReactJkMusicPlayer audioLists={[]} />)
+    const wrapper = mount<ReactJkMusicPlayer>(
+      <ReactJkMusicPlayer audioLists={[]} />,
+    )
     wrapper.setProps({
       audioLists: [
         {
@@ -85,7 +89,9 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
   })
 
   it('toggle theme', () => {
-    const wrapper = mount(<ReactJkMusicPlayer audioLists={[]} mode="full" />)
+    const wrapper = mount<ReactJkMusicPlayer>(
+      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    )
     wrapper.setState({ theme: 'dark' })
     wrapper.find('.theme-switch').simulate('click')
     assert(wrapper.state().theme === 'dark')
@@ -95,18 +101,24 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
     assert(wrapper.find('.light-theme').length === 1)
   })
   it('click reload button', () => {
-    const wrapper = mount(<ReactJkMusicPlayer audioLists={[]} mode="full" />)
+    const wrapper = mount<ReactJkMusicPlayer>(
+      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    )
     wrapper.find('.reload-btn').simulate('click')
     assert(wrapper.state().currentTime === 0)
   })
   it('click pause and play button', () => {
-    const wrapper = mount(<ReactJkMusicPlayer audioLists={[]} mode="full" />)
+    const wrapper = mount<ReactJkMusicPlayer>(
+      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    )
     // 暂停
     wrapper.find('.play-btn').simulate('click')
     assert(wrapper.state().playing === false)
   })
-  it('click prev and next audio', () => {
-    const wrapper = mount(<ReactJkMusicPlayer audioLists={[]} mode="full" />)
+  it('click prev and next audio', async () => {
+    const wrapper = mount<ReactJkMusicPlayer>(
+      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    )
     wrapper.setState({
       audioLists: [
         {
@@ -127,12 +139,11 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
     assert(wrapper.state().name === 'prev')
     wrapper.setState({ loading: false })
     wrapper.find('.prev-audio').simulate('click')
-    setTimeout(() => {
-      assert(wrapper.state().name === 'next')
-    })
+    await new Promise((res) => setTimeout(res, 0))
+    assert(wrapper.state().name === 'prev')
   })
   it('click mute', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer audioLists={[]} mode="full" defaultVolume={100} />,
     )
     // 静音
@@ -140,7 +151,7 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
     assert(wrapper.state().soundValue === 0)
   })
   it('click change play mode', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
         audioLists={[]}
         mode="full"

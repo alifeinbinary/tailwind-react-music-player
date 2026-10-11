@@ -3,9 +3,9 @@ import React from 'react'
 import ReactJkMusicPlayer from '../../src'
 import { sleep } from '../utils'
 
-const getApp = (props) => {
-  let _instance
-  const wrapper = mount(
+const getApp = (props?: any) => {
+  let _instance: any
+  const wrapper = mount<ReactJkMusicPlayer>(
     <ReactJkMusicPlayer
       audioLists={[{ musicSrc: 'a' }, { musicSrc: 'b' }]}
       autoPlay={false}
@@ -23,8 +23,8 @@ const getApp = (props) => {
 
 describe('AudioInstance test', () => {
   it('should call getAudioInstance function', () => {
-    const getAudioInstance = jest.fn()
-    mount(
+    const getAudioInstance = vi.fn()
+    mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
         audioLists={[{ musicSrc: 'x' }]}
         getAudioInstance={getAudioInstance}
@@ -36,20 +36,20 @@ describe('AudioInstance test', () => {
     const { instance } = getApp()
     expect(instance).toMatchSnapshot()
     ;[
-      ('destroy',
+      'destroy',
       'updatePlayIndex',
       'playByIndex',
       'playPrev',
       'playNext',
       'togglePlay',
-      'clear'),
+      'clear',
     ].forEach((key) => {
       expect(instance[key]).toBeInstanceOf(Function)
     })
   })
 
   it('should destroy', () => {
-    const onDestroyed = jest.fn()
+    const onDestroyed = vi.fn()
     const { instance, wrapper } = getApp({
       onDestroyed,
     })
@@ -60,7 +60,7 @@ describe('AudioInstance test', () => {
   })
 
   it('should updatePlayIndex', async () => {
-    const onPlayIndexChange = jest.fn()
+    const onPlayIndexChange = vi.fn()
     const { instance, wrapper } = getApp({
       onPlayIndexChange,
     })
@@ -72,7 +72,7 @@ describe('AudioInstance test', () => {
   })
 
   it('should playByIndex', async () => {
-    const onPlayIndexChange = jest.fn()
+    const onPlayIndexChange = vi.fn()
     const { instance, wrapper } = getApp({
       onPlayIndexChange,
     })
@@ -84,8 +84,8 @@ describe('AudioInstance test', () => {
   })
 
   it('should playNext', async () => {
-    const onPlayIndexChange = jest.fn()
-    const onAudioPlayTrackChange = jest.fn()
+    const onPlayIndexChange = vi.fn()
+    const onAudioPlayTrackChange = vi.fn()
     const { instance, wrapper } = getApp({
       onPlayIndexChange,
       onAudioPlayTrackChange,
@@ -99,8 +99,8 @@ describe('AudioInstance test', () => {
   })
 
   it('should playPrev', async () => {
-    const onPlayIndexChange = jest.fn()
-    const onAudioPlayTrackChange = jest.fn()
+    const onPlayIndexChange = vi.fn()
+    const onAudioPlayTrackChange = vi.fn()
     const { instance, wrapper } = getApp({
       onPlayIndexChange,
       onAudioPlayTrackChange,
@@ -117,11 +117,11 @@ describe('AudioInstance test', () => {
   })
 
   it('should togglePlay', async () => {
-    const onAudioPlay = jest.fn()
-    const onAudioPause = jest.fn()
-    window.HTMLMediaElement.prototype.play = () => {
+    const onAudioPlay = vi.fn()
+    const onAudioPause = vi.fn()
+    window.HTMLMediaElement.prototype.play = (() => {
       onAudioPlay()
-    }
+    }) as any
     window.HTMLMediaElement.prototype.pause = () => {
       onAudioPause()
     }
@@ -141,7 +141,7 @@ describe('AudioInstance test', () => {
   })
 
   it('should clear audio list', () => {
-    const onAudioListsChange = jest.fn()
+    const onAudioListsChange = vi.fn()
     const { instance, wrapper } = getApp({
       onAudioListsChange,
     })

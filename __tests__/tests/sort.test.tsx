@@ -3,8 +3,8 @@ import { mount } from 'enzyme'
 import Sortable from 'sortablejs'
 import ReactJkMusicPlayer from '../../src'
 
-const createPlayer = (props) => {
-  return mount(
+const createPlayer = (props?: any) => {
+  return mount<ReactJkMusicPlayer>(
     <ReactJkMusicPlayer
       audioLists={[
         { cover: 'xx', musicSrc: '1' },
@@ -18,23 +18,23 @@ const createPlayer = (props) => {
 
 describe('Audio lists Sort test', () => {
   it('should not call onAudioListsSortEnd and onAudioListsChange if index not changed', () => {
-    const onAudioListsSortEnd = jest.fn()
-    const onAudioListsChange = jest.fn()
+    const onAudioListsSortEnd = vi.fn()
+    const onAudioListsChange = vi.fn()
     const wrapper = createPlayer({ onAudioListsSortEnd, onAudioListsChange })
-    wrapper.instance().onAudioListsSortEnd({ oldIndex: 0, newIndex: 0 })
+    wrapper.instance().onAudioListsSortEnd({ oldIndex: 0, newIndex: 0 } as any)
 
     expect(onAudioListsSortEnd).not.toHaveBeenCalled()
     expect(onAudioListsChange).not.toHaveBeenCalled()
   })
 
   it('should sort audio list', () => {
-    let list
-    const onAudioListsSortEnd = jest.fn()
-    const onAudioListsChange = jest.fn((_, result) => {
+    let list: any
+    const onAudioListsSortEnd = vi.fn()
+    const onAudioListsChange = vi.fn((_, result) => {
       list = result
     })
     const wrapper = createPlayer({ onAudioListsSortEnd, onAudioListsChange })
-    wrapper.instance().onAudioListsSortEnd({ oldIndex: 0, newIndex: 1 })
+    wrapper.instance().onAudioListsSortEnd({ oldIndex: 0, newIndex: 1 } as any)
 
     expect(onAudioListsSortEnd).toHaveBeenCalledWith(0, 1)
     expect(onAudioListsChange).toHaveBeenCalledTimes(1)
@@ -43,10 +43,10 @@ describe('Audio lists Sort test', () => {
   })
 
   it('should deprecate onAudioListsDragEnd', () => {
-    const warnSpy = jest.spyOn(console, 'warn')
-    const onAudioListsDragEnd = jest.fn()
+    const warnSpy = vi.spyOn(console, 'warn')
+    const onAudioListsDragEnd = vi.fn()
     const wrapper = createPlayer({ onAudioListsDragEnd })
-    wrapper.instance().onAudioListsSortEnd({ oldIndex: 0, newIndex: 1 })
+    wrapper.instance().onAudioListsSortEnd({ oldIndex: 0, newIndex: 1 } as any)
 
     expect(onAudioListsDragEnd).toHaveBeenCalledWith(0, 1)
     expect(warnSpy).toHaveBeenCalledWith(
@@ -55,8 +55,8 @@ describe('Audio lists Sort test', () => {
   })
 
   it('should render correctly when audio lists is empty', () => {
-    Sortable.mockClear()
-    const errorSpy = jest.spyOn(console, 'error')
+    ;(Sortable as any).mockClear()
+    const errorSpy = vi.spyOn(console, 'error')
     createPlayer({ audioLists: [] })
     expect(errorSpy).not.toThrowError()
   })

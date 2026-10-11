@@ -1,5 +1,5 @@
 import isMobile from 'is-mobile'
-import assert from 'power-assert'
+import assert from 'assert'
 
 describe('ReactJkMusicPlayer', () => {
   it('test', () => {

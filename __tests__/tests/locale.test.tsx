@@ -4,7 +4,7 @@ import { mount } from 'enzyme'
 import ReactJkMusicPlayer from '../../src'
 import { FaHeadphonesIcon } from '../../src/components/Icon'
 
-const getTitle = (wrapper, className, at) => {
+const getTitle = (wrapper: any, className: string, at?: number) => {
   if (at) {
     return wrapper.find(className).at(at).getDOMNode().getAttribute('title')
   }
@@ -12,7 +12,7 @@ const getTitle = (wrapper, className, at) => {
 }
 describe('Locale test', () => {
   it('should render default locale with en_US', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer className="text-class-name" showLyric showDestroy />,
     )
 
@@ -20,7 +20,7 @@ describe('Locale test', () => {
   })
 
   it('should render locale with zh_CN', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
         className="text-class-name"
         showLyric
@@ -31,14 +31,16 @@ describe('Locale test', () => {
     expect(wrapper).toMatchSnapshot()
   })
   it('should override locale with en_US', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
         className="text-class-name"
         showLyric
         showDestroy
-        locale={{
-          audioTitle: 'audioTitle',
-        }}
+        locale={
+          {
+            audioTitle: 'audioTitle',
+          } as any
+        }
         audioLists={[
           {
             musicSrc: 'xx',
@@ -92,7 +94,7 @@ describe('Locale test', () => {
   })
 
   it('should render locale with zh_CN detail', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
         showLyric
         showDestroy
@@ -151,11 +153,13 @@ describe('Locale test', () => {
   })
 
   it('should override locale', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
-        locale={{
-          openText: 'test',
-        }}
+        locale={
+          {
+            openText: 'test',
+          } as any
+        }
       />,
     )
     expect(wrapper.find('.music-player-controller-setting').text()).toContain(
@@ -163,17 +167,19 @@ describe('Locale test', () => {
     )
   })
 
-  // https://github.com/lijinke666/react-music-player/issues/83
+  // https://github.com/alifeinbinary/react-music-player/issues/83
   it('should render locale with functional audioTitle', () => {
-    const wrapper = mount(
+    const wrapper = mount<ReactJkMusicPlayer>(
       <ReactJkMusicPlayer
         className="text-class-name"
         showMiniProcessBar
         showLyric
         showDestroy
-        locale={{
-          audioTitle: ({ name }) => `test-${name}`,
-        }}
+        locale={
+          {
+            audioTitle: ({ name }: any) => `test-${name}`,
+          } as any
+        }
         audioLists={[
           {
             musicSrc: 'xx',
