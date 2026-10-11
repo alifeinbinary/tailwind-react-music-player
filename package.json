@@ -67,14 +67,14 @@
       "prettier --write"
     ]
   },
-  "author": "Jinke.Li <1359518268@qq.com>",
+  "author": "Andrew Halliwell <andrew@alifeinbinary.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lijinke666/react-music-player"
+    "url": "https://github.com/alifeinbinary/react-music-player"
   },
-  "homepage": "https://lijinke666.github.io/react-music-player",
+  "homepage": "https://alifeinbinary.github.io/react-music-player",
   "bugs": {
-    "url": "https://github.com/lijinke666/react-music-player/issues"
+    "url": "https://github.com/alifeinbinary/react-music-player/issues"
   },
   "license": "MIT",
   "keywords": [

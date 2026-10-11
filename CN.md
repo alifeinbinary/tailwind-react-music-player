@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="logo" src="https://github.com/lijinke666/react-music-player/blob/master/assetsImg/logo.png" width="100" max-width="100%">
+  <img alt="logo" src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/logo.png" width="100" max-width="100%">
 </p>
 
 <h1 align="center">
@@ -17,14 +17,14 @@ react-jinke-music-player
   <a href="https://www.npmjs.com/package/react-jinke-music-player" title="npm">
     <img src="https://img.shields.io/npm/l/react-jinke-music-player.svg?style=flat-square" alt="npm">
   </a>
-  <a href="https://github.com/lijinke666/react-music-player/actions">
-    <img src="https://github.com/lijinke666/react-music-player/workflows/Node%20CI/badge.svg" />
+  <a href="https://github.com/alifeinbinary/react-music-player/actions">
+    <img src="https://github.com/alifeinbinary/react-music-player/workflows/Node%20CI/badge.svg" />
   </a>
    <a href="https://badge.fury.io/js/react-jinke-music-playerr" title="npm">
     <img src="https://img.shields.io/npm/v/react-jinke-music-player.svg?style=flat-square" alt="npm version">
   </a>
-  <a href="https://codecov.io/gh/lijinke666/react-music-player">
-    <img src="https://codecov.io/gh/lijinke666/react-music-player/branch/master/graph/badge.svg" />
+  <a href="https://codecov.io/gh/alifeinbinary/react-music-player">
+    <img src="https://codecov.io/gh/alifeinbinary/react-music-player/branch/master/graph/badge.svg" />
   </a>
      <a href="https://app.netlify.com/sites/react-jinke-music-player/deploys" title="Netlify Status">
     <img src="https://api.netlify.com/api/v1/badges/2a5d8639-9d2a-46ee-a504-10b7846a57e4/deploy-status" alt="Coverage Status">
@@ -32,7 +32,7 @@ react-jinke-music-player
 </p>
 
 <p align="center">
-  <a href="https://github.com/lijinke666/react-music-player/blob/master/README.md">
+  <a href="https://github.com/alifeinbinary/react-music-player/blob/master/README.md">
     English Doc
   </a>
 </p>
@@ -55,29 +55,29 @@ npm install react-jinke-music-player --save
 
 > 迷你模式 <br/>
 
-> ![mini mode](https://github.com/lijinke666/react-music-player/blob/master/assetsImg/mini.png)
+> ![mini mode](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/mini.png)
 
 > 白天主题 <br/>
 
-![light theme](https://github.com/lijinke666/react-music-player/blob/master/assetsImg/light-theme.png)
+![light theme](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/light-theme.png)
 
 > 黑夜主题 <br/>
 
-![dark theme](https://github.com/lijinke666/react-music-player/blob/master/assetsImg/dark-theme.png)
+![dark theme](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/dark-theme.png)
 
 > 移动端 <br/>
 
-![mobile](https://github.com/lijinke666/react-music-player/blob/master/assetsImg/mobile.jpg)
+![mobile](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/mobile.jpg)
 
 ## 例子
 
-> 在线访问 : [https://lijinke666.github.io/react-music-player/](https://lijinke666.github.io/react-music-player/)
+> 在线访问 : [https://alifeinbinary.github.io/react-music-player/](https://alifeinbinary.github.io/react-music-player/)
 
 > 实际应用 : [李金珂的小屋](http://www.lijinke.cn/)
 
 > 本地访问 : [http://localhost:8081/](http://localhost:8081/)
 
-[例子示例代码](https://github.com/lijinke666/react-music-player/blob/master/example/example.js)
+[例子示例代码](https://github.com/alifeinbinary/react-music-player/blob/master/example/example.js)
 
 ## 使用
 
@@ -215,9 +215,9 @@ class App extends React.Component {
 <ReactJkMusicPlayer glassBg />
 ```
 
-![glass-1](https://github.com/lijinke666/react-music-player/blob/master/assetsImg/glass-1.png)
+![glass-1](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/glass-1.png)
 
-![glass-2](https://github.com/lijinke666/react-music-player/blob/master/assetsImg/glass-2.png)
+![glass-2](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/glass-2.png)
 
 ## 自定义下载器
 
@@ -281,7 +281,7 @@ ReactDOM.render(
 ## 开发
 
 ```
-git clone https://github.com/lijinke666/react-music-player.git
+git clone https://github.com/alifeinbinary/react-music-player.git
 yarn | npm install
 yarn start | npm start
 访问 `http://localhost:8081/`
@@ -467,4 +467,4 @@ export interface ReactJkMusicPlayerInstance extends HTMLAudioElement {
 
 ## 许可证
 
-[MIT](https://github.com/lijinke666/react-music-player/blob/master/LICENCE)
+[MIT](https://github.com/alifeinbinary/react-music-player/blob/master/LICENCE)
