@@ -1,0 +1,1 @@
+export const AUDIO_LIST_REMOVE_ANIMATE_TIME = 350

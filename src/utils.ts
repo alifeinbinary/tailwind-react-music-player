@@ -1,54 +1,54 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable radix */
 /* eslint-disable no-bitwise */
-export function formatTime(second) {
+export function formatTime(second: number): string {
   let i = 0
   let h = 0
-  let s = parseInt(second)
+  let s = parseInt(String(second))
   if (s >= 60) {
-    i = parseInt(s / 60)
-    s = parseInt(s % 60)
+    i = parseInt(String(s / 60))
+    s = parseInt(String(s % 60))
     if (i >= 60) {
-      h = parseInt(i / 60)
-      i = parseInt(i % 60)
+      h = parseInt(String(i / 60))
+      i = parseInt(String(i % 60))
     }
   }
   // 补零
-  const zero = (v) => (v >> 0 < 10 ? `0${v}` : v)
+  const zero = (v: number | string) => ((v as number) >> 0 < 10 ? `0${v}` : v)
   if (h > 0) return [zero(h), zero(i), zero(s)].join(':')
   return [zero(i), zero(s)].join(':')
 }
 
-export function createRandomNum(minNum, maxNum) {
-  return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10)
+export function createRandomNum(minNum: number, maxNum: number): number {
+  return parseInt(String(Math.random() * (maxNum - minNum + 1) + minNum), 10)
 }
 
-export function distinct(array) {
+export function distinct<T>(array: T[]): T[] {
   return array
     .map((item) => JSON.stringify(item))
     .filter((item, idx, arr) => idx === arr.indexOf(item))
     .map((item) => JSON.parse(item))
 }
 
-export const arrayEqual = (arr1) => (arr2) =>
+export const arrayEqual = (arr1: any[]) => (arr2: any[]) =>
   JSON.stringify(arr1) === JSON.stringify(arr2)
 
 const s4 = () => {
   return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
 }
 // Generate a pseudo-GUID by concatenating random hexadecimal.
-export const uuId = () => {
+export const uuId = (): string => {
   return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
 }
 
-export const isSafari = () => {
+export const isSafari = (): boolean => {
   return (
     /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
   )
 }
 
 // https://stackoverflow.com/a/9039885/2789451
-export function isIOS() {
+export function isIOS(): boolean {
   return (
     [
       'iPad Simulator',
@@ -64,17 +64,28 @@ export function isIOS() {
 }
 
 // https://stackoverflow.com/questions/7451508/html5-audio-playback-with-fade-in-and-fade-out
-export function swing(p) {
+export function swing(p: number): number {
   return 0.5 - Math.cos(p * Math.PI) / 2
 }
 
+export interface AdjustVolumeOptions {
+  duration?: number
+  easing?: (p: number) => number
+  interval?: number
+}
+
+export interface AdjustVolumeResult {
+  fadeInterval: ReturnType<typeof setInterval> | undefined
+  updateIntervalEndVolume: ((newVolume: number) => void) | undefined
+}
+
 export function adjustVolume(
-  element,
-  startVolume,
-  endVolume,
-  { duration = 1000, easing = swing, interval = 13 } = {},
-  callback,
-) {
+  element: HTMLMediaElement,
+  startVolume: number,
+  endVolume: number,
+  { duration = 1000, easing = swing, interval = 13 }: AdjustVolumeOptions = {},
+  callback: () => void,
+): AdjustVolumeResult {
   let delta = endVolume - startVolume
 
   if (!delta || !duration || !easing || !interval || isIOS()) {
@@ -86,7 +97,7 @@ export function adjustVolume(
   const ticks = Math.floor(duration / interval)
   let tick = 1
 
-  const updateIntervalEndVolume = (newVolume) => {
+  const updateIntervalEndVolume = (newVolume: number) => {
     endVolume = newVolume
   }
 

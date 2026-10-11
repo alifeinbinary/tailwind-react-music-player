@@ -1,10 +1,44 @@
 import cls from 'classnames'
-import React, { isValidElement, memo } from 'react'
+import React, { isValidElement, memo, ReactNode } from 'react'
+import {
+  ReactJkMusicPlayerCustomLocale,
+  ReactJkMusicPlayerIcon,
+} from '../types'
 import PlayModeTip from './PlayModeTip'
 
 const prefix = 'react-jinke-music-player-mobile'
 
-const PlayerMobile = ({
+export interface PlayerMobileProps {
+  name: ReactNode
+  cover?: string
+  singer?: ReactNode
+  playing: boolean
+  duration: ReactNode
+  currentTime: ReactNode
+  loading: boolean
+  themeSwitch: ReactNode
+  progressBar: ReactNode
+  openAudioListsPanel: () => void
+  audioPrevPlay: () => void
+  audioNextPlay: () => void
+  playMode: ReactNode
+  onClose: () => void
+  playModeTipVisible?: boolean
+  currentPlayModeName: ReactNode
+  extendsContent?: ReactNode
+  onPlay: () => void
+  glassBg: boolean
+  onCoverClick: () => void
+  autoHiddenCover: boolean
+  icon: ReactJkMusicPlayerIcon
+  locale: ReactJkMusicPlayerCustomLocale
+  toggleMode: boolean
+  renderAudioTitle: () => ReactNode
+  shouldShowPlayIcon: boolean
+  isResetCoverRotate: boolean
+}
+
+const PlayerMobile: React.FC<PlayerMobileProps> = ({
   name,
   cover,
   singer,
@@ -32,7 +66,7 @@ const PlayerMobile = ({
   renderAudioTitle,
   shouldShowPlayIcon,
   isResetCoverRotate,
-}) => (
+}: PlayerMobileProps) => (
   <div
     className={cls(
       prefix,
@@ -54,7 +88,7 @@ const PlayerMobile = ({
     >
       <div
         className={`${prefix}-header-title text-center text-[20px] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) px-7.5 truncate`}
-        title={name}
+        title={name as string}
       >
         {renderAudioTitle()}
       </div>
@@ -72,7 +106,7 @@ const PlayerMobile = ({
     >
       <span
         className={`${prefix}-singer-name relative text-sm transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)`}
-        title={singer}
+        title={singer as string}
       >
         {singer}
       </span>
@@ -120,7 +154,7 @@ const PlayerMobile = ({
     >
       <span
         className="group prev-audio"
-        title={locale.previousTrackText}
+        title={locale.previousTrackText as string}
         onClick={audioPrevPlay}
       >
         {icon.prev}
@@ -132,8 +166,8 @@ const PlayerMobile = ({
           className="group play-btn px-10 [&_svg]:text-11.25! [@media_(max-width:320px)]:[&_svg]:text-10!"
           title={
             shouldShowPlayIcon
-              ? locale.clickToPlayText
-              : locale.clickToPauseText
+              ? (locale.clickToPlayText as string)
+              : (locale.clickToPauseText as string)
           }
           onClick={onPlay}
         >
@@ -142,7 +176,7 @@ const PlayerMobile = ({
       )}
       <span
         className="group next-audio"
-        title={locale.nextTrackText}
+        title={locale.nextTrackText as string}
         onClick={audioNextPlay}
       >
         {icon.next}
@@ -153,7 +187,9 @@ const PlayerMobile = ({
     >
       <ul className="items flex justify-around items-center">
         {[playMode, icon.download, icon.reload, icon.lyric]
-          .filter(isValidElement)
+          .filter((item): item is React.ReactElement<{ className?: string }> =>
+            isValidElement(item),
+          )
           .map((item) => (
             <li
               className="item cursor-pointer flex-1 text-center [&_svg]:text-(--rjmp-base-color)"

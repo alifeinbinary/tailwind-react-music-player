@@ -5,7 +5,7 @@ const timeExp = /\[(\d{2,}):(\d{2})(?:\.(\d{2,3}))?]/g
 const STATE_PAUSE = 0
 const STATE_PLAYING = 1
 
-const tagRegMap = {
+const tagRegMap: Record<string, string> = {
   title: 'ti',
   artist: 'ar',
   album: 'al',
@@ -13,8 +13,40 @@ const tagRegMap = {
   by: 'by',
 }
 
+export interface LyricLine {
+  time: number
+  txt: string
+}
+
+export interface LyricHandlerParams {
+  txt: string
+  lineNum: number
+}
+
+export type LyricHandler = (params: LyricHandlerParams) => void
+
 export default class Lyric {
-  constructor(lrc, handler = () => {}) {
+  lrc: string
+
+  tags: Record<string, string>
+
+  lines: LyricLine[]
+
+  handler: LyricHandler
+
+  state: number
+
+  curLine: number
+
+  curNum!: number
+
+  startStamp!: number
+
+  pauseStamp!: number
+
+  timer?: ReturnType<typeof setTimeout>
+
+  constructor(lrc: string, handler: LyricHandler = () => {}) {
     this.lrc = lrc
     this.tags = {}
     this.lines = []
@@ -51,9 +83,9 @@ export default class Lyric {
         if (txt) {
           this.lines.push({
             time:
-              result[1] * 60 * 1000 +
-              result[2] * 1000 +
-              (result[3] || 0) * 10 +
+              Number(result[1]) * 60 * 1000 +
+              Number(result[2]) * 1000 +
+              Number(result[3] || 0) * 10 +
               offset,
             txt,
           })
@@ -66,7 +98,7 @@ export default class Lyric {
     })
   }
 
-  _findCurNum(time) {
+  _findCurNum(time: number) {
     for (let i = 0; i < this.lines.length; i++) {
       if (time <= this.lines[i].time) {
         return i
@@ -75,7 +107,7 @@ export default class Lyric {
     return this.lines.length - 1
   }
 
-  _callHandler(i) {
+  _callHandler(i: number) {
     if (i < 0) {
       return
     }
@@ -97,7 +129,7 @@ export default class Lyric {
     }, delay)
   }
 
-  play(startTime = 0, skipLast) {
+  play(startTime = 0, skipLast?: boolean) {
     if (!this.lines.length) {
       return
     }
@@ -133,7 +165,7 @@ export default class Lyric {
     clearTimeout(this.timer)
   }
 
-  seek(offset) {
+  seek(offset: number) {
     this.play(offset)
   }
 }

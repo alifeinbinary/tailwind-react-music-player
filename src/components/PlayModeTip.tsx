@@ -1,7 +1,14 @@
 import cls from 'classnames'
-import React, { memo } from 'react'
+import React, { memo, ReactNode } from 'react'
 
-const PlayModeTip = ({ prefix, visible, title, text }) => (
+export interface PlayModeTipProps {
+  prefix: string
+  visible?: boolean
+  title: ReactNode
+  text: ReactNode
+}
+
+const PlayModeTip = ({ prefix, visible, title, text }: PlayModeTipProps) => (
   <div
     className={cls(
       `${prefix}-play-model-tip`,

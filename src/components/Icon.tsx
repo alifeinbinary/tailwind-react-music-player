@@ -23,9 +23,9 @@ export { RiPlayList2Fill as PlayListsIcon } from '@react-icons/all-files/ri/RiPl
 export { TiArrowShuffle as ShufflePlayIcon } from '@react-icons/all-files/ti/TiArrowShuffle'
 export { TiDownload as DownloadIcon } from '@react-icons/all-files/ti/TiDownload'
 
-export const AnimatePlayIcon = () => (
+export const AnimatePlayIcon = (): JSX.Element => (
   <FaPlayCircle className="react-jinke-music-player-play-icon" />
 )
-export const AnimatePauseIcon = () => (
+export const AnimatePauseIcon = (): JSX.Element => (
   <FaPauseCircle className="react-jinke-music-player-pause-icon" />
 )

@@ -1,7 +1,36 @@
 import cls from 'classnames'
-import React, { memo } from 'react'
+import React, { memo, MouseEvent } from 'react'
 import { PLAYER_KEY } from '../config/player'
 import SORTABLE_CONFIG from '../config/sortable'
+import {
+  ReactJkMusicPlayerAudioList,
+  ReactJkMusicPlayerCustomLocale,
+  ReactJkMusicPlayerIcon,
+} from '../types'
+
+interface PanelToggleAnimate {
+  show?: boolean
+  hide?: boolean
+}
+
+export interface AudioListsPanelProps {
+  visible: boolean
+  audioLists: ReactJkMusicPlayerAudioList[]
+  onCancel: (e: MouseEvent) => void
+  onDelete: (audioId?: string) => (e: MouseEvent) => void
+  onPlay: (playId: string) => void
+  playId: string
+  loading: boolean
+  panelToggleAnimate: PanelToggleAnimate
+  glassBg: boolean
+  remove: boolean
+  removeId: string | number
+  isMobile: boolean
+  locale: ReactJkMusicPlayerCustomLocale
+  icon: ReactJkMusicPlayerIcon
+  playing: boolean
+  cover?: string
+}
 
 const AudioListsPanel = ({
   audioLists,
@@ -18,7 +47,7 @@ const AudioListsPanel = ({
   locale,
   icon,
   playing,
-}) => (
+}: AudioListsPanelProps) => (
   <div
     className={cls(
       'audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)',
@@ -48,7 +77,7 @@ const AudioListsPanel = ({
             <>
               <span
                 className="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
-                title={locale.removeAudioListsText}
+                title={locale.removeAudioListsText as string}
                 onClick={onDelete()}
               >
                 {icon.delete}
@@ -58,7 +87,7 @@ const AudioListsPanel = ({
           )}
           <span
             className="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
-            title={locale.closeText}
+            title={locale.closeText as string}
             onClick={onCancel}
           >
             {isMobile ? icon.packUpPanelMobile : icon.close}
@@ -87,10 +116,10 @@ const AudioListsPanel = ({
                 key={audioId}
                 title={
                   !playing
-                    ? locale.clickToPlayText
+                    ? (locale.clickToPlayText as string)
                     : isCurrentPlaying
-                    ? locale.clickToPauseText
-                    : locale.clickToPlayText
+                    ? (locale.clickToPauseText as string)
+                    : (locale.clickToPlayText as string)
                 }
                 className={cls(
                   'audio-item border-b border-b-transparent px-5 py-0.75 leading-10 flex justify-between items-center text-sm cursor-pointer transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) odd:bg-(--rjmp-lists-item-bg) hover:bg-(--rjmp-lists-item-bg-active)! active:bg-(--rjmp-lists-item-bg-active)! [&:is(:hover,:active)_.group_svg]:text-(--rjmp-primary-color)',
@@ -101,7 +130,7 @@ const AudioListsPanel = ({
                       removeId === audioId,
                   },
                 )}
-                onClick={() => onPlay(audioId)}
+                onClick={() => onPlay(audioId as string)}
               >
                 <span className="group player-status inline-flex">
                   <span className="player-icons inline-flex w-7.5">
@@ -116,20 +145,20 @@ const AudioListsPanel = ({
                 </span>
                 <span
                   className="group player-name inline-block flex-1 pr-5 pl-2.5 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
-                  title={name}
+                  title={name as string}
                 >
                   {name}
                 </span>
                 <span
                   className="group player-singer inline-block text-xs w-21.25 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
-                  title={singer}
+                  title={singer as string}
                 >
                   {singer}
                 </span>
                 {remove && (
                   <span
                     className="group player-delete inline-flex w-7.5 text-right justify-end [&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
-                    title={locale.clickToDeleteText(name)}
+                    title={locale.clickToDeleteText(name) as string}
                     onClick={onDelete(audioId)}
                   >
                     {icon.close}

@@ -1,7 +1,12 @@
 import cls from 'classnames'
-import React, { memo } from 'react'
+import React, { memo, ReactNode } from 'react'
 
-const PlayModel = ({ visible, value }) => (
+export interface PlayModelProps {
+  visible: boolean
+  value: ReactNode
+}
+
+const PlayModel = ({ visible, value }: PlayModelProps) => (
   <div
     className={cls(
       'play-mode-title',
