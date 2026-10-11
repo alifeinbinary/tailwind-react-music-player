@@ -6,9 +6,9 @@ import pkg from '../package.json'
 import ReactJkMusicPlayer from '../src'
 import Locale from '../src/config/locale'
 import PLAY_MODE from '../src/config/playMode'
-import '../src/styles/index.less'
+import '../src/styles/index.css'
 import { createRandomNum } from '../src/utils'
-import './example.less'
+import './example.css'
 
 const audioList1 = [
   {

@@ -20,7 +20,7 @@
     "lint": "yarn lint:js && yarn lint:style",
     "lint:fix": "yarn lint-fix:js && yarn lint-fix:style",
     "lint:js": "./node_modules/.bin/eslint ./src ./__tests__",
-    "lint:style": "stylelint '{example,src}/**/*.less' --syntax less",
+    "lint:style": "stylelint '{example,src}/**/*.css'",
     "lint-fix:js": "yarn lint:js --fix",
     "lint-fix:style": "yarn lint:style --fix",
     "build:css": "webpack --mode=production --config webpack.css.config.js --progress",
@@ -28,14 +28,14 @@
     "build:cjs": "cross-env OUTPUT_MODULE=commonjs babel src -d lib",
     "build:es": "babel src -d es",
     "build:umd": "webpack --mode=production --config webpack.umd.config.js --progress",
-    "build": "cross-env NODE_ENV=production yarn build:clean && yarn build:js && yarn build:css && yarn copy:less && yarn copy:module-css",
+    "build": "cross-env NODE_ENV=production yarn build:clean && yarn build:js && yarn build:css && yarn copy:styles && yarn copy:module-css",
     "build:analyzer": "cross-env ANALYZER=1 yarn build",
     "build:demo": "cross-env NODE_ENV=production webpack --mode=production --progress --config  ./example/webpack.config.js",
     "build:demo-analyzer": "cross-env ANALYZER=1 yarn build:demo",
     "build:netlify": "cross-env NETLIFY=1 yarn build:demo ",
     "build:surge": "cross-env SURGE=1 yarn build:demo ",
     "copy:module-css": "cp ./assets/index.css ./assets/index.module.css",
-    "copy:less": "cp -r src/styles lib/styles && cp -r src/styles es/styles",
+    "copy:styles": "cp -r src/styles lib/styles && cp -r src/styles es/styles",
     "demo": "cross-env NODE_ENV=development webpack serve --mode=development --progress --config  ./example/webpack.config.js",
     "test": "jest __tests__/tests",
     "test:coverage": "yarn test --coverage",
@@ -56,10 +56,10 @@
   "sideEffects": [
     "assets/*",
     "dist/*",
-    "*.less"
+    "*.css"
   ],
   "lint-staged": {
-    "*.{css,less,json}": [
+    "*.{css,json}": [
       "prettier --write"
     ],
     "*.{js,jsx}": [
@@ -126,7 +126,7 @@
     "@semantic-release/git": "^9.0.0",
     "@types/jest": "^26.0.23",
     "@types/sortablejs": "^1.10.6",
-    "autoprefixer": "^10.2.5",
+    "@tailwindcss/postcss": "^4.1.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
@@ -163,11 +163,9 @@
     "jest": "^26.6.3",
     "jest-environment-jsdom": "^26.6.2",
     "jsdom": "^16.5.3",
-    "less": "^4.1.1",
-    "less-loader": "^8.1.1",
     "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^1.6.0",
-    "postcss": "^8.2.14",
+    "postcss": "^8.4.0",
     "postcss-loader": "^5.2.0",
     "power-assert": "^1.6.1",
     "pre-commit": "^1.2.2",
@@ -183,6 +181,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
+    "tailwindcss": "^4.1.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.36.2",
     "webpack-bundle-analyzer": "^4.4.1",

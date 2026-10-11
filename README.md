@@ -409,72 +409,86 @@ const customLocale = {
 
 ## :bulb: Customize Theme
 
+The player's styles are compiled with [Tailwind CSS](https://tailwindcss.com)
+and every theme value is exposed as a plain CSS custom property. To customize
+the theme, just override the variables in your own stylesheet — no
+preprocessor or build tooling required:
+
 ```jsx
 import ReactJkMusicPlayer from 'react-jinke-music-player'
-import 'react-jinke-music-player/lib/styles/index.less'
+import 'react-jinke-music-player/assets/index.css'
 ```
 
-```less
-@primary-color: #31c27c;
-@default-color: #d9d9d9;
-@bg-color: #f7f8fa;
-@border-color: #d9d9d9;
-@panel-bg-light: #fff;
-@controller-bg-light: #fff;
-@music-player-panel-height: 80px;
-@lists-panel-width: 480px;
-@lists-panel-height: 410px;
-@lists-panel-item-bg: #40444b;
-@lists-panel-item-bg-light: #fff;
-@panel-header-height: 50px;
-@panel-bg: rgba(0, 0, 0, 0.7);
-@font-color: #444;
-@player-width: 80px;
-@player-height: @player-width;
-@base-color: rgba(255, 255, 255, 0.6);
-@common-animate-type: cubic-bezier(0.43, -0.1, 0.16, 1.1);
-@common-animate-time: 350ms @common-animate-type;
-@progress-load-bar-bg-color: rgba(0, 0, 0, 0.11);
-@progress-load-bar-bg-color-light: rgba(0, 0, 0, 0.06);
-@progress-bar-bg-color-light: rgba(0, 0, 0, 0.09);
-@progress-bar-bg-color-dark: #fff;
-@player-lyric-color: @primary-color;
-@player-lyric-font-size: 36px;
-@player-lyric-font-size-mobile: 16px;
-@player-lyric-z-index: 999;
-```
-
-> Customize in webpack
-
-```diff
-// webpack.config.js
-
-module.exports = {
-  rules: [{
-    test: /\.less$/,
-    use: [
-      ...
-      {
-      loader: 'less-loader',
-+     options: {
-+       modifyVars: {
-+         'primary-color': '#444',
-+         // or
-+         'hack': `true; @import "your-less-file-path.less";`, // Override with less file
-+       },
-+       javascriptEnabled: true,
-+     },
-    }],
-  }],
+```css
+/* your-theme.css — load it after the player's stylesheet */
+:root {
+  --rjmp-primary-color: #ff5500;
+  --rjmp-panel-bg: #1e1e2e;
 }
 ```
 
-> Customize in less file
+Variables can also be scoped to a single player instance:
 
-```less
-@import 'react-jinke-music-player/lib/styles/index.less';
-@import 'your-theme-file.less';
+```css
+.my-player-wrapper {
+  --rjmp-primary-color: rebeccapurple;
+}
 ```
+
+```jsx
+<div className="my-player-wrapper">
+  <ReactJkMusicPlayer />
+</div>
+```
+
+### Theme variables
+
+Variables suffixed with `-light` or `-mobile` apply to the `light` theme and
+the mobile layout respectively; un-suffixed variables apply to the default
+(dark) theme.
+
+| Variable                                 | Default                 | Description                          |
+| ---------------------------------------- | ----------------------- | ------------------------------------ |
+| `--rjmp-primary-color`                   | `#31c27c`               | Accent color (icons, progress, etc.) |
+| `--rjmp-primary-color-hover`             | primary + 5% white      | Accent color on hover                |
+| `--rjmp-panel-bg`                        | `rgba(0, 0, 0, 0.75)`   | Bottom player bar background         |
+| `--rjmp-panel-bg-light`                  | `#fff`                  | Bottom bar background (light)        |
+| `--rjmp-panel-bg-mobile`                 | `rgba(0, 0, 0, 0.75)`   | Mobile player background             |
+| `--rjmp-panel-color`                     | `#fff`                  | Bottom bar text color                |
+| `--rjmp-panel-color-light`               | `#7d7d7d`               | Bottom bar text color (light)        |
+| `--rjmp-panel-height`                    | `80px`                  | Bottom bar height                    |
+| `--rjmp-panel-header-height`             | `50px`                  | Audio lists panel header height      |
+| `--rjmp-panel-border-radius`             | `4px`                   | Audio lists panel corner radius      |
+| `--rjmp-player-size`                     | `80px`                  | Mini mode controller size            |
+| `--rjmp-player-size-mobile`              | `60px`                  | Mini controller size (mobile)        |
+| `--rjmp-controller-bg`                   | `#e6e6e6`               | Mini controller background           |
+| `--rjmp-controller-bg-light`             | `#fff`                  | Mini controller background (light)   |
+| `--rjmp-font-color`                      | `#444`                  | Light theme text color               |
+| `--rjmp-base-color`                      | `rgba(255,255,255,0.6)` | Muted text / slider rail color       |
+| `--rjmp-bg-color`                        | `#f7f8fa`               | Scrollbar track / button background  |
+| `--rjmp-lists-panel-width`               | `480px`                 | Audio lists panel width              |
+| `--rjmp-lists-panel-height`              | `410px`                 | Audio lists panel height             |
+| `--rjmp-lists-item-bg`                   | `rgba(0, 0, 0, 0.1)`    | Odd row background                   |
+| `--rjmp-lists-item-bg-playing`           | `rgba(0, 0, 0, 0.35)`   | Playing row background               |
+| `--rjmp-lists-item-bg-active`            | `rgba(0, 0, 0, 0.35)`   | Row hover background                 |
+| `--rjmp-lists-item-bg-mobile`            | `rgba(0, 0, 0, 0.15)`   | Row background (mobile)              |
+| `--rjmp-lists-item-bg-playing-mobile`    | `rgba(0, 0, 0, 0.75)`   | Playing row background (mobile)      |
+| `--rjmp-lists-item-bg-active-mobile`     | `rgba(0, 0, 0, 0.15)`   | Row hover background (mobile)        |
+| `--rjmp-lists-item-bg-light`             | `#fff`                  | Row background (light)               |
+| `--rjmp-lists-item-bg-playing-light`     | `#f2f2f2`               | Playing row background (light)       |
+| `--rjmp-lists-item-bg-active-light`      | `#fafafa`               | Row hover/odd background (light)     |
+| `--rjmp-lists-item-singer-color-light`   | `rgba(162,162,162,.45)` | Singer text color (light)            |
+| `--rjmp-lists-sortable-highlight-bg`     | primary at 15% alpha    | Drag-to-sort highlight color         |
+| `--rjmp-progress-bar-height`             | `5px`                   | Progress bar height                  |
+| `--rjmp-progress-bar-bg`                 | `#fff`                  | Progress rail color                  |
+| `--rjmp-progress-bar-bg-light`           | `rgba(0, 0, 0, 0.09)`   | Progress rail color (light)          |
+| `--rjmp-progress-load-bar-bg`            | `rgba(0, 0, 0, 0.11)`   | Buffered-progress bar color          |
+| `--rjmp-progress-load-bar-bg-light`      | `rgba(0, 0, 0, 0.06)`   | Buffered-progress color (light)      |
+| `--rjmp-lyric-color`                     | `var(--rjmp-primary-color)` | Floating lyric color             |
+| `--rjmp-lyric-font-size`                 | `36px`                  | Floating lyric font size             |
+| `--rjmp-lyric-font-size-mobile`          | `16px`                  | Floating lyric font size (mobile)    |
+| `--rjmp-animate-time`                    | `350ms`                 | Default transition duration          |
+| `--rjmp-animate-type`                    | `cubic-bezier(0.43, -0.1, 0.16, 1.1)` | Default easing         |
 
 ## :bulb: Customize audio duration
 

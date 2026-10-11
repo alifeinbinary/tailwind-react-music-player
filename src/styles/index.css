@@ -1,0 +1,975 @@
+/* Tailwind theme + utilities (preflight intentionally skipped so the
+   player's stylesheet never resets the consumer's page styles, and
+   `source(none)` so no utility classes are generated into the bundle —
+   `@apply` inside our own rules is all we use) */
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities) source(none);
+@import 'rc-slider/assets/index.css';
+@import 'rc-switch/assets/index.css';
+@import './theme.css';
+@import './audio-lists-panel.css';
+@import './player-mobile.css';
+
+.react-jinke-music-player-main {
+  touch-action: none;
+  font-family: inherit;
+
+  ::-webkit-scrollbar-thumb {
+    height: 20px;
+    background-color: var(--rjmp-primary-color);
+    opacity: 0.5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--rjmp-bg-color);
+  }
+
+  .rc-switch {
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .lyric-btn {
+    svg {
+      font-size: 20px;
+    }
+  }
+
+  .lyric-btn-active {
+    &,
+    svg {
+      color: var(--rjmp-primary-color) !important;
+    }
+  }
+
+  .music-player-lyric {
+    position: fixed;
+    color: var(--rjmp-lyric-color);
+    font-size: var(--rjmp-lyric-font-size);
+    cursor: move;
+    z-index: 998;
+    bottom: calc(var(--rjmp-panel-height) + 20px);
+    width: 100%;
+    left: 0;
+    text-align: center;
+    transition: box-shadow var(--rjmp-animate-time) var(--rjmp-animate-type);
+    background: transparent;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.05);
+
+    @media (max-width: 767px) {
+      font-size: var(--rjmp-lyric-font-size-mobile);
+      z-index: 999;
+    }
+  }
+
+  .play-mode-title {
+    user-select: none;
+    position: fixed;
+    right: 72px;
+    bottom: var(--rjmp-panel-height);
+    padding: 5px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    line-height: 1.5;
+    text-align: center;
+    transform: translate3d(100%, 0, 0);
+    transform-origin: bottom center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all var(--rjmp-animate-time) var(--rjmp-animate-type);
+
+    &.play-mode-title-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .glass-bg-container {
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 300%;
+    height: 300%;
+    left: 0;
+    top: 0;
+    filter: blur(80px);
+    z-index: -1;
+  }
+
+  .glass-bg {
+    backdrop-filter: blur(10px);
+  }
+
+  svg {
+    font-size: 24px;
+    transition: color var(--rjmp-animate-time) var(--rjmp-animate-type);
+
+    &:hover,
+    &:active {
+      color: var(--rjmp-primary-color);
+    }
+  }
+
+  @media (max-width: 767px) {
+    svg {
+      font-size: 22px;
+    }
+  }
+
+  .react-jinke-music-player-mode-icon {
+    animation: scaleTo var(--rjmp-animate-time) var(--rjmp-animate-type);
+  }
+
+  .music-player-panel {
+    box-shadow: 0 0 3px #403f3f;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    color: var(--rjmp-panel-color);
+    height: var(--rjmp-panel-height);
+    background-color: var(--rjmp-panel-bg);
+    z-index: 99;
+    transition: background-color var(--rjmp-animate-time)
+      var(--rjmp-animate-type);
+
+    .panel-content {
+      height: 100%;
+      padding: 0 30px;
+      position: relative;
+      overflow: hidden;
+      @apply flex items-center justify-center;
+
+      .rc-slider-rail {
+        background-color: var(--rjmp-base-color);
+      }
+
+      .rc-slider-handle,
+      .rc-slider-track {
+        background-color: var(--rjmp-primary-color);
+      }
+
+      .rc-slider-handle {
+        border: 2px solid #fff;
+
+        &:active {
+          box-shadow: 0 0 2px var(--rjmp-primary-color);
+        }
+      }
+
+      .img-content {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        box-shadow: 0 0 10px rgba(0, 34, 77, 0.05);
+        cursor: pointer;
+
+        @media (max-width: 767px) {
+          width: 40px;
+          height: 40px;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .img-rotate {
+        animation: imgRotate 15s linear infinite;
+      }
+
+      .hide-panel,
+      .upload-music {
+        flex-basis: 10%;
+        cursor: pointer;
+        margin-left: 15px;
+      }
+
+      @media (max-width: 767px) {
+        .progress-bar-content {
+          display: none !important;
+        }
+      }
+
+      .progress-bar-content {
+        flex: 1;
+        padding: 0 20px;
+        overflow: hidden;
+
+        .audio-title {
+          transition: color var(--rjmp-animate-time) var(--rjmp-animate-type);
+          @apply inline-block w-full truncate;
+        }
+
+        .audio-main {
+          width: 100%;
+          display: inline-flex;
+          justify-content: center;
+          margin-top: 6px;
+
+          .current-time,
+          .duration {
+            font-size: 12px;
+            flex-basis: 5%;
+            transition: color var(--rjmp-animate-time) var(--rjmp-animate-type);
+          }
+        }
+
+        .progress-bar {
+          flex: 1 1 auto;
+          width: 100%;
+          margin: 2px 20px 0 20px;
+          position: relative;
+
+          .progress {
+            position: absolute;
+            display: inline-block;
+            height: var(--rjmp-progress-bar-height);
+            left: 0;
+            top: 0;
+            transition: width var(--rjmp-animate-time) var(--rjmp-animate-type);
+            background: linear-gradient(
+              135deg,
+              rgba(0, 0, 0, 0) 0%,
+              rgba(0, 0, 0, 0) 31%,
+              rgba(0, 0, 0, 0.05) 33%,
+              rgba(0, 0, 0, 0.05) 67%,
+              rgba(0, 0, 0, 0) 69%
+            );
+            background-color: var(--rjmp-primary-color);
+
+            .progress-change {
+              position: absolute;
+              width: 10px;
+              height: 10px;
+              right: 0;
+              bottom: -2px;
+              border-radius: 50%;
+              box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+              background-color: #fff;
+              cursor: pointer;
+            }
+          }
+
+          .progress-load-bar {
+            position: absolute;
+            width: 0%;
+            height: calc(var(--rjmp-progress-bar-height) - 1px);
+            background-color: var(--rjmp-progress-load-bar-bg);
+            transition: width,
+              background-color var(--rjmp-animate-time) var(--rjmp-animate-type);
+            left: 0;
+            top: 5px;
+            z-index: 77;
+            border-radius: 6px;
+          }
+
+          .rc-slider-track {
+            z-index: 78;
+          }
+
+          .rc-slider-handle {
+            z-index: 79;
+          }
+        }
+      }
+
+      .player-content {
+        padding-left: 5%;
+        display: inline-flex;
+        align-items: center;
+        align-content: center;
+        flex-basis: 15%;
+
+        > .group {
+          &,
+          & > svg {
+            cursor: pointer;
+          }
+
+          .group {
+            display: flex;
+          }
+
+          text-align: center;
+          flex: 1;
+          margin: 0 10px;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+
+          @media (max-width: 767px) {
+            margin: 0 6px;
+          }
+
+          @media (max-width: 320px) {
+            margin: 0 4px;
+          }
+
+          > i {
+            cursor: pointer;
+            color: var(--rjmp-primary-color);
+            font-size: 25px;
+            vertical-align: middle;
+          }
+        }
+
+        .theme-switch {
+          .rc-switch {
+            background-color: transparent;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .play-sounds {
+            display: none !important;
+          }
+        }
+
+        .prev-audio,
+        .next-audio {
+          svg {
+            font-size: 35px;
+          }
+        }
+
+        .loading-icon {
+          padding: 0 18px;
+        }
+
+        .play-btn {
+          padding: 0 18px;
+
+          svg {
+            font-size: 26px;
+          }
+        }
+
+        .loop-btn {
+          &.active {
+            color: var(--rjmp-primary-color);
+          }
+        }
+
+        .play-sounds {
+          align-items: center;
+
+          svg {
+            font-size: 28px;
+          }
+
+          .sounds-icon {
+            display: flex;
+            margin-right: 15px;
+            flex: 1 1 auto;
+          }
+
+          .sound-operation {
+            width: 100px;
+          }
+        }
+
+        .destroy-btn {
+          svg {
+            font-size: 28px;
+          }
+        }
+
+        .audio-lists-btn {
+          user-select: none;
+          min-width: 60px;
+          height: 28px;
+          border-radius: 40px;
+          background-color: rgba(0, 0, 0, 0.3);
+          padding: 0 10px;
+          box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.02);
+          position: relative;
+          transition: color,
+            background-color var(--rjmp-animate-time) var(--rjmp-animate-type);
+
+          .audio-lists-icon {
+            display: flex;
+          }
+
+          > .group:hover {
+            &,
+            & > svg {
+              color: var(--rjmp-primary-color);
+            }
+          }
+
+          .audio-lists-num {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+
+    .rc-switch-inner {
+      svg {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .rc-slider-rail {
+    background-color: var(--rjmp-progress-bar-bg) !important;
+    transition: background-color var(--rjmp-animate-time)
+      var(--rjmp-animate-type);
+  }
+
+  &.light-theme {
+    svg {
+      color: var(--rjmp-primary-color);
+
+      &:hover,
+      &:active {
+        color: var(--rjmp-primary-color-hover);
+      }
+    }
+
+    .rc-slider-rail {
+      background-color: var(--rjmp-progress-bar-bg-light) !important;
+    }
+
+    .music-player-controller {
+      border-color: var(--rjmp-controller-bg-light);
+      background-color: var(--rjmp-controller-bg-light);
+    }
+
+    .music-player-panel {
+      box-shadow: 0 1px 2px 0 rgba(0, 34, 77, 0.05);
+      background-color: var(--rjmp-panel-bg-light);
+      color: var(--rjmp-panel-color-light);
+
+      .img-content {
+        box-shadow: 0 0 10px #dcdcdc;
+      }
+
+      .progress-load-bar {
+        background-color: var(--rjmp-progress-load-bar-bg-light) !important;
+      }
+    }
+
+    .rc-switch {
+      color: #fff;
+
+      &::after {
+        background-color: #fff;
+      }
+    }
+
+    .rc-switch-checked {
+      background-color: var(--rjmp-primary-color) !important;
+      border: 1px solid var(--rjmp-primary-color);
+    }
+
+    .rc-switch-inner {
+      color: #fff;
+    }
+
+    .audio-lists-btn {
+      background-color: var(--rjmp-bg-color) !important;
+
+      &:hover,
+      &:active {
+        color: var(--rjmp-font-color);
+        background-color: color-mix(in srgb, var(--rjmp-bg-color) 98%, #fff);
+      }
+
+      > .group:hover {
+        &,
+        & > svg {
+          color: var(--rjmp-font-color);
+        }
+      }
+    }
+
+    .audio-lists-panel {
+      color: var(--rjmp-font-color);
+      background-color: var(--rjmp-lists-item-bg-light);
+      box-shadow: 0 0 2px #dcdcdc;
+
+      .audio-item {
+        background-color: var(--rjmp-lists-item-bg-light);
+
+        &:nth-child(2n + 1) {
+          background-color: var(--rjmp-lists-item-bg-active-light) !important;
+        }
+
+        &.playing {
+          background-color: var(--rjmp-lists-item-bg-playing-light) !important;
+
+          &,
+          svg {
+            color: var(--rjmp-primary-color) !important;
+          }
+        }
+
+        @media (max-width: 767px) {
+          background-color: var(--rjmp-lists-item-bg-light) !important;
+
+          &.playing {
+            background-color: var(
+              --rjmp-lists-item-bg-playing-light
+            ) !important;
+
+            &,
+            svg {
+              color: var(--rjmp-primary-color) !important;
+            }
+          }
+        }
+      }
+    }
+
+    .audio-lists-panel-header {
+      color: var(--rjmp-font-color);
+      background-color: var(--rjmp-panel-bg-light);
+      border-bottom: 1px solid #f4f4f7;
+    }
+
+    .audio-lists-panel-header-line {
+      background-color: #f4f4f7;
+    }
+
+    .audio-item {
+      box-shadow: 0 0 2px transparent !important;
+      border-bottom: 1px solid rgba(220, 220, 220, 0.26);
+      background-color: rgba(64, 68, 75, 0.65);
+
+      &:hover,
+      &:active {
+        background-color: var(--rjmp-lists-item-bg-active-light) !important;
+
+        svg {
+          color: var(--rjmp-primary-color);
+        }
+      }
+
+      &.playing {
+        background-color: var(--rjmp-lists-item-bg-active-light) !important;
+
+        svg {
+          color: var(--rjmp-primary-color);
+        }
+
+        .player-singer {
+          color: var(--rjmp-primary-color) !important;
+        }
+      }
+
+      .player-singer {
+        color: var(--rjmp-lists-item-singer-color-light) !important;
+      }
+    }
+
+    .react-jinke-music-player-mobile {
+      background-color: var(--rjmp-panel-bg-light);
+      color: var(--rjmp-font-color);
+
+      .current-time,
+      .duration {
+        color: var(--rjmp-font-color);
+      }
+
+      .rc-slider-rail {
+        background-color: #e9e9e9;
+      }
+    }
+
+    .react-jinke-music-player-mobile-cover {
+      border: 5px solid transparent;
+      box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .react-jinke-music-player-mobile-operation {
+      svg {
+        color: var(--rjmp-font-color);
+      }
+    }
+
+    .react-jinke-music-player-mobile-tip {
+      svg {
+        color: #fff !important;
+      }
+    }
+
+    .react-jinke-music-player-mobile-singer-name {
+      color: var(--rjmp-font-color);
+      transition: color var(--rjmp-animate-time) var(--rjmp-animate-type);
+
+      &::before,
+      &::after {
+        background-color: var(--rjmp-font-color);
+      }
+    }
+
+    .play-mode-title {
+      background-color: var(--rjmp-panel-bg-light);
+      color: var(--rjmp-primary-color);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .loading {
+    display: inline-flex;
+    animation: audioLoading 1s linear infinite;
+
+    svg {
+      font-size: 24px;
+      color: var(--rjmp-primary-color);
+    }
+  }
+
+  .translate {
+    animation: translate var(--rjmp-animate-time) var(--rjmp-animate-type)
+      forwards;
+  }
+
+  .scale {
+    animation: scaleTo var(--rjmp-animate-time) var(--rjmp-animate-type)
+      forwards;
+  }
+
+  .img-rotate-pause {
+    animation-play-state: paused !important;
+  }
+
+  .img-rotate-reset {
+    animation: coverReset var(--rjmp-animate-time) var(--rjmp-animate-type)
+      forwards !important;
+  }
+}
+
+.react-jinke-music-player {
+  position: fixed;
+  width: var(--rjmp-player-size);
+  height: var(--rjmp-player-size);
+  z-index: 999;
+
+  @media (max-width: 767px) {
+    width: var(--rjmp-player-size-mobile);
+    height: var(--rjmp-player-size-mobile);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .music-player {
+    cursor: pointer;
+    position: relative;
+    width: var(--rjmp-player-size);
+    height: var(--rjmp-player-size);
+
+    @media (max-width: 767px) {
+      width: var(--rjmp-player-size-mobile);
+      height: var(--rjmp-player-size-mobile);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    .destroy-btn {
+      z-index: 100;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      @media (max-width: 767px) {
+        right: -3px;
+      }
+    }
+  }
+
+  .music-player-audio {
+    display: none !important;
+  }
+
+  .music-player-controller {
+    width: var(--rjmp-player-size);
+    height: var(--rjmp-player-size);
+    border-radius: 50%;
+    border: 1px solid var(--rjmp-controller-bg);
+    background-color: var(--rjmp-controller-bg);
+    color: var(--rjmp-primary-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 20px;
+    text-align: center;
+    transition: all 0.3s var(--rjmp-animate-type);
+    z-index: 99;
+    padding: 10px;
+    position: fixed;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.music-player-playing {
+      &::before {
+        content: '';
+        position: fixed;
+        width: var(--rjmp-player-size);
+        height: var(--rjmp-player-size);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        z-index: -1;
+        animation: scale 5s linear infinite;
+        cursor: pointer;
+      }
+    }
+
+    @media (max-width: 767px) {
+      & {
+        width: var(--rjmp-player-size-mobile);
+        height: var(--rjmp-player-size-mobile);
+
+        &.music-player-playing {
+          &::before {
+            width: var(--rjmp-player-size-mobile);
+            height: var(--rjmp-player-size-mobile);
+          }
+        }
+      }
+    }
+
+    @apply flex items-center justify-center;
+
+    i {
+      font-size: 28px;
+    }
+
+    &:active {
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    }
+
+    &:hover {
+      font-size: 16px;
+
+      .music-player-controller-setting {
+        transform: scale(1);
+      }
+    }
+
+    .controller-title {
+      font-size: 14px;
+    }
+
+    @media (max-width: 767px) {
+      i {
+        font-size: 20px;
+      }
+
+      &:hover,
+      &:active {
+        font-size: 12px;
+
+        .music-player-controller-setting {
+          transform: scale(1);
+        }
+      }
+    }
+
+    .music-player-controller-setting {
+      width: 100%;
+      height: 100%;
+      background: color-mix(
+        in srgb,
+        var(--rjmp-primary-color) 30%,
+        transparent
+      );
+      transform: scale(0);
+      border-radius: 50%;
+      transition: all 0.4s var(--rjmp-animate-type);
+      color: #fff;
+      position: absolute;
+      left: 0;
+      top: 0;
+      @apply flex items-center justify-center;
+    }
+  }
+
+  .audio-circle-process-bar {
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    pointer-events: none;
+    width: var(--rjmp-player-size);
+    height: var(--rjmp-player-size);
+    position: absolute;
+    left: 0;
+    top: calc(-1 * var(--rjmp-player-size));
+    z-index: 100;
+    animation: scaleTo var(--rjmp-animate-time) var(--rjmp-animate-type);
+
+    circle[class='bg'] {
+      stroke: #fff;
+    }
+
+    circle[class='stroke'] {
+      stroke: var(--rjmp-primary-color);
+    }
+
+    &,
+    circle {
+      transition: stroke-dasharray var(--rjmp-animate-time)
+        var(--rjmp-animate-type);
+      transform: matrix(0, -1, 1, 0, 0, 80);
+
+      @media (max-width: 767px) {
+        transform: matrix(0, -1, 1, 0, 0, 60);
+      }
+    }
+  }
+}
+
+@keyframes playing {
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+@keyframes coverReset {
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes audioLoading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.5);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes scaleTo {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleFrom {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes imgRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fromTo {
+  from {
+    transform: scale(1) translate3d(0, 110%, 0);
+  }
+  to {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fromOut {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1) translate3d(0, 110%, 0);
+  }
+}
+
+@keyframes fromDown {
+  from {
+    transform: scale(1) translate3d(0, -110%, 0);
+  }
+  to {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes translate {
+  from {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes remove {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+}

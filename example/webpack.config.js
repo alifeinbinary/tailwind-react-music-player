@@ -48,7 +48,7 @@ module.exports = () => {
           exclude: '/node_modules/',
         },
         {
-          test: /\.less$/,
+          test: /\.css$/,
           use: [
             { loader: 'style-loader' },
             {
@@ -56,20 +56,7 @@ module.exports = () => {
               options: { sourceMap: isDev },
             },
             {
-              loader: 'less-loader',
-              options: {
-                sourceMap: isDev,
-                // javascriptEnabled: true,
-              },
-            },
-          ],
-        },
-        {
-          test: /\.css$/,
-          use: [
-            { loader: 'style-loader' },
-            {
-              loader: 'css-loader',
+              loader: 'postcss-loader',
               options: { sourceMap: isDev },
             },
           ],
