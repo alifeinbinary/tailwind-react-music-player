@@ -2,22 +2,49 @@
   "extends": [
     "airbnb",
     "plugin:react/recommended",
-    "plugin:jest/recommended",
+    "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "plugins": ["react", "babel", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "legacyDecorators": true
-    }
+    },
+    "sourceType": "module"
   },
   "rules": {
     "no-console": [
       "error",
       {
-        "allow": ["error"]
+        "allow": [
+          "error"
+        ]
       }
     ],
+    "no-undef": 0,
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "caughtErrors": "none",
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-unused-expressions": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "no-use-before-define": 0,
+    "no-shadow": 0,
+    "no-empty-function": 0,
+    "react/require-default-props": 0,
+    "react/no-unused-prop-types": 0,
+    "react/default-props-match-prop-types": 0,
+    "react/no-this-in-sfc": 0,
     "react/display-name": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
@@ -40,7 +67,6 @@
     "class-methods-use-this": 0,
     "no-mixed-operators": 0,
     "arrow-parens": 0,
-    "jest/expect-expect": 0,
     "react/state-in-constructor": 0,
     "no-return-await": 0,
     "react/no-access-state-in-setstate": 0,
@@ -65,18 +91,47 @@
     "no-plusplus": 0,
     "consistent-return": 0
   },
-  "parser": "babel-eslint",
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "rules": {
+        "import/no-unresolved": 0
+      }
+    }
+  ],
   "env": {
     "browser": true,
-    "jest": true,
-    "node": true
+    "node": true,
+    "es2020": true
   },
   "globals": {
-    "MediaMetadata": true
+    "MediaMetadata": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "vi": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "beforeAll": true,
+    "afterAll": true
   },
   "settings": {
     "react": {
       "version": "16.13.1"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json"
+        ]
+      }
     }
   }
 }

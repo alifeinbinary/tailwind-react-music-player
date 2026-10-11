@@ -361,10 +361,10 @@ const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
 [Source](https://github.com/alifeinbinary/react-music-player/blob/master/src/locale/index.js)
 
 ```jsx
-import Locale from 'react-jinke-music-player/lib/config/locale'
+import ReactJkMusicPlayer from 'react-jinke-music-player'
 // Two languages are provided by default
 // one of zh_CN | en_US
-<ReactJkMusicPlayer locale={Locale.zh_CN}/>
+<ReactJkMusicPlayer locale={ReactJkMusicPlayer.locale.zh_CN}/>
 // <ReactJkMusicPlayer locale={'en_US'}/>
 
 // Custom override

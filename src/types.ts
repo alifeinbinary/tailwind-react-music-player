@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { DraggableBounds } from 'react-draggable'
+import Sortable from 'sortablejs'
 
 export interface ReactJkMusicPlayerAudioInfo {
   cover: string
@@ -17,7 +19,7 @@ export interface ReactJkMusicPlayerAudioInfo {
   lyric: string
   currentLyric: string
   playIndex: number
-  __PLAYER_KEY__: string
+  __PLAYER_KEY__?: string
   [key: string]: any
 }
 
@@ -30,13 +32,17 @@ export type ReactJkMusicPlayerPlayMode =
   | 'shufflePlay'
 
 export interface ReactJkMusicPlayerAudioListProps {
-  name: React.ReactNode
-  musicSrc: (() => Promise<string>) | string
+  name?: React.ReactNode
+  musicSrc?: (() => Promise<string>) | string
   singer?: React.ReactNode
   cover?: string
   lyric?: string
   duration?: number
   [key: string]: any
+}
+
+export type ReactJkMusicPlayerAudioList = ReactJkMusicPlayerAudioListProps & {
+  __PLAYER_KEY__?: string
 }
 
 export interface ReactJkMusicPlayerInstance extends HTMLAudioElement {
@@ -47,7 +53,7 @@ export interface ReactJkMusicPlayerInstance extends HTMLAudioElement {
   playPrev?: () => void
   togglePlay?: () => void
   clear?: () => void
-  sortable?: any
+  sortable?: Sortable
 }
 
 export interface ReactJkMusicPlayerIcon {
@@ -70,15 +76,20 @@ export interface ReactJkMusicPlayerIcon {
   orderLoop?: React.ReactNode
   shuffle?: React.ReactNode
   loading?: React.ReactNode
+  packUpPanelMobile?: React.ReactNode
+  empty?: React.ReactNode
+  [key: string]: React.ReactNode
+}
+
+export interface ReactJkMusicPlayerPlayModeText {
+  order: React.ReactNode
+  orderLoop: React.ReactNode
+  singleLoop: React.ReactNode
+  shufflePlay: React.ReactNode
 }
 
 export interface ReactJkMusicPlayerCustomLocale {
-  playModeText: {
-    order: React.ReactNode
-    orderLoop: React.ReactNode
-    singleLoop: React.ReactNode
-    shufflePlay: React.ReactNode
-  }
+  playModeText: ReactJkMusicPlayerPlayModeText
   openText: React.ReactNode
   closeText: React.ReactNode
   emptyText: React.ReactNode
@@ -97,9 +108,15 @@ export interface ReactJkMusicPlayerCustomLocale {
   darkThemeText: React.ReactNode
   switchThemeText: React.ReactNode
   removeAudioListsText: React.ReactNode
-  clickToDeleteText: (name: string) => React.ReactNode
+  clickToDeleteText: (name: React.ReactNode) => React.ReactNode
   controllerTitle: React.ReactNode
   emptyLyricText: React.ReactNode
+  loadingText?: React.ReactNode
+  notContentText?: React.ReactNode
+  audioTitle?:
+    | ((audioInfo: ReactJkMusicPlayerAudioInfo) => React.ReactNode)
+    | React.ReactNode
+  [key: string]: any
 }
 
 export type ReactJkMusicPlayerLocale =
@@ -175,6 +192,9 @@ export interface ReactJkMusicPlayerProps {
     audioInfo: ReactJkMusicPlayerAudioInfo,
   ) => void
   onAudioListsSortEnd?: (oldIndex: number, newIndex: number) => void
+  /** @deprecated use onAudioListsSortEnd instead */
+  onAudioListsDragEnd?: (oldIndex: number, newIndex: number) => void
+  onAudioLyricChange?: (lineNum: number, txt: string) => void
   showDownload?: boolean
   showPlay?: boolean
   showReload?: boolean
@@ -183,12 +203,14 @@ export interface ReactJkMusicPlayerProps {
   showMiniModeCover?: boolean
   showDestroy?: boolean
   showMediaSession?: boolean
+  showProgressLoadBar?: boolean
+  playModeTipVisible?: boolean
   toggleMode?: boolean
   once?: boolean
   extendsContent?: React.ReactNode
   defaultVolume?: number
   playModeShowTime?: number
-  bounds?: React.ReactNode
+  bounds?: string | DraggableBounds
   showMiniProcessBar?: boolean
   loadAudioErrorPlayNext?: boolean
   preload?: boolean | 'auto' | 'metadata' | 'none'
@@ -204,7 +226,7 @@ export interface ReactJkMusicPlayerProps {
   autoHiddenCover?: boolean
   onBeforeAudioDownload?: (
     audioInfo: ReactJkMusicPlayerAudioInfo,
-  ) => Promise<TransformedDownloadAudioInfo>
+  ) => Promise<TransformedDownloadAudioInfo> | void
   clearPriorAudioLists?: boolean
   autoPlayInitLoadPlayList?: boolean
   spaceBar?: boolean
@@ -217,7 +239,7 @@ export interface ReactJkMusicPlayerProps {
     currentPlayId: string,
     audioLists: Array<ReactJkMusicPlayerAudioListProps>,
     audioInfo: ReactJkMusicPlayerAudioInfo,
-  ) => Promise<void>
+  ) => void
   customDownloader?: (downloadAudioInfo: TransformedDownloadAudioInfo) => void
   onCoverClick?: (
     mode: ReactJkMusicPlayerMode,
@@ -235,10 +257,47 @@ export interface ReactJkMusicPlayerProps {
     fadeOut?: number
   }
   restartCurrentOnPrev?: boolean
-  sortableOptions?: object
+  sortableOptions?: Sortable.SortableOptions
 }
 
-export default class ReactJkMusicPlayer extends React.PureComponent<
-  ReactJkMusicPlayerProps,
-  any
-> {}
+export interface ReactJkMusicPlayerState {
+  audioLists: ReactJkMusicPlayerAudioList[]
+  playId: string
+  name: React.ReactNode
+  cover?: string
+  singer?: React.ReactNode
+  musicSrc: string
+  lyric?: string
+  currentLyric: React.ReactNode
+  isMobile: boolean
+  toggle: boolean
+  playing: boolean
+  currentTime: number
+  soundValue: number
+  moveX: number
+  moveY: number
+  loading: boolean
+  audioListsPanelVisible: boolean
+  playModelNameVisible: boolean
+  playModeTipVisible?: boolean
+  theme: ReactJkMusicPlayerTheme
+  playMode: ReactJkMusicPlayerPlayMode | ''
+  currentAudioVolume: number
+  initAnimate: boolean
+  isInitAutoPlay?: boolean
+  isInitRemember: boolean
+  loadedProgress: number
+  removeId: string | number
+  isNeedMobileHack: boolean
+  audioLyricVisible: boolean
+  isAutoPlayWhenUserClicked: boolean
+  playIndex: number
+  canPlay: boolean
+  currentVolumeFade: string
+  currentVolumeFadeInterval?: ReturnType<typeof setInterval>
+  updateIntervalEndVolume?: (newVolume: number) => void
+  isAudioSeeking: boolean
+  isResetCoverRotate: boolean
+  isPlayDestroyed?: boolean
+  [key: string]: any
+}

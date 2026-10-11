@@ -19,4 +19,4 @@ cache:
     - '.eslintcache'
     - 'node_modules'
 
-after_script: 'yarn run ci'
+after_script: 'yarn run ci:coverage'
