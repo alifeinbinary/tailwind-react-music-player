@@ -100,6 +100,15 @@ const DEFAULT_ICON = {
   empty: <EmptyIcon />,
 }
 
+const PLAYER_CONTENT_GROUP_CLASS =
+  'group cursor-pointer text-center flex-1 mx-2.5 max-md:mx-1.5 [@media_(max-width:320px)]:mx-1 inline-flex items-center justify-center [&>svg]:cursor-pointer'
+
+// The icon components (download, reload, lyric, play-mode, theme-switch)
+// render in both the desktop panel (.player-content) and the mobile
+// player — scope the shared button styles to the panel context.
+const PLAYER_CONTENT_SCOPED_GROUP_CLASS =
+  'group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer'
+
 export default class ReactJkMusicPlayer extends PureComponent {
   isDrag = false
 
@@ -228,7 +237,9 @@ export default class ReactJkMusicPlayer extends PureComponent {
 
   get iconMap() {
     const Spin = () => (
-      <span className="loading group">{this.props.icon.loading}</span>
+      <span className="loading group inline-flex animate-[audioLoading_1s_linear_infinite] [&_svg]:text-[24px] [&_svg]:text-(--rjmp-primary-color)">
+        {this.props.icon.loading}
+      </span>
     )
     return { ...DEFAULT_ICON, ...this.props.icon, loading: <Spin /> }
   }
@@ -345,7 +356,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
       <>
         {showProgressLoadBar && (
           <div
-            className="progress-load-bar"
+            className="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)-1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-1.25 z-77"
             style={{ width: `${Math.min(loadedProgress, 100)}%` }}
           />
         )}
@@ -361,7 +372,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
 
     const DownloadComponent = showDownload && (
       <span
-        className="group audio-download"
+        className={cls(PLAYER_CONTENT_SCOPED_GROUP_CLASS, 'audio-download')}
         onClick={this.onAudioDownload}
         title={locale.downloadText}
       >
@@ -370,7 +381,12 @@ export default class ReactJkMusicPlayer extends PureComponent {
     )
 
     const ThemeSwitchComponent = showThemeSwitch && (
-      <span className="group theme-switch">
+      <span
+        className={cls(
+          PLAYER_CONTENT_SCOPED_GROUP_CLASS,
+          'theme-switch [.player-content_&_.rc-switch]:bg-transparent',
+        )}
+      >
         <Switch
           className="theme-switch-container"
           onChange={this.themeChange}
@@ -384,7 +400,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
 
     const ReloadComponent = showReload && (
       <span
-        className="group reload-btn"
+        className={cls(PLAYER_CONTENT_SCOPED_GROUP_CLASS, 'reload-btn')}
         onClick={this.onAudioReload}
         title={locale.reloadText}
       >
@@ -394,9 +410,13 @@ export default class ReactJkMusicPlayer extends PureComponent {
 
     const LyricComponent = showLyric && (
       <span
-        className={cls('group lyric-btn', {
-          'lyric-btn-active': audioLyricVisible,
-        })}
+        className={cls(
+          PLAYER_CONTENT_SCOPED_GROUP_CLASS,
+          'lyric-btn [&_svg]:text-[20px]',
+          {
+            'lyric-btn-active text-(--rjmp-primary-color)! [&_svg]:text-(--rjmp-primary-color)!': audioLyricVisible,
+          },
+        )}
         onClick={this.toggleAudioLyric}
         title={locale.toggleLyricText}
       >
@@ -406,7 +426,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
 
     const PlayModeComponent = showPlayMode && (
       <span
-        className={cls('group loop-btn')}
+        className={cls(PLAYER_CONTENT_SCOPED_GROUP_CLASS, 'loop-btn')}
         onClick={this.togglePlayMode}
         title={locale.playModeText[currentPlayMode]}
       >
@@ -429,11 +449,19 @@ export default class ReactJkMusicPlayer extends PureComponent {
 
     const AudioController = (
       <div
-        className={cls('react-jinke-music-player')}
+        className={cls(
+          'react-jinke-music-player',
+          'fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none',
+        )}
         style={defaultPosition}
         tabIndex="-1"
       >
-        <div className={cls('music-player')}>
+        <div
+          className={cls(
+            'music-player',
+            'cursor-pointer relative w-(--rjmp-player-size) h-(--rjmp-player-size) max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none',
+          )}
+        >
           {showMiniProcessBar && (
             <CircleProcessBar
               progress={currentTime / this.audioDuration}
@@ -442,9 +470,14 @@ export default class ReactJkMusicPlayer extends PureComponent {
           )}
           <div
             id={this.targetId}
-            className={cls('scale', 'music-player-controller', {
-              'music-player-playing': playing,
-            })}
+            className={cls(
+              'music-player-controller group',
+              'w-(--rjmp-player-size) h-(--rjmp-player-size) rounded-[50%] border border-(--rjmp-controller-bg) bg-(--rjmp-controller-bg) text-(--rjmp-primary-color) shadow-[0_0_10px_rgba(0,0,0,0.15)] text-[20px] text-center transition-all duration-300 ease-(--rjmp-animate-type) z-99 p-2.5 fixed cursor-pointer bg-no-repeat bg-size-[100%] focus:outline-none flex items-center justify-center animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] active:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:text-[16px] [&_i]:text-[28px]',
+              'max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) max-md:hover:text-[12px] max-md:active:text-[12px] max-md:[&_i]:text-[20px]',
+              {
+                'music-player-playing': playing,
+              },
+            )}
             {...miniModeCoverConfig}
             onClick={!drag ? this.onOpenPanel : undefined}
           >
@@ -452,10 +485,10 @@ export default class ReactJkMusicPlayer extends PureComponent {
               this.iconMap.loading
             ) : (
               <>
-                <span className="controller-title">
+                <span className="controller-title text-sm">
                   {locale.controllerTitle}
                 </span>
-                <div className="music-player-controller-setting">
+                <div className="music-player-controller-setting w-full h-full scale-0 group-hover:scale-100 group-active:scale-100 rounded-[50%] transition-all duration-400 ease-(--rjmp-animate-type) text-white absolute left-0 top-0 flex items-center justify-center [background:color-mix(in_srgb,var(--rjmp-primary-color)_30%,transparent)]">
                   {toggle ? locale.closeText : locale.openText}
                 </div>
               </>
@@ -480,6 +513,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
       <div
         className={cls(
           'react-jinke-music-player-main',
+          'touch-none [font-family:inherit] focus:outline-none',
           {
             'light-theme': theme === THEME.LIGHT,
             'dark-theme': theme === THEME.DARK,
@@ -542,43 +576,64 @@ export default class ReactJkMusicPlayer extends PureComponent {
         )}
         {toggle && (!isMobile || !responsive) && (
           <div
-            className={cls('music-player-panel', 'translate', {
-              'glass-bg': glassBg,
-            })}
+            className={cls(
+              'music-player-panel',
+              'shadow-[0_0_3px_#403f3f] fixed w-full bottom-0 left-0 text-(--rjmp-panel-color) h-(--rjmp-panel-height) bg-(--rjmp-panel-bg) z-99 transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) animate-[translate_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]',
+              {
+                'glass-bg backdrop-blur-[10px]': glassBg,
+              },
+            )}
           >
-            <section className="panel-content">
+            <section className="panel-content h-full px-7.5 relative overflow-hidden flex items-center justify-center">
               {/* lgtm [js/trivial-conditional] */}
               {(!autoHiddenCover || (autoHiddenCover && cover)) && (
                 <div
-                  className={cls('img-content', 'img-rotate', {
-                    'img-rotate-pause': !playing || !cover,
-                    'img-rotate-reset': isResetCoverRotate,
-                  })}
+                  className={cls(
+                    'img-content img-rotate',
+                    'w-12.5 h-12.5 rounded-[50%] overflow-hidden bg-size-[100%] bg-no-repeat shadow-[0_0_10px_rgba(0,34,77,0.05)] cursor-pointer animate-[imgRotate_15s_linear_infinite]',
+                    'max-md:w-10 max-md:h-10',
+                    {
+                      'img-rotate-pause [animation-play-state:paused]!':
+                        !playing || !cover,
+                      'img-rotate-reset animate-[coverReset_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]!': isResetCoverRotate,
+                    },
+                  )}
                   style={{ backgroundImage: `url(${cover})` }}
                   onClick={() => this.onCoverClick()}
                 />
               )}
-              <div className="progress-bar-content">
-                <span className="audio-title" title={audioTitle}>
+              <div className="progress-bar-content flex-1 px-5 overflow-hidden max-md:hidden!">
+                <span
+                  className="audio-title transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) inline-block w-full truncate"
+                  title={audioTitle}
+                >
                   {this.renderAudioTitle()}
                 </span>
-                <section className="audio-main">
-                  <span className="current-time" title={formattedCurrentTime}>
+                <section className="audio-main w-full inline-flex justify-center mt-1.5">
+                  <span
+                    className="current-time text-xs basis-[5%] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
+                    title={formattedCurrentTime}
+                  >
                     {loading ? '--' : formattedCurrentTime}
                   </span>
-                  <div className="progress-bar">{ProgressBar}</div>
-                  <span className="duration" title={formattedAudioDuration}>
+                  <div className="progress-bar flex-auto w-full mx-5 mt-[2px] relative">
+                    {ProgressBar}
+                  </div>
+                  <span
+                    className="duration text-xs basis-[5%] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
+                    title={formattedAudioDuration}
+                  >
                     {loading ? '--' : formattedAudioDuration}
                   </span>
                 </section>
               </div>
-              <div className="player-content">
+              <div className="player-content pl-[5%] inline-flex items-center content-center basis-[15%]">
                 {!showPlay ? (
                   loading && this.iconMap.loading
                 ) : (
-                  <span className="group">
+                  <span className={PLAYER_CONTENT_GROUP_CLASS}>
                     <span
-                      className="group prev-audio"
+                      className="group prev-audio flex [&_svg]:text-[35px]"
                       title={locale.previousTrackText}
                       onClick={this.onPlayPrevAudio}
                     >
@@ -586,14 +641,14 @@ export default class ReactJkMusicPlayer extends PureComponent {
                     </span>
                     {loading ? (
                       <span
-                        className="group loading-icon"
+                        className="group loading-icon flex px-4.5"
                         title={locale.loadingText}
                       >
                         {this.iconMap.loading}
                       </span>
                     ) : (
                       <span
-                        className="group play-btn"
+                        className="group play-btn flex px-4.5 [&_svg]:text-[26px]"
                         onClick={this.onTogglePlay}
                         title={
                           shouldShowPlayIcon
@@ -607,7 +662,7 @@ export default class ReactJkMusicPlayer extends PureComponent {
                       </span>
                     )}
                     <span
-                      className="group next-audio"
+                      className="group next-audio flex [&_svg]:text-[35px]"
                       title={locale.nextTrackText}
                       onClick={this.onPlayNextAudio}
                     >
@@ -622,20 +677,32 @@ export default class ReactJkMusicPlayer extends PureComponent {
                 {extendsContent || null}
 
                 {/* 音量控制 */}
-                <span className="group play-sounds" title={locale.volumeText}>
+                <span
+                  className={cls(
+                    PLAYER_CONTENT_GROUP_CLASS,
+                    'play-sounds max-md:hidden! [&_svg]:text-[28px]',
+                  )}
+                  title={locale.volumeText}
+                >
                   {soundValue === 0 ? (
-                    <span className="sounds-icon" onClick={this.onResetVolume}>
+                    <span
+                      className="sounds-icon flex mr-[15px] flex-auto"
+                      onClick={this.onResetVolume}
+                    >
                       {this.iconMap.mute}
                     </span>
                   ) : (
-                    <span className="sounds-icon" onClick={this.onAudioMute}>
+                    <span
+                      className="sounds-icon flex mr-3.75 flex-auto"
+                      onClick={this.onAudioMute}
+                    >
                       {this.iconMap.volume}
                     </span>
                   )}
                   <Slider
                     value={soundValue}
                     onChange={this.onAudioSoundChange}
-                    className="sound-operation"
+                    className="sound-operation w-25"
                     {...VOLUME_BAR_SLIDER_OPTIONS}
                   />
                 </span>
@@ -645,19 +712,24 @@ export default class ReactJkMusicPlayer extends PureComponent {
                 {LyricComponent}
 
                 <span
-                  className="group audio-lists-btn"
+                  className={cls(
+                    PLAYER_CONTENT_GROUP_CLASS,
+                    'audio-lists-btn select-none min-w-15 h-7 rounded-[40px] bg-black/30 px-2.5 shadow-[0_0_1px_1px_rgba(255,255,255,0.02)] relative [transition:color,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)]',
+                  )}
                   title={locale.playListsText}
                   onClick={this.openAudioListsPanel}
                 >
-                  <span className="audio-lists-icon">
+                  <span className="audio-lists-icon flex">
                     {this.iconMap.playLists}
                   </span>
-                  <span className="audio-lists-num">{audioLists.length}</span>
+                  <span className="audio-lists-num ml-2">
+                    {audioLists.length}
+                  </span>
                 </span>
 
                 {toggleMode && (
                   <span
-                    className="group hide-panel"
+                    className="group hide-panel cursor-pointer text-center flex-[1_1_10%] ml-3.75 mr-2.5 max-md:mr-1.5 [@media_(max-width:320px)]:mr-1 inline-flex items-center justify-center [&>svg]:cursor-pointer"
                     title={locale.toggleMiniModeText}
                     onClick={this.onHidePanel}
                   >
@@ -699,13 +771,19 @@ export default class ReactJkMusicPlayer extends PureComponent {
         {/* 歌词 */}
         {audioLyricVisible && (
           <Draggable>
-            <div className={cls('music-player-lyric', lyricClassName)}>
+            <div
+              className={cls(
+                'music-player-lyric',
+                'fixed z-998 bottom-[calc(var(--rjmp-panel-height)+20px)] w-full left-0 text-center text-(--rjmp-lyric-color) text-(length:--rjmp-lyric-font-size) max-md:text-(length:--rjmp-lyric-font-size-mobile) max-md:z-999 cursor-move transition-shadow duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) bg-transparent [text-shadow:0_1px_1px_rgba(255,255,255,0.05)]',
+                lyricClassName,
+              )}
+            >
               {currentLyric || locale.emptyLyricText}
             </div>
           </Draggable>
         )}
         <audio
-          className="music-player-audio"
+          className="music-player-audio hidden!"
           title={audioTitle}
           {...preloadState}
           src={musicSrc}
@@ -791,7 +869,8 @@ export default class ReactJkMusicPlayer extends PureComponent {
   // 渲染播放模式 对应按钮
   renderPlayModeIcon = (playMode) => {
     const animateProps = {
-      className: 'react-jinke-music-player-mode-icon',
+      className:
+        'react-jinke-music-player-mode-icon animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)]',
     }
     let IconNode = null
     switch (playMode) {

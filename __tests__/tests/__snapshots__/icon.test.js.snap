@@ -2,42 +2,42 @@
 
 exports[`Player custom icon test should render custom icon 1`] = `
 <div
-  class="react-jinke-music-player-main dark-theme"
+  class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme"
   tabindex="-1"
 >
   <div
-    class="music-player-panel translate"
+    class="music-player-panel shadow-[0_0_3px_#403f3f] fixed w-full bottom-0 left-0 text-(color:--rjmp-panel-color) h-(--rjmp-panel-height) bg-(color:--rjmp-panel-bg) z-[99] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) animate-[translate_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
   >
     <section
-      class="panel-content"
+      class="panel-content h-full px-[30px] relative overflow-hidden flex items-center justify-center"
     >
       <div
-        class="img-content img-rotate img-rotate-pause"
+        class="img-content img-rotate w-[50px] h-[50px] rounded-[50%] overflow-hidden [background-size:100%] bg-no-repeat shadow-[0_0_10px_rgba(0,34,77,0.05)] cursor-pointer animate-[imgRotate_15s_linear_infinite] max-md:w-[40px] max-md:h-[40px] img-rotate-pause [animation-play-state:paused]!"
         style="background-image: url();"
       />
       <div
-        class="progress-bar-content"
+        class="progress-bar-content flex-1 px-5 overflow-hidden max-md:hidden!"
       >
         <span
-          class="audio-title"
+          class="audio-title transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) inline-block w-full truncate"
           title="audioName"
         >
           audioName
         </span>
         <section
-          class="audio-main"
+          class="audio-main w-full inline-flex justify-center mt-1.5"
         >
           <span
-            class="current-time"
+            class="current-time text-xs basis-[5%] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             title="00:00"
           >
             00:00
           </span>
           <div
-            class="progress-bar"
+            class="progress-bar flex-auto w-full mx-5 mt-[2px] relative"
           >
             <div
-              class="progress-load-bar"
+              class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)_-_1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-[5px] z-[77]"
               style="width: 0%;"
             />
             <div
@@ -69,7 +69,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
             </div>
           </div>
           <span
-            class="duration"
+            class="duration text-xs basis-[5%] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             title="00:00"
           >
             00:00
@@ -77,13 +77,13 @@ exports[`Player custom icon test should render custom icon 1`] = `
         </section>
       </div>
       <div
-        class="player-content"
+        class="player-content pl-[5%] inline-flex items-center content-center basis-[15%]"
       >
         <span
-          class="group"
+          class="group cursor-pointer text-center flex-1 mx-2.5 max-md:mx-1.5 [@media_(max-width:320px)]:mx-1 inline-flex items-center justify-center [&>svg]:cursor-pointer"
         >
           <span
-            class="group prev-audio"
+            class="group prev-audio flex [&_svg]:text-[35px]"
             title="Previous track"
           >
             <div>
@@ -91,7 +91,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
             </div>
           </span>
           <span
-            class="group play-btn"
+            class="group play-btn flex px-[18px] [&_svg]:text-[26px]"
             title="Click to play"
           >
             <div>
@@ -99,7 +99,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
             </div>
           </span>
           <span
-            class="group next-audio"
+            class="group next-audio flex [&_svg]:text-[35px]"
             title="Next track"
           >
             <div>
@@ -108,7 +108,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </span>
         </span>
         <span
-          class="group reload-btn"
+          class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer reload-btn"
           title="Reload"
         >
           <div>
@@ -116,7 +116,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </div>
         </span>
         <span
-          class="group audio-download"
+          class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer audio-download"
           title="Download"
         >
           <div>
@@ -124,7 +124,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </div>
         </span>
         <span
-          class="group theme-switch"
+          class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer theme-switch [.player-content_&_.rc-switch]:bg-transparent"
         >
           <button
             aria-checked="false"
@@ -141,18 +141,18 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </button>
         </span>
         <span
-          class="group play-sounds"
+          class="group cursor-pointer text-center flex-1 mx-2.5 max-md:mx-1.5 [@media_(max-width:320px)]:mx-1 inline-flex items-center justify-center [&>svg]:cursor-pointer play-sounds max-md:hidden! [&_svg]:text-[28px]"
           title="Volume"
         >
           <span
-            class="sounds-icon"
+            class="sounds-icon flex mr-[15px] flex-auto"
           >
             <div>
               1
             </div>
           </span>
           <div
-            class="rc-slider sound-operation"
+            class="rc-slider sound-operation w-[100px]"
           >
             <div
               class="rc-slider-rail"
@@ -180,7 +180,7 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </div>
         </span>
         <span
-          class="group loop-btn"
+          class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer loop-btn"
           title="Play in order"
         >
           <div>
@@ -188,24 +188,24 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </div>
         </span>
         <span
-          class="group audio-lists-btn"
+          class="group cursor-pointer text-center flex-1 mx-2.5 max-md:mx-1.5 [@media_(max-width:320px)]:mx-1 inline-flex items-center justify-center [&>svg]:cursor-pointer audio-lists-btn select-none min-w-[60px] h-[28px] rounded-[40px] bg-black/30 px-2.5 shadow-[0_0_1px_1px_rgba(255,255,255,0.02)] relative [transition:color,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
           title="Playlists"
         >
           <span
-            class="audio-lists-icon"
+            class="audio-lists-icon flex"
           >
             <div>
               1
             </div>
           </span>
           <span
-            class="audio-lists-num"
+            class="audio-lists-num ml-2"
           >
             2
           </span>
         </span>
         <span
-          class="group hide-panel"
+          class="group hide-panel cursor-pointer text-center flex-[1_1_10%] ml-[15px] mr-2.5 max-md:mr-1.5 [@media_(max-width:320px)]:mr-1 inline-flex items-center justify-center [&>svg]:cursor-pointer"
           title="Minimize"
         >
           <div>
@@ -216,27 +216,27 @@ exports[`Player custom icon test should render custom icon 1`] = `
     </section>
   </div>
   <div
-    class="audio-lists-panel show"
+    class="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius) show animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
   >
     <div
-      class="audio-lists-panel-header"
+      class="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
     >
       <h2
-        class="audio-lists-panel-header-title"
+        class="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
       >
         <span>
           Playlists / 
         </span>
         <span
-          class="audio-lists-panel-header-num"
+          class="audio-lists-panel-header-num ml-2.5"
         >
           2
         </span>
         <span
-          class="audio-lists-panel-header-actions"
+          class="audio-lists-panel-header-actions flex grow justify-end items-center"
         >
           <span
-            class="audio-lists-panel-header-delete-btn"
+            class="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
             title="Delete audio lists"
           >
             <div>
@@ -244,10 +244,10 @@ exports[`Player custom icon test should render custom icon 1`] = `
             </div>
           </span>
           <span
-            class="audio-lists-panel-header-line"
+            class="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
           />
           <span
-            class="audio-lists-panel-header-close-btn"
+            class="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             title="Close"
           >
             <div>
@@ -258,20 +258,20 @@ exports[`Player custom icon test should render custom icon 1`] = `
       </h2>
     </div>
     <div
-      class="audio-lists-panel-content"
+      class="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)]"
     >
       <ul
         class="audio-lists-panel-content-wrap"
       >
         <li
-          class="audio-item playing pause"
+          class="audio-item border-b border-b-transparent px-5 py-0.75 leading-10 flex justify-between items-center text-sm cursor-pointer transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) odd:bg-(--rjmp-lists-item-bg) hover:bg-(--rjmp-lists-item-bg-active)! active:bg-(--rjmp-lists-item-bg-active)! [&:is(:hover,:active)_.group_svg]:text-(--rjmp-primary-color) playing bg-(--rjmp-lists-item-bg-playing)! text-(--rjmp-primary-color) [&_svg]:text-(--rjmp-primary-color) pause"
           title="Click to play"
         >
           <span
-            class="group player-status"
+            class="group player-status inline-flex"
           >
             <span
-              class="player-icons"
+              class="player-icons inline-flex w-[30px]"
             >
               <div>
                 1
@@ -279,16 +279,16 @@ exports[`Player custom icon test should render custom icon 1`] = `
             </span>
           </span>
           <span
-            class="group player-name"
+            class="group player-name inline-block flex-1 pr-5 pl-2.5 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             title="audioName"
           >
             audioName
           </span>
           <span
-            class="group player-singer"
+            class="group player-singer inline-block text-xs w-21.25 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
           />
           <span
-            class="group player-delete"
+            class="group player-delete inline-flex w-7.5 text-right justify-end [&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             title="Click to delete audioName"
           >
             <div>
@@ -297,27 +297,27 @@ exports[`Player custom icon test should render custom icon 1`] = `
           </span>
         </li>
         <li
-          class="audio-item pause"
+          class="audio-item border-b border-b-transparent px-5 py-0.75 leading-10 flex justify-between items-center text-sm cursor-pointer transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) odd:bg-(--rjmp-lists-item-bg) hover:bg-(--rjmp-lists-item-bg-active)! active:bg-(--rjmp-lists-item-bg-active)! [&:is(:hover,:active)_.group_svg]:text-(--rjmp-primary-color) pause"
           title="Click to play"
         >
           <span
-            class="group player-status"
+            class="group player-status inline-flex"
           >
             <span
-              class="player-icons"
+              class="player-icons inline-flex w-[30px]"
             />
           </span>
           <span
-            class="group player-name"
+            class="group player-name inline-block flex-1 pr-5 pl-2.5 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             title="audioName2"
           >
             audioName2
           </span>
           <span
-            class="group player-singer"
+            class="group player-singer inline-block text-xs w-21.25 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
           />
           <span
-            class="group player-delete"
+            class="group player-delete inline-flex w-7.5 text-right justify-end [&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             title="Click to delete audioName2"
           >
             <div>
@@ -329,12 +329,12 @@ exports[`Player custom icon test should render custom icon 1`] = `
     </div>
   </div>
   <div
-    class="play-mode-title"
+    class="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
   >
     Play in order
   </div>
   <audio
-    class="music-player-audio"
+    class="music-player-audio hidden!"
     src="xx"
     title="audioName"
   />
@@ -343,20 +343,20 @@ exports[`Player custom icon test should render custom icon 1`] = `
 
 exports[`Player custom icon test should render custom icon in mobile mode 1`] = `
 <div
-  class="react-jinke-music-player-main dark-theme"
+  class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme"
   tabindex="-1"
 >
   <div
-    class="react-jinke-music-player-mobile default-bg"
+    class="react-jinke-music-player-mobile w-full fixed z-[999] inset-0 p-5 text-white flex flex-col justify-between bg-(color:--rjmp-panel-bg-mobile) overflow-hidden [&>.group]:flex-auto default-bg"
   >
     <div
-      class="react-jinke-music-player-mobile-play-model-tip"
+      class="react-jinke-music-player-mobile-play-model-tip fixed left-0 top-0 w-full h-[35px] leading-[35px] bg-(color:--rjmp-primary-color) text-white px-5 z-[1000] shadow-[0_2px_20px_rgba(0,0,0,0.1)] -translate-y-[105%] transition-transform duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) flex items-center"
     >
       <span
-        class="react-jinke-music-player-mobile-play-model-tip-title"
+        class="react-jinke-music-player-mobile-play-model-tip-title mr-3 [&_svg]:animate-none! [&_svg]:align-text-bottom! [&_.loop-btn]:flex max-md:[&_svg]:text-[19px] max-md:[&_svg]:text-white!"
       >
         <span
-          class="group loop-btn"
+          class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer loop-btn"
           title="Play in order"
         >
           <div>
@@ -365,22 +365,22 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         </span>
       </span>
       <span
-        class="react-jinke-music-player-mobile-play-model-tip-text"
+        class="react-jinke-music-player-mobile-play-model-tip-text text-sm"
       >
         Play in order
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-header group"
+      class="react-jinke-music-player-mobile-header group w-full flex justify-center items-center animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] relative"
     >
       <div
-        class="react-jinke-music-player-mobile-header-title"
+        class="react-jinke-music-player-mobile-header-title text-center text-[20px] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) px-[30px] truncate"
         title="audioName"
       >
         audioName
       </div>
       <div
-        class="react-jinke-music-player-mobile-header-right"
+        class="react-jinke-music-player-mobile-header-right text-(color:--rjmp-base-color) cursor-pointer absolute right-0 [&_svg]:text-[25px]"
       >
         <div>
           1
@@ -388,18 +388,18 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       </div>
     </div>
     <div
-      class="react-jinke-music-player-mobile-singer text-center group"
+      class="react-jinke-music-player-mobile-singer text-center group animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] py-3 [@media_(max-width:320px)]:p-0"
     >
       <span
-        class="react-jinke-music-player-mobile-singer-name"
+        class="react-jinke-music-player-mobile-singer-name relative text-sm transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
         title=""
       />
     </div>
     <div
-      class="react-jinke-music-player-mobile-switch text-center group"
+      class="react-jinke-music-player-mobile-switch text-center group animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <span
-        class="group theme-switch"
+        class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer theme-switch [.player-content_&_.rc-switch]:bg-transparent"
       >
         <button
           aria-checked="false"
@@ -417,27 +417,27 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-cover text-center"
+      class="react-jinke-music-player-mobile-cover text-center w-[300px] h-[300px] rounded-[50%] border-[5px] border-black/20 shadow-[0_0_1px_3px_rgba(0,0,0,0.1)] my-[15px] mx-auto animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] overflow-hidden [transition:box-shadow,border_var(--rjmp-animate-time)_var(--rjmp-animate-type)] [@media_(max-width:320px)]:w-[230px] [@media_(max-width:320px)]:h-[230px] [@media_(max-width:320px)]:my-2.5"
     >
       <img
         alt="cover"
-        class="cover img-rotate-pause"
+        class="cover img-rotate w-full animate-[imgRotate_30s_linear_infinite] object-cover img-rotate-pause [animation-play-state:paused]!"
         src=""
       />
     </div>
     <div
-      class="react-jinke-music-player-mobile-progress group"
+      class="react-jinke-music-player-mobile-progress group justify-around flex items-center animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <span
-        class="current-time"
+        class="current-time inline-flex w-[55px] text-xs text-(color:--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) mr-[5px]"
       >
         00:00
       </span>
       <span
-        class="react-jinke-music-player-mobile-progress-bar"
+        class="react-jinke-music-player-mobile-progress-bar relative flex w-full"
       >
         <div
-          class="progress-load-bar"
+          class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)_-_1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-[5px] z-[77]"
           style="width: 0%;"
         />
         <div
@@ -469,13 +469,13 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         </div>
       </span>
       <span
-        class="duration text-right"
+        class="duration text-right inline-flex w-[55px] text-xs text-(color:--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) justify-end ml-[5px]"
       >
         00:00
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-toggle text-center group"
+      class="react-jinke-music-player-mobile-toggle text-center group py-[17px] animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] [&_.group]:cursor-pointer [&_.group_svg]:text-[40px] [@media_(max-width:320px)]:py-2.5 [@media_(max-width:320px)]:[&>.group_svg]:text-[32px]"
     >
       <span
         class="group prev-audio"
@@ -486,7 +486,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
         </div>
       </span>
       <span
-        class="group play-btn"
+        class="group play-btn px-10 [&_svg]:text-[45px]! [@media_(max-width:320px)]:[&_svg]:text-[40px]!"
         title="Click to play"
       >
         <div>
@@ -503,16 +503,16 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-operation group"
+      class="react-jinke-music-player-mobile-operation group animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <ul
-        class="items"
+        class="items flex justify-around items-center"
       >
         <li
-          class="item"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
         >
           <span
-            class="group loop-btn"
+            class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer loop-btn"
             title="Play in order"
           >
             <div>
@@ -521,10 +521,10 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="item"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
         >
           <span
-            class="group audio-download"
+            class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer audio-download"
             title="Download"
           >
             <div>
@@ -533,10 +533,10 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="item"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
         >
           <span
-            class="group reload-btn"
+            class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer reload-btn"
             title="Reload"
           >
             <div>
@@ -545,7 +545,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="item"
+          class="item cursor-pointer flex-1 text-center [&_svg]:text-(color:--rjmp-base-color)"
         >
           <div>
             1
@@ -555,27 +555,27 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
     </div>
   </div>
   <div
-    class="audio-lists-panel audio-lists-panel-mobile"
+    class="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius) audio-lists-panel-mobile w-full! inset-0! h-auto! origin-bottom! bg-(--rjmp-panel-bg-mobile) rounded-none!"
   >
     <div
-      class="audio-lists-panel-header"
+      class="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
     >
       <h2
-        class="audio-lists-panel-header-title"
+        class="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
       >
         <span>
           Playlists / 
         </span>
         <span
-          class="audio-lists-panel-header-num"
+          class="audio-lists-panel-header-num ml-2.5"
         >
           2
         </span>
         <span
-          class="audio-lists-panel-header-actions"
+          class="audio-lists-panel-header-actions flex grow justify-end items-center"
         >
           <span
-            class="audio-lists-panel-header-delete-btn"
+            class="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
             title="Delete audio lists"
           >
             <div>
@@ -583,10 +583,10 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
             </div>
           </span>
           <span
-            class="audio-lists-panel-header-line"
+            class="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
           />
           <span
-            class="audio-lists-panel-header-close-btn"
+            class="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             title="Close"
           >
             <div>
@@ -597,20 +597,20 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
       </h2>
     </div>
     <div
-      class="audio-lists-panel-content"
+      class="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)] w-full! h-[calc(100vh-var(--rjmp-panel-header-height))]! origin-bottom [-webkit-overflow-scrolling:touch]"
     >
       <ul
         class="audio-lists-panel-content-wrap"
       >
         <li
-          class="audio-item playing pause"
+          class="audio-item border-b border-b-transparent px-5 py-0.75 leading-10 flex justify-between items-center text-sm cursor-pointer transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) odd:bg-(--rjmp-lists-item-bg) hover:bg-(--rjmp-lists-item-bg-active)! active:bg-(--rjmp-lists-item-bg-active)! [&:is(:hover,:active)_.group_svg]:text-(--rjmp-primary-color) playing bg-(--rjmp-lists-item-bg-playing)! text-(--rjmp-primary-color) [&_svg]:text-(--rjmp-primary-color) pause"
           title="Click to play"
         >
           <span
-            class="group player-status"
+            class="group player-status inline-flex"
           >
             <span
-              class="player-icons"
+              class="player-icons inline-flex w-[30px]"
             >
               <div>
                 1
@@ -618,16 +618,16 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
             </span>
           </span>
           <span
-            class="group player-name"
+            class="group player-name inline-block flex-1 pr-5 pl-2.5 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             title="audioName"
           >
             audioName
           </span>
           <span
-            class="group player-singer"
+            class="group player-singer inline-block text-xs w-21.25 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
           />
           <span
-            class="group player-delete"
+            class="group player-delete inline-flex w-7.5 text-right justify-end [&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             title="Click to delete audioName"
           >
             <div>
@@ -636,27 +636,27 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
           </span>
         </li>
         <li
-          class="audio-item pause"
+          class="audio-item border-b border-b-transparent px-5 py-0.75 leading-10 flex justify-between items-center text-sm cursor-pointer transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) odd:bg-(--rjmp-lists-item-bg) hover:bg-(--rjmp-lists-item-bg-active)! active:bg-(--rjmp-lists-item-bg-active)! [&:is(:hover,:active)_.group_svg]:text-(--rjmp-primary-color) pause"
           title="Click to play"
         >
           <span
-            class="group player-status"
+            class="group player-status inline-flex"
           >
             <span
-              class="player-icons"
+              class="player-icons inline-flex w-[30px]"
             />
           </span>
           <span
-            class="group player-name"
+            class="group player-name inline-block flex-1 pr-5 pl-2.5 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             title="audioName2"
           >
             audioName2
           </span>
           <span
-            class="group player-singer"
+            class="group player-singer inline-block text-xs w-21.25 truncate transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
           />
           <span
-            class="group player-delete"
+            class="group player-delete inline-flex w-7.5 text-right justify-end [&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             title="Click to delete audioName2"
           >
             <div>
@@ -668,7 +668,7 @@ exports[`Player custom icon test should render custom icon in mobile mode 1`] = 
     </div>
   </div>
   <audio
-    class="music-player-audio"
+    class="music-player-audio hidden!"
     src="xx"
     title="audioName"
   />

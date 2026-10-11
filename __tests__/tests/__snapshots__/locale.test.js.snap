@@ -105,24 +105,24 @@ exports[`Locale test should render default locale with en_US 1`] = `
     containerInfo={
       <body>
         <div
-          class="react-jinke-music-player-main dark-theme text-class-name"
+          class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme text-class-name"
           tabindex="-1"
         >
           <div
-            class="react-jinke-music-player react-draggable"
+            class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-[999] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             style="left: 0px; top: 0px; transform: translate(0px,0px);"
             tabindex="-1"
           >
             <div
-              class="music-player"
+              class="music-player cursor-pointer relative w-(--rjmp-player-size) h-(--rjmp-player-size) max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none"
             >
               <div
-                class="scale music-player-controller"
+                class="music-player-controller group w-(--rjmp-player-size) h-(--rjmp-player-size) rounded-[50%] border border-(color:--rjmp-controller-bg) bg-(color:--rjmp-controller-bg) text-(color:--rjmp-primary-color) shadow-[0_0_10px_rgba(0,0,0,0.15)] text-[20px] text-center transition-all duration-300 ease-(--rjmp-animate-type) z-[99] p-2.5 fixed cursor-pointer bg-no-repeat [background-size:100%] focus:outline-none flex items-center justify-center animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] active:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:text-[16px] [&_i]:text-[28px] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) max-md:hover:text-[12px] max-md:active:text-[12px] max-md:[&_i]:text-[20px]"
                 id="music-player-controller"
                 style="background-image: url();"
               >
                 <span
-                  class="controller-title"
+                  class="controller-title text-sm"
                 >
                   <svg
                     fill="currentColor"
@@ -139,7 +139,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
                   </svg>
                 </span>
                 <div
-                  class="music-player-controller-setting"
+                  class="music-player-controller-setting w-full h-full scale-0 group-hover:scale-100 group-active:scale-100 rounded-[50%] transition-all duration-400 ease-(--rjmp-animate-type) text-white absolute left-0 top-0 flex items-center justify-center [background:color-mix(in_srgb,var(--rjmp-primary-color)_30%,transparent)]"
                 >
                   Open
                 </div>
@@ -165,28 +165,28 @@ exports[`Locale test should render default locale with en_US 1`] = `
             </div>
           </div>
           <div
-            class="audio-lists-panel"
+            class="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)"
           >
             <div
-              class="audio-lists-panel-header"
+              class="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             >
               <h2
-                class="audio-lists-panel-header-title"
+                class="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
               >
                 <span>
                   Playlists
                    / 
                 </span>
                 <span
-                  class="audio-lists-panel-header-num"
+                  class="audio-lists-panel-header-num ml-2.5"
                 >
                   0
                 </span>
                 <span
-                  class="audio-lists-panel-header-actions"
+                  class="audio-lists-panel-header-actions flex grow justify-end items-center"
                 >
                   <span
-                    class="audio-lists-panel-header-delete-btn"
+                    class="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
                     title="Delete audio lists"
                   >
                     <svg
@@ -210,10 +210,10 @@ exports[`Locale test should render default locale with en_US 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="audio-lists-panel-header-line"
+                    class="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
                   />
                   <span
-                    class="audio-lists-panel-header-close-btn"
+                    class="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
                     title="Close"
                   >
                     <svg
@@ -234,7 +234,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
               </h2>
             </div>
             <div
-              class="audio-lists-panel-content no-content"
+              class="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)] no-content flex items-center justify-center [&>span]:flex"
             >
               <span>
                 <svg
@@ -252,19 +252,19 @@ exports[`Locale test should render default locale with en_US 1`] = `
                 </svg>
               </span>
               <span
-                class="no-data"
+                class="no-data ml-2.5"
               >
                 No music
               </span>
             </div>
           </div>
           <div
-            class="play-mode-title"
+            class="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
           >
             Play in order
           </div>
           <audio
-            class="music-player-audio"
+            class="music-player-audio hidden!"
             src=""
             title=""
           />
@@ -273,7 +273,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
     }
   >
     <div
-      className="react-jinke-music-player-main dark-theme text-class-name"
+      className="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme text-class-name"
       tabIndex="-1"
     >
       <Draggable
@@ -324,7 +324,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
           transform={null}
         >
           <div
-            className="react-jinke-music-player react-draggable"
+            className="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-[999] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             onMouseDown={[Function]}
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
@@ -339,10 +339,10 @@ exports[`Locale test should render default locale with en_US 1`] = `
             transform={null}
           >
             <div
-              className="music-player"
+              className="music-player cursor-pointer relative w-(--rjmp-player-size) h-(--rjmp-player-size) max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none"
             >
               <div
-                className="scale music-player-controller"
+                className="music-player-controller group w-(--rjmp-player-size) h-(--rjmp-player-size) rounded-[50%] border border-(color:--rjmp-controller-bg) bg-(color:--rjmp-controller-bg) text-(color:--rjmp-primary-color) shadow-[0_0_10px_rgba(0,0,0,0.15)] text-[20px] text-center transition-all duration-300 ease-(--rjmp-animate-type) z-[99] p-2.5 fixed cursor-pointer bg-no-repeat [background-size:100%] focus:outline-none flex items-center justify-center animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] active:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:text-[16px] [&_i]:text-[28px] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) max-md:hover:text-[12px] max-md:active:text-[12px] max-md:[&_i]:text-[20px]"
                 id="music-player-controller"
                 style={
                   Object {
@@ -351,7 +351,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
                 }
               >
                 <span
-                  className="controller-title"
+                  className="controller-title text-sm"
                 >
                   <FaHeadphones>
                     <IconBase
@@ -384,7 +384,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
                   </FaHeadphones>
                 </span>
                 <div
-                  className="music-player-controller-setting"
+                  className="music-player-controller-setting w-full h-full scale-0 group-hover:scale-100 group-active:scale-100 rounded-[50%] transition-all duration-400 ease-(--rjmp-animate-type) text-white absolute left-0 top-0 flex items-center justify-center [background:color-mix(in_srgb,var(--rjmp-primary-color)_30%,transparent)]"
                 >
                   Open
                 </div>
@@ -525,28 +525,28 @@ exports[`Locale test should render default locale with en_US 1`] = `
         visible={false}
       >
         <div
-          className="audio-lists-panel"
+          className="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)"
         >
           <div
-            className="audio-lists-panel-header"
+            className="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
           >
             <h2
-              className="audio-lists-panel-header-title"
+              className="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             >
               <span>
                 Playlists
                  / 
               </span>
               <span
-                className="audio-lists-panel-header-num"
+                className="audio-lists-panel-header-num ml-2.5"
               >
                 0
               </span>
               <span
-                className="audio-lists-panel-header-actions"
+                className="audio-lists-panel-header-actions flex grow justify-end items-center"
               >
                 <span
-                  className="audio-lists-panel-header-delete-btn"
+                  className="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
                   onClick={[Function]}
                   title="Delete audio lists"
                 >
@@ -593,10 +593,10 @@ exports[`Locale test should render default locale with en_US 1`] = `
                   </RiDeleteBinLine>
                 </span>
                 <span
-                  className="audio-lists-panel-header-line"
+                  className="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
                 />
                 <span
-                  className="audio-lists-panel-header-close-btn"
+                  className="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
                   onClick={[Function]}
                   title="Close"
                 >
@@ -634,7 +634,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
             </h2>
           </div>
           <div
-            className="audio-lists-panel-content no-content"
+            className="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)] no-content flex items-center justify-center [&>span]:flex"
           >
             <span>
               <MdLibraryMusic>
@@ -668,7 +668,7 @@ exports[`Locale test should render default locale with en_US 1`] = `
               </MdLibraryMusic>
             </span>
             <span
-              className="no-data"
+              className="no-data ml-2.5"
             >
               No music
             </span>
@@ -680,13 +680,13 @@ exports[`Locale test should render default locale with en_US 1`] = `
         visible={false}
       >
         <div
-          className="play-mode-title"
+          className="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
         >
           Play in order
         </div>
       </Memo(PlayModel)>
       <audio
-        className="music-player-audio"
+        className="music-player-audio hidden!"
         src=""
         title=""
       />
@@ -800,24 +800,24 @@ exports[`Locale test should render locale with zh_CN 1`] = `
     containerInfo={
       <body>
         <div
-          class="react-jinke-music-player-main dark-theme text-class-name"
+          class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme text-class-name"
           tabindex="-1"
         >
           <div
-            class="react-jinke-music-player react-draggable"
+            class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-[999] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             style="left: 0px; top: 0px; transform: translate(0px,0px);"
             tabindex="-1"
           >
             <div
-              class="music-player"
+              class="music-player cursor-pointer relative w-(--rjmp-player-size) h-(--rjmp-player-size) max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none"
             >
               <div
-                class="scale music-player-controller"
+                class="music-player-controller group w-(--rjmp-player-size) h-(--rjmp-player-size) rounded-[50%] border border-(color:--rjmp-controller-bg) bg-(color:--rjmp-controller-bg) text-(color:--rjmp-primary-color) shadow-[0_0_10px_rgba(0,0,0,0.15)] text-[20px] text-center transition-all duration-300 ease-(--rjmp-animate-type) z-[99] p-2.5 fixed cursor-pointer bg-no-repeat [background-size:100%] focus:outline-none flex items-center justify-center animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] active:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:text-[16px] [&_i]:text-[28px] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) max-md:hover:text-[12px] max-md:active:text-[12px] max-md:[&_i]:text-[20px]"
                 id="music-player-controller"
                 style="background-image: url();"
               >
                 <span
-                  class="controller-title"
+                  class="controller-title text-sm"
                 >
                   <svg
                     fill="currentColor"
@@ -834,7 +834,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                   </svg>
                 </span>
                 <div
-                  class="music-player-controller-setting"
+                  class="music-player-controller-setting w-full h-full scale-0 group-hover:scale-100 group-active:scale-100 rounded-[50%] transition-all duration-400 ease-(--rjmp-animate-type) text-white absolute left-0 top-0 flex items-center justify-center [background:color-mix(in_srgb,var(--rjmp-primary-color)_30%,transparent)]"
                 >
                   Open
                 </div>
@@ -860,28 +860,28 @@ exports[`Locale test should render locale with zh_CN 1`] = `
             </div>
           </div>
           <div
-            class="audio-lists-panel"
+            class="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)"
           >
             <div
-              class="audio-lists-panel-header"
+              class="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             >
               <h2
-                class="audio-lists-panel-header-title"
+                class="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
               >
                 <span>
                   Playlists
                    / 
                 </span>
                 <span
-                  class="audio-lists-panel-header-num"
+                  class="audio-lists-panel-header-num ml-2.5"
                 >
                   0
                 </span>
                 <span
-                  class="audio-lists-panel-header-actions"
+                  class="audio-lists-panel-header-actions flex grow justify-end items-center"
                 >
                   <span
-                    class="audio-lists-panel-header-delete-btn"
+                    class="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
                     title="Delete audio lists"
                   >
                     <svg
@@ -905,10 +905,10 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="audio-lists-panel-header-line"
+                    class="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
                   />
                   <span
-                    class="audio-lists-panel-header-close-btn"
+                    class="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
                     title="Close"
                   >
                     <svg
@@ -929,7 +929,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
               </h2>
             </div>
             <div
-              class="audio-lists-panel-content no-content"
+              class="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)] no-content flex items-center justify-center [&>span]:flex"
             >
               <span>
                 <svg
@@ -947,42 +947,42 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                 </svg>
               </span>
               <span
-                class="no-data"
+                class="no-data ml-2.5"
               >
                 No music
               </span>
             </div>
           </div>
           <div
-            class="play-mode-title"
+            class="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
           >
             Play in order
           </div>
           <audio
-            class="music-player-audio"
+            class="music-player-audio hidden!"
             src=""
             title=""
           />
         </div>
         <div
-          class="react-jinke-music-player-main dark-theme text-class-name"
+          class="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme text-class-name"
           tabindex="-1"
         >
           <div
-            class="react-jinke-music-player react-draggable"
+            class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-[999] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             style="left: 0px; top: 0px; transform: translate(0px,0px);"
             tabindex="-1"
           >
             <div
-              class="music-player"
+              class="music-player cursor-pointer relative w-(--rjmp-player-size) h-(--rjmp-player-size) max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none"
             >
               <div
-                class="scale music-player-controller"
+                class="music-player-controller group w-(--rjmp-player-size) h-(--rjmp-player-size) rounded-[50%] border border-(color:--rjmp-controller-bg) bg-(color:--rjmp-controller-bg) text-(color:--rjmp-primary-color) shadow-[0_0_10px_rgba(0,0,0,0.15)] text-[20px] text-center transition-all duration-300 ease-(--rjmp-animate-type) z-[99] p-2.5 fixed cursor-pointer bg-no-repeat [background-size:100%] focus:outline-none flex items-center justify-center animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] active:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:text-[16px] [&_i]:text-[28px] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) max-md:hover:text-[12px] max-md:active:text-[12px] max-md:[&_i]:text-[20px]"
                 id="music-player-controller"
                 style="background-image: url();"
               >
                 <span
-                  class="controller-title"
+                  class="controller-title text-sm"
                 >
                   <svg
                     fill="currentColor"
@@ -999,7 +999,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                   </svg>
                 </span>
                 <div
-                  class="music-player-controller-setting"
+                  class="music-player-controller-setting w-full h-full scale-0 group-hover:scale-100 group-active:scale-100 rounded-[50%] transition-all duration-400 ease-(--rjmp-animate-type) text-white absolute left-0 top-0 flex items-center justify-center [background:color-mix(in_srgb,var(--rjmp-primary-color)_30%,transparent)]"
                 >
                   打开
                 </div>
@@ -1025,28 +1025,28 @@ exports[`Locale test should render locale with zh_CN 1`] = `
             </div>
           </div>
           <div
-            class="audio-lists-panel"
+            class="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)"
           >
             <div
-              class="audio-lists-panel-header"
+              class="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
             >
               <h2
-                class="audio-lists-panel-header-title"
+                class="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
               >
                 <span>
                   播放列表
                    / 
                 </span>
                 <span
-                  class="audio-lists-panel-header-num"
+                  class="audio-lists-panel-header-num ml-2.5"
                 >
                   0
                 </span>
                 <span
-                  class="audio-lists-panel-header-actions"
+                  class="audio-lists-panel-header-actions flex grow justify-end items-center"
                 >
                   <span
-                    class="audio-lists-panel-header-delete-btn"
+                    class="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
                     title="清空播放列表"
                   >
                     <svg
@@ -1070,10 +1070,10 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                     </svg>
                   </span>
                   <span
-                    class="audio-lists-panel-header-line"
+                    class="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
                   />
                   <span
-                    class="audio-lists-panel-header-close-btn"
+                    class="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
                     title="关闭"
                   >
                     <svg
@@ -1094,7 +1094,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
               </h2>
             </div>
             <div
-              class="audio-lists-panel-content no-content"
+              class="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)] no-content flex items-center justify-center [&>span]:flex"
             >
               <span>
                 <svg
@@ -1112,19 +1112,19 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                 </svg>
               </span>
               <span
-                class="no-data"
+                class="no-data ml-2.5"
               >
                 音乐播放列表为空
               </span>
             </div>
           </div>
           <div
-            class="play-mode-title"
+            class="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
           >
             顺序播放
           </div>
           <audio
-            class="music-player-audio"
+            class="music-player-audio hidden!"
             src=""
             title=""
           />
@@ -1133,7 +1133,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
     }
   >
     <div
-      className="react-jinke-music-player-main dark-theme text-class-name"
+      className="react-jinke-music-player-main touch-none [font-family:inherit] focus:outline-none dark-theme text-class-name"
       tabIndex="-1"
     >
       <Draggable
@@ -1184,7 +1184,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
           transform={null}
         >
           <div
-            className="react-jinke-music-player react-draggable"
+            className="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-[999] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             onMouseDown={[Function]}
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
@@ -1199,10 +1199,10 @@ exports[`Locale test should render locale with zh_CN 1`] = `
             transform={null}
           >
             <div
-              className="music-player"
+              className="music-player cursor-pointer relative w-(--rjmp-player-size) h-(--rjmp-player-size) max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none"
             >
               <div
-                className="scale music-player-controller"
+                className="music-player-controller group w-(--rjmp-player-size) h-(--rjmp-player-size) rounded-[50%] border border-(color:--rjmp-controller-bg) bg-(color:--rjmp-controller-bg) text-(color:--rjmp-primary-color) shadow-[0_0_10px_rgba(0,0,0,0.15)] text-[20px] text-center transition-all duration-300 ease-(--rjmp-animate-type) z-[99] p-2.5 fixed cursor-pointer bg-no-repeat [background-size:100%] focus:outline-none flex items-center justify-center animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] active:shadow-[0_0_30px_rgba(0,0,0,0.2)] hover:text-[16px] [&_i]:text-[28px] max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) max-md:hover:text-[12px] max-md:active:text-[12px] max-md:[&_i]:text-[20px]"
                 id="music-player-controller"
                 style={
                   Object {
@@ -1211,7 +1211,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                 }
               >
                 <span
-                  className="controller-title"
+                  className="controller-title text-sm"
                 >
                   <FaHeadphones>
                     <IconBase
@@ -1244,7 +1244,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                   </FaHeadphones>
                 </span>
                 <div
-                  className="music-player-controller-setting"
+                  className="music-player-controller-setting w-full h-full scale-0 group-hover:scale-100 group-active:scale-100 rounded-[50%] transition-all duration-400 ease-(--rjmp-animate-type) text-white absolute left-0 top-0 flex items-center justify-center [background:color-mix(in_srgb,var(--rjmp-primary-color)_30%,transparent)]"
                 >
                   打开
                 </div>
@@ -1385,28 +1385,28 @@ exports[`Locale test should render locale with zh_CN 1`] = `
         visible={false}
       >
         <div
-          className="audio-lists-panel"
+          className="audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)"
         >
           <div
-            className="audio-lists-panel-header"
+            className="audio-lists-panel-header [border-bottom:1px_solid_color-mix(in_srgb,var(--rjmp-panel-bg)_99%,#fff)] shadow-[0_1px_2px_rgba(0,0,0,0.2)] [text-shadow:0_1px_1px_rgba(0,0,0,0.1)] [transition:background-color,border-bottom_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
           >
             <h2
-              className="audio-lists-panel-header-title"
+              className="audio-lists-panel-header-title h-(--rjmp-panel-header-height) flex items-center px-5 text-base m-0 text-left font-medium transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
             >
               <span>
                 播放列表
                  / 
               </span>
               <span
-                className="audio-lists-panel-header-num"
+                className="audio-lists-panel-header-num ml-2.5"
               >
                 0
               </span>
               <span
-                className="audio-lists-panel-header-actions"
+                className="audio-lists-panel-header-actions flex grow justify-end items-center"
               >
                 <span
-                  className="audio-lists-panel-header-delete-btn"
+                  className="audio-lists-panel-header-delete-btn flex cursor-pointer [&_svg]:text-[21px] max-md:[&_svg]:text-[19px]"
                   onClick={[Function]}
                   title="清空播放列表"
                 >
@@ -1453,10 +1453,10 @@ exports[`Locale test should render locale with zh_CN 1`] = `
                   </RiDeleteBinLine>
                 </span>
                 <span
-                  className="audio-lists-panel-header-line"
+                  className="audio-lists-panel-header-line w-px bg-white h-5 mx-2.5"
                 />
                 <span
-                  className="audio-lists-panel-header-close-btn"
+                  className="audio-lists-panel-header-close-btn flex cursor-pointer md:[&:hover_svg]:animate-[imgRotate_var(--rjmp-animate-time)_var(--rjmp-animate-type)]"
                   onClick={[Function]}
                   title="关闭"
                 >
@@ -1494,7 +1494,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
             </h2>
           </div>
           <div
-            className="audio-lists-panel-content no-content"
+            className="audio-lists-panel-content overflow-x-hidden overflow-y-auto h-[calc(var(--rjmp-lists-panel-height)-var(--rjmp-panel-header-height)-1px)] no-content flex items-center justify-center [&>span]:flex"
           >
             <span>
               <MdLibraryMusic>
@@ -1528,7 +1528,7 @@ exports[`Locale test should render locale with zh_CN 1`] = `
               </MdLibraryMusic>
             </span>
             <span
-              className="no-data"
+              className="no-data ml-2.5"
             >
               音乐播放列表为空
             </span>
@@ -1540,13 +1540,13 @@ exports[`Locale test should render locale with zh_CN 1`] = `
         visible={false}
       >
         <div
-          className="play-mode-title"
+          className="play-mode-title select-none fixed right-[72px] bottom-(--rjmp-panel-height) px-5 py-[5px] bg-black/50 text-white leading-normal text-center origin-bottom z-[1000] transition-all duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) opacity-0 invisible translate-x-full pointer-events-none"
         >
           顺序播放
         </div>
       </Memo(PlayModel)>
       <audio
-        className="music-player-audio"
+        className="music-player-audio hidden!"
         src=""
         title=""
       />

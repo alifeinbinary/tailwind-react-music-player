@@ -1,13 +1,13 @@
 language: node_js
 
 node_js:
-  - "8"
+  - '8'
 
 sudo: false
 
 branches:
-   only:
-   - master
+  only:
+    - master
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -16,7 +16,7 @@ before_install:
 cache:
   yarn: true
   directories:
-    - ".eslintcache"
-    - "node_modules"
+    - '.eslintcache'
+    - 'node_modules'
 
-after_script: "yarn run ci"
+after_script: 'yarn run ci'

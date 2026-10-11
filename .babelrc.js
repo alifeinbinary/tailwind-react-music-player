@@ -7,7 +7,10 @@ const plugins = [
 ]
 
 if (env === 'test') {
-  plugins.push('@babel/plugin-transform-modules-commonjs', '@babel/plugin-transform-runtime')
+  plugins.push(
+    '@babel/plugin-transform-modules-commonjs',
+    '@babel/plugin-transform-runtime',
+  )
 }
 
 if (env === 'development') {
