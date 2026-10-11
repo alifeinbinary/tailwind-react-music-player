@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import { FaHeadphonesIcon } from '../components/Icon'
+import { ReactJkMusicPlayerCustomLocale } from '../types'
 
-export default {
+const zh_CN: ReactJkMusicPlayerCustomLocale = {
   playModeText: {
     order: '顺序播放',
     orderLoop: '列表循环',
@@ -31,3 +33,5 @@ export default {
   emptyLyricText: '暂无歌词',
   loadingText: '加载中',
 }
+
+export default zh_CN

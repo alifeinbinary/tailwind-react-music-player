@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import { FaHeadphonesIcon } from '../components/Icon'
+import { ReactJkMusicPlayerCustomLocale } from '../types'
 
-export default {
+const en_GB: ReactJkMusicPlayerCustomLocale = {
   playModeText: {
     order: 'Play in order',
     orderLoop: 'List loop',
@@ -19,7 +21,7 @@ export default {
   volumeText: 'Volume',
   playListsText: 'Playlists',
   toggleLyricText: 'Toggle lyric',
-  toggleMiniModeText: 'Minimize',
+  toggleMiniModeText: 'Minimise',
   destroyText: 'Destroy',
   downloadText: 'Download',
   lightThemeText: 'L',
@@ -28,6 +30,8 @@ export default {
   removeAudioListsText: 'Delete audio lists',
   clickToDeleteText: (name) => `Click to delete ${name}`,
   controllerTitle: <FaHeadphonesIcon />,
-  emptyLyricText: 'No lyric',
+  emptyLyricText: 'No lyrics',
   loadingText: 'Loading',
 }
+
+export default en_GB
