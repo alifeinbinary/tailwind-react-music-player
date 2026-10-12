@@ -25,15 +25,42 @@ jobs:
       - run: yarn lint
       - run: yarn typecheck
       - run: yarn test:coverage
+      - run: yarn playwright install chromium
+      - run: yarn test:browser
       - run: yarn build
       - run: yarn smoke:import
       - run: yarn size
       - run: yarn check:package
+      - run: yarn smoke:pack
       - name: Upload coverage
         if: matrix.node == 22
         uses: codecov/codecov-action@v4
         with:
           fail_ci_if_error: false
+
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn --frozen-lockfile
+      - run: yarn playwright install --with-deps chromium
+      - run: yarn e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 7
 
   deploy-pages:
     runs-on: ubuntu-latest

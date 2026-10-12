@@ -5,9 +5,10 @@ import { useSortable } from '../hooks/use-sortable'
 import type { PlaylistItem } from '../types'
 import { IconButton, reactNodeToText } from './controls'
 import { usePlayerContext } from './player-context'
+import { useFocusReturn } from './use-focus-return'
 
 const styles = {
-  root: 'trmp:fixed trmp:right-0 trmp:top-0 trmp:z-50 trmp:flex trmp:h-playlist-h trmp:w-playlist-w trmp:max-w-full trmp:flex-col trmp:bg-panel trmp:text-panel-text trmp:shadow-panel trmp:animate-slide-in-right trmp:data-[open=false]:hidden',
+  root: 'trmp-playlist trmp:fixed trmp:right-0 trmp:top-0 trmp:z-50 trmp:flex trmp:h-playlist-h trmp:w-playlist-w trmp:max-w-full trmp:flex-col trmp:bg-panel trmp:text-panel-text trmp:shadow-panel trmp:animate-slide-in-right trmp:data-[open=false]:hidden',
   header:
     'trmp:flex trmp:h-panel-header trmp:items-center trmp:justify-between trmp:border-b trmp:border-panel-muted trmp:px-4',
   list: 'trmp:flex-1 trmp:overflow-y-auto',
@@ -46,6 +47,10 @@ export function PlaylistPanel({
     onSortEnd: actions.reorderTracks,
   })
 
+  // Move focus into the dialog on open; useFocusReturn hands it back to
+  // the toggle on close.
+  useFocusReturn(rootRef, open)
+
   // Escape closes
   useEffect(() => {
     const el = rootRef.current
@@ -73,7 +78,7 @@ export function PlaylistPanel({
       requestAnimationFrame(() => {
         listRef.current
           ?.querySelectorAll<HTMLElement>('[data-track-index]')
-          [to]?.focus()
+        [to]?.focus()
       })
     },
     [actions, state.tracks.length],
@@ -103,6 +108,7 @@ export function PlaylistPanel({
       id={id}
       role="dialog"
       aria-label={locale.playlist}
+      tabIndex={-1}
       data-open={open}
       hidden={!open}
       className={styles.root}

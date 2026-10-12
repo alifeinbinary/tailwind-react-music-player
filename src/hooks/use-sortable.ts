@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import type { RefObject } from 'react'
 import Sortable from 'sortablejs/modular/sortable.core.esm.js'
+import type { SortableOptions } from '../types'
 
 let swapMounted = false
 
@@ -8,7 +9,7 @@ let swapMounted = false
 export interface UseSortableOptions {
   enabled: boolean
   /** Extra Sortable options merged over the defaults. */
-  options?: Sortable.Options
+  options?: SortableOptions
   onSortEnd(from: number, to: number): void
 }
 

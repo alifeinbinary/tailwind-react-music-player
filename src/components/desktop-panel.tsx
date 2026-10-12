@@ -12,14 +12,14 @@ import { VolumeControl } from './volume-control'
 import { usePlayerContext } from './player-context'
 
 const styles = {
-  root: 'trmp:fixed trmp:bottom-0 trmp:left-0 trmp:z-50 trmp:flex trmp:h-panel trmp:w-full trmp:items-center trmp:gap-5 trmp:bg-panel trmp:px-[30px] trmp:text-panel-text trmp:shadow-panel',
+  root: 'trmp-panel trmp:fixed trmp:bottom-0 trmp:left-0 trmp:z-50 trmp:flex trmp:h-panel trmp:w-full trmp:items-center trmp:gap-5 trmp:bg-panel trmp:px-[30px] trmp:text-panel-text trmp:shadow-panel',
   column:
     'trmp:flex trmp:min-w-0 trmp:flex-1 trmp:flex-col trmp:justify-center trmp:gap-1',
   controls: 'trmp:flex trmp:flex-none trmp:items-center trmp:gap-4',
   glass:
     'trmp:absolute trmp:inset-0 trmp:-z-10 trmp:scale-[3] trmp:bg-cover trmp:bg-center trmp:blur-[80px]',
   count:
-    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-full trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-white',
+    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-full trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
 }
 
 /** Bottom-bar desktop player panel (mode full, desktop layout). */

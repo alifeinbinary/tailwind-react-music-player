@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { type RefObject } from 'react'
 import { type DraggableBounds } from 'react-draggable'
-import type Sortable from 'sortablejs'
 import type { Locale, LocaleId } from './i18n'
 import type { PlayerIcons } from './components/icons'
 import { PLAYER_MODES, PLAY_MODES, THEMES } from './constants'
@@ -63,6 +62,19 @@ export interface DownloadInfo {
   src: string
   filename?: string
   mimeType?: string
+}
+
+/** Subset of SortableJS options exposed in the public API.
+ * Self-contained so consumers don't need `@types/sortablejs`; an index
+ * signature keeps every SortableJS option assignable. */
+export interface SortableOptions {
+  animation?: number
+  handle?: string
+  ghostClass?: string
+  chosenClass?: string
+  dragClass?: string
+  onEnd?: (event: { oldIndex?: number; newIndex?: number }) => void
+  [key: string]: unknown
 }
 
 /** Fade durations in milliseconds. */
@@ -246,7 +258,7 @@ export interface MusicPlayerUIProps {
   showLyric?: boolean
   showDestroy?: boolean
   removable?: boolean
-  sortable?: boolean | Sortable.Options
+  sortable?: boolean | SortableOptions
   keyboardShortcuts?: boolean
   /** How long a mode-change toast stays visible (ms). */
   playModeTipDuration?: number

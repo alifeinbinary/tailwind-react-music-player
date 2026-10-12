@@ -39,6 +39,7 @@
     "lint-fix:style": "yarn lint:style --fix",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.build.json --noEmit",
     "build:css": "tailwindcss -i src/styles/index.css -o dist/styles.css --minify",
+    "gen:fixtures": "node scripts/gen-fixtures.ts",
     "gen:icons": "node scripts/gen-icons.ts",
     "build:bundle": "vite build",
     "build": "yarn build:clean && yarn build:bundle && yarn build:css",
@@ -47,7 +48,7 @@
     "build:surge": "SURGE=1 yarn build:demo",
     "demo": "vite playground",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage --project unit",
     "prepublishOnly": "yarn build",
     "prettier": "prettier --check .",
     "format": "prettier --write .",
@@ -55,7 +56,13 @@
     "check:package": "publint --pack npm && attw --pack . --exclude-entrypoints ./styles.css --ignore-rules cjs-resolves-to-esm",
     "smoke:import": "node -e \"import('./dist/index.js').then(()=>console.log('ESM import OK'))\"",
     "release": "semantic-release",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:unit": "vitest run --project unit",
+    "test:browser": "vitest run --project browser",
+    "e2e": "playwright test",
+    "e2e:update": "playwright test --update-snapshots",
+    "e2e:a11y": "playwright test e2e/a11y.spec.ts",
+    "smoke:pack": "node scripts/smoke-pack.mjs"
   },
   "author": "Andrew Halliwell <andrew@alifeinbinary.com>",
   "repository": {
@@ -89,6 +96,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@axe-core/playwright": "^4.11.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.39.5",
@@ -107,6 +115,8 @@
     "@types/react-dom": "^19",
     "@types/sortablejs": "^1.15.9",
     "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/browser": "^5.0.3",
+    "@vitest/browser-playwright": "^5.0.3",
     "@vitest/coverage-v8": "^5.0.3",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",

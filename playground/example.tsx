@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import MusicPlayer, {
   useMusicPlayer,
   type AudioInfo,
@@ -11,6 +11,7 @@ import MusicPlayer, {
   type Theme,
 } from '../src'
 import { lyric } from './lyric'
+import coverUrl from './assets/cover.png'
 import '../src/styles/index.css'
 import './example.css'
 
@@ -18,16 +19,14 @@ const audioList: AudioTrack[] = [
   {
     name: 'Despacito',
     singer: 'Luis Fonsi',
-    cover:
-      'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
+    cover: coverUrl,
     musicSrc:
       'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3',
   },
   {
     name: 'Dorost Nemisham',
     singer: 'Sirvan Khosravi',
-    cover:
-      'https://res.cloudinary.com/ehsanahmadi/image/upload/v1573758778/Sirvan-Khosravi-Dorost-Nemisham_glicks.jpg',
+    cover: coverUrl,
     musicSrc:
       'https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3',
   },
@@ -35,6 +34,7 @@ const audioList: AudioTrack[] = [
     name: '高尚 (lyric demo)',
     singer: '薛之谦',
     lyric,
+    cover: coverUrl,
     musicSrc:
       'http://res.cloudinary.com/alick/video/upload/v1502375674/Bedtime_Stories.mp3',
   },
@@ -102,6 +102,18 @@ function CustomPlayer() {
   )
 }
 
+const query = new URLSearchParams(
+  typeof window === 'undefined' ? '' : window.location.search,
+)
+const flag = (name: string) => query.get(name) === '1'
+const queryValue = <T extends string>(
+  name: string,
+  allowed: readonly T[],
+): T | undefined => {
+  const v = query.get(name) as T | null
+  return v && allowed.includes(v) ? v : undefined
+}
+
 export default function Demo() {
   const playerRef = useRef<MusicPlayerHandle>(null)
   const [ui, setUi] = useState<Record<string, boolean>>({
@@ -119,16 +131,30 @@ export default function Demo() {
     sortable: true,
     draggable: true,
     keyboardShortcuts: true,
-    glassBackground: false,
+    glassBackground: flag('glass'),
     hideEmptyCover: false,
     allowModeToggle: true,
     responsive: true,
     seekable: true,
   })
-  const [theme, setTheme] = useState<Theme>('dark')
-  const [mode, setMode] = useState<PlayerMode>('mini')
-  const [playMode, setPlayMode] = useState<PlayMode>('orderLoop')
-  const [locale, setLocale] = useState<LocaleId>('en_US')
+  const [theme, setTheme] = useState<Theme>(
+    () => queryValue('theme', ['dark', 'light', 'auto']) ?? 'dark',
+  )
+  const [mode, setMode] = useState<PlayerMode>(
+    () => queryValue('mode', ['mini', 'full']) ?? 'mini',
+  )
+  const [playMode, setPlayMode] = useState<PlayMode>(
+    () =>
+      queryValue('playMode', [
+        'order',
+        'orderLoop',
+        'singleLoop',
+        'shufflePlay',
+      ]) ?? 'orderLoop',
+  )
+  const [locale, setLocale] = useState<LocaleId>(
+    () => queryValue('locale', ['en_US', 'en_GB', 'zh_CN']) ?? 'en_US',
+  )
   const [persist, setPersist] = useState(false)
   const [fade, setFade] = useState(false)
   const [log, setLog] = useState<string[]>([])
@@ -141,6 +167,27 @@ export default function Demo() {
   const toggle = (key: keyof MusicPlayerUIProps) =>
     setUi((s) => ({ ...s, [key]: !s[key] }))
 
+  // Seed playlist / lyric overlay visibility from ?playlist=1&lyric=1 by
+  // activating the player's own toggles once on mount.
+  useEffect(() => {
+    if (!flag('playlist') && !flag('lyric')) return
+    const id = requestAnimationFrame(() => {
+      const root = document.querySelector('.trmp-root')
+      if (!root) return
+      if (flag('playlist')) {
+        root
+          .querySelector<HTMLElement>('button[aria-controls]')
+          ?.click()
+      }
+      if (flag('lyric')) {
+        root
+          .querySelector<HTMLElement>('button[aria-label="Toggle lyrics"]')
+          ?.click()
+      }
+    })
+    return () => cancelAnimationFrame(id)
+  }, [])
+
   return (
     <main>
       <h1>tailwind-react-music-player v5</h1>
@@ -150,7 +197,7 @@ export default function Demo() {
         <label htmlFor="pf-theme">
           theme{' '}
           <select
-            id="pf-theme"
+            id="pf-theme" data-testid="pf-theme"
             value={theme}
             onChange={(e) => setTheme(e.target.value as Theme)}
           >
@@ -162,7 +209,7 @@ export default function Demo() {
         <label htmlFor="pf-mode">
           mode{' '}
           <select
-            id="pf-mode"
+            id="pf-mode" data-testid="pf-mode"
             value={mode}
             onChange={(e) => setMode(e.target.value as PlayerMode)}
           >
@@ -173,7 +220,7 @@ export default function Demo() {
         <label htmlFor="pf-play-mode">
           playMode{' '}
           <select
-            id="pf-play-mode"
+            id="pf-play-mode" data-testid="pf-play-mode"
             value={playMode}
             onChange={(e) => setPlayMode(e.target.value as PlayMode)}
           >
@@ -186,7 +233,7 @@ export default function Demo() {
         <label htmlFor="pf-locale">
           locale{' '}
           <select
-            id="pf-locale"
+            id="pf-locale" data-testid="pf-locale"
             value={locale}
             onChange={(e) => setLocale(e.target.value as LocaleId)}
           >
@@ -197,7 +244,7 @@ export default function Demo() {
         </label>
         <label htmlFor="pf-persist">
           <input
-            id="pf-persist"
+            id="pf-persist" data-testid="pf-persist"
             type="checkbox"
             aria-label="persist"
             checked={persist}
@@ -207,7 +254,7 @@ export default function Demo() {
         </label>
         <label htmlFor="pf-fade">
           <input
-            id="pf-fade"
+            id="pf-fade" data-testid="pf-fade"
             type="checkbox"
             aria-label="volumeFade"
             checked={fade}
@@ -219,7 +266,7 @@ export default function Demo() {
           {TOGGLES.map((key) => (
             <label key={key} htmlFor={`pf-${key}`}>
               <input
-                id={`pf-${key}`}
+                id={`pf-${key}`} data-testid={`pf-${key}`}
                 type="checkbox"
                 aria-label={key}
                 checked={!!ui[key]}
@@ -272,6 +319,9 @@ export default function Demo() {
       <MusicPlayer
         ref={playerRef}
         audioLists={audioList}
+        autoPlay={
+          query.has('autoplay') ? query.get('autoplay') === '1' : undefined
+        }
         theme={theme}
         mode={mode}
         playMode={playMode}

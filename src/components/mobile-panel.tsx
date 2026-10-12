@@ -13,7 +13,7 @@ import { usePlayerContext } from './player-context'
 import { useFocusReturn } from './use-focus-return'
 
 const styles = {
-  root: 'trmp:fixed trmp:inset-0 trmp:z-50 trmp:flex trmp:flex-col trmp:bg-panel-mobile trmp:text-panel-text',
+  root: 'trmp-mobile trmp:fixed trmp:inset-0 trmp:z-50 trmp:flex trmp:flex-col trmp:bg-panel-mobile trmp:text-panel-text',
   header:
     'trmp:flex trmp:h-panel-header trmp:items-center trmp:justify-between trmp:border-b trmp:border-panel-muted trmp:px-4',
   title: 'trmp:truncate trmp:text-center trmp:flex-1',
@@ -23,7 +23,7 @@ const styles = {
   bottom:
     'trmp:flex trmp:items-center trmp:justify-center trmp:gap-2 trmp:pb-6',
   count:
-    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-full trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-white',
+    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-full trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
 }
 
 /** Full-screen mobile panel (mode full, mobile layout). */
