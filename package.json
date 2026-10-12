@@ -92,7 +92,7 @@
     "downloadjs": "^1.4.7",
     "is-mobile": "^2.2.2",
     "prop-types": "^15.8.1",
-    "rc-slider": "^9.7.2",
+    "rc-slider": "^11.1.8",
     "rc-switch": "^3.2.2",
     "react-draggable": "^4.7.2",
     "sortablejs": "^1.15.7"

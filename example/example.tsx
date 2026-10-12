@@ -1036,7 +1036,8 @@ class Demo extends React.PureComponent<object, DemoState> {
                 this.onChangeKey(checked ? 'mini' : 'full')
               }
             />
-            language :{params.locale}
+            language :
+            {typeof params.locale === 'string' ? params.locale : 'custom'}
             <Switch
               checkedChildren="zh"
               unCheckedChildren="en"

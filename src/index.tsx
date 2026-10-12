@@ -8,7 +8,7 @@
 import cls from 'classnames'
 import download from 'downloadjs'
 import getIsMobile from 'is-mobile'
-import Slider from 'rc-slider/lib/Slider'
+import Slider from 'rc-slider'
 import Switch from 'rc-switch'
 import React, {
   cloneElement,
@@ -204,9 +204,13 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
   sortable?: Sortable
 
-  player: React.RefObject<HTMLDivElement>
+  player: React.RefObject<HTMLDivElement | null>
 
-  destroyBtn: React.RefObject<HTMLSpanElement>
+  destroyBtn: React.RefObject<HTMLSpanElement | null>
+
+  audioController: React.RefObject<HTMLDivElement | null>
+
+  lyricContainer: React.RefObject<HTMLDivElement | null>
 
   targetId: string
 
@@ -319,6 +323,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
     this.player = createRef()
     this.destroyBtn = createRef()
+    this.audioController = createRef()
+    this.lyricContainer = createRef()
   }
 
   render() {
@@ -411,8 +417,10 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
     const progressHandler = seeked
       ? {
-          onChange: this.onProgressChange,
-          onAfterChange: this.onAudioSeeked,
+          onChange: (value: number | number[]) =>
+            this.onProgressChange(value as number),
+          onChangeComplete: (value: number | number[]) =>
+            this.onAudioSeeked(value as number),
         }
       : {}
 
@@ -513,6 +521,7 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
     const AudioController = (
       <div
+        ref={this.audioController}
         className={cls(
           'tailwind-react-music-player',
           'fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none',
@@ -627,6 +636,7 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
         {toggle ? undefined : drag ? (
           <Draggable
+            nodeRef={this.audioController}
             bounds={bounds}
             position={{ x: moveX, y: moveY }}
             onDrag={this.onControllerDrag}
@@ -765,7 +775,9 @@ export default class TailwindReactMusicPlayer extends PureComponent<
                   )}
                   <Slider
                     value={soundValue}
-                    onChange={this.onAudioSoundChange}
+                    onChange={(value) =>
+                      this.onAudioSoundChange(value as number)
+                    }
                     className="sound-operation w-25"
                     {...VOLUME_BAR_SLIDER_OPTIONS}
                   />
@@ -834,8 +846,9 @@ export default class TailwindReactMusicPlayer extends PureComponent<
         )}
         {/* Lyrics panel: Displays the current song's lyrics with draggable positioning. */}
         {audioLyricVisible && (
-          <Draggable>
+          <Draggable nodeRef={this.lyricContainer}>
             <div
+              ref={this.lyricContainer}
               className={cls(
                 'music-player-lyric',
                 'fixed z-998 bottom-[calc(var(--rjmp-panel-height)+20px)] w-full left-0 text-center text-(--rjmp-lyric-color) text-(length:--rjmp-lyric-font-size) max-md:text-(length:--rjmp-lyric-font-size-mobile) max-md:z-999 cursor-move transition-shadow duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) bg-transparent [text-shadow:0_1px_1px_rgba(255,255,255,0.05)]',
@@ -888,8 +901,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
   getAudioTitle = (): ReactNode => {
     const { audioTitle } = this.locale || {}
     const { name, singer } = this.state
-    if (typeof audioTitle === 'function' && this.audio) {
-      return audioTitle(this.getBaseAudioInfo())
+    if (typeof audioTitle === 'function') {
+      return this.audio ? audioTitle(this.getBaseAudioInfo()) : ''
     }
     return audioTitle || `${name}${singer ? ` - ${singer}` : ''}`
   }
@@ -2206,22 +2219,20 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     this.props.onAudioLyricChange && this.props.onAudioLyricChange(lineNum, txt)
   }
 
-  updateTheme = (theme?: TailwindReactMusicPlayerTheme) => {
-    if (
-      theme &&
-      theme !== this.props.theme &&
-      Object.values(THEME).includes(theme)
-    ) {
+  updateTheme = (
+    theme?: TailwindReactMusicPlayerTheme,
+    prevTheme = this.props.theme,
+  ) => {
+    if (theme && theme !== prevTheme && Object.values(THEME).includes(theme)) {
       this.setState({ theme })
     }
   }
 
-  updateMode = (mode?: TailwindReactMusicPlayerMode) => {
-    if (
-      mode &&
-      mode !== this.props.mode &&
-      Object.values(MODE).includes(mode)
-    ) {
+  updateMode = (
+    mode?: TailwindReactMusicPlayerMode,
+    prevMode = this.props.mode,
+  ) => {
+    if (mode && mode !== prevMode && Object.values(MODE).includes(mode)) {
       this.setState({ toggle: mode === MODE.FULL })
       if (mode === MODE.MINI) {
         this._closeAudioListsPanel()
@@ -2229,11 +2240,14 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     }
   }
 
-  updatePlayMode = (playMode?: TailwindReactMusicPlayerPlayMode) => {
+  updatePlayMode = (
+    playMode?: TailwindReactMusicPlayerPlayMode,
+    prevPlayMode = this.props.playMode,
+  ) => {
     if (!playMode || !Object.values(PLAY_MODE).includes(playMode)) {
       return
     }
-    if (playMode !== this.props.playMode) {
+    if (playMode !== prevPlayMode) {
       this.setState({ playMode })
     }
   }
@@ -2590,17 +2604,14 @@ export default class TailwindReactMusicPlayer extends PureComponent<
   }
 
   componentDidUpdate(
-    _prevProps: TailwindReactMusicPlayerProps,
+    prevProps: TailwindReactMusicPlayerProps,
     prevState: TailwindReactMusicPlayerState,
   ) {
     if (prevState.musicSrc !== this.state.musicSrc) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ isResetCoverRotate: true })
     }
-  }
 
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: ResolvedProps) {
     const {
       audioLists,
       playIndex,
@@ -2608,31 +2619,35 @@ export default class TailwindReactMusicPlayer extends PureComponent<
       mode,
       playMode,
       clearPriorAudioLists,
-    } = nextProps
-    const isEqualAudioLists = arrayEqual(audioLists)(this.props.audioLists)
+    } = this.props
+    const isEqualAudioLists = arrayEqual(audioLists)(prevProps.audioLists)
     if (!isEqualAudioLists) {
       if (clearPriorAudioLists) {
-        this.changeAudioLists(nextProps)
+        this.changeAudioLists(this.props)
       } else {
         this.updateAudioLists(audioLists)
       }
-      if (!this.checkCurrentPlayingAudioIsInUpdatedAudioLists(nextProps)) {
+      if (!this.checkCurrentPlayingAudioIsInUpdatedAudioLists(this.props)) {
         this.initPlayer(audioLists, false, false)
       }
       setTimeout(() => this.initSortableAudioLists(), 200)
     }
-    this.updatePlayIndex(
-      !isEqualAudioLists && clearPriorAudioLists
-        ? DEFAULT_PLAY_INDEX
-        : playIndex,
-    )
-    this.updateTheme(theme)
-    this.updateMode(mode)
-    this.updatePlayMode(playMode)
+    if (
+      prevProps.playIndex !== playIndex ||
+      (!isEqualAudioLists && clearPriorAudioLists)
+    ) {
+      this.updatePlayIndex(
+        !isEqualAudioLists && clearPriorAudioLists
+          ? DEFAULT_PLAY_INDEX
+          : playIndex,
+      )
+    }
+    this.updateTheme(theme, prevProps.theme)
+    this.updateMode(mode, prevProps.mode)
+    this.updatePlayMode(playMode, prevProps.playMode)
   }
 
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillMount() {
+  initAudioInfo = (onInited?: () => void) => {
     const { audioLists, remember } = this.props
 
     if (Array.isArray(audioLists) && audioLists.length >= 1) {
@@ -2642,20 +2657,28 @@ export default class TailwindReactMusicPlayer extends PureComponent<
       switch (typeof playInfo.musicSrc) {
         case 'function':
           playInfo.musicSrc().then((val) => {
-            this.setState({
-              ...playInfo,
-              musicSrc: val,
-              ...lastPlayStatus,
-            } as TailwindReactMusicPlayerState)
+            this.setState(
+              {
+                ...playInfo,
+                musicSrc: val,
+                ...lastPlayStatus,
+              } as TailwindReactMusicPlayerState,
+              onInited,
+            )
           }, this.onAudioError)
           break
         default:
-          this.setState({
-            ...playInfo,
-            musicSrc: playInfo.musicSrc,
-            ...lastPlayStatus,
-          } as TailwindReactMusicPlayerState)
+          this.setState(
+            {
+              ...playInfo,
+              musicSrc: playInfo.musicSrc,
+              ...lastPlayStatus,
+            } as TailwindReactMusicPlayerState,
+            onInited,
+          )
       }
+    } else if (onInited) {
+      onInited()
     }
   }
 
@@ -2666,8 +2689,10 @@ export default class TailwindReactMusicPlayer extends PureComponent<
   componentDidMount() {
     this.addMobileListener()
     this.addSystemThemeListener()
-    this.initPlayer()
-    this.initSortableAudioLists()
-    this.onGetAudioInstance()
+    this.initAudioInfo(() => {
+      this.initPlayer()
+      this.initSortableAudioLists()
+      this.onGetAudioInstance()
+    })
   }
 }

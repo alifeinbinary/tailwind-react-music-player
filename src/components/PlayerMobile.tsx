@@ -30,10 +30,10 @@ export interface PlayerMobileProps {
   glassBg: boolean
   onCoverClick: () => void
   autoHiddenCover: boolean
-  icon: TailwindReactMusicPlayerIcon
+  icon?: TailwindReactMusicPlayerIcon
   locale: TailwindReactMusicPlayerCustomLocale
   toggleMode: boolean
-  renderAudioTitle: () => ReactNode
+  renderAudioTitle?: () => ReactNode
   shouldShowPlayIcon: boolean
   isResetCoverRotate: boolean
 }
@@ -60,10 +60,10 @@ const PlayerMobile: React.FC<PlayerMobileProps> = ({
   glassBg,
   onCoverClick,
   autoHiddenCover,
-  icon,
+  icon = {},
   locale,
   toggleMode,
-  renderAudioTitle,
+  renderAudioTitle = () => null,
   shouldShowPlayIcon,
   isResetCoverRotate,
 }: PlayerMobileProps) => (
@@ -209,10 +209,5 @@ const PlayerMobile: React.FC<PlayerMobileProps> = ({
     </div>
   </div>
 )
-
-PlayerMobile.defaultProps = {
-  icon: {},
-  renderAudioTitle: () => {},
-}
 
 export default memo(PlayerMobile)
