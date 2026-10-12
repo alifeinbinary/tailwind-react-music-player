@@ -2,7 +2,7 @@ import * as React from 'react'
 import { DraggableBounds } from 'react-draggable'
 import Sortable from 'sortablejs'
 
-export interface ReactJkMusicPlayerAudioInfo {
+export interface TailwindReactMusicPlayerAudioInfo {
   cover: string
   currentTime: number
   duration: number
@@ -23,15 +23,15 @@ export interface ReactJkMusicPlayerAudioInfo {
   [key: string]: any
 }
 
-export type ReactJkMusicPlayerTheme = 'dark' | 'light' | 'auto'
-export type ReactJkMusicPlayerMode = 'mini' | 'full'
-export type ReactJkMusicPlayerPlayMode =
+export type TailwindReactMusicPlayerTheme = 'dark' | 'light' | 'auto'
+export type TailwindReactMusicPlayerMode = 'mini' | 'full'
+export type TailwindReactMusicPlayerPlayMode =
   | 'order'
   | 'orderLoop'
   | 'singleLoop'
   | 'shufflePlay'
 
-export interface ReactJkMusicPlayerAudioListProps {
+export interface TailwindReactMusicPlayerAudioListProps {
   name?: React.ReactNode
   musicSrc?: (() => Promise<string>) | string
   singer?: React.ReactNode
@@ -41,11 +41,11 @@ export interface ReactJkMusicPlayerAudioListProps {
   [key: string]: any
 }
 
-export type ReactJkMusicPlayerAudioList = ReactJkMusicPlayerAudioListProps & {
+export type TailwindReactMusicPlayerAudioList = TailwindReactMusicPlayerAudioListProps & {
   __PLAYER_KEY__?: string
 }
 
-export interface ReactJkMusicPlayerInstance extends HTMLAudioElement {
+export interface TailwindReactMusicPlayerInstance extends HTMLAudioElement {
   destroy?: () => void
   updatePlayIndex?: (index: number) => void
   playByIndex?: (index: number) => void
@@ -56,7 +56,7 @@ export interface ReactJkMusicPlayerInstance extends HTMLAudioElement {
   sortable?: Sortable
 }
 
-export interface ReactJkMusicPlayerIcon {
+export interface TailwindReactMusicPlayerIcon {
   pause?: React.ReactNode
   play?: React.ReactNode
   destroy?: React.ReactNode
@@ -81,15 +81,15 @@ export interface ReactJkMusicPlayerIcon {
   [key: string]: React.ReactNode
 }
 
-export interface ReactJkMusicPlayerPlayModeText {
+export interface TailwindReactMusicPlayerPlayModeText {
   order: React.ReactNode
   orderLoop: React.ReactNode
   singleLoop: React.ReactNode
   shufflePlay: React.ReactNode
 }
 
-export interface ReactJkMusicPlayerCustomLocale {
-  playModeText: ReactJkMusicPlayerPlayModeText
+export interface TailwindReactMusicPlayerCustomLocale {
+  playModeText: TailwindReactMusicPlayerPlayModeText
   openText: React.ReactNode
   closeText: React.ReactNode
   emptyText: React.ReactNode
@@ -114,15 +114,15 @@ export interface ReactJkMusicPlayerCustomLocale {
   loadingText?: React.ReactNode
   notContentText?: React.ReactNode
   audioTitle?:
-    | ((audioInfo: ReactJkMusicPlayerAudioInfo) => React.ReactNode)
+    | ((audioInfo: TailwindReactMusicPlayerAudioInfo) => React.ReactNode)
     | React.ReactNode
   [key: string]: any
 }
 
-export type ReactJkMusicPlayerLocale =
+export type TailwindReactMusicPlayerLocale =
   | 'zh_CN'
   | 'en_US'
-  | ReactJkMusicPlayerCustomLocale
+  | TailwindReactMusicPlayerCustomLocale
 
 export interface TransformedDownloadAudioInfo {
   src: string
@@ -130,16 +130,16 @@ export interface TransformedDownloadAudioInfo {
   mimeType?: string
 }
 
-export interface ReactJkMusicPlayerProps {
+export interface TailwindReactMusicPlayerProps {
   style?: React.CSSProperties
   className?: string
-  audioLists: Array<ReactJkMusicPlayerAudioListProps>
-  locale?: ReactJkMusicPlayerLocale
-  icon?: ReactJkMusicPlayerIcon
-  theme?: ReactJkMusicPlayerTheme
-  mode?: ReactJkMusicPlayerMode
-  defaultPlayMode?: ReactJkMusicPlayerPlayMode
-  playMode?: ReactJkMusicPlayerPlayMode
+  audioLists: Array<TailwindReactMusicPlayerAudioListProps>
+  locale?: TailwindReactMusicPlayerLocale
+  icon?: TailwindReactMusicPlayerIcon
+  theme?: TailwindReactMusicPlayerTheme
+  mode?: TailwindReactMusicPlayerMode
+  defaultPlayMode?: TailwindReactMusicPlayerPlayMode
+  playMode?: TailwindReactMusicPlayerPlayMode
   drag?: boolean
   seeked?: boolean
   autoPlay?: boolean
@@ -151,45 +151,45 @@ export interface ReactJkMusicPlayerProps {
   }
   responsive?: boolean
   quietUpdate?: boolean
-  onAudioPlay?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
-  onAudioPause?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
+  onAudioPlay?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
+  onAudioPause?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
   onAudioEnded?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   onAudioAbort?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   onAudioVolumeChange?: (volume: number) => void
   onAudioError?: (
     error: any,
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
-  onAudioProgress?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
-  onAudioSeeked?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
+  onAudioProgress?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
+  onAudioSeeked?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
   onAudioDownload?: (
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
     transformedDownloadAudioInfo: TransformedDownloadAudioInfo,
   ) => void
-  onAudioReload?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
-  onThemeChange?: (theme: ReactJkMusicPlayerTheme) => void
+  onAudioReload?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
+  onThemeChange?: (theme: TailwindReactMusicPlayerTheme) => void
   onAudioListsChange?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
-  onPlayModeChange?: (playMode: ReactJkMusicPlayerPlayMode) => void
-  onModeChange?: (mode: ReactJkMusicPlayerMode) => void
+  onPlayModeChange?: (playMode: TailwindReactMusicPlayerPlayMode) => void
+  onModeChange?: (mode: TailwindReactMusicPlayerMode) => void
   onAudioListsPanelChange?: (panelVisible: boolean) => void
   onAudioPlayTrackChange?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   onAudioListsSortEnd?: (oldIndex: number, newIndex: number) => void
   /** @deprecated use onAudioListsSortEnd instead */
@@ -222,33 +222,33 @@ export interface ReactJkMusicPlayerProps {
   lyricClassName?: string
   showLyric?: boolean
   getContainer?: () => HTMLElement
-  getAudioInstance?: (instance: ReactJkMusicPlayerInstance) => void
+  getAudioInstance?: (instance: TailwindReactMusicPlayerInstance) => void
   autoHiddenCover?: boolean
   onBeforeAudioDownload?: (
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => Promise<TransformedDownloadAudioInfo> | void
   clearPriorAudioLists?: boolean
   autoPlayInitLoadPlayList?: boolean
   spaceBar?: boolean
   onBeforeDestroy?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => Promise<void>
   onDestroyed?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   customDownloader?: (downloadAudioInfo: TransformedDownloadAudioInfo) => void
   onCoverClick?: (
-    mode: ReactJkMusicPlayerMode,
-    audioLists: Array<ReactJkMusicPlayerAudioListProps>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    mode: TailwindReactMusicPlayerMode,
+    audioLists: Array<TailwindReactMusicPlayerAudioListProps>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   onPlayIndexChange?: (playIndex: number) => void
   renderAudioTitle?: (
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
     isMobile: boolean,
   ) => React.ReactNode
   mobileMediaQuery?: string
@@ -260,8 +260,8 @@ export interface ReactJkMusicPlayerProps {
   sortableOptions?: Sortable.SortableOptions
 }
 
-export interface ReactJkMusicPlayerState {
-  audioLists: ReactJkMusicPlayerAudioList[]
+export interface TailwindReactMusicPlayerState {
+  audioLists: TailwindReactMusicPlayerAudioList[]
   playId: string
   name: React.ReactNode
   cover?: string
@@ -280,8 +280,8 @@ export interface ReactJkMusicPlayerState {
   audioListsPanelVisible: boolean
   playModelNameVisible: boolean
   playModeTipVisible?: boolean
-  theme: ReactJkMusicPlayerTheme
-  playMode: ReactJkMusicPlayerPlayMode | ''
+  theme: TailwindReactMusicPlayerTheme
+  playMode: TailwindReactMusicPlayerPlayMode | ''
   currentAudioVolume: number
   initAnimate: boolean
   isInitAutoPlay?: boolean

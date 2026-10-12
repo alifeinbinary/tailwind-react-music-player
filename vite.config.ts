@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
       minify: isUmd,
       lib: {
         entry: resolve(__dirname, 'src/index.tsx'),
-        name: 'ReactJkMusicPlayer',
+        name: 'TailwindReactMusicPlayer',
         formats: isUmd ? ['umd'] : ['es', 'cjs'],
         fileName: (format) =>
           format === 'es'

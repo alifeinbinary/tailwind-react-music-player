@@ -9,7 +9,7 @@ yarn build        # clean + vite lib build (ESM+CJS+d.ts) + vite UMD build + tai
 ```
 
 - `yarn build:bundle` — `vite build` → `dist/index.js` (ESM) + `dist/index.cjs` (CJS) + declarations via `vite-plugin-dts`
-- `yarn build:umd` — `vite build --mode umd` → `dist/tailwind-react-music-player.min.js` (UMD, global `ReactJkMusicPlayer`, externals: react/react-dom)
+- `yarn build:umd` — `vite build --mode umd` → `dist/tailwind-react-music-player.min.js` (UMD, global `TailwindReactMusicPlayer`, externals: react/react-dom)
 - `yarn build:css` — Tailwind CLI: `src/styles/index.css` → `assets/index.css`
 - `yarn demo` — Vite dev server on http://localhost:8084 (config: `example/vite.config.ts`)
 - `yarn build:demo` — production demo build → `example/dist/` (base `/react-music-player/`; `/` on Netlify/Surge via env vars)
@@ -23,8 +23,8 @@ All library output goes to `dist/` — there is no `lib/` or `es/` anymore. Pack
 
 - `src/types.ts` is the single source of truth for the public API types — it is re-exported from `src/index.tsx` (`export * from './types'` plus `export { default as locale }`, which replaces the old `lib/config/locale` deep import).
 - Runtime `prop-types` are kept (`src/config/propTypes.ts`) — do not remove them; they are part of the runtime API for JS consumers.
-- `name`/`musicSrc` on `ReactJkMusicPlayerAudioListProps` are optional — the runtime and tests tolerate missing fields.
-- Enzyme wrappers in tests are typed via `mount<ReactJkMusicPlayer>(...)` to expose real state/instance types.
+- `name`/`musicSrc` on `TailwindReactMusicPlayerAudioListProps` are optional — the runtime and tests tolerate missing fields.
+- Enzyme wrappers in tests are typed via `mount<TailwindReactMusicPlayer>(...)` to expose real state/instance types.
 - jest-style globals are Vitest's (`vi.*`, `describe`, `it`, `expect` are global via `vitest/globals` in tsconfig).
 
 ## Styling
