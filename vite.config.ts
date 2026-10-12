@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      react({ jsxRuntime: 'classic' }),
+      react(),
       !isUmd &&
         dts({
           include: ['src'],
@@ -74,7 +74,6 @@ export default defineConfig(({ mode }) => {
       globals: true,
       environment: 'jsdom',
       setupFiles: ['__tests__/setup.ts'],
-      snapshotSerializers: ['enzyme-to-json/serializer'],
       include: ['__tests__/tests/**/*.test.{ts,tsx,js,jsx}'],
       coverage: {
         provider: 'v8',

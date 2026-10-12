@@ -10,11 +10,8 @@ const getBase = (command: 'build' | 'serve') => {
 }
 
 export default defineConfig(({ command }) => ({
-  plugins: [react({ jsxRuntime: 'classic' }), tailwindcss()],
+  plugins: [react(), tailwindcss()],
   base: getBase(command),
-  optimizeDeps: {
-    exclude: ['react/jsx-dev-runtime', 'react/jsx-runtime'],
-  },
   server: {
     host: 'localhost',
     port: 8084,

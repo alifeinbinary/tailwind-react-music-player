@@ -1,6 +1,4 @@
 /* eslint-disable no-console */
-import Enzyme from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
 import sortablejs from 'sortablejs'
 import { vi } from 'vitest'
 import {
@@ -9,6 +7,9 @@ import {
 } from '../src/config/audioState'
 
 const g = globalThis as any
+
+// Required for React 19 `act()` outside of react-test-renderer.
+g.IS_REACT_ACT_ENVIRONMENT = true
 
 g.window = window
 g.document = window.document
@@ -56,8 +57,6 @@ if (typeof window !== 'undefined') {
   })
   g.window.URL.createObjectURL = vi.fn()
 }
-
-Enzyme.configure({ adapter: new Adapter() })
 
 vi.mock('sortablejs', () => {
   const Sortable = vi.fn(function Sortable(this: any) {

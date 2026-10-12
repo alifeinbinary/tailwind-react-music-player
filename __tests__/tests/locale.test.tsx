@@ -1,18 +1,16 @@
 /* eslint-disable no-console */
 import React from 'react'
-import { mount } from 'enzyme'
 import TailwindReactMusicPlayer from '../../src'
-import { FaHeadphonesIcon } from '../../src/components/Icon'
+import { mount, PlayerWrapper } from '../utils'
 
-const getTitle = (wrapper: any, className: string, at?: number) => {
-  if (at) {
-    return wrapper.find(className).at(at).getDOMNode().getAttribute('title')
-  }
-  return wrapper.find(className).getDOMNode().getAttribute('title')
+const getTitle = (wrapper: PlayerWrapper, className: string, at?: number) => {
+  const found = wrapper.find(className)
+  const el = at !== undefined ? found.at(at).getDOMNode() : found.getDOMNode()
+  return el && el.getAttribute('title')
 }
 describe('Locale test', () => {
   it('should render default locale with en_US', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         className="text-class-name"
         showLyric
@@ -20,11 +18,11 @@ describe('Locale test', () => {
       />,
     )
 
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.render()).toMatchSnapshot()
   })
 
   it('should render locale with zh_CN', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         className="text-class-name"
         showLyric
@@ -32,10 +30,10 @@ describe('Locale test', () => {
         locale="zh_CN"
       />,
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.render()).toMatchSnapshot()
   })
   it('should override locale with en_US', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         className="text-class-name"
         showLyric
@@ -57,7 +55,7 @@ describe('Locale test', () => {
     expect(wrapper.find('.music-player-controller-setting').text()).toContain(
       'Open',
     )
-    expect(wrapper.find(FaHeadphonesIcon)).toHaveLength(1)
+    expect(wrapper.find('.controller-title svg')).toHaveLength(1)
 
     wrapper.setProps({ mode: 'full' })
     expect(getTitle(wrapper, '.prev-audio')).toEqual('Previous track')
@@ -98,7 +96,7 @@ describe('Locale test', () => {
   })
 
   it('should render locale with zh_CN detail', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         showLyric
         showDestroy
@@ -116,7 +114,7 @@ describe('Locale test', () => {
     expect(wrapper.find('.music-player-controller-setting').text()).toContain(
       '打开',
     )
-    expect(wrapper.find(FaHeadphonesIcon)).toHaveLength(1)
+    expect(wrapper.find('.controller-title svg')).toHaveLength(1)
 
     wrapper.setProps({ mode: 'full' })
     expect(getTitle(wrapper, '.prev-audio')).toEqual('上一首')
@@ -157,7 +155,7 @@ describe('Locale test', () => {
   })
 
   it('should override locale', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         locale={
           {
@@ -173,7 +171,7 @@ describe('Locale test', () => {
 
   // https://github.com/alifeinbinary/react-music-player/issues/83
   it('should render locale with functional audioTitle', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         className="text-class-name"
         showMiniProcessBar

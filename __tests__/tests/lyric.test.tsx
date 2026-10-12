@@ -1,8 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { mount, sleep } from '../utils'
 import TailwindReactMusicPlayer from '../../src'
 import lyric from '../../example/lyric'
-import { sleep } from '../utils'
 
 const createPlayer = (props?: any) => (
   <TailwindReactMusicPlayer
@@ -25,20 +24,18 @@ const createPlayer = (props?: any) => (
 
 describe('Lyric test', () => {
   it('should get initial lyric', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(createPlayer())
+    const wrapper = mount(createPlayer())
     expect(wrapper.state().lyric).toEqual(lyric)
   })
   it('should active lyric button when current clicked', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(createPlayer())
+    const wrapper = mount(createPlayer())
     expect(wrapper.find('.lyric-btn.lyric-btn-active')).toHaveLength(0)
     wrapper.find('.lyric-btn').simulate('click')
     expect(wrapper.find('.lyric-btn.lyric-btn-active').exists()).toBeTruthy()
   })
   it.skip('should call onAudioLyricChange when audio playing', () => {
     const onAudioLyricChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      createPlayer({ onAudioLyricChange }),
-    )
+    const wrapper = mount(createPlayer({ onAudioLyricChange }))
     wrapper.setState({ loading: false }, () => {
       wrapper.find('.play-btn').simulate('click')
 
@@ -50,9 +47,7 @@ describe('Lyric test', () => {
 
   it.skip('should call onAudioLyricChange when audio auto play', () => {
     const onAudioLyricChange = vi.fn()
-    mount<TailwindReactMusicPlayer>(
-      createPlayer({ autoPlay: true, onAudioLyricChange }),
-    )
+    mount(createPlayer({ autoPlay: true, onAudioLyricChange }))
     sleep(1000).then(() => {
       expect(onAudioLyricChange).toHaveBeenCalled()
     })
@@ -60,9 +55,7 @@ describe('Lyric test', () => {
 
   it.skip('should toggle call onAudioLyricChange when audio pause', async () => {
     const onAudioLyricChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      createPlayer({ onAudioLyricChange }),
-    )
+    const wrapper = mount(createPlayer({ onAudioLyricChange }))
     wrapper.setState({ loading: false })
     wrapper.find('.play-btn').simulate('click')
 
@@ -76,9 +69,7 @@ describe('Lyric test', () => {
 
   it.skip('should toggle call onAudioLyricChange when audio pause and select audio', async () => {
     const onAudioLyricChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      createPlayer({ onAudioLyricChange }),
-    )
+    const wrapper = mount(createPlayer({ onAudioLyricChange }))
     wrapper.setState({ audioListsPanelVisible: true })
     wrapper.find('.audio-item').first().simulate('click')
 
@@ -93,18 +84,14 @@ describe('Lyric test', () => {
 
   it('should match current audio lyric', () => {
     const onAudioLyricChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      createPlayer({ onAudioLyricChange }),
-    )
+    const wrapper = mount(createPlayer({ onAudioLyricChange }))
     wrapper.find('.next-audio').simulate('click')
     expect(wrapper.state().lyric).toEqual('')
   })
 
   it('should match current audio lyric by audio item panel', () => {
     const onAudioLyricChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      createPlayer({ onAudioLyricChange }),
-    )
+    const wrapper = mount(createPlayer({ onAudioLyricChange }))
     wrapper.setState({ audioListsPanelVisible: true })
     wrapper.find('.audio-item').last().simulate('click')
     expect(wrapper.state().lyric).toEqual('')

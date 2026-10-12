@@ -1,11 +1,11 @@
-import { mount } from 'enzyme'
+import { act } from '@testing-library/react'
 import React from 'react'
 import TailwindReactMusicPlayer from '../../src'
-import { sleep } from '../utils'
+import { mount, sleep } from '../utils'
 
 const getApp = (props?: any) => {
   let _instance: any
-  const wrapper = mount<TailwindReactMusicPlayer>(
+  const wrapper = mount(
     <TailwindReactMusicPlayer
       audioLists={[{ musicSrc: 'a' }, { musicSrc: 'b' }]}
       autoPlay={false}
@@ -15,8 +15,30 @@ const getApp = (props?: any) => {
       {...props}
     />,
   )
+  // getAudioInstance returns the enhanced <audio> element, not the component —
+  // forward its player methods through act() so the setState calls they make
+  // flush (a Proxy can't be used: the methods are non-configurable own props).
+  const actWrap = (fn: (...args: any[]) => any) => {
+    let result: any
+    return (...args: any[]) => {
+      act(() => {
+        result = fn(...args)
+      })
+      return result
+    }
+  }
+  const instance = {
+    destroy: actWrap(_instance.destroy),
+    updatePlayIndex: actWrap(_instance.updatePlayIndex),
+    playByIndex: actWrap(_instance.playByIndex),
+    playPrev: actWrap(_instance.playPrev),
+    playNext: actWrap(_instance.playNext),
+    togglePlay: actWrap(_instance.togglePlay),
+    clear: actWrap(_instance.clear),
+    sortable: _instance.sortable,
+  }
   return {
-    instance: _instance,
+    instance,
     wrapper,
   }
 }
@@ -24,7 +46,7 @@ const getApp = (props?: any) => {
 describe('AudioInstance test', () => {
   it('should call getAudioInstance function', () => {
     const getAudioInstance = vi.fn()
-    mount<TailwindReactMusicPlayer>(
+    mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x' }]}
         getAudioInstance={getAudioInstance}
@@ -44,7 +66,7 @@ describe('AudioInstance test', () => {
       'togglePlay',
       'clear',
     ].forEach((key) => {
-      expect(instance[key]).toBeInstanceOf(Function)
+      expect((instance as Record<string, any>)[key]).toBeInstanceOf(Function)
     })
   })
 

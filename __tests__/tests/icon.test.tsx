@@ -1,5 +1,5 @@
-import { mount } from 'enzyme'
 import React from 'react'
+import { mount } from '../utils'
 import lyric from '../../example/lyric'
 import TailwindReactMusicPlayer from '../../src'
 
@@ -68,13 +68,13 @@ const createPlayer = (props?: any) => (
 
 describe('Player custom icon test', () => {
   it('should render custom icon', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(createPlayer())
+    const wrapper = mount(createPlayer())
     wrapper.find('.audio-lists-btn').simulate('click')
     expect(wrapper.render()).toMatchSnapshot()
   })
 
   it('should render custom icon in mobile mode', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(createPlayer())
+    const wrapper = mount(createPlayer())
     wrapper.setState({ isMobile: true })
     expect(wrapper.render()).toMatchSnapshot()
   })

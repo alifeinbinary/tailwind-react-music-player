@@ -1,10 +1,10 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import Sortable from 'sortablejs'
 import TailwindReactMusicPlayer from '../../src'
+import { mount } from '../utils'
 
 const createPlayer = (props?: any) => {
-  return mount<TailwindReactMusicPlayer>(
+  return mount(
     <TailwindReactMusicPlayer
       audioLists={[
         { cover: 'xx', musicSrc: '1' },

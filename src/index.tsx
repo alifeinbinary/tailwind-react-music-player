@@ -863,7 +863,7 @@ export default class TailwindReactMusicPlayer extends PureComponent<
           className="music-player-audio hidden!"
           title={audioTitle}
           {...preloadState}
-          src={musicSrc}
+          src={musicSrc || undefined}
           ref={(node) => {
             this.audio = node as HTMLAudioElement
           }}
@@ -2607,7 +2607,9 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     prevProps: TailwindReactMusicPlayerProps,
     prevState: TailwindReactMusicPlayerState,
   ) {
-    if (prevState.musicSrc !== this.state.musicSrc) {
+    // Only a real track change resets the cover rotation — on mount musicSrc
+    // goes from '' to the first track, which isn't a "change".
+    if (prevState.musicSrc && prevState.musicSrc !== this.state.musicSrc) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ isResetCoverRotate: true })
     }

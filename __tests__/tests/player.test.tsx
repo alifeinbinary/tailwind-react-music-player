@@ -1,21 +1,11 @@
 /* eslint-disable no-console */
-import { mount, shallow } from 'enzyme'
+import { fireEvent } from '@testing-library/react'
 import assert from 'assert'
 import React from 'react'
 import TailwindReactMusicPlayer, {
   TailwindReactMusicPlayerAudioInfo,
 } from '../../src'
-import AudioListsPanel from '../../src/components/AudioListsPanel'
-import CircleProcessBar from '../../src/components/CircleProcessBar'
-import {
-  AnimatePauseIcon,
-  AnimatePlayIcon,
-  VolumeMuteIcon,
-  VolumeUnmuteIcon,
-} from '../../src/components/Icon'
 import PlayerMobile from '../../src/components/PlayerMobile'
-import PlayModel from '../../src/components/PlayModel'
-import PlayModeTip from '../../src/components/PlayModeTip'
 import { SPACE_BAR_KEYCODE } from '../../src/config/keycode'
 import { MEDIA_QUERY } from '../../src/config/mediaQuery'
 import {
@@ -25,17 +15,17 @@ import {
   formatTime,
   adjustVolume,
 } from '../../src/utils'
-import { sleep } from '../utils'
+import { mount, sleep } from '../utils'
 
 describe('<TailwindReactMusicPlayer/>', () => {
   it('should render a <TailwindReactMusicPlayer/> components', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer className="text-class-name" />,
     )
     expect(wrapper.render()).toMatchSnapshot()
   })
   it('should render base components', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         className="text-class-name"
         showMiniProcessBar
@@ -48,40 +38,37 @@ describe('<TailwindReactMusicPlayer/>', () => {
     wrapper.setProps({ showMiniProcessBar: false })
     assert(wrapper.find('.audio-circle-process-bar').length === 0)
     wrapper.setState({ playing: true, toggle: true })
-    assert(wrapper.find(AnimatePauseIcon).length >= 1)
+    assert(wrapper.find('.tailwind-react-music-player-pause-icon').length >= 1)
     wrapper.setState({ playing: false })
-    assert(wrapper.find(AnimatePlayIcon).length >= 1)
+    assert(wrapper.find('.tailwind-react-music-player-play-icon').length >= 1)
     wrapper.setState({ loading: true })
     assert(wrapper.find('.loading').length >= 1)
-    assert(wrapper.find(PlayModel).length >= 1)
+    assert(wrapper.find('.play-mode-title').length >= 1)
     wrapper.setState({ toggle: false })
     wrapper.setProps({ showMiniProcessBar: true })
-    assert(wrapper.find(CircleProcessBar).length >= 1)
+    assert(wrapper.find('.audio-circle-process-bar').length >= 1)
   })
   it('should render <AudioListsPanel/> components', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer />,
-    )
-    assert(wrapper.find(AudioListsPanel).length === 1)
+    const wrapper = mount(<TailwindReactMusicPlayer />)
+    assert(wrapper.find('.audio-lists-panel').length === 1)
     assert(wrapper.find('.audio-lists-panel').length === 1)
   })
   it('should find a <PlayerMobile/> components', () => {
-    const wrapper = shallow(<PlayerMobile {...({ locale: {} } as any)} />)
+    const wrapper = mount(<PlayerMobile {...({ locale: {} } as any)} />)
     assert(wrapper.find('.tailwind-react-music-player-mobile').length === 1)
-    assert(wrapper.find(PlayModeTip).length === 1)
+    assert(
+      wrapper.find('.tailwind-react-music-player-mobile-play-model-tip')
+        .length === 1,
+    )
   })
   it('should render mini of full mode', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer mode="full" />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer mode="full" />)
     assert(wrapper.props().mode === 'full')
     wrapper.setProps({ mode: 'mini' })
     assert(wrapper.props().mode === 'mini')
   })
   it('should render dark and light theme', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer theme="dark" />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer theme="dark" />)
     assert(wrapper.props().theme === 'dark')
     wrapper.setState({ theme: 'dark' })
     assert(wrapper.find('.light-theme').length === 0)
@@ -103,7 +90,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
         },
       ],
     }
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer {...testProps} clearPriorAudioLists />,
     )
 
@@ -122,7 +109,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(wrapper.text()).toContain('No music')
   })
   it('should toggle group setting buttons', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         showDownload
         showThemeSwitch
@@ -143,9 +130,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     assert(wrapper.find('.loop-btn').length === 0)
   })
   it('should render seeked', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer seeked />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer seeked />)
     assert(wrapper.props().seeked === true)
     wrapper.setProps({ seeked: false })
     assert(wrapper.props().seeked === false)
@@ -158,7 +143,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
       </>
     )
 
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer extendsContent={extendsContent} />,
     )
     wrapper.setState({ toggle: true })
@@ -172,15 +157,15 @@ describe('<TailwindReactMusicPlayer/>', () => {
         <button type="button">1</button>
       </>
     )
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer extendsContent={<ExtendsContent />} />,
     )
-    const wrapper1 = mount<TailwindReactMusicPlayer>(
+    const wrapper1 = mount(
       <TailwindReactMusicPlayer extendsContent="extends" />,
     )
     wrapper.setState({ toggle: true })
     wrapper1.setState({ toggle: true })
-    assert(wrapper.find(ExtendsContent).length === 1)
+    assert(wrapper.find('.player-content button:not(.rc-switch)').length === 1)
     expect(wrapper1.text()).toContain('extends')
   })
   it('should render range random', () => {
@@ -192,7 +177,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should set defaultVolume', () => {
     const volumes = [100, 20]
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer defaultVolume={volumes[0]} />,
     )
     assert(wrapper.props().defaultVolume === volumes[0])
@@ -200,24 +185,18 @@ describe('<TailwindReactMusicPlayer/>', () => {
     assert(wrapper.props().defaultVolume === volumes[1])
   })
   it('should autoPlay', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer autoPlay={false} />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer autoPlay={false} />)
     assert(wrapper.state().playing === false)
     wrapper.setProps({ autoPlay: true })
     assert(wrapper.props().autoPlay === true)
   })
   it('should render glass background', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer glassBg />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer glassBg />)
     assert(wrapper.props().glassBg === true)
     assert(wrapper.find('.glass-bg').length >= 1)
   })
   it('should render delete btns', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer audioLists={[]} remove />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer audioLists={[]} remove />)
     assert(wrapper.find('.audio-lists-panel-header-delete-btn').length >= 1)
     assert(wrapper.find('.player-delete').length === 0)
     wrapper.setState({
@@ -233,9 +212,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     assert(wrapper.find('.player-delete').length === 1)
   })
   it('should render progress load bar', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer showProgressLoadBar />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer showProgressLoadBar />)
     wrapper.setState({ toggle: true })
     assert(wrapper.props().showProgressLoadBar === true)
     assert(wrapper.find('.progress-load-bar').length === 1)
@@ -264,13 +241,11 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should render operation group', () => {
     const prefix = '.tailwind-react-music-player-mobile'
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer />)
     wrapper.setState({ toggle: true })
-    assert(wrapper.find(PlayerMobile).length === 0)
+    assert(wrapper.find('.tailwind-react-music-player-mobile').length === 0)
     wrapper.setState({ isMobile: true })
-    assert(wrapper.find(PlayerMobile).length === 1)
+    assert(wrapper.find('.tailwind-react-music-player-mobile').length === 1)
     assert(wrapper.find(`${prefix}-header`).length === 1)
     assert(wrapper.find(`${prefix}-singer`).length === 1)
     assert(wrapper.find(`${prefix}-switch`).length === 1)
@@ -282,16 +257,20 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should render extendsContent with mobile', () => {
     const Content = () => <div>extends</div>
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer extendsContent={<Content />} />,
     )
     wrapper.setState({ toggle: true, isMobile: true })
-    expect(wrapper.find(Content)).toHaveLength(1)
+    expect(
+      wrapper.find(
+        '.tailwind-react-music-player-mobile-operation .items > div',
+      ),
+    ).toHaveLength(1)
   })
   it('should not render music player in custom root node if container not found', () => {
     const div = document.createElement('div')
     div.className = 'test'
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer getContainer={() => div as any} />,
     )
     expect(wrapper.find('.test')).toHaveLength(0)
@@ -308,28 +287,26 @@ describe('<TailwindReactMusicPlayer/>', () => {
         <span className="test1" />
       </div>,
     )
-    expect(wrapper.find('.test1').find(TailwindReactMusicPlayer)).toHaveLength(
-      0,
-    )
-    expect(wrapper.find('.test').find(TailwindReactMusicPlayer)).toHaveLength(1)
+    expect(
+      wrapper.find('.test1 .tailwind-react-music-player-main'),
+    ).toHaveLength(0)
+    expect(
+      wrapper.find('.test .tailwind-react-music-player-main'),
+    ).toHaveLength(1)
   })
 
   it('should cannot render player in invalid custom root node', () => {
     const div = 1
     let errMsg = ''
     try {
-      mount<TailwindReactMusicPlayer>(
-        <TailwindReactMusicPlayer getContainer={() => div as any} />,
-      )
+      mount(<TailwindReactMusicPlayer getContainer={() => div as any} />)
     } catch (error) {
       errMsg = (error as Error).message
     }
     expect(errMsg).toContain('Target container is not a DOM element')
   })
   it('update state theme when option theme change', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer theme="light" />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer theme="light" />)
     wrapper.setProps({ theme: 'dark' })
     expect(wrapper.state().theme).toEqual('dark')
     wrapper.setProps({ theme: 'xxxx' } as any)
@@ -338,7 +315,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('trigger theme change handler when option theme change', () => {
     const onThemeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer theme="light" onThemeChange={onThemeChange} />,
     )
     wrapper.setProps({ theme: 'dark' })
@@ -347,7 +324,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('update mode', () => {
     const onModeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer mode="mini" onModeChange={onModeChange} />,
     )
     wrapper.setProps({ mode: 'full' })
@@ -361,14 +338,14 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('mode change handler when update mode', () => {
     const onModeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer mode="mini" onModeChange={onModeChange} />,
     )
     wrapper.setProps({ mode: 'full' })
     expect(onModeChange).not.toHaveBeenCalled()
   })
   it('should cannot find lyric operation button', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.setState({ isMobile: true })
@@ -378,7 +355,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should find five operation button when toggle lyric option', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[]}
         mode="full"
@@ -395,7 +372,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     ).toHaveLength(5)
   })
   it('should only render audio list menu button when', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[]}
         mode="full"
@@ -423,7 +400,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
       ],
       onAudioError,
     }
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer {...testProps} mode="full" />,
     )
     wrapper.setState({ audioListsPanelVisible: true })
@@ -431,7 +408,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(onAudioError).not.toHaveBeenCalled()
   })
   it('should auto hide the cover photo if no cover photo is available for desktop', async () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', cover: '' }]}
         mode="full"
@@ -451,7 +428,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(wrapper.find('.img-content')).toHaveLength(1)
   })
   it('should auto hide the cover photo if no cover photo is available for mobile', async () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', cover: '' }]}
         mode="full"
@@ -480,7 +457,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
       })
     })
     const onAudioDownload = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', cover: '' }]}
         mode="full"
@@ -504,7 +481,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const customDownloader = vi.fn((info) => {
       testSrc = info.src
     })
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', cover: '' }]}
         mode="full"
@@ -520,7 +497,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   it('should trigger onAudioPlay hook when audio track list change', () => {
     const onAudioPlay = vi.fn()
     window.HTMLMediaElement.prototype.play = onAudioPlay
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', cover: '' },
@@ -540,7 +517,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const onAudioPlay = vi.fn((audioInfo) => {
       _audioInfo = audioInfo
     })
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', name: '1', cover: '11', id: '1', customField: '1' },
@@ -562,7 +539,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const onThemeChange = vi.fn()
     const onModeChange = vi.fn()
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', name: '1', cover: '11', id: '1', customField: '1' },
@@ -581,7 +558,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should not trigger onAudioListsChange when audioList is equal', () => {
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -595,7 +572,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should update audioLists', () => {
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -612,7 +589,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(
       wrapper
         .state()
-        .audioLists.map(({ musicSrc, name }) => ({ musicSrc, name })),
+        .audioLists.map(({ musicSrc, name }: any) => ({ musicSrc, name })),
     ).toEqual([
       { musicSrc: 'x', name: '1' },
       { musicSrc: 'xx', name: '11' },
@@ -621,7 +598,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should replace audioLists with clearPriorAudioLists option', async () => {
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -641,7 +618,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(
       wrapper
         .state()
-        .audioLists.map(({ musicSrc, name }) => ({ musicSrc, name })),
+        .audioLists.map(({ musicSrc, name }: any) => ({ musicSrc, name })),
     ).toEqual([
       { musicSrc: 'xx', name: '11' },
       { musicSrc: 'xxx', name: '111' },
@@ -651,7 +628,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should not set playing state when audioLists is change and autoPlayInitLoadPlayList is false', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -670,7 +647,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onAudioListsChange when clear all audio list', () => {
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -683,7 +660,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onAudioListsChange when audio list update', () => {
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', name: '1' },
@@ -703,9 +680,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const onAudioPause = vi.fn()
     const onAudioPlay = vi.fn()
     window.HTMLMediaElement.prototype.load = () => {}
-    window.HTMLMediaElement.prototype.play = (() => {
-      onAudioPlay()
-    }) as any
+    window.HTMLMediaElement.prototype.play = vi.fn() as any
     window.HTMLMediaElement.prototype.pause = () => {
       onAudioPause()
     }
@@ -718,7 +693,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
         new KeyboardEvent('keydown', { keyCode: SPACE_BAR_KEYCODE }),
       )
     }
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -729,6 +704,8 @@ describe('<TailwindReactMusicPlayer/>', () => {
       />,
     )
     wrapper.setState({ canPlay: true })
+    // Exercises the real keydown handler; jsdom media never loads so
+    // loadAndPlayAudio can't reach audio.play() here.
     triggerKeyDown()
     wrapper.instance().onAudioPlay()
     await sleep(500)
@@ -737,7 +714,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should find destroy button', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -752,7 +729,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onDestroyed when destroy button clicked', () => {
     const onDestroyed = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -766,7 +743,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onBeforeDestroy when destroy button clicked', () => {
     const onBeforeDestroy = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -783,7 +760,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const onBeforeDestroyRej = vi.fn(() => Promise.reject())
     const onDestroyedRes = vi.fn()
     const onDestroyedRej = vi.fn()
-    const wrapperRes = mount<TailwindReactMusicPlayer>(
+    const wrapperRes = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -797,7 +774,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     await new Promise((res) => setTimeout(res, 0))
     expect(onDestroyedRes).toHaveBeenCalled()
 
-    const wrapperRej = mount<TailwindReactMusicPlayer>(
+    const wrapperRej = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -813,7 +790,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onDestroyed when component unmount', () => {
     const onDestroyed = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -828,7 +805,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   // https://github.com/alifeinbinary/react-music-player/issues/78#issuecomment-574089990
   it('should play audio when click play button and not auto play', async () => {
     const onAudioPlay = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         autoPlay={false}
@@ -844,7 +821,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should toggle audio volume', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -860,7 +837,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   // https://github.com/alifeinbinary/react-music-player/issues/91
   it('should not call ref.contains when showDestroy is false', async () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         showDestroy={false}
@@ -882,7 +859,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
         res('xxx.mp3')
       }, 200)
     })
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: getMusicSrc as any, name: '1' }]}
         mode="full"
@@ -900,7 +877,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
         rej()
       }, 200)
     })
-    mount<TailwindReactMusicPlayer>(
+    mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: getMusicSrc as any, name: '1' }]}
         mode="full"
@@ -914,7 +891,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   // https://github.com/alifeinbinary/react-music-player/issues/101
   it('should render light theme when audio lists is empty', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="full" theme="light" />,
     )
     expect(
@@ -928,24 +905,28 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should toggle audio volume when audio lists is empty', () => {
     const onAudioVolumeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[]}
         mode="full"
+        icon={{
+          volume: <i className="volume-icon" />,
+          mute: <i className="mute-icon" />,
+        }}
         onAudioVolumeChange={onAudioVolumeChange}
       />,
     )
-    expect(wrapper.find(VolumeUnmuteIcon)).toHaveLength(1)
-    expect(wrapper.find(VolumeMuteIcon)).toHaveLength(0)
+    expect(wrapper.find('.sounds-icon .volume-icon')).toHaveLength(1)
+    expect(wrapper.find('.sounds-icon .mute-icon')).toHaveLength(0)
     wrapper.find('.sounds-icon').simulate('click')
-    expect(wrapper.find(VolumeUnmuteIcon)).toHaveLength(0)
-    expect(wrapper.find(VolumeMuteIcon)).toHaveLength(1)
+    expect(wrapper.find('.sounds-icon .volume-icon')).toHaveLength(0)
+    expect(wrapper.find('.sounds-icon .mute-icon')).toHaveLength(1)
     expect(onAudioVolumeChange).not.toHaveBeenCalled()
   })
 
   it('should call onAudioVolumeChange', () => {
     const onAudioVolumeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', name: '1' }]}
         mode="full"
@@ -956,41 +937,47 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(onAudioVolumeChange).toHaveBeenCalled()
     wrapper.find('.sounds-icon').simulate('click')
     expect(onAudioVolumeChange).toHaveBeenCalled()
-    wrapper.find('.sound-operation .rc-slider-step').simulate('click')
+    fireEvent.mouseDown(
+      wrapper.find('.sound-operation').getDOMNode() as Element,
+    )
     expect(onAudioVolumeChange).toHaveBeenCalled()
   })
 
   // https://github.com/alifeinbinary/react-music-player/issues/100
   it('should toggle mobile and desktop panel when enable responsive option', () => {
     const onAudioVolumeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         responsive
         onAudioVolumeChange={onAudioVolumeChange}
       />,
     )
-    expect(wrapper.find(PlayerMobile)).toHaveLength(0)
+    expect(wrapper.find('.tailwind-react-music-player-mobile')).toHaveLength(0)
     expect(wrapper.find('.music-player-panel')).toHaveLength(1)
     wrapper.setState({ isMobile: true }, () => {
-      expect(wrapper.find(PlayerMobile)).toHaveLength(1)
+      expect(wrapper.find('.tailwind-react-music-player-mobile')).toHaveLength(
+        1,
+      )
       expect(wrapper.find('.music-player-panel')).toHaveLength(0)
     })
   })
 
   it('should toggle mobile and desktop panel when disable responsive option', () => {
     const onAudioVolumeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         responsive={false}
         onAudioVolumeChange={onAudioVolumeChange}
       />,
     )
-    expect(wrapper.find(PlayerMobile)).toHaveLength(0)
+    expect(wrapper.find('.tailwind-react-music-player-mobile')).toHaveLength(0)
     expect(wrapper.find('.music-player-panel')).toHaveLength(1)
     wrapper.setState({ isMobile: true }, () => {
-      expect(wrapper.find(PlayerMobile)).toHaveLength(0)
+      expect(wrapper.find('.tailwind-react-music-player-mobile')).toHaveLength(
+        0,
+      )
       expect(wrapper.find('.music-player-panel')).toHaveLength(1)
     })
   })
@@ -998,7 +985,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   // https://github.com/alifeinbinary/react-music-player/issues/90
   it('should support custom audio duration', () => {
     const customAudioDuration = 70.01
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[
@@ -1016,7 +1003,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should format custom audio duration', () => {
     const customAudioDuration = 104.0
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[
@@ -1040,7 +1027,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should close audio panel when change to mini mode', () => {
     const onAudioListsPanelChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[{ musicSrc: 'x', name: '1' }]}
@@ -1056,7 +1043,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not call onAudioReload when reload button clicked and audio list is empty', () => {
     const onAudioReload = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[]}
@@ -1068,29 +1055,26 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   // https://github.com/alifeinbinary/react-music-player/issues/115
-  it('should throw error when audioList is not array', () => {
-    const errSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-    mount<TailwindReactMusicPlayer>(
+  // React 19 no longer validates propTypes, so an invalid audioLists value
+  // should simply not crash the player.
+  it('should not throw when audioList is not array', () => {
+    const wrapper = mount(
       <TailwindReactMusicPlayer mode="full" audioLists={'' as any} />,
     )
-
-    expect(errSpy).toHaveBeenCalled()
-    errSpy.mockRestore()
+    expect(wrapper.find('.tailwind-react-music-player-main')).toHaveLength(1)
   })
 
   // https://github.com/alifeinbinary/react-music-player/issues/115
   it('should unmount player success', () => {
     let success = false
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer audioLists={[]} />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer audioLists={[]} />)
     wrapper.unmount()
     success = true
     expect(success).toEqual(true)
   })
 
   it('should only update defaultPlayMode once', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer defaultPlayMode="order" audioLists={[]} />,
     )
     expect(wrapper.state().playMode).toEqual('order')
@@ -1099,7 +1083,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should use playMode options if all with playMode and defaultPlayMode', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         playMode="orderLoop"
         defaultPlayMode="order"
@@ -1112,7 +1096,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   // https://github.com/alifeinbinary/react-music-player/issues/117
   it('should update play mode', () => {
     const onPlayModeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         playMode="order"
         audioLists={[]}
@@ -1130,7 +1114,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should call onCoverClick', () => {
     const onCoverClick = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[
@@ -1152,7 +1136,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not call onCoverClick if cover is empty', () => {
     const onCoverClick = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="mini"
         audioLists={[
@@ -1173,7 +1157,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not call onCoverClick if showMiniModeCover is false in mini mode', () => {
     const onCoverClick = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="mini"
         showMiniModeCover={false}
@@ -1195,7 +1179,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onPlayIndexChange hook when audio track list change', () => {
     const onPlayIndexChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', cover: '' },
@@ -1211,7 +1195,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should trigger onAudioPlayTrackChange hook when audio track list change', () => {
     const onAudioPlayTrackChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', cover: '' },
@@ -1226,7 +1210,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
   it('should trigger onPlayIndexChange hook when playIndex props update', async () => {
     const onPlayIndexChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         playIndex={0}
         audioLists={[
@@ -1243,7 +1227,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     expect(onPlayIndexChange).toHaveBeenCalledTimes(1)
   })
   it('should get first audio info by default play index', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         defaultPlayIndex={0}
         audioLists={[
@@ -1258,7 +1242,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should get secondary audio info by default play index', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         defaultPlayIndex={1}
         audioLists={[
@@ -1273,7 +1257,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should get secondary audio info by play index', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         playIndex={1}
         audioLists={[
@@ -1288,7 +1272,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should auto play audio clicked in audio panel list', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[
@@ -1303,7 +1287,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should auto play audio clicked by prev or next audio button', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[
@@ -1320,7 +1304,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   it('should cannot trigger onPlayIndexChange when open full mode', () => {
     const onAudioPlay = vi.fn()
     const onPlayIndexChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         defaultPlayIndex={1}
         mode="mini"
@@ -1341,7 +1325,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not throw error when unmount player', () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[{ musicSrc: 'a', cover: 'a', name: 'a' }]}
@@ -1354,7 +1338,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not throw error when unmount player after destroyed', () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[{ musicSrc: 'a', cover: 'a', name: 'a' }]}
@@ -1368,7 +1352,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should reset volume if current is mute and mute icon clicked', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[{ musicSrc: 'a', cover: 'a', name: 'a' }]}
@@ -1387,7 +1371,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
         addListener: vi.fn(),
       }
     })
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer theme="auto" autoPlay={false} />,
     )
     expect(wrapper.state().theme).toEqual('dark')
@@ -1400,16 +1384,14 @@ describe('<TailwindReactMusicPlayer/>', () => {
         addListener: vi.fn(),
       }
     })
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer theme="auto" autoPlay={false} />,
     )
     expect(wrapper.state().theme).toEqual('light')
   })
 
   it('should update auto theme props', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer autoPlay={false} />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer autoPlay={false} />)
 
     wrapper.setProps({ theme: 'auto' })
     expect(wrapper.state().theme).toEqual('auto')
@@ -1419,7 +1401,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   it('should toggle mode if drag disabled', () => {
     const onModeChange = vi.fn()
     const onCoverClick = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="mini"
         drag={false}
@@ -1444,7 +1426,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const onModeChange = vi.fn()
     const onCoverClick = vi.fn()
     const onDestroyed = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="mini"
         drag={false}
@@ -1464,9 +1446,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   // https://github.com/alifeinbinary/react-music-player/issues/149
   it('should not change theme to dark when audio list changed if theme is auto', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer theme="auto" />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer theme="auto" />)
     wrapper.setProps({
       audioList: [{ musicSrc: 'xxx', name: 'xxx' }],
       clearPriorAudioLists: true,
@@ -1476,7 +1456,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should cannot set isAutoPlayWhenUserClicked to true if audioList updated', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer autoPlay={false} clearPriorAudioLists />,
     )
     wrapper.setProps({
@@ -1488,7 +1468,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   it('should quiet update audio lists', async () => {
     const onAudioAbort = vi.fn()
     const onAudioListsChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           {
@@ -1546,7 +1526,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     window.HTMLMediaElement.prototype.play = (() => {
       onAudioPlay()
     }) as any
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'aaa', name: 'aaa' },
@@ -1568,7 +1548,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not call onAudioListsPanelChange if panel is closed when hide panel', () => {
     const onAudioListsPanelChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'aaa', name: 'aaa' },
@@ -1584,7 +1564,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should not render toggle mode close button in mobile panel', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer mode="full" toggleMode={false} />,
     )
     wrapper.setState({ isMobile: true })
@@ -1594,7 +1574,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should render default audio title', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer mode="full" audioLists={[{ name: 'test' }]} />,
     )
     expect(wrapper.find('.audio-title').text()).toEqual('test')
@@ -1614,7 +1594,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const renderAudioTitle = (audioInfo: TailwindReactMusicPlayerAudioInfo) => (
       <div className="custom-audio-title">{audioInfo.name}</div>
     )
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         audioLists={[{ name: 'test' }]}
@@ -1644,7 +1624,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   // https://github.com/alifeinbinary/react-music-player/issues/197
   it("should don't hidden play and next icon when audio loading", () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer mode="full" audioLists={[{ name: 'test' }]} />,
     )
 
@@ -1664,7 +1644,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should not call onAudioVolumeChange when volume fade in or fade out', async () => {
     const onAudioVolumeChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         mode="full"
         volumeFade={{
@@ -1775,7 +1755,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should set audio volume non-linearly', async () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', cover: '' },
@@ -1795,7 +1775,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
 
   it('should set volume slider value non-linearly and invoke onAudioVolumeChange', async () => {
     const fn = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[
           { musicSrc: 'x', cover: '' },
@@ -1820,7 +1800,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
     const onPlayIndexChange = vi.fn()
     const onAudioPlayTrackChange = vi.fn()
     let audio: any
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         restartCurrentOnPrev
         mode="full"
@@ -1855,7 +1835,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   it("should don't play audio when audio seeked by slider bar if audio is paused", async () => {
     const onAudioSeeked = vi.fn()
     const onAudioPlay = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x', cover: '' }]}
         autoPlay={false}
@@ -1924,7 +1904,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   it('should reset play index to default value when audio lists changed', async () => {
     const audioLists = [{ musicSrc: 'y' }]
     const onPlayIndexChange = vi.fn()
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x' }]}
         autoPlay={false}
@@ -1944,7 +1924,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it('should reset current cover rotate deg when playing audio changed', async () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[{ musicSrc: 'x' }]} />,
     )
 
@@ -1962,7 +1942,7 @@ describe('<TailwindReactMusicPlayer/>', () => {
   })
 
   it("should don't reset current audio volume when audio changed", async () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[{ musicSrc: 'x' }]} />,
     )
 

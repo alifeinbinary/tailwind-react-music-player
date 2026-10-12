@@ -1,14 +1,13 @@
 /* eslint-disable no-console */
 import React from 'react'
 import assert from 'assert'
-import { mount } from 'enzyme'
 
 import TailwindReactMusicPlayer from '../../src'
-import AudioListsPanel from '../../src/components/AudioListsPanel'
+import { mount } from '../utils'
 
 describe('<TailwindReactMusicPlayer/> click events tests', () => {
   it('sinon audio lists panel close events', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="mini" />,
     )
     wrapper.find('.tailwind-react-music-player').simulate('click')
@@ -16,17 +15,17 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
     assert(wrapper.find('.music-player-panel').length >= 1)
     // 展开歌曲列表
     wrapper.find('.audio-lists-btn').simulate('click')
-    assert(wrapper.find(AudioListsPanel).length === 1)
+    assert(wrapper.find('.audio-lists-panel').length === 1)
     assert(wrapper.state().audioListsPanelVisible === true)
 
     // 关闭歌曲列表
     wrapper.find('.audio-lists-panel-header-close-btn').simulate('click')
-    assert(wrapper.find(AudioListsPanel).length === 1)
+    assert(wrapper.find('.audio-lists-panel').length === 1)
     assert(wrapper.state().audioListsPanelVisible === false)
 
     // 切换到迷你模式
     wrapper.find('.hide-panel').simulate('click')
-    assert(wrapper.find(AudioListsPanel).length === 1)
+    assert(wrapper.find('.audio-lists-panel').length === 1)
     assert(wrapper.state().audioListsPanelVisible === false)
     assert(wrapper.state().toggle === false)
 
@@ -47,9 +46,7 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
   })
 
   it('change audio lists', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
-      <TailwindReactMusicPlayer audioLists={[]} />,
-    )
+    const wrapper = mount(<TailwindReactMusicPlayer audioLists={[]} />)
     wrapper.setProps({
       audioLists: [
         {
@@ -89,7 +86,7 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
   })
 
   it('toggle theme', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.setState({ theme: 'dark' })
@@ -101,14 +98,14 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
     assert(wrapper.find('.light-theme').length === 1)
   })
   it('click reload button', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.find('.reload-btn').simulate('click')
     assert(wrapper.state().currentTime === 0)
   })
   it('click pause and play button', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     // 暂停
@@ -116,7 +113,7 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
     assert(wrapper.state().playing === false)
   })
   it('click prev and next audio', async () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.setState({
@@ -143,7 +140,7 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
     assert(wrapper.state().name === 'prev')
   })
   it('click mute', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[]}
         mode="full"
@@ -155,7 +152,7 @@ describe('<TailwindReactMusicPlayer/> click events tests', () => {
     assert(wrapper.state().soundValue === 0)
   })
   it('click change play mode', () => {
-    const wrapper = mount<TailwindReactMusicPlayer>(
+    const wrapper = mount(
       <TailwindReactMusicPlayer
         audioLists={[]}
         mode="full"
