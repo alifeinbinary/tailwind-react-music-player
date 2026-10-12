@@ -5,7 +5,7 @@
    - scoped .progress-load-bar colour (the element is shared with the
      desktop panel, so the mobile colour must be context-scoped) */
 
-.react-jinke-music-player-mobile {
+.tailwind-react-music-player-mobile {
   .show {
     animation: mobile-bg-show var(--rjmp-animate-time) var(--rjmp-animate-type)
       forwards;
@@ -17,7 +17,7 @@
   }
 }
 
-.react-jinke-music-player-mobile-singer-name {
+.tailwind-react-music-player-mobile-singer-name {
   &::before,
   &::after {
     content: '';
@@ -40,7 +40,7 @@
   }
 }
 
-.react-jinke-music-player-mobile-progress {
+.tailwind-react-music-player-mobile-progress {
   .rc-slider-rail {
     background-color: var(--rjmp-base-color);
   }
@@ -59,7 +59,7 @@
   }
 }
 
-.react-jinke-music-player-mobile-progress-bar {
+.tailwind-react-music-player-mobile-progress-bar {
   .progress-load-bar {
     background-color: var(--rjmp-progress-load-bar-bg-light);
   }

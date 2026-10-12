@@ -1,8 +1,8 @@
-import { ReactJkMusicPlayerPlayMode } from '../types'
+import { TailwindReactMusicPlayerPlayMode } from '../types'
 
 const PLAY_MODE: Record<
-  ReactJkMusicPlayerPlayMode,
-  ReactJkMusicPlayerPlayMode
+  TailwindReactMusicPlayerPlayMode,
+  TailwindReactMusicPlayerPlayMode
 > = {
   order: 'order',
   orderLoop: 'orderLoop',

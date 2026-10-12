@@ -1,4 +1,4 @@
-# react-jinke-music-player
+# tailwind-react-music-player
 
 HTML5 music player component for React. Written in **TypeScript**, built with **Vite**, tested with **Vitest** + Enzyme (React 16 adapter). Styles are compiled with **Tailwind CSS v4** (see `src/styles/`).
 
@@ -9,7 +9,7 @@ yarn build        # clean + vite lib build (ESM+CJS+d.ts) + vite UMD build + tai
 ```
 
 - `yarn build:bundle` — `vite build` → `dist/index.js` (ESM) + `dist/index.cjs` (CJS) + declarations via `vite-plugin-dts`
-- `yarn build:umd` — `vite build --mode umd` → `dist/react-jinke-music-player.min.js` (UMD, global `ReactJkMusicPlayer`, externals: react/react-dom)
+- `yarn build:umd` — `vite build --mode umd` → `dist/tailwind-react-music-player.min.js` (UMD, global `ReactJkMusicPlayer`, externals: react/react-dom)
 - `yarn build:css` — Tailwind CLI: `src/styles/index.css` → `assets/index.css`
 - `yarn demo` — Vite dev server on http://localhost:8084 (config: `example/vite.config.ts`)
 - `yarn build:demo` — production demo build → `example/dist/` (base `/react-music-player/`; `/` on Netlify/Surge via env vars)
@@ -30,7 +30,7 @@ All library output goes to `dist/` — there is no `lib/` or `es/` anymore. Pack
 ## Styling
 
 - Layout/spacing/typography lives in **Tailwind utility classes inside component `className`s** (`src/**/*.tsx`, scanned via `source('..')` on the utilities import). The CSS files keep only what utilities can't express: keyframes, pseudo-elements, element selectors (`svg`, `ul`, `*`), rc-slider/rc-switch overrides, ancestor-scoped rules (`.player-content > .destroy-btn`, `.music-player .destroy-btn`), and the `.light-theme` / mobile `.audio-item` override layers.
-- Semantic class names (`.react-jinke-music-player-main`, `.audio-lists-panel`, `.music-player-panel`, ...) are the library's public styling API — they stay on elements alongside utilities; do not rename them; tests and user overrides depend on them.
+- Semantic class names (`.tailwind-react-music-player-main`, `.audio-lists-panel`, `.music-player-panel`, ...) are the library's public styling API — they stay on elements alongside utilities; do not rename them; tests and user overrides depend on them.
 - All theme values are exposed as `--rjmp-*` CSS custom properties on `:root` in `theme.css`. End users theme the player by overriding those variables — keep that mechanism intact.
 - `theme.css` values must remain plain values (no `var()` chains to other `--rjmp-*` tokens are fine — they resolve lazily, e.g. `--rjmp-lyric-color`).
 - Light theme rules use `-light` suffixed tokens; mobile uses `-mobile`.

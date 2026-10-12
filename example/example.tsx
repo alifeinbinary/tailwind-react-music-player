@@ -2,14 +2,14 @@
 import Switch from 'rc-switch'
 import React, { ChangeEvent } from 'react'
 import pkg from '../package.json'
-import ReactJkMusicPlayer, {
-  ReactJkMusicPlayerAudioInfo,
-  ReactJkMusicPlayerAudioListProps,
-  ReactJkMusicPlayerInstance,
-  ReactJkMusicPlayerMode,
-  ReactJkMusicPlayerPlayMode,
-  ReactJkMusicPlayerProps,
-  ReactJkMusicPlayerTheme,
+import TailwindReactMusicPlayer, {
+  TailwindReactMusicPlayerAudioInfo,
+  TailwindReactMusicPlayerAudioListProps,
+  TailwindReactMusicPlayerInstance,
+  TailwindReactMusicPlayerMode,
+  TailwindReactMusicPlayerPlayMode,
+  TailwindReactMusicPlayerProps,
+  TailwindReactMusicPlayerTheme,
 } from '../src'
 import Locale from '../src/config/locale'
 import PLAY_MODE from '../src/config/playMode'
@@ -17,7 +17,7 @@ import '../src/styles/index.css'
 import { createRandomNum } from '../src/utils'
 import './example.css'
 
-const audioList1: ReactJkMusicPlayerAudioListProps[] = [
+const audioList1: TailwindReactMusicPlayerAudioListProps[] = [
   {
     name: 'Despacito',
     singer: 'Luis Fonsi',
@@ -40,7 +40,7 @@ const audioList1: ReactJkMusicPlayerAudioListProps[] = [
   },
 ]
 
-const audioList2: ReactJkMusicPlayerAudioListProps[] = [
+const audioList2: TailwindReactMusicPlayerAudioListProps[] = [
   {
     name: 'Bedtime Stories',
     singer: 'Jay Chou',
@@ -70,7 +70,7 @@ const audioList2: ReactJkMusicPlayerAudioListProps[] = [
   },
 ]
 
-const audioList3: ReactJkMusicPlayerAudioListProps[] = [
+const audioList3: TailwindReactMusicPlayerAudioListProps[] = [
   {
     name: 'Despacito',
     singer: 'Luis Fonsi',
@@ -97,7 +97,7 @@ const audioList3: ReactJkMusicPlayerAudioListProps[] = [
   },
 ]
 
-const audioList4: ReactJkMusicPlayerAudioListProps[] = [
+const audioList4: TailwindReactMusicPlayerAudioListProps[] = [
   {
     name: 'Bedtime Stories',
     singer: 'Jay Chou',
@@ -108,7 +108,7 @@ const audioList4: ReactJkMusicPlayerAudioListProps[] = [
   },
 ]
 
-const options: ReactJkMusicPlayerProps = {
+const options: TailwindReactMusicPlayerProps = {
   // audio lists model
   audioLists: audioList1,
 
@@ -454,17 +454,17 @@ const options: ReactJkMusicPlayerProps = {
 
 interface DemoState {
   unmount: boolean
-  params: ReactJkMusicPlayerProps & Record<string, any>
+  params: TailwindReactMusicPlayerProps & Record<string, any>
 }
 
 class Demo extends React.PureComponent<object, DemoState> {
-  private audio: ReactJkMusicPlayerInstance = {} as ReactJkMusicPlayerInstance
+  private audio: TailwindReactMusicPlayerInstance = {} as TailwindReactMusicPlayerInstance
 
   state: DemoState = {
     unmount: false,
     params: {
       ...options,
-      getAudioInstance: (audio: ReactJkMusicPlayerInstance) => {
+      getAudioInstance: (audio: TailwindReactMusicPlayerInstance) => {
         this.audio = audio
       },
     },
@@ -568,7 +568,7 @@ class Demo extends React.PureComponent<object, DemoState> {
   }
 
   onChangeKey = (key: string) => {
-    const data: ReactJkMusicPlayerProps & Record<string, any> = {
+    const data: TailwindReactMusicPlayerProps & Record<string, any> = {
       ...this.state.params,
       [key]: !this.state.params[key],
     }
@@ -579,7 +579,7 @@ class Demo extends React.PureComponent<object, DemoState> {
       data.mode = key
     }
     if ((Object.values(Locale) as string[]).includes(key)) {
-      data.locale = key as ReactJkMusicPlayerProps['locale']
+      data.locale = key as TailwindReactMusicPlayerProps['locale']
     }
     this.setState({ params: data })
   }
@@ -604,7 +604,7 @@ class Demo extends React.PureComponent<object, DemoState> {
     })
   }
 
-  updateParams = (params: Partial<ReactJkMusicPlayerProps>) => {
+  updateParams = (params: Partial<TailwindReactMusicPlayerProps>) => {
     const data = {
       ...this.state.params,
       ...params,
@@ -620,14 +620,14 @@ class Demo extends React.PureComponent<object, DemoState> {
 
   onPlayModeChange = (e: ChangeEvent<HTMLSelectElement>) => {
     this.updateParams({
-      playMode: e.target.value as ReactJkMusicPlayerPlayMode,
+      playMode: e.target.value as TailwindReactMusicPlayerPlayMode,
     })
   }
 
   renderCustomAudioTitle = () => {
     this.updateParams({
       renderAudioTitle: (
-        audioInfo: ReactJkMusicPlayerAudioInfo,
+        audioInfo: TailwindReactMusicPlayerAudioInfo,
         _isMobile: boolean,
       ) => {
         return (
@@ -736,11 +736,11 @@ class Demo extends React.PureComponent<object, DemoState> {
         </h1>
         <p className="version">
           <a
-            href="https://badge.fury.io/js/react-jinke-music-playerr"
+            href="https://badge.fury.io/js/tailwind-react-music-playerr"
             title="npm"
           >
             <img
-              src="https://img.shields.io/npm/v/react-jinke-music-player.svg?style=flat-square"
+              src="https://img.shields.io/npm/v/tailwind-react-music-player.svg?style=flat-square"
               alt="npm version"
             />
           </a>
@@ -1049,17 +1049,17 @@ class Demo extends React.PureComponent<object, DemoState> {
           <div>{this.renderCustomUI()}</div>
         </section>
         {unmount ? null : (
-          <ReactJkMusicPlayer
+          <TailwindReactMusicPlayer
             {...params}
-            onThemeChange={(theme: ReactJkMusicPlayerTheme) => {
+            onThemeChange={(theme: TailwindReactMusicPlayerTheme) => {
               console.log('onThemeChange: ', theme)
               this.updateParams({ theme })
             }}
-            onModeChange={(mode: ReactJkMusicPlayerMode) => {
+            onModeChange={(mode: TailwindReactMusicPlayerMode) => {
               console.log('onModeChange: ', mode)
               this.updateParams({ mode })
             }}
-            onPlayModeChange={(playMode: ReactJkMusicPlayerPlayMode) => {
+            onPlayModeChange={(playMode: TailwindReactMusicPlayerPlayMode) => {
               console.log('onPlayModeChange: ', playMode)
               this.updateParams({ playMode })
             }}

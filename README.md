@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-react-jinke-music-player
+tailwind-react-music-player
 </h1>
 
 <h4 align="center">
@@ -11,17 +11,17 @@ react-jinke-music-player
 </h4>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/react-jinke-music-player" title="npm">
-    <img src="https://img.shields.io/npm/dm/react-jinke-music-player.svg?style=flat-square" alt="npm"/>
+  <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
+    <img src="https://img.shields.io/npm/dm/tailwind-react-music-player.svg?style=flat-square" alt="npm"/>
   </a>
-  <a href="https://www.npmjs.com/package/react-jinke-music-player" title="npm">
-    <img src="https://img.shields.io/npm/l/react-jinke-music-player.svg?style=flat-square" alt="npm"/>
+  <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
+    <img src="https://img.shields.io/npm/l/tailwind-react-music-player.svg?style=flat-square" alt="npm"/>
   </a>
   <a href="https://github.com/alifeinbinary/react-music-player/actions">
     <img src="https://github.com/alifeinbinary/react-music-player/workflows/CI/badge.svg" />
   </a>
-   <a href="https://badge.fury.io/js/react-jinke-music-player" title="npm">
-    <img src="https://img.shields.io/npm/v/react-jinke-music-player.svg?style=flat-square" alt="npm version"/>
+   <a href="https://badge.fury.io/js/tailwind-react-music-player" title="npm">
+    <img src="https://img.shields.io/npm/v/tailwind-react-music-player.svg?style=flat-square" alt="npm version"/>
   </a>
   <a href="https://lgtm.com/projects/g/alifeinbinary/react-music-player/context:javascript">
     <img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/alifeinbinary/react-music-player.svg?logo=lgtm&logoWidth=18"/>
@@ -29,7 +29,7 @@ react-jinke-music-player
   <a href="https://codecov.io/gh/alifeinbinary/react-music-player">
     <img src="https://codecov.io/gh/alifeinbinary/react-music-player/branch/master/graph/badge.svg" />
   </a>
-  <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/react-jinke-music-player?style=flat-square">
+  <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/tailwind-react-music-player?style=flat-square">
   <a href="https://david-dm.org/alifeinbinary/react-music-player" title="dependencies status"><img src="https://david-dm.oalifeinbinary666/react-music-player/status.svg"/></a>
   <a href="https://david-dm.org/alifeinbinary/react-music-player?type=dev" title="devDependencies status"><img src="https://david-dm.oalifeinbinary666/react-music-player/dev-status.svg"/></a>
   <a href="https://github.com/semantic-release/semantic-release" title="semantic-release">
@@ -51,13 +51,13 @@ react-jinke-music-player
 using `yarn` :
 
 ```bash
-yarn add react-jinke-music-player
+yarn add tailwind-react-music-player
 ```
 
 using `npm` :
 
 ```bash
-npm install react-jinke-music-player --save
+npm install tailwind-react-music-player --save
 ```
 
 ## :framed_picture: Screenshots
@@ -118,11 +118,11 @@ npm install react-jinke-music-player --save
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactJkMusicPlayer from 'react-jinke-music-player'
-import 'react-jinke-music-player/assets/index.css'
+import TailwindReactMusicPlayer from 'tailwind-react-music-player'
+import 'tailwind-react-music-player/assets/index.css'
 
 ReactDOM.render(
-  <ReactJkMusicPlayer {...options} />,
+  <TailwindReactMusicPlayer {...options} />,
   document.getElementById('root'),
 )
 ```
@@ -188,7 +188,7 @@ ReactDOM.render(
 | getContainer | `() => HTMLElement` \| `Selectors` | `document.body` | Return the mount node for Music player |
 | getAudioInstance | `(instance: HTMLAudioElement) => void` | `-` | get origin audio element instance , you can use it do everything |
 | autoHiddenCover | `boolean` | `false` | Auto hide the cover photo if no cover photo is available |
-| onBeforeAudioDownload | `(audioInfo: ReactJkMusicPlayerAudioInfo) => Promise<TransformedDownloadAudioInfo>` | `-` | transform download audio info before |
+| onBeforeAudioDownload | `(audioInfo: TailwindReactMusicPlayerAudioInfo) => Promise<TransformedDownloadAudioInfo>` | `-` | transform download audio info before |
 | clearPriorAudioLists | `boolean` | `false` | Replace a new playlist with the first loaded playlist and reset playIndex to 0 |
 | autoPlayInitLoadPlayList | `boolean` | `false` | Play your new play list right after your new play list is loaded turn false. |
 | spaceBar | `boolean` | `false` | Play and pause audio through space bar （Desktop effective）. |
@@ -233,7 +233,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <ReactJkMusicPlayer
+        <TailwindReactMusicPlayer
           getAudioInstance={(instance) => {
             this.audioInstance = instance
           }}
@@ -270,7 +270,7 @@ class App extends React.Component {
 ## :bulb: Glass bg
 
 ```jsx
-<ReactJkMusicPlayer glassBg />
+<TailwindReactMusicPlayer glassBg />
 ```
 
 <p>
@@ -293,7 +293,7 @@ const customDownloader = (downloadInfo) => {
   link.click()
 }
 
-;<ReactJkMusicPlayer
+;<TailwindReactMusicPlayer
   audioLists={[{ src: 'a.mp3' }]}
   customDownloader={customDownloader}
 />
@@ -309,7 +309,7 @@ const customDownloader = (downloadInfo) => {
   console.log(downloadInfo.src) // 1.mp3
 }
 
-;<ReactJkMusicPlayer
+;<TailwindReactMusicPlayer
   customDownloader={customDownloader}
   onBeforeAudioDownload={onBeforeAudioDownload}
 />
@@ -335,7 +335,7 @@ const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
   console.log('onDestroyed:', currentPlayId, audioLists, audioInfo)
 }
 
-;<ReactJkMusicPlayer
+;<TailwindReactMusicPlayer
   showDestroy
   onBeforeDestroy={onBeforeDestroy}
   onDestroyed={onDestroyed}
@@ -348,7 +348,7 @@ const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
 
 ```jsx
 // so cool, so easy !!!
-<ReactJkMusicPlayer showMediaSession />
+<TailwindReactMusicPlayer showMediaSession />
 ```
 
 <img src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/media-session-destop.png" max-width="100%"/>
@@ -361,11 +361,11 @@ const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
 [Source](https://github.com/alifeinbinary/react-music-player/blob/master/src/locale/index.js)
 
 ```jsx
-import ReactJkMusicPlayer from 'react-jinke-music-player'
+import TailwindReactMusicPlayer from 'tailwind-react-music-player'
 // Two languages are provided by default
 // one of zh_CN | en_US
-<ReactJkMusicPlayer locale={ReactJkMusicPlayer.locale.zh_CN}/>
-// <ReactJkMusicPlayer locale={'en_US'}/>
+<TailwindReactMusicPlayer locale={TailwindReactMusicPlayer.locale.zh_CN}/>
+// <TailwindReactMusicPlayer locale={'en_US'}/>
 
 // Custom override
 const customLocale = {
@@ -400,11 +400,11 @@ const customLocale = {
   // audioTitle: (audioInfo) => ``
 }
 
-<ReactJkMusicPlayer locale={customLocale}/>
+<TailwindReactMusicPlayer locale={customLocale}/>
 
 // Support partial override, auto merge
 
-<ReactJkMusicPlayer locale={{ audioTitle: "xxx" }}/>
+<TailwindReactMusicPlayer locale={{ audioTitle: "xxx" }}/>
 ```
 
 ## :bulb: Customize Theme
@@ -415,8 +415,8 @@ the theme, just override the variables in your own stylesheet — no
 preprocessor or build tooling required:
 
 ```jsx
-import ReactJkMusicPlayer from 'react-jinke-music-player'
-import 'react-jinke-music-player/assets/index.css'
+import TailwindReactMusicPlayer from 'tailwind-react-music-player'
+import 'tailwind-react-music-player/assets/index.css'
 ```
 
 ```css
@@ -437,7 +437,7 @@ Variables can also be scoped to a single player instance:
 
 ```jsx
 <div className="my-player-wrapper">
-  <ReactJkMusicPlayer />
+  <TailwindReactMusicPlayer />
 </div>
 ```
 
@@ -495,7 +495,7 @@ the mobile layout respectively; un-suffixed variables apply to the default
 > Default: by this.audio.duration, if cannot get current play audio's duration, you can customize to set.
 
 ```jsx
-<ReactJkMusicPlayer audioLists={[{
+<TailwindReactMusicPlayer audioLists={[{
   ...
   duration: 100.00
 }]} />
@@ -505,7 +505,7 @@ the mobile layout respectively; un-suffixed variables apply to the default
 ## :bulb: Customize player icon
 
 ```ts
-export interface ReactJkMusicPlayerIcon {
+export interface TailwindReactMusicPlayerIcon {
   pause?: React.ReactNode | string
   play?: React.ReactNode | string
   destroy?: React.ReactNode | string
@@ -531,7 +531,7 @@ export interface ReactJkMusicPlayerIcon {
 ## :bulb: Follow the theme of the system
 
 ```jsx
-<ReactJkMusicPlayer theme="auto" />
+<TailwindReactMusicPlayer theme="auto" />
 ```
 
 ![auto-theme](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/auto-theme.gif?raw=true)
@@ -563,7 +563,7 @@ function App() {
   }, [setAudioLists])
 
   return (
-    <ReactJkMusicPlayer
+    <TailwindReactMusicPlayer
       quietUpdate
       clearPriorAudioLists
       audioLists={audioLists}
@@ -580,7 +580,7 @@ function App() {
   <head>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/react-jinke-music-player@4.18.1/assets/index.css"
+      href="https://unpkg.com/tailwind-react-music-player@4.18.1/assets/index.css"
     />
   </head>
   <body>
@@ -588,10 +588,10 @@ function App() {
   </body>
   <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/react-jinke-music-player@4.18.1/dist/react-jinke-music-player.min.js"></script>
+  <script src="https://unpkg.com/tailwind-react-music-player@4.18.1/dist/tailwind-react-music-player.min.js"></script>
   <script>
     ReactDOM.render(
-      React.createElement(ReactJkMusicPlayer),
+      React.createElement(TailwindReactMusicPlayer),
       document.getElementById('root'),
     )
   </script>
@@ -603,10 +603,10 @@ function App() {
 ```jsx
 // components/Player.js
 import React from 'react'
-import ReactJkMusicPlayer from 'react-jinke-music-player'
-import styles from 'react-jinke-music-player/assets/index.module.css'
+import TailwindReactMusicPlayer from 'tailwind-react-music-player'
+import styles from 'tailwind-react-music-player/assets/index.module.css'
 
-export const Player = () => <ReactJkMusicPlayer />
+export const Player = () => <TailwindReactMusicPlayer />
 
 // pages/_app.js
 import dynamic from 'next/dynamic'
@@ -621,13 +621,13 @@ const PlayerWithNoSSR = dynamic(() => import('../components/Player'), {
 
 ```jsx
 // Default '(max-width: 768px) and (orientation : portrait)'
-<ReactJkMusicPlayer mobileMediaQuery="(max-width: 1024px)" />
+<TailwindReactMusicPlayer mobileMediaQuery="(max-width: 1024px)" />
 ```
 
 ## :bulb: Audio volume fade in and fade out
 
 ```jsx
-<ReactJkMusicPlayer volumeFade={{ fadeIn: 500, fadeOut: 500 }} />
+<TailwindReactMusicPlayer volumeFade={{ fadeIn: 500, fadeOut: 500 }} />
 ```
 
 ## :pencil: Development
@@ -650,7 +650,7 @@ npm run test
 > Like This
 
 ```ts
-interface ReactJkMusicPlayerAudioListProps {
+interface TailwindReactMusicPlayerAudioListProps {
   name: string | React.ReactNode,
   musicSrc: string | () => Promise<string>,
   cover: string,
@@ -666,7 +666,7 @@ interface ReactJkMusicPlayerAudioListProps {
 > Like This
 
 ```ts
-interface ReactJkMusicPlayerAudioInfo {
+interface TailwindReactMusicPlayerAudioInfo {
   cover: string
   currentTime: number
   duration: number
@@ -687,9 +687,9 @@ interface ReactJkMusicPlayerAudioInfo {
 
 ## :two_men_holding_hands: Contributors
 
-> Special thanks: @JeffreyCA
+> Special thanks: @JeffreyCA @lijinke666
 
-![https://github.com/alifeinbinary/react-music-player/graphs/contributors](https://contrib.rocks/image?repo=lijinke666/react-music-player)
+![https://github.com/alifeinbinary/tailwind-react-music-player/graphs/contributors](https://contrib.rocks/image?repo=lijinke666/react-music-player)
 
 ## :page_facing_up: License
 

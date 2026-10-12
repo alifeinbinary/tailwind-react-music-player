@@ -1,11 +1,11 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import Sortable from 'sortablejs'
-import ReactJkMusicPlayer from '../../src'
+import TailwindReactMusicPlayer from '../../src'
 
 const createPlayer = (props?: any) => {
-  return mount<ReactJkMusicPlayer>(
-    <ReactJkMusicPlayer
+  return mount<TailwindReactMusicPlayer>(
+    <TailwindReactMusicPlayer
       audioLists={[
         { cover: 'xx', musicSrc: '1' },
         { cover: 'xx', musicSrc: '2' },

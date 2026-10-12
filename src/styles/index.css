@@ -12,7 +12,7 @@
 @import './audio-lists-panel.css';
 @import './player-mobile.css';
 
-.react-jinke-music-player-main {
+.tailwind-react-music-player-main {
   ::-webkit-scrollbar-thumb {
     height: 20px;
     background-color: var(--rjmp-primary-color);
@@ -305,7 +305,7 @@
       }
     }
 
-    .react-jinke-music-player-mobile {
+    .tailwind-react-music-player-mobile {
       background-color: var(--rjmp-panel-bg-light);
       color: var(--rjmp-font-color);
 
@@ -319,24 +319,24 @@
       }
     }
 
-    .react-jinke-music-player-mobile-cover {
+    .tailwind-react-music-player-mobile-cover {
       border: 5px solid transparent;
       box-shadow: 0 0 30px 2px rgba(0, 0, 0, 0.2);
     }
 
-    .react-jinke-music-player-mobile-operation {
+    .tailwind-react-music-player-mobile-operation {
       svg {
         color: var(--rjmp-font-color);
       }
     }
 
-    .react-jinke-music-player-mobile-tip {
+    .tailwind-react-music-player-mobile-tip {
       svg {
         color: #fff !important;
       }
     }
 
-    .react-jinke-music-player-mobile-singer-name {
+    .tailwind-react-music-player-mobile-singer-name {
       color: var(--rjmp-font-color);
       transition: color var(--rjmp-animate-time) var(--rjmp-animate-type);
 
@@ -353,7 +353,7 @@
   }
 }
 
-.react-jinke-music-player {
+.tailwind-react-music-player {
   .music-player {
     .destroy-btn {
       z-index: 100;

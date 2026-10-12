@@ -26,7 +26,7 @@ ${readFileSync(resolve(__dirname, './LICENCE'), 'utf-8')
  */`
 
 // `vite build`           -> ESM (dist/index.js) + CJS (dist/index.cjs) + .d.ts
-// `vite build --mode umd` -> dist/react-jinke-music-player.min.js (UMD, deps bundled)
+// `vite build --mode umd` -> dist/tailwind-react-music-player.min.js (UMD, deps bundled)
 export default defineConfig(({ mode }) => {
   const isUmd = mode === 'umd'
 
@@ -53,7 +53,7 @@ export default defineConfig(({ mode }) => {
             ? 'index.js'
             : format === 'cjs'
             ? 'index.cjs'
-            : 'react-jinke-music-player.min.js',
+            : 'tailwind-react-music-player.min.js',
       },
       rollupOptions: {
         external: external(

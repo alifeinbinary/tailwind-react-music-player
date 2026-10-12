@@ -1,10 +1,10 @@
 {
-  "name": "react-jinke-music-player",
+  "name": "tailwind-react-music-player",
   "version": "4.24.2",
   "description": "Maybe the best beautiful HTML5 responsive player component for react",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "unpkg": "dist/react-jinke-music-player.min.js",
+  "unpkg": "dist/tailwind-react-music-player.min.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -78,7 +78,7 @@
     "music",
     "audio",
     "react-player",
-    "react-jinke-music-player",
+    "tailwind-react-music-player",
     "react-music-player",
     "react-audio-player",
     "cd-player",
@@ -99,7 +99,7 @@
   },
   "bundlesize": [
     {
-      "path": "./dist/react-jinke-music-player.min.js",
+      "path": "./dist/tailwind-react-music-player.min.js",
       "maxSize": "250 kB"
     }
   ],

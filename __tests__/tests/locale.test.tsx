@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react'
 import { mount } from 'enzyme'
-import ReactJkMusicPlayer from '../../src'
+import TailwindReactMusicPlayer from '../../src'
 import { FaHeadphonesIcon } from '../../src/components/Icon'
 
 const getTitle = (wrapper: any, className: string, at?: number) => {
@@ -12,16 +12,20 @@ const getTitle = (wrapper: any, className: string, at?: number) => {
 }
 describe('Locale test', () => {
   it('should render default locale with en_US', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer className="text-class-name" showLyric showDestroy />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
+        className="text-class-name"
+        showLyric
+        showDestroy
+      />,
     )
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('should render locale with zh_CN', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         className="text-class-name"
         showLyric
         showDestroy
@@ -31,8 +35,8 @@ describe('Locale test', () => {
     expect(wrapper).toMatchSnapshot()
   })
   it('should override locale with en_US', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         className="text-class-name"
         showLyric
         showDestroy
@@ -94,8 +98,8 @@ describe('Locale test', () => {
   })
 
   it('should render locale with zh_CN detail', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         showLyric
         showDestroy
         locale="zh_CN"
@@ -153,8 +157,8 @@ describe('Locale test', () => {
   })
 
   it('should override locale', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         locale={
           {
             openText: 'test',
@@ -169,8 +173,8 @@ describe('Locale test', () => {
 
   // https://github.com/alifeinbinary/react-music-player/issues/83
   it('should render locale with functional audioTitle', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         className="text-class-name"
         showMiniProcessBar
         showLyric

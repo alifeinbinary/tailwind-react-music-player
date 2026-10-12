@@ -1,5 +1,5 @@
 /**
- * @name react-jinke-music-player
+ * @name tailwind-react-music-player
  * @description Maybe the best beautiful HTML5 responsive player component for react :)
  * @author Jinke.Li <1359518268@qq.com>
  * @license MIT
@@ -71,15 +71,15 @@ import SORTABLE_CONFIG from './config/sortable'
 import LOCALE_CONFIG from './locale'
 import Lyric, { LyricHandlerParams } from './lyric'
 import {
-  ReactJkMusicPlayerAudioInfo,
-  ReactJkMusicPlayerAudioList,
-  ReactJkMusicPlayerCustomLocale,
-  ReactJkMusicPlayerInstance,
-  ReactJkMusicPlayerMode,
-  ReactJkMusicPlayerPlayMode,
-  ReactJkMusicPlayerProps,
-  ReactJkMusicPlayerState,
-  ReactJkMusicPlayerTheme,
+  TailwindReactMusicPlayerAudioInfo,
+  TailwindReactMusicPlayerAudioList,
+  TailwindReactMusicPlayerCustomLocale,
+  TailwindReactMusicPlayerInstance,
+  TailwindReactMusicPlayerMode,
+  TailwindReactMusicPlayerPlayMode,
+  TailwindReactMusicPlayerProps,
+  TailwindReactMusicPlayerState,
+  TailwindReactMusicPlayerTheme,
   TransformedDownloadAudioInfo,
 } from './types'
 import {
@@ -130,9 +130,9 @@ const PLAYER_CONTENT_GROUP_CLASS =
 const PLAYER_CONTENT_SCOPED_GROUP_CLASS =
   'group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer'
 
-type ResolvedProps = Required<ReactJkMusicPlayerProps>
+type ResolvedProps = Required<TailwindReactMusicPlayerProps>
 
-const defaultProps: Partial<ReactJkMusicPlayerProps> = {
+const defaultProps: Partial<TailwindReactMusicPlayerProps> = {
   audioLists: [],
   theme: THEME.DARK,
   mode: MODE.MINI,
@@ -186,9 +186,9 @@ const defaultProps: Partial<ReactJkMusicPlayerProps> = {
   sortableOptions: {},
 }
 
-export default class ReactJkMusicPlayer extends PureComponent<
-  ReactJkMusicPlayerProps,
-  ReactJkMusicPlayerState
+export default class TailwindReactMusicPlayer extends PureComponent<
+  TailwindReactMusicPlayerProps,
+  TailwindReactMusicPlayerState
 > {
   // this.props is fully resolved: every prop has a default (defaultProps
   // below) or is required, so internally nothing is undefined.
@@ -218,11 +218,11 @@ export default class ReactJkMusicPlayer extends PureComponent<
 
   defaultVolume = DEFAULT_VOLUME
 
-  private _PLAY_MODE_: ReactJkMusicPlayerPlayMode[]
+  private _PLAY_MODE_: TailwindReactMusicPlayerPlayMode[]
 
   private _PLAY_MODE_LENGTH_: number
 
-  state: ReactJkMusicPlayerState = {
+  state: TailwindReactMusicPlayerState = {
     audioLists: [],
     playId: this.initPlayId, // The ID of the currently playing song.
     name: '', // The name of the current song.
@@ -268,14 +268,14 @@ export default class ReactJkMusicPlayer extends PureComponent<
 
   static locale = LOCALE
 
-  get locale(): ReactJkMusicPlayerCustomLocale {
+  get locale(): TailwindReactMusicPlayerCustomLocale {
     const { locale } = this.props
     if (typeof locale === 'string') {
       return LOCALE_CONFIG[locale]
     }
     return locale
       ? { ...LOCALE_CONFIG[LOCALE.en_US], ...locale }
-      : ({} as ReactJkMusicPlayerCustomLocale)
+      : ({} as TailwindReactMusicPlayerCustomLocale)
   }
 
   get audioDuration() {
@@ -285,7 +285,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     }
     const { duration } = (audioLists.find(
       (audio) => audio[PLAYER_KEY] === playId,
-    ) || {}) as ReactJkMusicPlayerAudioList
+    ) || {}) as TailwindReactMusicPlayerAudioList
 
     return Math.max(Number(duration) || this.audio.duration || 0, 0)
   }
@@ -308,7 +308,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     return { ...DEFAULT_ICON, ...this.props.icon, loading: <Spin /> }
   }
 
-  constructor(props: ReactJkMusicPlayerProps) {
+  constructor(props: TailwindReactMusicPlayerProps) {
     super(props)
 
     this.audio = (null as unknown) as HTMLAudioElement
@@ -514,7 +514,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     const AudioController = (
       <div
         className={cls(
-          'react-jinke-music-player',
+          'tailwind-react-music-player',
           'fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none',
         )}
         style={defaultPosition}
@@ -576,7 +576,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     return createPortal(
       <div
         className={cls(
-          'react-jinke-music-player-main',
+          'tailwind-react-music-player-main',
           'touch-none font-[inherit] focus:outline-none',
           {
             'light-theme': theme === THEME.LIGHT,
@@ -870,7 +870,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     )
   }
 
-  onCoverClick = (mode: ReactJkMusicPlayerMode = MODE.FULL) => {
+  onCoverClick = (mode: TailwindReactMusicPlayerMode = MODE.FULL) => {
     const { showMiniModeCover } = this.props
     const { cover } = this.state
     if (!showMiniModeCover && mode === MODE.MINI) {
@@ -931,10 +931,10 @@ export default class ReactJkMusicPlayer extends PureComponent<
   }
 
   // Render the play mode icon for the corresponding button.
-  renderPlayModeIcon = (playMode: ReactJkMusicPlayerPlayMode) => {
+  renderPlayModeIcon = (playMode: TailwindReactMusicPlayerPlayMode) => {
     const animateProps = {
       className:
-        'react-jinke-music-player-mode-icon animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)]',
+        'tailwind-react-music-player-mode-icon animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)]',
     }
     let IconNode = null
     switch (playMode) {
@@ -978,7 +978,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
   audioListsPlay = (
     playId: string,
     ignore = false,
-    state: ReactJkMusicPlayerState = this.state,
+    state: TailwindReactMusicPlayerState = this.state,
   ) => {
     const {
       playId: currentPlayId,
@@ -1001,7 +1001,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     )
     const { name, cover, musicSrc, singer, lyric = '' } = (audioLists[
       playIndex
-    ] || {}) as ReactJkMusicPlayerAudioList
+    ] || {}) as TailwindReactMusicPlayerAudioList
 
     const loadAudio = (originMusicSrc: string) => {
       this.setState(
@@ -1074,7 +1074,11 @@ export default class ReactJkMusicPlayer extends PureComponent<
 
   clearAudioLists = () => {
     this.props.onAudioListsChange &&
-      this.props.onAudioListsChange('', [], {} as ReactJkMusicPlayerAudioInfo)
+      this.props.onAudioListsChange(
+        '',
+        [],
+        {} as TailwindReactMusicPlayerAudioInfo,
+      )
     this.resetAudioStatus()
   }
 
@@ -1345,7 +1349,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
   }
 
   // Returns audio information to the user
-  getBaseAudioInfo(): ReactJkMusicPlayerAudioInfo {
+  getBaseAudioInfo(): TailwindReactMusicPlayerAudioInfo {
     const {
       cover,
       name,
@@ -1369,7 +1373,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
 
     const currentPlayIndex = this.getCurrentPlayIndex()
     const currentAudioListInfo = (audioLists[currentPlayIndex] ||
-      {}) as ReactJkMusicPlayerAudioList
+      {}) as TailwindReactMusicPlayerAudioList
 
     return {
       ...currentAudioListInfo,
@@ -1389,7 +1393,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
       lyric: lyric as string,
       currentLyric: currentLyric as string,
       playIndex: currentPlayIndex,
-    } as ReactJkMusicPlayerAudioInfo
+    } as TailwindReactMusicPlayerAudioInfo
   }
 
   onTogglePlay = () => {
@@ -1681,7 +1685,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
             randomIndex = this.getPlayIndex(randomIndex + 1)
           }
           const randomPlayId = ((audioLists[randomIndex] ||
-            {}) as ReactJkMusicPlayerAudioList)[PLAYER_KEY]
+            {}) as TailwindReactMusicPlayerAudioList)[PLAYER_KEY]
           this.audioListsPlay(randomPlayId as string, true)
         }
         break
@@ -1815,13 +1819,13 @@ export default class ReactJkMusicPlayer extends PureComponent<
       this.props.onAudioAbort(playId, audioLists, mergedAudioInfo)
   }
 
-  toggleMode = (mode: ReactJkMusicPlayerMode) => {
+  toggleMode = (mode: TailwindReactMusicPlayerMode) => {
     if (mode === MODE.FULL) {
       this.setState({ toggle: true })
     }
   }
 
-  toggleTheme = (theme: ReactJkMusicPlayerTheme) => {
+  toggleTheme = (theme: TailwindReactMusicPlayerTheme) => {
     this.setState({ theme })
   }
 
@@ -1892,7 +1896,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     localStorage.setItem('lastPlayStatus', lastPlayStatus)
   }
 
-  getLastPlayStatus = (): Partial<ReactJkMusicPlayerState> => {
+  getLastPlayStatus = (): Partial<TailwindReactMusicPlayerState> => {
     const {
       theme,
       defaultPlayMode,
@@ -1901,7 +1905,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
       playIndex,
     } = this.props
 
-    const status: Partial<ReactJkMusicPlayerState> = {
+    const status: Partial<TailwindReactMusicPlayerState> = {
       currentTime: 0,
       playMode: playMode || defaultPlayMode || PLAY_MODE.order,
       name: '',
@@ -2033,7 +2037,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     return playId as string
   }
 
-  _getPlayInfo = (audioLists: ReactJkMusicPlayerAudioList[] = []) => {
+  _getPlayInfo = (audioLists: TailwindReactMusicPlayerAudioList[] = []) => {
     const playId = this.getPlayId(audioLists)
 
     const {
@@ -2043,7 +2047,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
       musicSrc = '',
       lyric = '',
     } = (audioLists.find((audio) => audio[PLAYER_KEY] === playId) ||
-      {}) as ReactJkMusicPlayerAudioList
+      {}) as TailwindReactMusicPlayerAudioList
 
     return {
       name,
@@ -2056,7 +2060,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     }
   }
 
-  getPlayInfo = (audioLists: ReactJkMusicPlayerAudioList[] = []) => {
+  getPlayInfo = (audioLists: TailwindReactMusicPlayerAudioList[] = []) => {
     const newAudioLists = audioLists.filter((audio) => !audio[PLAYER_KEY])
     const lastAudioLists = audioLists.filter((audio) => audio[PLAYER_KEY])
     const mergedAudioLists = [
@@ -2080,7 +2084,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
         this.state.audioLists.find(
           ({ musicSrc }) => musicSrc === info.musicSrc,
         )) ||
-        {}) as ReactJkMusicPlayerAudioList
+        {}) as TailwindReactMusicPlayerAudioList
       return {
         ...info,
         [PLAYER_KEY]: prevAudioBeforeUpdate[PLAYER_KEY] || uuId(),
@@ -2091,7 +2095,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
   }
 
   initPlayInfo = (
-    audioLists: ReactJkMusicPlayerAudioList[] = [],
+    audioLists: TailwindReactMusicPlayerAudioList[] = [],
     cb?: () => void,
   ) => {
     const info = this.getPlayInfo(audioLists)
@@ -2202,7 +2206,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     this.props.onAudioLyricChange && this.props.onAudioLyricChange(lineNum, txt)
   }
 
-  updateTheme = (theme?: ReactJkMusicPlayerTheme) => {
+  updateTheme = (theme?: TailwindReactMusicPlayerTheme) => {
     if (
       theme &&
       theme !== this.props.theme &&
@@ -2212,7 +2216,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     }
   }
 
-  updateMode = (mode?: ReactJkMusicPlayerMode) => {
+  updateMode = (mode?: TailwindReactMusicPlayerMode) => {
     if (
       mode &&
       mode !== this.props.mode &&
@@ -2225,7 +2229,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     }
   }
 
-  updatePlayMode = (playMode?: ReactJkMusicPlayerPlayMode) => {
+  updatePlayMode = (playMode?: TailwindReactMusicPlayerPlayMode) => {
     if (!playMode || !Object.values(PLAY_MODE).includes(playMode)) {
       return
     }
@@ -2234,7 +2238,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
     }
   }
 
-  updateAudioLists = (audioLists: ReactJkMusicPlayerAudioList[]) => {
+  updateAudioLists = (audioLists: TailwindReactMusicPlayerAudioList[]) => {
     const newAudioLists = [
       ...this.state.audioLists,
       ...audioLists.filter(
@@ -2267,7 +2271,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
       return
     }
     const info = this.getPlayInfoOfNewList(nextProps)
-    const lastPlayStatus: Partial<ReactJkMusicPlayerState> = remember
+    const lastPlayStatus: Partial<TailwindReactMusicPlayerState> = remember
       ? this.getLastPlayStatus()
       : {
           playMode: playMode || PLAY_MODE.order,
@@ -2296,11 +2300,11 @@ export default class ReactJkMusicPlayer extends PureComponent<
           this.setState({
             ...audioInfo,
             musicSrc,
-          } as ReactJkMusicPlayerState)
+          } as TailwindReactMusicPlayerState)
         }, this.onAudioError)
         break
       default:
-        this.setState(audioInfo as ReactJkMusicPlayerState)
+        this.setState(audioInfo as TailwindReactMusicPlayerState)
     }
   }
 
@@ -2390,7 +2394,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
   onGetAudioInstance = () => {
     if (this.props.getAudioInstance) {
       this.props.getAudioInstance(
-        this.getEnhanceAudio() as ReactJkMusicPlayerInstance,
+        this.getEnhanceAudio() as TailwindReactMusicPlayerInstance,
       )
     }
   }
@@ -2586,8 +2590,8 @@ export default class ReactJkMusicPlayer extends PureComponent<
   }
 
   componentDidUpdate(
-    _prevProps: ReactJkMusicPlayerProps,
-    prevState: ReactJkMusicPlayerState,
+    _prevProps: TailwindReactMusicPlayerProps,
+    prevState: TailwindReactMusicPlayerState,
   ) {
     if (prevState.musicSrc !== this.state.musicSrc) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -2642,7 +2646,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
               ...playInfo,
               musicSrc: val,
               ...lastPlayStatus,
-            } as ReactJkMusicPlayerState)
+            } as TailwindReactMusicPlayerState)
           }, this.onAudioError)
           break
         default:
@@ -2650,7 +2654,7 @@ export default class ReactJkMusicPlayer extends PureComponent<
             ...playInfo,
             musicSrc: playInfo.musicSrc,
             ...lastPlayStatus,
-          } as ReactJkMusicPlayerState)
+          } as TailwindReactMusicPlayerState)
       }
     }
   }

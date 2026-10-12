@@ -3,15 +3,15 @@ import React from 'react'
 import assert from 'assert'
 import { mount } from 'enzyme'
 
-import ReactJkMusicPlayer from '../../src'
+import TailwindReactMusicPlayer from '../../src'
 import AudioListsPanel from '../../src/components/AudioListsPanel'
 
-describe('<ReactJkMusicPlayer/> click events tests', () => {
+describe('<TailwindReactMusicPlayer/> click events tests', () => {
   it('sinon audio lists panel close events', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} mode="mini" />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer audioLists={[]} mode="mini" />,
     )
-    wrapper.find('.react-jinke-music-player').simulate('click')
+    wrapper.find('.tailwind-react-music-player').simulate('click')
     wrapper.setState({ toggle: true })
     assert(wrapper.find('.music-player-panel').length >= 1)
     // 展开歌曲列表
@@ -47,8 +47,8 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
   })
 
   it('change audio lists', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer audioLists={[]} />,
     )
     wrapper.setProps({
       audioLists: [
@@ -60,7 +60,7 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
         },
       ],
     })
-    wrapper.find('.react-jinke-music-player').simulate('click')
+    wrapper.find('.tailwind-react-music-player').simulate('click')
     assert(wrapper.state().audioLists.length === 1)
     // 删除列表
     wrapper.find('.audio-lists-panel-header-delete-btn').simulate('click')
@@ -89,8 +89,8 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
   })
 
   it('toggle theme', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.setState({ theme: 'dark' })
     wrapper.find('.theme-switch').simulate('click')
@@ -101,23 +101,23 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
     assert(wrapper.find('.light-theme').length === 1)
   })
   it('click reload button', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.find('.reload-btn').simulate('click')
     assert(wrapper.state().currentTime === 0)
   })
   it('click pause and play button', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     // 暂停
     wrapper.find('.play-btn').simulate('click')
     assert(wrapper.state().playing === false)
   })
   it('click prev and next audio', async () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} mode="full" />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer audioLists={[]} mode="full" />,
     )
     wrapper.setState({
       audioLists: [
@@ -143,16 +143,20 @@ describe('<ReactJkMusicPlayer/> click events tests', () => {
     assert(wrapper.state().name === 'prev')
   })
   it('click mute', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer audioLists={[]} mode="full" defaultVolume={100} />,
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
+        audioLists={[]}
+        mode="full"
+        defaultVolume={100}
+      />,
     )
     // 静音
     wrapper.find('.sounds-icon').simulate('click')
     assert(wrapper.state().soundValue === 0)
   })
   it('click change play mode', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    const wrapper = mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         audioLists={[]}
         mode="full"
         defaultPlayMode="order"

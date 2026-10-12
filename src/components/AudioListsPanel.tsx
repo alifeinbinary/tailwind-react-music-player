@@ -3,9 +3,9 @@ import React, { memo, MouseEvent } from 'react'
 import { PLAYER_KEY } from '../config/player'
 import SORTABLE_CONFIG from '../config/sortable'
 import {
-  ReactJkMusicPlayerAudioList,
-  ReactJkMusicPlayerCustomLocale,
-  ReactJkMusicPlayerIcon,
+  TailwindReactMusicPlayerAudioList,
+  TailwindReactMusicPlayerCustomLocale,
+  TailwindReactMusicPlayerIcon,
 } from '../types'
 
 interface PanelToggleAnimate {
@@ -15,7 +15,7 @@ interface PanelToggleAnimate {
 
 export interface AudioListsPanelProps {
   visible: boolean
-  audioLists: ReactJkMusicPlayerAudioList[]
+  audioLists: TailwindReactMusicPlayerAudioList[]
   onCancel: (e: MouseEvent) => void
   onDelete: (audioId?: string) => (e: MouseEvent) => void
   onPlay: (playId: string) => void
@@ -26,8 +26,8 @@ export interface AudioListsPanelProps {
   remove: boolean
   removeId: string | number
   isMobile: boolean
-  locale: ReactJkMusicPlayerCustomLocale
-  icon: ReactJkMusicPlayerIcon
+  locale: TailwindReactMusicPlayerCustomLocale
+  icon: TailwindReactMusicPlayerIcon
   playing: boolean
   cover?: string
 }

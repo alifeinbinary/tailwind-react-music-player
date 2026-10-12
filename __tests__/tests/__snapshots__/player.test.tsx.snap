@@ -1,12 +1,12 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`<ReactJkMusicPlayer/> > should render a <ReactJkMusicPlayer/> components 1`] = `
+exports[`<TailwindReactMusicPlayer/> > should render a <TailwindReactMusicPlayer/> components 1`] = `
 <div
-  class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
+  class="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
   tabindex="-1"
 >
   <div
-    class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
+    class="tailwind-react-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
     style="left: 0px; top: 0px; transform: translate(0px,0px);"
     tabindex="-1"
   >

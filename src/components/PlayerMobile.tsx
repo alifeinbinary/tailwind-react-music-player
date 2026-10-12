@@ -1,12 +1,12 @@
 import cls from 'classnames'
 import React, { isValidElement, memo, ReactNode } from 'react'
 import {
-  ReactJkMusicPlayerCustomLocale,
-  ReactJkMusicPlayerIcon,
+  TailwindReactMusicPlayerCustomLocale,
+  TailwindReactMusicPlayerIcon,
 } from '../types'
 import PlayModeTip from './PlayModeTip'
 
-const prefix = 'react-jinke-music-player-mobile'
+const prefix = 'tailwind-react-music-player-mobile'
 
 export interface PlayerMobileProps {
   name: ReactNode
@@ -30,8 +30,8 @@ export interface PlayerMobileProps {
   glassBg: boolean
   onCoverClick: () => void
   autoHiddenCover: boolean
-  icon: ReactJkMusicPlayerIcon
-  locale: ReactJkMusicPlayerCustomLocale
+  icon: TailwindReactMusicPlayerIcon
+  locale: TailwindReactMusicPlayerCustomLocale
   toggleMode: boolean
   renderAudioTitle: () => ReactNode
   shouldShowPlayIcon: boolean

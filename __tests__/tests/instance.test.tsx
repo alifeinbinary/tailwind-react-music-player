@@ -1,12 +1,12 @@
 import { mount } from 'enzyme'
 import React from 'react'
-import ReactJkMusicPlayer from '../../src'
+import TailwindReactMusicPlayer from '../../src'
 import { sleep } from '../utils'
 
 const getApp = (props?: any) => {
   let _instance: any
-  const wrapper = mount<ReactJkMusicPlayer>(
-    <ReactJkMusicPlayer
+  const wrapper = mount<TailwindReactMusicPlayer>(
+    <TailwindReactMusicPlayer
       audioLists={[{ musicSrc: 'a' }, { musicSrc: 'b' }]}
       autoPlay={false}
       getAudioInstance={(instance) => {
@@ -24,8 +24,8 @@ const getApp = (props?: any) => {
 describe('AudioInstance test', () => {
   it('should call getAudioInstance function', () => {
     const getAudioInstance = vi.fn()
-    mount<ReactJkMusicPlayer>(
-      <ReactJkMusicPlayer
+    mount<TailwindReactMusicPlayer>(
+      <TailwindReactMusicPlayer
         audioLists={[{ musicSrc: 'x' }]}
         getAudioInstance={getAudioInstance}
       />,
@@ -55,7 +55,7 @@ describe('AudioInstance test', () => {
     })
     instance.destroy()
     wrapper.update()
-    expect(wrapper.find('.react-jinke-music-player').exists()).toBeFalsy()
+    expect(wrapper.find('.tailwind-react-music-player').exists()).toBeFalsy()
     expect(onDestroyed).toHaveBeenCalled()
   })
 

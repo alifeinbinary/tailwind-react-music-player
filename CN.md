@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-react-jinke-music-player
+tailwind-react-music-player
 </h1>
 
 <h4 align="center">
@@ -11,22 +11,22 @@ react-jinke-music-player
 </h4>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/react-jinke-music-player" title="npm">
-    <img src="https://img.shields.io/npm/dm/react-jinke-music-player.svg?style=flat-square" alt="npm">
+  <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
+    <img src="https://img.shields.io/npm/dm/tailwind-react-music-player.svg?style=flat-square" alt="npm">
   </a>
-  <a href="https://www.npmjs.com/package/react-jinke-music-player" title="npm">
-    <img src="https://img.shields.io/npm/l/react-jinke-music-player.svg?style=flat-square" alt="npm">
+  <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
+    <img src="https://img.shields.io/npm/l/tailwind-react-music-player.svg?style=flat-square" alt="npm">
   </a>
   <a href="https://github.com/alifeinbinary/react-music-player/actions">
     <img src="https://github.com/alifeinbinary/react-music-player/workflows/Node%20CI/badge.svg" />
   </a>
-   <a href="https://badge.fury.io/js/react-jinke-music-playerr" title="npm">
-    <img src="https://img.shields.io/npm/v/react-jinke-music-player.svg?style=flat-square" alt="npm version">
+   <a href="https://badge.fury.io/js/tailwind-react-music-playerr" title="npm">
+    <img src="https://img.shields.io/npm/v/tailwind-react-music-player.svg?style=flat-square" alt="npm version">
   </a>
   <a href="https://codecov.io/gh/alifeinbinary/react-music-player">
     <img src="https://codecov.io/gh/alifeinbinary/react-music-player/branch/master/graph/badge.svg" />
   </a>
-     <a href="https://app.netlify.com/sites/react-jinke-music-player/deploys" title="Netlify Status">
+     <a href="https://app.netlify.com/sites/tailwind-react-music-player/deploys" title="Netlify Status">
     <img src="https://api.netlify.com/api/v1/badges/2a5d8639-9d2a-46ee-a504-10b7846a57e4/deploy-status" alt="Coverage Status">
   </a>
 </p>
@@ -42,13 +42,13 @@ react-jinke-music-player
 使用 `yarn`:
 
 ```
-yarn add react-jinke-music-player
+yarn add tailwind-react-music-player
 ```
 
 或者 `npm`
 
 ```
-npm install react-jinke-music-player --save
+npm install tailwind-react-music-player --save
 ```
 
 ## 预览
@@ -73,7 +73,7 @@ npm install react-jinke-music-player --save
 
 > 在线访问 : [https://alifeinbinary.github.io/react-music-player/](https://alifeinbinary.github.io/react-music-player/)
 
-> 实际应用 : [李金珂的小屋](http://www.lijinke.cn/)
+> 实际应用 : [李金珂的小屋](http://www.alifeinbinary.com/)
 
 > 本地访问 : [http://localhost:8081/](http://localhost:8081/)
 
@@ -84,11 +84,11 @@ npm install react-jinke-music-player --save
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactJkMusicPlayer from 'react-jinke-music-player'
-import 'react-jinke-music-player/assets/index.css'
+import TailwindReactMusicPlayer from 'tailwind-react-music-player'
+import 'tailwind-react-music-player/assets/index.css'
 
 ReactDOM.render(
-  <ReactJkMusicPlayer {...options} />,
+  <TailwindReactMusicPlayer {...options} />,
   document.getElementById('root'),
 )
 ```
@@ -157,7 +157,7 @@ ReactDOM.render(
 | getContainer | `() => HTMLElement` \| `Selectors` | `document.body` | 播放器挂载的节点 默认在 body |
 | getAudioInstance | `(instance: HTMLAudioElement) => void` | `-` | 获取原始的 audio 实例, 可以用它所有的 api 做你想做的事情 |
 | autoHiddenCover | `boolean` | `false` | 当前歌曲没有封面图时是否不渲染对应的 dom 节点 |
-| onBeforeAudioDownload | `(audioInfo: ReactJkMusicPlayerAudioInfo) => Promise<TransformedDownloadAudioInfo>` | `-` | 转换下载歌曲的文件名,路径等 |
+| onBeforeAudioDownload | `(audioInfo: TailwindReactMusicPlayerAudioInfo) => Promise<TransformedDownloadAudioInfo>` | `-` | 转换下载歌曲的文件名,路径等 |
 | clearPriorAudioLists | `boolean` | `false` | 更新歌曲列表时, 是否清除之前的列表 |
 | autoPlayInitLoadPlayList | `boolean` | `false` | 歌曲列表更新后, 是否自动播放 |
 | spaceBar | `boolean` | `false` | 是否可以通过空格键控制音乐的播放与暂停 |
@@ -165,7 +165,7 @@ ReactDOM.render(
 | onBeforeDestroy | `function(currentPlayId,audioLists,audioInfo)` | `-` | 销毁之前处理函数 |
 | onDestroyed | `function(currentPlayId,audioLists,audioInfo)` | `-` | 销毁之后的回调 |
 | customDownloader | `function(downloadInfo: TransformedDownloadAudioInfo)` | `-` | 自定义下载器 |
-| audioTitle | `string \| (audioInfo: ReactJkMusicPlayerAudioInfo) => string` | `{name} - {signer}` | 自定义音乐显示名称, 默认歌曲名-歌手 |
+| audioTitle | `string \| (audioInfo: TailwindReactMusicPlayerAudioInfo) => string` | `{name} - {signer}` | 自定义音乐显示名称, 默认歌曲名-歌手 |
 
 ## 自定义操作按钮
 
@@ -187,7 +187,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <ReactJkMusicPlayer
+        <TailwindReactMusicPlayer
           getAudioInstance={(instance) => (this.audioInstance = instance)}
         />
         <button onClick={() => this.audioInstance.play()}>播放</button>
@@ -212,7 +212,7 @@ class App extends React.Component {
 ## 毛玻璃效果
 
 ```jsx
-<ReactJkMusicPlayer glassBg />
+<TailwindReactMusicPlayer glassBg />
 ```
 
 ![glass-1](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/glass-1.png)
@@ -231,7 +231,7 @@ const customDownloader = (downloadInfo) => {
   document.body.appendChild(link)
   link.click()
 }
-;<ReactJkMusicPlayer
+;<TailwindReactMusicPlayer
   audioLists={[{ src: 'a.mp3' }]}
   customDownloader={customDownloader}
 />
@@ -246,7 +246,7 @@ const onBeforeAudioDownload = () => {
 const customDownloader = (downloadInfo) => {
   console.log(downloadInfo.src) // 1.mp3
 }
-;<ReactJkMusicPlayer customDownloader={customDownloader} />
+;<TailwindReactMusicPlayer customDownloader={customDownloader} />
 ```
 
 ## 关闭/销毁 播放器
@@ -270,7 +270,7 @@ const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
 }
 
 ReactDOM.render(
-  <ReactJkMusicPlayer
+  <TailwindReactMusicPlayer
     showDestroy
     onBeforeDestroy={onBeforeDestroy}
     onDestroyed={onDestroyed}
@@ -298,7 +298,7 @@ npm run test
 > Like This
 
 ```ts
-interface ReactJkMusicPlayerAudioList {
+interface TailwindReactMusicPlayerAudioList {
   name: string | React.ReactNode,
   singer?: string | React.ReactNode,
   cover: string,
@@ -313,7 +313,7 @@ interface ReactJkMusicPlayerAudioList {
 > Like This
 
 ```ts
-interface ReactJkMusicPlayerAudioInfo {
+interface TailwindReactMusicPlayerAudioInfo {
   cover: string
   currentTime: number
   duration: number
@@ -335,11 +335,11 @@ interface ReactJkMusicPlayerAudioInfo {
 ## 参数
 
 ```ts
-export interface ReactJkMusicPlayerProps {
-  audioLists: Array<ReactJkMusicPlayerAudioList>
-  theme?: ReactJkMusicPlayerTheme
-  mode?: ReactJkMusicPlayerMode
-  defaultPlayMode?: ReactJkMusicPlayerPlayMode
+export interface TailwindReactMusicPlayerProps {
+  audioLists: Array<TailwindReactMusicPlayerAudioList>
+  theme?: TailwindReactMusicPlayerTheme
+  mode?: TailwindReactMusicPlayerMode
+  defaultPlayMode?: TailwindReactMusicPlayerPlayMode
   drag?: boolean
   seeked?: boolean
   autoPlay?: boolean
@@ -360,46 +360,46 @@ export interface ReactJkMusicPlayerProps {
     right: number | string
     bottom: number | string
   }
-  onAudioPlay?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
-  onAudioPause?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
+  onAudioPlay?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
+  onAudioPause?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
   onAudioEnded?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   onAudioAbort?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   onAudioVolumeChange?: (volume: number) => void
   onAudioError?: (
     errMsg: any,
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
-  onAudioProgress?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
-  onAudioSeeked?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
+  onAudioProgress?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
+  onAudioSeeked?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
   onAudioDownload?: (
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
     transformedDownloadAudioInfo: TransformedDownloadAudioInfo,
   ) => void
-  onAudioReload?: (audioInfo: ReactJkMusicPlayerAudioInfo) => void
-  onThemeChange?: (theme: ReactJkMusicPlayerTheme) => void
+  onAudioReload?: (audioInfo: TailwindReactMusicPlayerAudioInfo) => void
+  onThemeChange?: (theme: TailwindReactMusicPlayerTheme) => void
   onAudioListsChange?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
-  onPlayModeChange?: (playMode: ReactJkMusicPlayerPlayMode) => void
-  onModeChange?: (mode: ReactJkMusicPlayerMode) => void
+  onPlayModeChange?: (playMode: TailwindReactMusicPlayerPlayMode) => void
+  onModeChange?: (mode: TailwindReactMusicPlayerMode) => void
   onAudioListsPanelChange?: (panelVisible: boolean) => void
   onAudioPlayTrackChange?: (fromIndex: number, endIndex: number) => void
   onAudioListsSortEnd?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => void
   showDownload?: boolean
   showPlay?: boolean
@@ -435,23 +435,23 @@ export interface ReactJkMusicPlayerProps {
   getAudioInstance?: (instance: HTMLAudioElement) => void
   autoHiddenCover?: boolean
   onBeforeAudioDownload?: (
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => Promise<TransformedDownloadAudioInfo>
   clearPriorAudioLists?: boolean
   autoPlayInitLoadPlayList?: boolean
   spaceBar?: boolean
   onBeforeDestroy?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => Promise<void>
   onDestroyed?: (
     currentPlayId: string,
-    audioLists: Array<ReactJkMusicPlayerAudioList>,
-    audioInfo: ReactJkMusicPlayerAudioInfo,
+    audioLists: Array<TailwindReactMusicPlayerAudioList>,
+    audioInfo: TailwindReactMusicPlayerAudioInfo,
   ) => Promise<void>
   customDownloader?: (downloadAudioInfo: TransformedDownloadAudioInfo) => void
-  audioTitle?: ((audioInfo: ReactJkMusicPlayerAudioInfo) => string) | string
+  audioTitle?: ((audioInfo: TailwindReactMusicPlayerAudioInfo) => string) | string
 }
 
 export interface TransformedDownloadAudioInfo {
@@ -460,7 +460,7 @@ export interface TransformedDownloadAudioInfo {
   mimeType?: string
 }
 
-export interface ReactJkMusicPlayerInstance extends HTMLAudioElement {
+export interface TailwindReactMusicPlayerInstance extends HTMLAudioElement {
   destroy: () => void
 }
 ```

@@ -1,4 +1,4 @@
-# react-jinke-music-player
+# tailwind-react-music-player
 a example
 
 ```

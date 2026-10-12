@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { FaHeadphonesIcon } from '../components/Icon'
-import { ReactJkMusicPlayerCustomLocale } from '../types'
+import { TailwindReactMusicPlayerCustomLocale } from '../types'
 
-const zh_CN: ReactJkMusicPlayerCustomLocale = {
+const zh_CN: TailwindReactMusicPlayerCustomLocale = {
   playModeText: {
     order: '顺序播放',
     orderLoop: '列表循环',

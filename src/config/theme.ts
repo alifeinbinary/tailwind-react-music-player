@@ -1,8 +1,8 @@
-import { ReactJkMusicPlayerTheme } from '../types'
+import { TailwindReactMusicPlayerTheme } from '../types'
 
 export const THEME: Record<
   'LIGHT' | 'DARK' | 'AUTO',
-  ReactJkMusicPlayerTheme
+  TailwindReactMusicPlayerTheme
 > = {
   LIGHT: 'light',
   DARK: 'dark',

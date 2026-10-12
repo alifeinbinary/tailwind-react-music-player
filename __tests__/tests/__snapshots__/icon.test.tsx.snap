@@ -2,7 +2,7 @@
 
 exports[`Player custom icon test > should render custom icon 1`] = `
 <div
-  class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme"
+  class="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme"
   tabindex="-1"
 >
   <div
@@ -343,17 +343,17 @@ exports[`Player custom icon test > should render custom icon 1`] = `
 
 exports[`Player custom icon test > should render custom icon in mobile mode 1`] = `
 <div
-  class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme"
+  class="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme"
   tabindex="-1"
 >
   <div
-    class="react-jinke-music-player-mobile w-full fixed z-999 inset-0 p-5 text-white flex flex-col justify-between bg-(--rjmp-panel-bg-mobile) overflow-hidden [&>.group]:flex-auto default-bg"
+    class="tailwind-react-music-player-mobile w-full fixed z-999 inset-0 p-5 text-white flex flex-col justify-between bg-(--rjmp-panel-bg-mobile) overflow-hidden [&>.group]:flex-auto default-bg"
   >
     <div
-      class="react-jinke-music-player-mobile-play-model-tip fixed left-0 top-0 w-full h-8.75 leading-8.75 bg-(--rjmp-primary-color) text-white px-5 z-1000 shadow-[0_2px_20px_rgba(0,0,0,0.1)] translate-y-[-105%] transition-transform duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) flex items-center"
+      class="tailwind-react-music-player-mobile-play-model-tip fixed left-0 top-0 w-full h-8.75 leading-8.75 bg-(--rjmp-primary-color) text-white px-5 z-1000 shadow-[0_2px_20px_rgba(0,0,0,0.1)] translate-y-[-105%] transition-transform duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) flex items-center"
     >
       <span
-        class="react-jinke-music-player-mobile-play-model-tip-title mr-3 [&_svg]:animate-none! [&_svg]:align-text-bottom! [&_.loop-btn]:flex max-md:[&_svg]:text-[19px] max-md:[&_svg]:text-white!"
+        class="tailwind-react-music-player-mobile-play-model-tip-title mr-3 [&_svg]:animate-none! [&_svg]:align-text-bottom! [&_.loop-btn]:flex max-md:[&_svg]:text-[19px] max-md:[&_svg]:text-white!"
       >
         <span
           class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer loop-btn"
@@ -365,22 +365,22 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
         </span>
       </span>
       <span
-        class="react-jinke-music-player-mobile-play-model-tip-text text-sm"
+        class="tailwind-react-music-player-mobile-play-model-tip-text text-sm"
       >
         Play in order
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-header group w-full flex justify-center items-center animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] relative"
+      class="tailwind-react-music-player-mobile-header group w-full flex justify-center items-center animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] relative"
     >
       <div
-        class="react-jinke-music-player-mobile-header-title text-center text-[20px] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) px-7.5 truncate"
+        class="tailwind-react-music-player-mobile-header-title text-center text-[20px] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) px-7.5 truncate"
         title="audioName"
       >
         audioName
       </div>
       <div
-        class="react-jinke-music-player-mobile-header-right text-(--rjmp-base-color) cursor-pointer absolute right-0 [&_svg]:text-[25px]"
+        class="tailwind-react-music-player-mobile-header-right text-(--rjmp-base-color) cursor-pointer absolute right-0 [&_svg]:text-[25px]"
       >
         <div>
           1
@@ -388,15 +388,15 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
       </div>
     </div>
     <div
-      class="react-jinke-music-player-mobile-singer text-center group animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] py-3 [@media_(max-width:320px)]:p-0"
+      class="tailwind-react-music-player-mobile-singer text-center group animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] py-3 [@media_(max-width:320px)]:p-0"
     >
       <span
-        class="react-jinke-music-player-mobile-singer-name relative text-sm transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
+        class="tailwind-react-music-player-mobile-singer-name relative text-sm transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)"
         title=""
       />
     </div>
     <div
-      class="react-jinke-music-player-mobile-switch text-center group animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
+      class="tailwind-react-music-player-mobile-switch text-center group animate-[fromDown_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <span
         class="group [.player-content_&]:cursor-pointer [.player-content_&]:text-center [.player-content_&]:flex-1 [.player-content_&]:mx-2.5 max-md:[.player-content_&]:mx-1.5 [@media_(max-width:320px)]:[.player-content_&]:mx-1 [.player-content_&]:inline-flex [.player-content_&]:items-center [.player-content_&]:justify-center [.player-content_&>svg]:cursor-pointer theme-switch [.player-content_&_.rc-switch]:bg-transparent"
@@ -417,7 +417,7 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-cover text-center w-75 h-75 rounded-[50%] border-[5px] border-black/20 shadow-[0_0_1px_3px_rgba(0,0,0,0.1)] my-3.75 mx-auto animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] overflow-hidden [transition:box-shadow,border_var(--rjmp-animate-time)_var(--rjmp-animate-type)] [@media_(max-width:320px)]:w-57.5 [@media_(max-width:320px)]:h-57.5 [@media_(max-width:320px)]:my-2.5"
+      class="tailwind-react-music-player-mobile-cover text-center w-75 h-75 rounded-[50%] border-[5px] border-black/20 shadow-[0_0_1px_3px_rgba(0,0,0,0.1)] my-3.75 mx-auto animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] overflow-hidden [transition:box-shadow,border_var(--rjmp-animate-time)_var(--rjmp-animate-type)] [@media_(max-width:320px)]:w-57.5 [@media_(max-width:320px)]:h-57.5 [@media_(max-width:320px)]:my-2.5"
     >
       <img
         alt="cover"
@@ -426,7 +426,7 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
       />
     </div>
     <div
-      class="react-jinke-music-player-mobile-progress group justify-around flex items-center animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
+      class="tailwind-react-music-player-mobile-progress group justify-around flex items-center animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <span
         class="current-time inline-flex w-13.75 text-xs text-(--rjmp-base-color) transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) mr-1.25"
@@ -434,7 +434,7 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
         00:00
       </span>
       <span
-        class="react-jinke-music-player-mobile-progress-bar relative flex w-full"
+        class="tailwind-react-music-player-mobile-progress-bar relative flex w-full"
       >
         <div
           class="progress-load-bar absolute w-0 h-[calc(var(--rjmp-progress-bar-height)-1px)] [transition:width,background-color_var(--rjmp-animate-time)_var(--rjmp-animate-type)] left-0 top-1.25 z-77"
@@ -475,7 +475,7 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-toggle text-center group py-4.25 animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] [&_.group]:cursor-pointer [&_.group_svg]:text-10 [@media_(max-width:320px)]:py-1 [@media_(max-width:320px)]:[&>.group_svg]:text-8"
+      class="tailwind-react-music-player-mobile-toggle text-center group py-4.25 animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards] [&_.group]:cursor-pointer [&_.group_svg]:text-10 [@media_(max-width:320px)]:py-1 [@media_(max-width:320px)]:[&>.group_svg]:text-8"
     >
       <span
         class="group prev-audio"
@@ -503,7 +503,7 @@ exports[`Player custom icon test > should render custom icon in mobile mode 1`] 
       </span>
     </div>
     <div
-      class="react-jinke-music-player-mobile-operation group animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
+      class="tailwind-react-music-player-mobile-operation group animate-[fromTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]"
     >
       <ul
         class="items flex justify-around items-center"

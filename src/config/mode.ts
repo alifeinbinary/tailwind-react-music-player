@@ -1,6 +1,6 @@
-import { ReactJkMusicPlayerMode } from '../types'
+import { TailwindReactMusicPlayerMode } from '../types'
 
-export const MODE: Record<'FULL' | 'MINI', ReactJkMusicPlayerMode> = {
+export const MODE: Record<'FULL' | 'MINI', TailwindReactMusicPlayerMode> = {
   FULL: 'full',
   MINI: 'mini',
 }

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Locale test > should render default locale with en_US 1`] = `
-<ReactJkMusicPlayer
+<TailwindReactMusicPlayer
   audioLists={[]}
   autoHiddenCover={false}
   autoPlay={true}
@@ -105,11 +105,11 @@ exports[`Locale test > should render default locale with en_US 1`] = `
     containerInfo={
       <body>
         <div
-          class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
+          class="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
           tabindex="-1"
         >
           <div
-            class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
+            class="tailwind-react-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             style="left: 0px; top: 0px; transform: translate(0px,0px);"
             tabindex="-1"
           >
@@ -273,7 +273,7 @@ exports[`Locale test > should render default locale with en_US 1`] = `
     }
   >
     <div
-      className="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
+      className="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
       tabIndex={-1}
     >
       <Draggable
@@ -324,7 +324,7 @@ exports[`Locale test > should render default locale with en_US 1`] = `
           transform={null}
         >
           <div
-            className="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
+            className="tailwind-react-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             onMouseDown={[Function]}
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
@@ -692,11 +692,11 @@ exports[`Locale test > should render default locale with en_US 1`] = `
       />
     </div>
   </Portal>
-</ReactJkMusicPlayer>
+</TailwindReactMusicPlayer>
 `;
 
 exports[`Locale test > should render locale with zh_CN 1`] = `
-<ReactJkMusicPlayer
+<TailwindReactMusicPlayer
   audioLists={[]}
   autoHiddenCover={false}
   autoPlay={true}
@@ -800,11 +800,11 @@ exports[`Locale test > should render locale with zh_CN 1`] = `
     containerInfo={
       <body>
         <div
-          class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
+          class="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
           tabindex="-1"
         >
           <div
-            class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
+            class="tailwind-react-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             style="left: 0px; top: 0px; transform: translate(0px,0px);"
             tabindex="-1"
           >
@@ -965,11 +965,11 @@ exports[`Locale test > should render locale with zh_CN 1`] = `
           />
         </div>
         <div
-          class="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
+          class="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
           tabindex="-1"
         >
           <div
-            class="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
+            class="tailwind-react-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             style="left: 0px; top: 0px; transform: translate(0px,0px);"
             tabindex="-1"
           >
@@ -1133,7 +1133,7 @@ exports[`Locale test > should render locale with zh_CN 1`] = `
     }
   >
     <div
-      className="react-jinke-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
+      className="tailwind-react-music-player-main touch-none font-[inherit] focus:outline-none dark-theme text-class-name"
       tabIndex={-1}
     >
       <Draggable
@@ -1184,7 +1184,7 @@ exports[`Locale test > should render locale with zh_CN 1`] = `
           transform={null}
         >
           <div
-            className="react-jinke-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
+            className="tailwind-react-music-player fixed w-(--rjmp-player-size) h-(--rjmp-player-size) z-999 max-md:w-(--rjmp-player-size-mobile) max-md:h-(--rjmp-player-size-mobile) focus:outline-none react-draggable"
             onMouseDown={[Function]}
             onMouseUp={[Function]}
             onTouchEnd={[Function]}
@@ -1552,5 +1552,5 @@ exports[`Locale test > should render locale with zh_CN 1`] = `
       />
     </div>
   </Portal>
-</ReactJkMusicPlayer>
+</TailwindReactMusicPlayer>
 `;

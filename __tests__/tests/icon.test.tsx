@@ -1,7 +1,7 @@
 import { mount } from 'enzyme'
 import React from 'react'
 import lyric from '../../example/lyric'
-import ReactJkMusicPlayer from '../../src'
+import TailwindReactMusicPlayer from '../../src'
 
 const PauseIcon = () => <div>1</div>
 const PlayIcon = () => <div>1</div>
@@ -26,7 +26,7 @@ const PackUpPanelMobileIcon = () => <div>1</div>
 const EmptyIcon = () => <div>1</div>
 
 const createPlayer = (props?: any) => (
-  <ReactJkMusicPlayer
+  <TailwindReactMusicPlayer
     mode="full"
     audioLists={[
       {
@@ -68,13 +68,13 @@ const createPlayer = (props?: any) => (
 
 describe('Player custom icon test', () => {
   it('should render custom icon', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(createPlayer())
+    const wrapper = mount<TailwindReactMusicPlayer>(createPlayer())
     wrapper.find('.audio-lists-btn').simulate('click')
     expect(wrapper.render()).toMatchSnapshot()
   })
 
   it('should render custom icon in mobile mode', () => {
-    const wrapper = mount<ReactJkMusicPlayer>(createPlayer())
+    const wrapper = mount<TailwindReactMusicPlayer>(createPlayer())
     wrapper.setState({ isMobile: true })
     expect(wrapper.render()).toMatchSnapshot()
   })
