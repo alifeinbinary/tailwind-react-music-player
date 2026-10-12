@@ -19,7 +19,7 @@ const styles = {
   glass:
     'trmp:absolute trmp:inset-0 trmp:-z-10 trmp:scale-[3] trmp:bg-cover trmp:bg-center trmp:blur-[80px]',
   count:
-    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-full trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
+    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-[50%] trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
 }
 
 /** Bottom-bar desktop player panel (mode full, desktop layout). */

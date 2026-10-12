@@ -9,3 +9,6 @@ LICENCE
 netlify.toml
 yarn-error.log
 .DS_Store
+
+# generated files
+src/components/icons/icons.tsx

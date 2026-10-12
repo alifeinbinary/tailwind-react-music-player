@@ -78,7 +78,7 @@ export function PlaylistPanel({
       requestAnimationFrame(() => {
         listRef.current
           ?.querySelectorAll<HTMLElement>('[data-track-index]')
-        [to]?.focus()
+          [to]?.focus()
       })
     },
     [actions, state.tracks.length],

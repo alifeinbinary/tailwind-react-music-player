@@ -2,9 +2,9 @@ import classnames from 'classnames'
 import type { ResolvedTheme } from '../../types'
 
 const styles = {
-  base: 'trmp:relative trmp:inline-flex trmp:items-center trmp:rounded-full trmp:border trmp:border-panel-muted trmp:text-[11px] trmp:leading-none trmp:text-panel-muted trmp:px-1 trmp:py-0.5 trmp:gap-1',
+  base: 'trmp:relative trmp:inline-flex trmp:items-center trmp:rounded-[50%] trmp:border trmp:border-panel-muted trmp:text-[11px] trmp:leading-none trmp:text-panel-muted trmp:px-1 trmp:py-0.5 trmp:gap-1',
   thumb:
-    'trmp:inline-block trmp:rounded-full trmp:px-1.5 trmp:py-0.5 trmp:text-panel-muted trmp:data-[on=true]:bg-primary trmp:data-[on=true]:text-primary-contrast',
+    'trmp:inline-block trmp:rounded-[50%] trmp:px-1.5 trmp:py-0.5 trmp:text-panel-muted trmp:data-[on=true]:bg-primary trmp:data-[on=true]:text-primary-contrast',
 }
 
 /** Props for {@link ThemeSwitch}. */

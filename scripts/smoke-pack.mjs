@@ -30,11 +30,7 @@ try {
   // build must be fresh so dist/ matches what would be published
   run('yarn', ['build'], root)
 
-  const packLine = out(
-    'npm',
-    ['pack', '--pack-destination', tmp],
-    root,
-  ).trim()
+  const packLine = out('npm', ['pack', '--pack-destination', tmp], root).trim()
   const tarball = join(tmp, packLine.split('\n').at(-1))
   console.warn('tarball:', tarball)
 

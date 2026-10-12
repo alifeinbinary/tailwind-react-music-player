@@ -22,8 +22,12 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn lint
       - run: yarn typecheck
+      - run: yarn playwright install --with-deps chromium
       - run: yarn test
       - run: yarn build
+      - run: yarn smoke:import
+      - run: yarn check:package
+      - run: yarn smoke:pack
       - run: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

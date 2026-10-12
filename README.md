@@ -1,691 +1,357 @@
-<p align="center">
-  <img alt="logo" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/logo.png?raw=true" width="100" max-width="100%">
-</p>
+# tailwind-react-music-player
 
-<h1 align="center">
-tailwind-react-music-player
-</h1>
+An accessible, themeable HTML5 music player component for React, styled with Tailwind CSS — with a headless `useMusicPlayer` hook if you want to bring your own UI.
 
-<h4 align="center">
-:musical_note: Maybe the best beautiful HTML5 responsive player component for react : )
-</h4>
+[![npm version](https://img.shields.io/npm/v/tailwind-react-music-player.svg)](https://www.npmjs.com/package/tailwind-react-music-player) [![CI](https://github.com/alifeinbinary/tailwind-react-music-player/workflows/CI/badge.svg)](https://github.com/alifeinbinary/tailwind-react-music-player/actions) [![bundle size](https://img.shields.io/bundlephobia/minzip/tailwind-react-music-player)](https://bundlephobia.com/package/tailwind-react-music-player) [![license](https://img.shields.io/npm/l/tailwind-react-music-player.svg)](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/LICENCE) [![TypeScript](https://img.shields.io/badge/TypeScript-ready-blue.svg)](https://github.com/alifeinbinary/tailwind-react-music-player)
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
-    <img src="https://img.shields.io/npm/dm/tailwind-react-music-player.svg?style=flat-square" alt="npm"/>
-  </a>
-  <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
-    <img src="https://img.shields.io/npm/l/tailwind-react-music-player.svg?style=flat-square" alt="npm"/>
-  </a>
-  <a href="https://github.com/alifeinbinary/react-music-player/actions">
-    <img src="https://github.com/alifeinbinary/react-music-player/workflows/CI/badge.svg" />
-  </a>
-   <a href="https://badge.fury.io/js/tailwind-react-music-player" title="npm">
-    <img src="https://img.shields.io/npm/v/tailwind-react-music-player.svg?style=flat-square" alt="npm version"/>
-  </a>
-  <a href="https://lgtm.com/projects/g/alifeinbinary/react-music-player/context:javascript">
-    <img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/alifeinbinary/react-music-player.svg?logo=lgtm&logoWidth=18"/>
-  </a>
-  <a href="https://codecov.io/gh/alifeinbinary/react-music-player">
-    <img src="https://codecov.io/gh/alifeinbinary/react-music-player/branch/master/graph/badge.svg" />
-  </a>
-  <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/tailwind-react-music-player?style=flat-square">
-  <a href="https://david-dm.org/alifeinbinary/react-music-player" title="dependencies status"><img src="https://david-dm.oalifeinbinary666/react-music-player/status.svg"/></a>
-  <a href="https://david-dm.org/alifeinbinary/react-music-player?type=dev" title="devDependencies status"><img src="https://david-dm.oalifeinbinary666/react-music-player/dev-status.svg"/></a>
-  <a href="https://github.com/semantic-release/semantic-release" title="semantic-release">
-    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic release"/>
-  </a>
-  <a href="https://visitor-badge.glitch.me" title="visitor">
-    <img src="https://visitor-badge.glitch.me/badge?page_id=alifeinbinary.react-music-player" alt="visitor"/>
-  </a>
-</p>
+![demo](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/example.gif?raw=true)
 
-<p align="center">
-  <a href="https://github.com/alifeinbinary/react-music-player/blob/master/CN.md">
-    中文文档
-  </a>
-</p>
+## Features
 
-## :package: Installation
+- Full player UI: mini controller, fixed bottom panel, mobile layout, playlist drawer, floating lyric overlay
+- Headless `useMusicPlayer` hook — same engine, your own markup
+- Accessible: labelled controls, keyboard shortcuts, focus management, reduced-motion support
+- Themeable: `dark` / `light` / `auto` themes, runtime `--trmp-*` CSS custom properties, per-slot icon overrides
+- Playlist management: drag-to-sort (SortableJS), remove, reorder, list updates that preserve the current track
+- Lyrics: LRC parsing and sync (`parseLrc` is exported if you roll your own)
+- Volume fade in/out, perceptual volume mapping, persistence to `localStorage`
+- Media Session API integration (lock-screen / hardware-key controls)
+- Typed end-to-end; the public API surface is `src/types.ts`
 
-using `yarn` :
+## Requirements
+
+- **React >= 19** (`MusicPlayer` takes `ref` as a plain prop — a React 19 feature)
+- **ESM-only** — no CJS or UMD build; CJS consumers must `import()` or go through a bundler
+- **Node >= 20.19** for the build tooling (the published bundle has no runtime Node dependency)
+
+## Install
 
 ```bash
 yarn add tailwind-react-music-player
+# or
+npm install tailwind-react-music-player
 ```
 
-using `npm` :
-
-```bash
-npm install tailwind-react-music-player --save
+```tsx
+import MusicPlayer from 'tailwind-react-music-player'
+import 'tailwind-react-music-player/styles.css' // required — styles are a separate entry point
 ```
 
-## :framed_picture: Screenshots
+## Quick start
 
-> mini mode <br/>
-
-![mini mode](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/mini.png?raw=true)
-
-> Light Theme <br/>
-
-![light theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/light-theme.png?raw=true)
-
-> Dark Theme <br/>
-
-![dark theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/dark-theme.png?raw=true)
-
-> mobile <br/>
-
-![mobile](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/mobile.jpg?raw=true)
-
-## :sparkles: Feature list
-
-- [x] Beautiful ui and animation
-- [x] Responsive
-- [x] Support theme switch
-- [x] Support typescript (d.ts)
-- [x] Support lyric
-- [x] Support audio list sortable
-- [x] Play list
-- [x] Full player features
-- [x] [Server-Side Rendering](#bulb-server-side-rendering)
-- [x] [Import in Browser](#bulb-import-in-browser)
-- [x] [Complete hook function](#clipboard-api)
-- [x] [Custom operation ui](#bulb-custom-operation-ui)
-- [x] [Custom downloader](#bulb-custom-downloader)
-- [x] [Support destroy player](#bulb-destroy-player)
-- [x] [Support glass background](#bulb-glass-bg)
-- [x] [Media session](#bulb-media-session) (v4.11.0)
-- [x] [Support internationalization](#bulb-internationalization) (v4.11.0)
-- [x] [Customize theme](#bulb-customize-theme) (v4.11.0)
-- [x] [Customize audio duration](#bulb-customize-audio-duration) (v4.13.0)
-- [x] [Customize player icon](#bulb-customize-player-icon) (v4.17.0)
-- [x] [Follow the theme of the system](#bulb-follow-the-theme-of-the-system) (v4.16.0)
-- [x] [Audio volume fadeIn/fadeOut](#bulb-audio-volume-fade-in-and-fade-out) (v4.20.0)
-
-## :eyes: Example
-
-> live example :
-
-- [https://alifeinbinary.github.io/react-music-player/](httpsalifeinbinary666.github.io/react-music-player/)
-
-> local example : [http://localhost:8081/](http://localhost:8081/)
-
-[Source Code](https://github.com/alifeinbinary/react-music-player/blob/master/playground/example.tsx)
-
-## :memo: Usage
-
-```jsx
-import React from 'react'
-import ReactDOM from 'react-dom'
-import TailwindReactMusicPlayer from 'tailwind-react-music-player'
+```tsx
+import MusicPlayer from 'tailwind-react-music-player'
 import 'tailwind-react-music-player/styles.css'
 
-ReactDOM.render(
-  <TailwindReactMusicPlayer {...options} />,
-  document.getElementById('root'),
-)
-```
-
-## :clipboard: API
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| className | `string` | `-` | Additional CSS class for the root DOM node |
-| audioLists | [AudioListProps[]](#bulb-audiolistprops) | `-` | [Detail](#bulb-audiolistprops) |
-| theme | `light` \| `dark` \| `auto` | `dark` | color of the music player theme `dark`, `light`, `auto (follow system)` | `light` |
-| locale | `zh_CN` \| `en_US` \| [CustomLocale](#bulb-internationalization) | `en_US` | [Detail](#bulb-internationalization) | `light` |
-| icon | [Customize player icon](#bulb-customize-player-icon) | `-` | [Customize player icon](#bulb-customize-player-icon) | `light` |
-| defaultPosition | `object` | `{top:0,left:0}` | audio controller initial position with `left,top,right,and bottom` |
-| playModeShowTime | `number` | `600` | play mode toggle show time (ms) |
-| bounds | `object`,`number` | `body` | specifies movement boundaries. Accepted values: `parent` restricts movement within the node's offsetParent (nearest node with position relative or absolute), or a selector, restricts movement within the targeted node An object with `left, top, right, and bottom` properties. These indicate how far in each direction the draggable can be moved. |
-| preload | `boolean`,`string` | `false` | Whether to load audio immediately after the page loads. can be set to `auto | metadata | none` `true | false`if`preload=true` preload="auto" |
-| remember | `boolean` | `false` | The next time you access the player, do you keep the last state |
-| glassBg | `boolean` | `false` | Whether the player's background displays frosted glass effect |
-| remove | `boolean` | `true` | The Audio Can be deleted |
-| defaultPlayIndex | `number` | `0` | Default play index of the audio player |
-| playIndex | `number` | `0` | play index of the audio player |
-| defaultPlayMode | `string` | `order` | default play mode of the audio player options can be set to `order`,`orderLoop`,`singleLoop`,`shufflePlay` or omitted |
-| mode | `string` | `mini` | audio theme switch checkedText can be set to `mini`,`full` or omitted |
-| once | `boolean` | `false` | The default audioPlay handle function will be played again after each pause, If you only want to trigger it once, you can set 'true' |
-| autoPlay | `boolean` | `true` | Whether the audio is played after loading is completed. mobile devices are invalid [autoplay-policy-changes](https://developers.google.com/web/updates/2017/09/autoplay-policy-changes) |
-| toggleMode | `boolean` | `true` | Whether you can switch between two modes, full => mini or mini => full |
-| drag | `boolean` | `true` | audio controller is can be drag of the "mini" mode |
-| seeked | `boolean` | `true` | Whether you can drag or click the progress bar to play in the new progress. |
-| showMiniModeCover | `boolean` | `true` | audio cover is show of the "mini" mode |
-| showMiniProcessBar | `boolean` | `false` | audio progress circle bar is show of the "mini" mode |
-| showProgressLoadBar | `boolean` | `true` | Displays the audio load progress bar. |
-| showPlay | `boolean` | `true` | play button display of the audio player panel |
-| showReload | `boolean` | `true` | reload button display of the audio player panel |
-| showDownload | `boolean` | `true` | download button display of the audio player panel |
-| showPlayMode | `boolean` | `true` | play mode toggle button display of the audio player panel |
-| showThemeSwitch | `boolean` | `true` | theme toggle switch display of the audio player panel |
-| showLyric | `boolean` | `false` | audio lyric button display of the audio player panel |
-| showMediaSession | `boolean` | `false` | [https://web.dev/media-session/](https://web.dev/media-session/) |
-| lyricClassName | `string` | `-` | audio lyric class name |
-| extendsContent | `ReactNode \| boolean \| string` | `-` | Extensible custom content like `<><button>button1</button> <button>button2</button></>` |
-| defaultVolume | `number` | `1` | default volume of the audio player , range `0`-`1` |
-| loadAudioErrorPlayNext | `boolean` | `true` | Whether to try playing the next audio when the current audio playback fails |
-| responsive | `boolean` | `true` | Whether to turn on the response mode, if set false, audio controller always show desktop ui |
-| onAudioDownload | `function(audioInfo)` | `-` | audio is downloaded handle |
-| onAudioPlay | `function(audioInfo)` | `-` | audio play handle |
-| onAudioPause | `function(audioInfo)` | `-` | audio pause handle |
-| onAudioSeeked | `function(audioInfo)` | `-` | When the user has moved/jumped to a new location in audio handle |
-| onAudioVolumeChange | `function(volume)` | `-` | When the volume has changed handle min = 0.0 max = 1.0 |
-| onAudioEnded | `function(currentPlayId,audioLists,audioInfo)` | `-` | The single song is ended handle |
-| onAudioAbort | `function(currentPlayId, audioLists, audioInfo)` | `-` | audio load abort The target event like {...,audioName:xx,audioSrc:xx,playMode:xx} |
-| onAudioProgress | `function(audioInfo)` | `-` | audio play progress handle |
-| onAudioError | `function(errMsg,currentPlayId, audioLists, audioInfo)` | `-` | audio load failed error handle |
-| onAudioReload | `function(audioInfo)` | `-` | audio reload handle |
-| onAudioListsChange | `function(currentPlayId,audioLists,audioInfo)` | `-` | audio lists change handle |
-| onAudioPlayTrackChange | `function(currentPlayId,audioLists,audioInfo)` | `-` | audio current play track change handle |
-| onAudioPlayModeChange | `function(playMode)` | `-` | play mode change handle |
-| onAudioListsPanelChange | `function(panelVisible)` | `-` | audio lists panel change handle |
-| onThemeChange | `function(theme)` | `-` | theme change handle |
-| onModeChange | `function(mode)` | `-` | mode change handle |
-| onAudioListsSortEnd | `function(oldIndex,newIndex)` | `-` | audio lists sort end handle, use [SortableJS](https://github.com/SortableJS/Sortable) |
-| onAudioLyricChange | `function(lineNum, currentLyric)` | `-` | audio lyric change handle |
-| getContainer | `() => HTMLElement` \| `Selectors` | `document.body` | Return the mount node for Music player |
-| getAudioInstance | `(instance: HTMLAudioElement) => void` | `-` | get origin audio element instance , you can use it do everything |
-| autoHiddenCover | `boolean` | `false` | Auto hide the cover photo if no cover photo is available |
-| onBeforeAudioDownload | `(audioInfo: TailwindReactMusicPlayerAudioInfo) => Promise<TransformedDownloadAudioInfo>` | `-` | transform download audio info before |
-| clearPriorAudioLists | `boolean` | `false` | Replace a new playlist with the first loaded playlist and reset playIndex to 0 |
-| autoPlayInitLoadPlayList | `boolean` | `false` | Play your new play list right after your new play list is loaded turn false. |
-| spaceBar | `boolean` | `false` | Play and pause audio through space bar （Desktop effective）. |
-| showDestroy | `boolean` | `false` | Destroy player button display |
-| onBeforeDestroy | `function(currentPlayId,audioLists,audioInfo)` | `-` | custom destroy handler before |
-| onDestroyed | `function(currentPlayId,audioLists,audioInfo)` | `-` | player destroyed handle |
-| customDownloader | `function(downloadInfo: TransformedDownloadAudioInfo)` | `-` | custom download handle |
-| onCoverClick | `function(mode,audioLists,audioInfo)` | `-` | audio cover clicked handle |
-| onPlayIndexChange | `function(playIndex)` | `-` | audio play index change handle |
-| quietUpdate | `boolean` | `false` | [Detail](#bulb-quiet-update) |
-| renderAudioTitle | `(audioInfo, isMobile) => ReactNode` | `-` | use `locale.audioTitle` to set `audio` tag title, the api can render custom jsx element for display |
-| mobileMediaQuery | `string` | `(max-width: 768px) and (orientation : portrait)` | custom mobile media query string, eg use the mobile version UI on iPad. <https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries> |
-| volumeFade | `{ fadeIn: number(ms), fadeOut: number(ms) }` | `-` | audio fade in and out. [Detail](#bulb-audio-volume-fade-in-and-fade-out) |
-| sortableOptions | `object` | `{swap: true, animation: 100, swapClass: 'audio-lists-panel-sortable-highlight-bg'}` | [SortableJs Options](https://github.com/SortableJS/Sortable#options) |
-| restartCurrentOnPrev | `boolean` | `false` | Restarts the current track when trying to play previous song, if the current time of the song is more than 1 second |
-
-## :bulb: Custom operation ui
-
-Support feature:
-
-- `play`
-- `pause`
-- `reload`
-- `change play time`
-- `change playback rate`
-- `change volume`
-- `destroy audio player`
-- `toggle play`
-- `clear audio list`
-- `toggle play`
-- `play next audio`
-- `play prev audio`
-- `play audio by custom play index`
-- `update play index`
-- [SortableJS methods](https://github.com/SortableJS/Sortable#methods)
-
-```jsx
-class App extends React.Component {
-  constructor() {
-    this.audioInstance = null
-  }
-  render() {
-    return (
-      <>
-        <TailwindReactMusicPlayer
-          getAudioInstance={(instance) => {
-            this.audioInstance = instance
-          }}
-        />
-        <button onClick={() => this.audioInstance.play()}>play</button>
-        <button onClick={() => this.audioInstance.pause()}>pause</button>
-        <button onClick={() => this.audioInstance.load()}>reload</button>
-        <button onClick={() => (this.audioInstance.currentTime = 40)}>
-          change current play time
-        </button>
-        <button onClick={() => (this.audioInstance.playbackRate = 2)}>
-          change play back rate
-        </button>
-        <button onClick={() => (this.audioInstance.volume = 0.2)}>
-          change volume
-        </button>
-        <button onClick={() => this.audioInstance.destroy()}>
-          destroy player
-        </button>
-        <button onClick={this.audio.togglePlay}>toggle play</button>
-        <button onClick={this.audio.clear}>clear audio lists</button>
-        <button onClick={this.audio.playNext}>play next</button>
-        <button onClick={this.audio.playPrev}>play prev</button>
-        <button onClick={() => this.audio.playByIndex(1)}>play by index</button>
-        <button onClick={() => this.audio.updatePlayIndex(1)}>
-          update play index
-        </button>
-      </>
-    )
-  }
-}
-```
-
-## :bulb: Glass bg
-
-```jsx
-<TailwindReactMusicPlayer glassBg />
-```
-
-<p>
-<img alt="glass-1" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/glass-1.png?raw=true" width="200" max-width="49%">
-<img alt="glass-2" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/glass-2.png?raw=true" width="200" max-width="49%">
-</p>
-
-## :bulb: Custom downloader
-
-Default use [downloadjs](https://github.com/rndme/download), you can use any download library
-
-eg. <https://www.npmjs.com/package/file-saver>, or use `download` attribute
-
-```jsx
-const customDownloader = (downloadInfo) => {
-  const link = document.createElement('a')
-  link.href = downloadInfo.src // a.mp3
-  link.download = downloadInfo.filename || 'test'
-  document.body.appendChild(link)
-  link.click()
-}
-
-;<TailwindReactMusicPlayer
-  audioLists={[{ src: 'a.mp3' }]}
-  customDownloader={customDownloader}
-/>
-
-// use onBeforeAudioDownload
-const onBeforeAudioDownload = () => {
-  return Promise.resolve({
-    src: '1.mp3',
-  })
-}
-
-const customDownloader = (downloadInfo) => {
-  console.log(downloadInfo.src) // 1.mp3
-}
-
-;<TailwindReactMusicPlayer
-  customDownloader={customDownloader}
-  onBeforeAudioDownload={onBeforeAudioDownload}
-/>
-```
-
-## :bulb: Destroy player
-
-```jsx
-const onBeforeDestroy = (currentPlayId, audioLists, audioInfo) => {
-  return new Promise((resolve, reject) => {
-    // your custom validate
-    if (window.confirm('Are you confirm destroy the player?')) {
-      // if resolve, player destroyed
-      resolve()
-    } else {
-      // if reject, skip.
-      reject()
-    }
-  })
-}
-
-const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
-  console.log('onDestroyed:', currentPlayId, audioLists, audioInfo)
-}
-
-;<TailwindReactMusicPlayer
-  showDestroy
-  onBeforeDestroy={onBeforeDestroy}
-  onDestroyed={onDestroyed}
-/>
-```
-
-## :bulb: Media session
-
-> <https://web.dev/media-session/>
-
-```jsx
-// so cool, so easy !!!
-<TailwindReactMusicPlayer showMediaSession />
-```
-
-<img src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/media-session-destop.png" max-width="100%"/>
-<img src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/media-session-mobile.jpeg" width="400" max-width="100%"/>
-
-## :bulb: Internationalization
-
-> Version: 4.11.0
-
-[Source](https://github.com/alifeinbinary/react-music-player/blob/master/src/locale/index.js)
-
-```jsx
-import TailwindReactMusicPlayer from 'tailwind-react-music-player'
-// Two languages are provided by default
-// one of zh_CN | en_US
-<TailwindReactMusicPlayer locale={TailwindReactMusicPlayer.locale.zh_CN}/>
-// <TailwindReactMusicPlayer locale={'en_US'}/>
-
-// Custom override
-const customLocale = {
-  playModeText: {
-    order: '',
-    orderLoop: '',
-    singleLoop: '',
-    shufflePlay: ''
+const audioLists = [
+  {
+    name: 'Despacito',
+    singer: 'Luis Fonsi',
+    cover: 'https://example.com/cover.jpg',
+    musicSrc: 'https://example.com/despacito.mp3',
+    // musicSrc can also resolve lazily:
+    // musicSrc: () => fetch('/api/sign').then((r) => r.text()),
+    lyric: '[00:00.00]Line one of the lyric',
   },
-  openText: '',
-  closeText: '',
-  emptyText: '',
-  clickToPlayText: '',
-  clickToPauseText: '',
-  nextTrackText: '',
-  previousTrackText: '',
-  reloadText: '',
-  volumeText: '',
-  playListsText: '',
-  toggleLyricText: '',
-  toggleMiniModeText: '',
-  destroyText: '',
-  downloadText: '',
-  lightThemeText: '',
-  darkThemeText: '',
-  switchThemeText: '',
-  removeAudioListsText: '',
-  controllerTitle: '',
-  emptyLyricText: '',
-  clickToDeleteText: (name) => ``,
-  audioTitle: ''
-  // audioTitle: (audioInfo) => ``
-}
+]
 
-<TailwindReactMusicPlayer locale={customLocale}/>
-
-// Support partial override, auto merge
-
-<TailwindReactMusicPlayer locale={{ audioTitle: "xxx" }}/>
-```
-
-## :bulb: Customize Theme
-
-The player's styles are compiled with [Tailwind CSS](https://tailwindcss.com) and every theme value is exposed as a plain CSS custom property. To customize the theme, just override the variables in your own stylesheet — no preprocessor or build tooling required:
-
-```jsx
-import TailwindReactMusicPlayer from 'tailwind-react-music-player'
-import 'tailwind-react-music-player/styles.css'
-```
-
-```css
-/* your-theme.css — load it after the player's stylesheet */
-:root {
-  --rjmp-primary-color: #ff5500;
-  --rjmp-panel-bg: #1e1e2e;
+export default function App() {
+  return <MusicPlayer audioLists={audioLists} />
 }
 ```
 
-Variables can also be scoped to a single player instance:
+## Props
 
-```css
-.my-player-wrapper {
-  --rjmp-primary-color: rebeccapurple;
-}
-```
+`MusicPlayerProps = UseMusicPlayerOptions & MusicPlayerUIProps` — the options below are also accepted directly by `useMusicPlayer`. `src/types.ts` is the source of truth.
 
-```jsx
-<div className="my-player-wrapper">
-  <TailwindReactMusicPlayer />
-</div>
-```
+### Playlist, playback and state
 
-### Theme variables
+Most state can be **controlled** (`value` + `onChange`) or **uncontrolled** (`default*`).
 
-Variables suffixed with `-light` or `-mobile` apply to the `light` theme and the mobile layout respectively; un-suffixed variables apply to the default (dark) theme.
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `audioLists` | `readonly AudioTrack[]` | — | **Required.** The playlist. |
+| `playIndex` | `number` | — | Controlled index of the playing track |
+| `defaultPlayIndex` | `number` | `0` | Initial index (uncontrolled) |
+| `onPlayIndexChange` | `(index: number) => void` | — | Fires when the index changes |
+| `playMode` | `PlayMode` | — | Controlled play mode |
+| `defaultPlayMode` | `PlayMode` | `'order'` | `'order' \| 'orderLoop' \| 'singleLoop' \| 'shufflePlay'` |
+| `onPlayModeChange` | `(mode: PlayMode) => void` | — | Fires when the play mode changes |
+| `theme` | `Theme` | — | Controlled theme |
+| `defaultTheme` | `Theme` | `'dark'` | `'dark' \| 'light' \| 'auto'` (auto follows `prefers-color-scheme`) |
+| `onThemeChange` | `(theme: Theme) => void` | — | Fires when the theme changes |
+| `mode` | `PlayerMode` | — | Controlled layout mode |
+| `defaultMode` | `PlayerMode` | `'mini'`¹ | `'mini' \| 'full'` |
+| `onModeChange` | `(mode: PlayerMode) => void` | — | Fires when the mode changes |
+| `volume` | `number` | — | Controlled volume, slider scale `0..1` (mapped to gain internally) |
+| `defaultVolume` | `number` | `1` | Initial volume (uncontrolled) |
+| `onVolumeChange` | `(volume: number) => void` | — | Fires when the volume changes |
+| `autoPlay` | `boolean` | `true` | Play the first track on load (subject to browser gesture policy) |
+| `preload` | `'auto' \| 'metadata' \| 'none'` | `'none'` | `preload` attribute on the `<audio>` element |
+| `crossOrigin` | `'anonymous' \| 'use-credentials'` | — | `crossOrigin` attribute on the `<audio>` element |
+| `skipOnError` | `boolean` | `true` | Skip to the next track on load/playback errors |
+| `restartCurrentOnPrev` | `boolean` | `false` | Prev restarts the track when past the restart threshold |
+| `preserveCurrentOnUpdate` | `boolean` | `false` | Keep the playing track across `audioLists` updates |
+| `replaceListOnUpdate` | `boolean` | `false` | Replace the list on `audioLists` update instead of merging |
+| `autoPlayOnListUpdate` | `boolean` | `false` | Auto-play when `audioLists` changes |
+| `persist` | `boolean \| string` | `false` | Persist state to `localStorage`; `true` uses the default key, a string sets a custom key |
+| `volumeFade` | `VolumeFadeOptions` | — | `{ fadeIn, fadeOut }` durations in ms (skipped on iOS) |
+| `mobileMediaQuery` | `string \| null` | `(max-width: 768px) and (orientation: portrait)` | Media query that selects the mobile UI; `null` disables |
+| `mediaSession` | `boolean` | `false` | Publish Media Session metadata and action handlers |
+| `random` | `() => number` | `Math.random` | Injectable random source for shuffle (tests) |
 
-| Variable | Default | Description |
-| --- | --- | --- |
-| `--rjmp-primary-color` | `#31c27c` | Accent color (icons, progress, etc.) |
-| `--rjmp-primary-color-hover` | primary + 5% white | Accent color on hover |
-| `--rjmp-panel-bg` | `rgba(0, 0, 0, 0.75)` | Bottom player bar background |
-| `--rjmp-panel-bg-light` | `#fff` | Bottom bar background (light) |
-| `--rjmp-panel-bg-mobile` | `rgba(0, 0, 0, 0.75)` | Mobile player background |
-| `--rjmp-panel-color` | `#fff` | Bottom bar text color |
-| `--rjmp-panel-color-light` | `#7d7d7d` | Bottom bar text color (light) |
-| `--rjmp-panel-height` | `80px` | Bottom bar height |
-| `--rjmp-panel-header-height` | `50px` | Audio lists panel header height |
-| `--rjmp-panel-border-radius` | `4px` | Audio lists panel corner radius |
-| `--rjmp-player-size` | `80px` | Mini mode controller size |
-| `--rjmp-player-size-mobile` | `60px` | Mini controller size (mobile) |
-| `--rjmp-controller-bg` | `#e6e6e6` | Mini controller background |
-| `--rjmp-controller-bg-light` | `#fff` | Mini controller background (light) |
-| `--rjmp-font-color` | `#444` | Light theme text color |
-| `--rjmp-base-color` | `rgba(255,255,255,0.6)` | Muted text / slider rail color |
-| `--rjmp-bg-color` | `#f7f8fa` | Scrollbar track / button background |
-| `--rjmp-lists-panel-width` | `480px` | Audio lists panel width |
-| `--rjmp-lists-panel-height` | `410px` | Audio lists panel height |
-| `--rjmp-lists-item-bg` | `rgba(0, 0, 0, 0.1)` | Odd row background |
-| `--rjmp-lists-item-bg-playing` | `rgba(0, 0, 0, 0.35)` | Playing row background |
-| `--rjmp-lists-item-bg-active` | `rgba(0, 0, 0, 0.35)` | Row hover background |
-| `--rjmp-lists-item-bg-mobile` | `rgba(0, 0, 0, 0.15)` | Row background (mobile) |
-| `--rjmp-lists-item-bg-playing-mobile` | `rgba(0, 0, 0, 0.75)` | Playing row background (mobile) |
-| `--rjmp-lists-item-bg-active-mobile` | `rgba(0, 0, 0, 0.15)` | Row hover background (mobile) |
-| `--rjmp-lists-item-bg-light` | `#fff` | Row background (light) |
-| `--rjmp-lists-item-bg-playing-light` | `#f2f2f2` | Playing row background (light) |
-| `--rjmp-lists-item-bg-active-light` | `#fafafa` | Row hover/odd background (light) |
-| `--rjmp-lists-item-singer-color-light` | `rgba(162,162,162,.45)` | Singer text color (light) |
-| `--rjmp-lists-sortable-highlight-bg` | primary at 15% alpha | Drag-to-sort highlight color |
-| `--rjmp-progress-bar-height` | `5px` | Progress bar height |
-| `--rjmp-progress-bar-bg` | `#fff` | Progress rail color |
-| `--rjmp-progress-bar-bg-light` | `rgba(0, 0, 0, 0.09)` | Progress rail color (light) |
-| `--rjmp-progress-load-bar-bg` | `rgba(0, 0, 0, 0.11)` | Buffered-progress bar color |
-| `--rjmp-progress-load-bar-bg-light` | `rgba(0, 0, 0, 0.06)` | Buffered-progress color (light) |
-| `--rjmp-lyric-color` | `var(--rjmp-primary-color)` | Floating lyric color |
-| `--rjmp-lyric-font-size` | `36px` | Floating lyric font size |
-| `--rjmp-lyric-font-size-mobile` | `16px` | Floating lyric font size (mobile) |
-| `--rjmp-animate-time` | `350ms` | Default transition duration |
-| `--rjmp-animate-type` | `cubic-bezier(0.43, -0.1, 0.16, 1.1)` | Default easing |
+¹ `<MusicPlayer>` defaults `defaultMode` to `'mini'`; bare `useMusicPlayer` defaults to `'full'`.
 
-## :bulb: Customize audio duration
-
-> Default: by this.audio.duration, if cannot get current play audio's duration, you can customize to set.
-
-```jsx
-<TailwindReactMusicPlayer audioLists={[{
-  ...
-  duration: 100.00
-}]} />
-
-```
-
-## :bulb: Customize player icon
+`AudioTrack`:
 
 ```ts
-export interface TailwindReactMusicPlayerIcon {
-  pause?: React.ReactNode | string
-  play?: React.ReactNode | string
-  destroy?: React.ReactNode | string
-  close?: React.ReactNode | string
-  delete?: React.ReactNode | string
-  download?: React.ReactNode | string
-  toggle?: React.ReactNode | string
-  lyric?: React.ReactNode | string
-  volume?: React.ReactNode | string
-  mute?: React.ReactNode | string
-  next?: React.ReactNode | string
-  prev?: React.ReactNode | string
-  playLists?: React.ReactNode | string
-  reload?: React.ReactNode | string
-  loop?: React.ReactNode | string
-  order?: React.ReactNode | string
-  orderLoop?: React.ReactNode | string
-  shuffle?: React.ReactNode | string
-  loading?: React.ReactNode | string
+interface AudioTrack {
+  name?: React.ReactNode
+  singer?: React.ReactNode
+  cover?: string
+  musicSrc: string | (() => Promise<string>)
+  lyric?: string
+  duration?: number
 }
 ```
 
-## :bulb: Follow the theme of the system
+### Callbacks
 
-```jsx
-<TailwindReactMusicPlayer theme="auto" />
-```
+Every callback receives a unified `AudioInfo` payload (`track`, `index`, `tracks`, `currentTime`, `duration`, `volume`, `muted`, `paused`, `ended`, `readyState`, `networkState`, `playMode`, `currentLyric`).
 
-![auto-theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/auto-theme.gif?raw=true)
+| Prop | Signature | Description |
+| --- | --- | --- |
+| `onPlay` | `(info: AudioInfo) => void` | Playback started |
+| `onPause` | `(info: AudioInfo) => void` | Playback paused |
+| `onEnded` | `(info: AudioInfo) => void` | Track ended |
+| `onError` | `(error: MediaError \| Error \| null, info: AudioInfo) => void` | Load/playback error |
+| `onProgress` | `(info: AudioInfo) => void` | `timeupdate` progress |
+| `onSeeked` | `(info: AudioInfo) => void` | Seek completed |
+| `onAbort` | `(info: AudioInfo) => void` | Load aborted |
+| `onTrackChange` | `(info: AudioInfo) => void` | Current track changed |
+| `onTracksChange` | `(tracks: readonly PlaylistItem[], info: AudioInfo) => void` | Playlist contents changed |
+| `onLyricChange` | `(line: string, index: number) => void` | Active lyric line changed |
+| `onReload` | `(info: AudioInfo) => void` | Reload requested |
+| `onBeforeDownload` | `(info: AudioInfo) => DownloadInfo \| Promise<DownloadInfo> \| void` | Return/resolve a `DownloadInfo` to customise the download; return nothing for the default `{ src, filename }` |
+| `onDownload` | `(info: AudioInfo, download: DownloadInfo) => void` | Fires after the download resolves |
+| `customDownloader` | `(download: DownloadInfo) => void` | Replaces the built-in download behaviour (`DownloadInfo` = `{ src, filename?, mimeType? }`) |
 
-## :bulb: Quiet update
+### UI props
 
-```jsx
-/**
- * Don't interrupt current playing state when audio list updated
- * eg. (A) is current playing...
- * [A,B] => [A,C,B]
- * [A,B] => [A,B,C]
- *
- * if (A) not in updated audio lists
- * [A,B] => [C]
- * (C) is playing
- */
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | `string` | — | Extra class on the `.trmp-root` element |
+| `style` | `React.CSSProperties` | — | Inline style on the root element |
+| `container` | `HTMLElement \| (() => HTMLElement) \| null` | `document.body` | Portal target; `null` renders inline (no portal) |
+| `locale` | `LocaleId \| Partial<Locale>` | `'en_US'` | Locale id or partial string overrides — see [Locales](#locales) |
+| `icons` | `Partial<PlayerIcons>` | `defaultIcons` | Per-slot icon overrides — see [Icons](#icons) |
+| `draggable` | `boolean` | `true` | Mini controller is draggable |
+| `dragBounds` | `string \| DraggableBounds` | — | Drag constraint passed to `react-draggable` |
+| `defaultPosition` | `{ top?, left?, right?, bottom? }` | `{ right: 30, bottom: 30 }` | Mini controller initial position |
+| `allowModeToggle` | `boolean` | `true` | Allow switching `mini` ⇄ `full` |
+| `responsive` | `boolean` | `true` | Switch to the mobile UI when `mobileMediaQuery` matches |
+| `seekable` | `boolean` | `true` | Progress bar is interactive |
+| `glassBackground` | `boolean` | `false` | Frosted-glass panel background |
+| `hideEmptyCover` | `boolean` | `false` | Hide the cover when a track has none |
+| `showMiniCover` | `boolean` | `true` | Show the cover in the mini controller |
+| `showMiniProgress` | `boolean` | `false` | Circular progress ring on the mini controller |
+| `showBuffered` | `boolean` | `true` | Show the buffered-progress bar |
+| `showPlayButton` | `boolean` | `true` | Show the play/pause button |
+| `showReload` | `boolean` | `true` | Show the reload button |
+| `showDownload` | `boolean` | `true` | Show the download button |
+| `showPlayMode` | `boolean` | `true` | Show the play-mode toggle |
+| `showThemeSwitch` | `boolean` | `true` | Show the light/dark theme switch |
+| `showLyric` | `boolean` | `false` | Show the lyric toggle (and enable the lyric overlay) |
+| `showDestroy` | `boolean` | `false` | Show the destroy button |
+| `removable` | `boolean` | `true` | Tracks can be removed from the playlist |
+| `sortable` | `boolean \| SortableOptions` | `false` | Drag-to-sort the playlist; an object is forwarded to SortableJS |
+| `keyboardShortcuts` | `boolean` | `false` | Enable keyboard shortcuts — see [Accessibility](#accessibility) |
+| `playModeTipDuration` | `number` | `600` | How long the play-mode toast stays visible (ms) |
+| `extraControls` | `React.ReactNode` | — | Custom content rendered into the controls row |
+| `lyricClassName` | `string` | — | Extra class on the lyric overlay |
+| `renderTrackTitle` | `(info: AudioInfo, isMobile: boolean) => ReactNode` | — | Custom title renderer (also used for the `<audio>` title) |
+| `onCoverClick` | `(info: AudioInfo) => void` | — | Cover image clicked |
+| `onPlaylistToggle` | `(open: boolean) => void` | — | Playlist drawer opened/closed |
+| `onBeforeDestroy` | `(info: AudioInfo) => boolean \| void \| Promise<boolean \| void>` | — | Return/resolve `false` to cancel destruction |
+| `onDestroyed` | `(info: AudioInfo) => void` | — | Player destroyed |
+
+## Ref handle
+
+`MusicPlayer` takes a React 19 `ref` prop exposing `MusicPlayerHandle`: every `MusicPlayerActions` method, the live `audio` element, and `destroy()`.
+
+```tsx
+import { useRef } from 'react'
+import MusicPlayer, {
+  type MusicPlayerHandle,
+} from 'tailwind-react-music-player'
 
 function App() {
-  const [audioLists, setAudioLists] = useState([
-    { musicSrc: 'A' },
-    { musicSrc: 'B' },
-  ])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAudioLists([{ musicSrc: 'A' }, { musicSrc: 'C' }, { musicSrc: 'B' }])
-    }, 1000)
-  }, [setAudioLists])
+  const playerRef = useRef<MusicPlayerHandle>(null)
 
   return (
-    <TailwindReactMusicPlayer
-      quietUpdate
-      clearPriorAudioLists
-      audioLists={audioLists}
-    />
+    <>
+      <MusicPlayer ref={playerRef} audioLists={audioLists} />
+      <button onClick={() => playerRef.current?.togglePlay()}>toggle</button>
+      <button onClick={() => playerRef.current?.seekBy(10)}>+10s</button>
+    </>
   )
 }
 ```
 
-## :bulb: Import in browser
+`MusicPlayerActions`: `play`, `pause`, `togglePlay`, `playIndex`, `playId`, `next`, `prev`, `reload`, `seek`, `seekBy`, `setVolume`, `volumeBy`, `toggleMute`, `setPlayMode`, `cyclePlayMode`, `setTheme`, `toggleTheme`, `setMode`, `toggleMode`, `removeTrack`, `clearTracks`, `reorderTracks`, `download`, `getAudioInfo`.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/tailwind-react-music-player@5.0.0-alpha.0/styles.css"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-  <script src="https://unpkg.com/react@16.13.1/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/tailwind-react-music-player@4.18.1/dist/tailwind-react-music-player.min.js"></script>
-  <script>
-    ReactDOM.render(
-      React.createElement(TailwindReactMusicPlayer),
-      document.getElementById('root'),
-    )
-  </script>
-</html>
-```
+## Headless: `useMusicPlayer`
 
-## :bulb: Server-Side Rendering
+Build your own UI on the same engine. Render an `<audio>` element with `player.audioProps` and wire `player.state`/`player.actions` to your controls.
 
-```jsx
-// components/Player.js
-import React from 'react'
-import TailwindReactMusicPlayer from 'tailwind-react-music-player'
-import styles from 'tailwind-react-music-player/styles.css'
+```tsx
+import { useMusicPlayer } from 'tailwind-react-music-player'
 
-export const Player = () => <TailwindReactMusicPlayer />
+function MyPlayer() {
+  const { state, actions, audioProps } = useMusicPlayer({
+    audioLists,
+    onTrackChange: (info) => console.log('now playing', info.track?.name),
+  })
 
-// pages/_app.js
-import dynamic from 'next/dynamic'
-const PlayerWithNoSSR = dynamic(() => import('../components/Player'), {
-  ssr: false,
-})
-```
-
-## :bulb: Customize mobile media query
-
-> eg. Use mobile UI on a iPad device
-
-```jsx
-// Default '(max-width: 768px) and (orientation : portrait)'
-<TailwindReactMusicPlayer mobileMediaQuery="(max-width: 1024px)" />
-```
-
-## :bulb: Audio volume fade in and fade out
-
-```jsx
-<TailwindReactMusicPlayer volumeFade={{ fadeIn: 500, fadeOut: 500 }} />
-```
-
-## :pencil: Development
-
-```bash
-git clone https://github.com/alifeinbinary/react-music-player.git
-yarn # npm install
-yarn start # npm start
-open `http://localhost:8084/`
-```
-
-## :hourglass: Test case
-
-```bash
-npm run test
-```
-
-## :bulb: AudioListProps
-
-> Like This
-
-```ts
-interface TailwindReactMusicPlayerAudioListProps {
-  name: string | React.ReactNode,
-  musicSrc: string | () => Promise<string>,
-  cover: string,
-  singer?: string | React.ReactNode,
-  duration?: number,
-  lyric?: string,
-  [key: string]: any
-}>
-```
-
-## :bulb: AudioInfo
-
-> Like This
-
-```ts
-interface TailwindReactMusicPlayerAudioInfo {
-  cover: string
-  currentTime: number
-  duration: number
-  ended: boolean
-  musicSrc: string
-  muted: boolean
-  name: string
-  networkState: number
-  paused: boolean
-  played: any
-  readyState: number
-  startDate: any
-  volume: number
-  lyric: string
-  [key: string]: any
+  return (
+    <div>
+      <audio {...audioProps} />
+      <p>
+        {state.track?.name} — {state.status}
+      </p>
+      <button onClick={actions.prev}>prev</button>
+      <button onClick={actions.togglePlay}>
+        {state.status === 'playing' ? 'pause' : 'play'}
+      </button>
+      <button onClick={actions.next}>next</button>
+      <input
+        type="range"
+        min={0}
+        max={state.duration || 0}
+        value={state.currentTime}
+        onChange={(e) => actions.seek(e.target.valueAsNumber)}
+      />
+    </div>
+  )
 }
 ```
 
-## :two_men_holding_hands: Contributors
+`useMusicPlayer(options)` returns `{ state, actions, audioRef, audioProps }` — see `MusicPlayerState`, `MusicPlayerActions` and `MusicPlayerAudioProps` in `src/types.ts`.
 
-> Special thanks: @JeffreyCA @lijinke666
+## Theming
 
-![https://github.com/alifeinbinary/tailwind-react-music-player/graphs/contributors](https://contrib.rocks/image?repo=lijinke666/react-music-player)
+The player renders under a `.trmp-root` element carrying `data-theme` (`dark` | `light`), `data-mode`, `data-layout` (`desktop` | `mobile`) and `data-status` attributes.
 
-## :page_facing_up: License
+```tsx
+<MusicPlayer theme="auto" /> // follows prefers-color-scheme
+```
 
-[MIT](https://github.com/alifeinbinary/react-music-player/blob/master/LICENCE)
+### CSS custom properties
+
+Every design token is a `--trmp-*` variable you can override at runtime — globally, or scoped to a subtree:
+
+```css
+:root {
+  --trmp-color-primary: #ff5500;
+}
+.my-player-scope {
+  --trmp-color-panel: #1e1e2e;
+}
+```
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--trmp-color-primary` | `#31c27c` | Accent colour |
+| `--trmp-color-primary-contrast` | `#05301c` | Text/icons on the accent |
+| `--trmp-color-primary-hover` | primary + 15% white | Accent on hover |
+| `--trmp-color-panel` | `rgb(0 0 0 / 75%)` | Panel background |
+| `--trmp-color-panel-mobile` | `rgb(0 0 0 / 92%)` | Mobile panel background |
+| `--trmp-color-panel-text` | `#fff` | Panel text |
+| `--trmp-color-panel-muted` | `rgb(255 255 255 / 60%)` | Muted text / slider rail |
+| `--trmp-color-controller` | `#e6e6e6` | Mini controller background |
+| `--trmp-color-surface` | `#f7f8fa` | Scrollbar/button surface |
+| `--trmp-color-list-item` | `rgb(0 0 0 / 10%)` | Playlist row background |
+| `--trmp-color-list-item-active` | `rgb(0 0 0 / 35%)` | Row hover |
+| `--trmp-color-list-item-playing` | `rgb(0 0 0 / 35%)` | Playing row |
+| `--trmp-color-track` | `#fff` | Progress rail |
+| `--trmp-color-track-buffered` | `rgb(0 0 0 / 11%)` | Buffered progress |
+| `--trmp-color-lyric` | `var(--trmp-color-primary)` | Floating lyric colour |
+| `--trmp-spacing-panel` | `80px` | Panel height |
+| `--trmp-spacing-panel-header` | `50px` | Playlist header height |
+| `--trmp-spacing-controller` | `80px` | Mini controller size |
+| `--trmp-spacing-controller-mobile` | `60px` | Mini controller size (mobile) |
+| `--trmp-spacing-playlist-w` / `--trmp-spacing-playlist-h` | `480px` / `410px` | Playlist drawer size |
+| `--trmp-spacing-track-h` | `5px` | Progress bar height |
+| `--trmp-radius-panel` | `4px` | Playlist corner radius |
+| `--trmp-text-lyric` / `--trmp-text-lyric-mobile` | `36px` / `16px` | Floating lyric font size |
+| `--trmp-ease-player` | `cubic-bezier(0.43, -0.1, 0.16, 1.1)` | Default easing |
+| `--trmp-duration-player` | `350ms` | Default transition duration |
+| `--trmp-shadow-panel` | `0 0 3px #403f3f` | Panel shadow |
+| `--trmp-range-fill` | per-slider | Filled portion of each range input (set inline by the player) |
+
+The `light` theme is a token remap on `.trmp-root[data-theme='light']`; the mobile layout remaps on `.trmp-root[data-layout='mobile']`. To customise a single theme, override tokens inside the corresponding selector:
+
+```css
+.trmp-root[data-theme='light'] {
+  --trmp-color-primary: #7c3aed;
+}
+```
+
+### Semantic class hooks
+
+Stable `trmp-*` classes are part of the public styling API and always present alongside utility classes: `.trmp-root`, `.trmp-panel`, `.trmp-mobile`, `.trmp-mini`, `.trmp-playlist`, `.trmp-lyric`, `.trmp-toast`, `.trmp-cover`, `.trmp-icon-button`, `.trmp-theme-switch`, `.trmp-time`, `.trmp-track-title`, `.trmp-range-wrap`, `.trmp-range`, `.trmp-sortable-highlight`.
+
+### Icons
+
+`icons` accepts per-slot `ReactNode` overrides. Slots: `play`, `pause`, `prev`, `next`, `loading`, `volume`, `mute`, `download`, `reload`, `lyric`, `playlist`, `close`, `delete`, `minimize`, `destroy`, `order`, `orderLoop`, `singleLoop`, `shuffle`, `collapse`, `empty`, `controller`.
+
+```tsx
+<MusicPlayer icons={{ play: <MyPlayIcon />, playlist: <MyListIcon /> }} />
+```
+
+`defaultIcons` is exported if you want to wrap or inspect the defaults.
+
+## Locales
+
+Built-in locales: `en_US`, `en_GB`, `zh_CN` (all exported via `locales`). `locale` accepts an id or a partial override merged over `en_US`:
+
+```tsx
+<MusicPlayer locale="zh_CN" />
+<MusicPlayer locale={{ play: 'Play now', emptyPlaylist: 'Nothing here yet' }} />
+```
+
+`createLocale(partial, base?)` and `resolveLocale(input)` are exported for reuse; the full string list is the `Locale` type in `src/i18n/types.ts`.
+
+## Accessibility
+
+- All controls are labelled (`aria-label`/`title`) and keyboard-reachable
+- The theme switch is `role="switch"`; the playlist is a dialog with focus management; lyrics announce via an `aria-live` overlay
+- `prefers-reduced-motion` collapses decorative animation
+
+Enable keyboard shortcuts with `keyboardShortcuts`. They fire on `keydown` within the player (ignored from text fields and handled events):
+
+| Key       | Action                |
+| --------- | --------------------- |
+| `Space`   | Play / pause          |
+| `←` / `→` | Seek −5s / +5s        |
+| `↑` / `↓` | Volume +0.1 / −0.1    |
+| `m`       | Mute / unmute         |
+| `n` / `p` | Next / previous track |
+
+Playlist rows additionally support `Alt`+arrow keyboard reordering. `useKeyboardShortcuts` is exported if you want the same bindings in a headless UI.
+
+## SSR
+
+The module is SSR-importable — it ships a `"use client"` banner and touches `document` only inside effects. By default the component renders nothing until the portal target resolves after mount; pass `container={null}` to render inline without a portal.
+
+## Migrating from v4
+
+v5 is a full rewrite — React 19, hooks, ESM-only, new prop names and a new token system. See [MIGRATION.md](./MIGRATION.md).
+
+## Development
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## License
+
+[MIT](./LICENCE)

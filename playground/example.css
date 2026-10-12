@@ -56,7 +56,6 @@ a {
   font-size: 12px;
 }
 
-
 /* Scoped to the demo's own sections so these unlayered rules can never
    outrank the player's layered trmp: utilities (buttons inside
    .trmp-root live in nested divs, not directly under main > section). */

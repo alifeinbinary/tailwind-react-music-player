@@ -175,9 +175,7 @@ export default function Demo() {
       const root = document.querySelector('.trmp-root')
       if (!root) return
       if (flag('playlist')) {
-        root
-          .querySelector<HTMLElement>('button[aria-controls]')
-          ?.click()
+        root.querySelector<HTMLElement>('button[aria-controls]')?.click()
       }
       if (flag('lyric')) {
         root
@@ -197,7 +195,8 @@ export default function Demo() {
         <label htmlFor="pf-theme">
           theme{' '}
           <select
-            id="pf-theme" data-testid="pf-theme"
+            id="pf-theme"
+            data-testid="pf-theme"
             value={theme}
             onChange={(e) => setTheme(e.target.value as Theme)}
           >
@@ -209,7 +208,8 @@ export default function Demo() {
         <label htmlFor="pf-mode">
           mode{' '}
           <select
-            id="pf-mode" data-testid="pf-mode"
+            id="pf-mode"
+            data-testid="pf-mode"
             value={mode}
             onChange={(e) => setMode(e.target.value as PlayerMode)}
           >
@@ -220,7 +220,8 @@ export default function Demo() {
         <label htmlFor="pf-play-mode">
           playMode{' '}
           <select
-            id="pf-play-mode" data-testid="pf-play-mode"
+            id="pf-play-mode"
+            data-testid="pf-play-mode"
             value={playMode}
             onChange={(e) => setPlayMode(e.target.value as PlayMode)}
           >
@@ -233,7 +234,8 @@ export default function Demo() {
         <label htmlFor="pf-locale">
           locale{' '}
           <select
-            id="pf-locale" data-testid="pf-locale"
+            id="pf-locale"
+            data-testid="pf-locale"
             value={locale}
             onChange={(e) => setLocale(e.target.value as LocaleId)}
           >
@@ -244,7 +246,8 @@ export default function Demo() {
         </label>
         <label htmlFor="pf-persist">
           <input
-            id="pf-persist" data-testid="pf-persist"
+            id="pf-persist"
+            data-testid="pf-persist"
             type="checkbox"
             aria-label="persist"
             checked={persist}
@@ -254,7 +257,8 @@ export default function Demo() {
         </label>
         <label htmlFor="pf-fade">
           <input
-            id="pf-fade" data-testid="pf-fade"
+            id="pf-fade"
+            data-testid="pf-fade"
             type="checkbox"
             aria-label="volumeFade"
             checked={fade}
@@ -266,7 +270,8 @@ export default function Demo() {
           {TOGGLES.map((key) => (
             <label key={key} htmlFor={`pf-${key}`}>
               <input
-                id={`pf-${key}`} data-testid={`pf-${key}`}
+                id={`pf-${key}`}
+                data-testid={`pf-${key}`}
                 type="checkbox"
                 aria-label={key}
                 checked={!!ui[key]}

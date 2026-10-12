@@ -67,11 +67,11 @@
   "author": "Andrew Halliwell <andrew@alifeinbinary.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alifeinbinary/react-music-player.git"
+    "url": "git+https://github.com/alifeinbinary/tailwind-react-music-player.git"
   },
-  "homepage": "https://alifeinbinary.github.io/react-music-player",
+  "homepage": "https://alifeinbinary.github.io/tailwind-react-music-player",
   "bugs": {
-    "url": "https://github.com/alifeinbinary/react-music-player/issues"
+    "url": "https://github.com/alifeinbinary/tailwind-react-music-player/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -146,8 +146,8 @@
     "vitest-axe": "^0.1.0"
   },
   "peerDependencies": {
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

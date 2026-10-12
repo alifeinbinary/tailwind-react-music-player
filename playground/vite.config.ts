@@ -6,7 +6,7 @@ const getBase = (command: 'build' | 'serve') => {
   if (process.env.NETLIFY || process.env.SURGE || command === 'serve') {
     return '/'
   }
-  return '/react-music-player/'
+  return '/tailwind-react-music-player/'
 }
 
 export default defineConfig(({ command }) => ({

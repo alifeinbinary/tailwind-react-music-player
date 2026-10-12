@@ -14,10 +14,7 @@ const hasBaseline = (file: string, arg: string) =>
     ),
   )
 
-const openPlayer = async (
-  page: import('playwright/test').Page,
-  qs: string,
-) => {
+const openPlayer = async (page: import('playwright/test').Page, qs: string) => {
   await page.goto(`/?${qs}&autoplay=0`)
   await expect(page.locator('.trmp-root')).toBeAttached()
   // wait until at least one fixed-position child is visible

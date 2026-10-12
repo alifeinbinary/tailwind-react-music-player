@@ -23,7 +23,7 @@ const styles = {
   bottom:
     'trmp:flex trmp:items-center trmp:justify-center trmp:gap-2 trmp:pb-6',
   count:
-    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-full trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
+    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-[50%] trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
 }
 
 /** Full-screen mobile panel (mode full, mobile layout). */

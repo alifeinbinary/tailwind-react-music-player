@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="logo" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/logo.png" width="100" max-width="100%">
+  <img alt="logo" src="https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/logo.png" width="100" max-width="100%">
 </p>
 
 <h1 align="center">
@@ -17,14 +17,14 @@ tailwind-react-music-player
   <a href="https://www.npmjs.com/package/tailwind-react-music-player" title="npm">
     <img src="https://img.shields.io/npm/l/tailwind-react-music-player.svg?style=flat-square" alt="npm">
   </a>
-  <a href="https://github.com/alifeinbinary/react-music-player/actions">
-    <img src="https://github.com/alifeinbinary/react-music-player/workflows/Node%20CI/badge.svg" />
+  <a href="https://github.com/alifeinbinary/tailwind-react-music-player/actions">
+    <img src="https://github.com/alifeinbinary/tailwind-react-music-player/workflows/CI/badge.svg" />
   </a>
    <a href="https://badge.fury.io/js/tailwind-react-music-playerr" title="npm">
     <img src="https://img.shields.io/npm/v/tailwind-react-music-player.svg?style=flat-square" alt="npm version">
   </a>
-  <a href="https://codecov.io/gh/alifeinbinary/react-music-player">
-    <img src="https://codecov.io/gh/alifeinbinary/react-music-player/branch/master/graph/badge.svg" />
+  <a href="https://codecov.io/gh/alifeinbinary/tailwind-react-music-player">
+    <img src="https://codecov.io/gh/alifeinbinary/tailwind-react-music-player/branch/master/graph/badge.svg" />
   </a>
      <a href="https://app.netlify.com/sites/tailwind-react-music-player/deploys" title="Netlify Status">
     <img src="https://api.netlify.com/api/v1/badges/2a5d8639-9d2a-46ee-a504-10b7846a57e4/deploy-status" alt="Coverage Status">
@@ -32,10 +32,12 @@ tailwind-react-music-player
 </p>
 
 <p align="center">
-  <a href="https://github.com/alifeinbinary/react-music-player/blob/master/README.md">
+  <a href="https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/README.md">
     English Doc
   </a>
 </p>
+
+> **注意:** 本文档描述的是 v4 API。v5 是一次完全重写(React 19、函数组件 + hooks、ESM-only),API 已大幅变更。请以英文 [README.md](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/README.md) 和 [MIGRATION.md](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/MIGRATION.md) 为准。
 
 ## 安装
 
@@ -55,19 +57,19 @@ npm install tailwind-react-music-player --save
 
 > 迷你模式 <br/>
 
-> ![mini mode](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/mini.png)
+> ![mini mode](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/mini.png)
 
 > 白天主题 <br/>
 
-![light theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/light-theme.png)
+![light theme](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/light-theme.png)
 
 > 黑夜主题 <br/>
 
-![dark theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/dark-theme.png)
+![dark theme](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/dark-theme.png)
 
 > 移动端 <br/>
 
-![mobile](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/mobile.jpg)
+![mobile](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/mobile.jpg)
 
 ## 例子
 
@@ -77,7 +79,7 @@ npm install tailwind-react-music-player --save
 
 > 本地访问 : [http://localhost:8081/](http://localhost:8081/)
 
-[例子示例代码](https://github.com/alifeinbinary/react-music-player/blob/master/playground/example.tsx)
+[例子示例代码](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/playground/example.tsx)
 
 ## 使用
 
@@ -147,9 +149,9 @@ class App extends React.Component {
 <TailwindReactMusicPlayer glassBg />
 ```
 
-![glass-1](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/glass-1.png)
+![glass-1](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/glass-1.png)
 
-![glass-2](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/glass-2.png)
+![glass-2](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/glass-2.png)
 
 ## 自定义下载器
 
@@ -213,7 +215,7 @@ ReactDOM.render(
 ## 开发
 
 ```
-git clone https://github.com/alifeinbinary/react-music-player.git
+git clone https://github.com/alifeinbinary/tailwind-react-music-player.git
 yarn | npm install
 yarn start | npm start
 访问 `http://localhost:8081/`
@@ -397,4 +399,4 @@ export interface TailwindReactMusicPlayerInstance extends HTMLAudioElement {
 
 ## 许可证
 
-[MIT](https://github.com/alifeinbinary/react-music-player/blob/master/LICENCE)
+[MIT](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/LICENCE)

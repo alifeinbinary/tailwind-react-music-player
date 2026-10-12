@@ -2,17 +2,13 @@
   {
     "path": "dist/index.js",
     "limit": "25 kB",
-    "disablePlugins": [
-      "@size-limit/rolldown"
-    ],
+    "disablePlugins": ["@size-limit/rolldown"],
     "gzip": true
   },
   {
     "path": "dist/styles.css",
     "limit": "8 kB",
-    "disablePlugins": [
-      "@size-limit/rolldown"
-    ],
+    "disablePlugins": ["@size-limit/rolldown"],
     "gzip": true
   }
 ]
