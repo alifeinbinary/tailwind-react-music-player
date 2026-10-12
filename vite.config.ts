@@ -55,16 +55,29 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['__tests__/setup.ts'],
-    include: ['__tests__/tests/**/*.test.{ts,tsx,js,jsx}'],
+    include: [
+      '__tests__/tests/**/*.test.{ts,tsx,js,jsx}',
+      'src/**/*.test.{ts,tsx}',
+    ],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/types.ts', 'src/config/locale.ts'],
+      exclude: [
+        'src/types.ts',
+        'src/config/locale.ts',
+        'src/**/*.test.{ts,tsx}',
+      ],
       thresholds: {
         statements: 75,
         branches: 70,
         functions: 75,
         lines: 75,
+        'src/core/**': {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100,
+        },
       },
     },
   },

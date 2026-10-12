@@ -2,6 +2,8 @@ import * as React from 'react'
 import { type DraggableBounds } from 'react-draggable'
 import Sortable from 'sortablejs'
 
+import { PLAYER_MODES, PLAY_MODES, THEMES } from './constants'
+
 export interface TailwindReactMusicPlayerAudioInfo {
   cover: string
   currentTime: number
@@ -296,4 +298,33 @@ export interface TailwindReactMusicPlayerState {
   isResetCoverRotate: boolean
   isPlayDestroyed?: boolean
   [key: string]: any
+}
+
+// ---- v5 core types ----
+
+/** Play mode controlling what happens on track end and prev/next. */
+export type PlayMode = (typeof PLAY_MODES)[number]
+
+/** Player color theme. */
+export type Theme = (typeof THEMES)[number]
+
+/** Player layout mode. */
+export type PlayerMode = (typeof PLAYER_MODES)[number]
+
+/** A track source: a URL or an async resolver returning a URL. */
+export type MusicSrc = string | (() => Promise<string>)
+
+/** A playlist entry as supplied by the consumer. */
+export interface AudioTrack {
+  name?: React.ReactNode
+  singer?: React.ReactNode
+  cover?: string
+  musicSrc: MusicSrc
+  lyric?: string
+  duration?: number
+}
+
+/** A playlist entry with a stable player-assigned id. */
+export interface PlaylistItem extends AudioTrack {
+  readonly id: string
 }
