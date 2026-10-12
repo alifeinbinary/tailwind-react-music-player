@@ -73,7 +73,7 @@ npm install tailwind-react-music-player --save
 
 ## 例子
 
-> 在线访问 : [https://alifeinbinary.github.io/react-music-player/](https://alifeinbinary.github.io/react-music-player/)
+> 在线访问 : [https://alifeinbinary.github.io/tailwind-react-music-player/](https://alifeinbinary.github.io/tailwind-react-music-player/)
 
 > 实际应用 : [李金珂的小屋](http://www.alifeinbinary.com/)
 
