@@ -11,32 +11,34 @@ import MusicPlayer, {
   type Theme,
 } from '../src'
 import { lyric } from './lyric'
-import coverUrl from './assets/cover.png'
 import '../src/styles/index.css'
 import './example.css'
 
 const audioList: AudioTrack[] = [
   {
-    name: 'Despacito',
-    singer: 'Luis Fonsi',
-    cover: coverUrl,
+    name: 'Listen At a Distance',
+    singer: 'A Life in Binary',
+    cover:
+      'https://dj8rv0ejdatzv.cloudfront.net/files/9le9epk0p-Guilt-artwork.jpeg',
     musicSrc:
-      'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3',
+      'https://dj8rv0ejdatzv.cloudfront.net/files/689e5515f908500002e288f2/ALifeinBinary-ListenAtaDistance.mp3',
   },
   {
-    name: 'Dorost Nemisham',
-    singer: 'Sirvan Khosravi',
-    cover: coverUrl,
+    name: 'Fantan Disco',
+    singer: 'A Life in Binary',
+    cover:
+      'https://dj8rv0ejdatzv.cloudfront.net/files/68a6074812fa8c00025f59d6/stringsattached-artwork.webp',
     musicSrc:
-      'https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3',
+      'https://dj8rv0ejdatzv.cloudfront.net/files/6661b4ac7acd5200083d7043/DM-FantanDisco.mp3',
   },
   {
-    name: '高尚 (lyric demo)',
-    singer: '薛之谦',
+    name: 'Answers Matter (lyric demo)',
+    singer: 'A Life in Binary',
     lyric,
-    cover: coverUrl,
+    cover:
+      'https://dj8rv0ejdatzv.cloudfront.net/files/68a5f0bb78061000022cfc82/meditations-artwork.webp',
     musicSrc:
-      'http://res.cloudinary.com/alick/video/upload/v1502375674/Bedtime_Stories.mp3',
+      'https://dj8rv0ejdatzv.cloudfront.net/files/691f9763031a0d000279e7bd/ALifeinBinary-AnswersMatter.mp3',
   },
 ]
 
@@ -141,7 +143,7 @@ export default function Demo() {
     () => queryValue('theme', ['dark', 'light', 'auto']) ?? 'dark',
   )
   const [mode, setMode] = useState<PlayerMode>(
-    () => queryValue('mode', ['mini', 'full']) ?? 'mini',
+    () => queryValue('mode', ['mini', 'full']) ?? 'full',
   )
   const [playMode, setPlayMode] = useState<PlayMode>(
     () =>
@@ -153,7 +155,7 @@ export default function Demo() {
       ]) ?? 'orderLoop',
   )
   const [locale, setLocale] = useState<LocaleId>(
-    () => queryValue('locale', ['en_US', 'en_GB', 'zh_CN']) ?? 'en_US',
+    () => queryValue('locale', ['en_US', 'en_GB', 'zh_CN']) ?? 'en_GB',
   )
   const [persist, setPersist] = useState(false)
   const [fade, setFade] = useState(false)

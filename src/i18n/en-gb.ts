@@ -1,5 +1,39 @@
 import type { Locale } from './types'
-import { en_US } from './en-us'
 
 /** English (United Kingdom) — same copy as en_US today. */
-export const en_GB: Locale = { ...en_US }
+export const en_GB: Locale = {
+  playMode: {
+    order: 'Play in order',
+    orderLoop: 'Repeat all',
+    singleLoop: 'Repeat one',
+    shufflePlay: 'Shuffle',
+  },
+  open: 'Open player',
+  close: 'Close',
+  minimize: 'Minimise',
+  destroy: 'Destroy player',
+  play: 'Play',
+  pause: 'Pause',
+  previous: 'Previous track',
+  next: 'Next track',
+  reload: 'Reload track',
+  download: 'Download track',
+  volume: 'Volume',
+  mute: 'Mute',
+  unmute: 'Unmute',
+  seek: 'Seek',
+  playlist: 'Playlist',
+  playlistCount: (count) => `Playlist (${count})`,
+  emptyPlaylist: 'No music available',
+  removeTrack: (name) => `Remove ${name}`,
+  clearPlaylist: 'Clear playlist',
+  toggleLyric: 'Toggle lyrics',
+  noLyric: 'No lyrics available',
+  theme: 'Theme',
+  lightTheme: 'Light',
+  darkTheme: 'Dark',
+  systemTheme: 'System',
+  loading: 'Loading',
+  nowPlaying: (name) => `Now playing ${name}`,
+  reorderHint: 'Press Alt+Arrow keys to reorder',
+}
