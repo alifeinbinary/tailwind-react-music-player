@@ -1,0 +1,96 @@
+/* Keyframes used by the v5 components (referenced via --animate-*
+   tokens in tokens.css). */
+
+@keyframes trmp-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes trmp-scale-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes trmp-scale-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes trmp-slide-up {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes trmp-slide-down {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 110%, 0);
+  }
+}
+
+@keyframes trmp-slide-in-right {
+  from {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes trmp-pulse {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes trmp-remove {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+}

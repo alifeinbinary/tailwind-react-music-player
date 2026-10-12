@@ -54,7 +54,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['__tests__/setup.ts'],
+    setupFiles: ['__tests__/setup.ts', 'src/test/setup.ts'],
     include: [
       '__tests__/tests/**/*.test.{ts,tsx,js,jsx}',
       'src/**/*.test.{ts,tsx}',
@@ -79,6 +79,12 @@ export default defineConfig({
           branches: 100,
           functions: 100,
           lines: 100,
+        },
+        'src/components/controls/**': {
+          statements: 90,
+          branches: 85,
+          functions: 90,
+          lines: 90,
         },
         'src/hooks/**': {
           statements: 90,

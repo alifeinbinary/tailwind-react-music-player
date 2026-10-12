@@ -30,11 +30,14 @@ The package is **ESM-only** (`"type": "module"`, `exports` map). All library out
 
 ## Styling
 
-- Layout/spacing/typography lives in **Tailwind utility classes inside component `className`s** (`src/**/*.tsx`, scanned via `source('..')` on the utilities import). The CSS files keep only what utilities can't express: keyframes, pseudo-elements, element selectors (`svg`, `ul`, `*`), rc-slider/rc-switch overrides, ancestor-scoped rules (`.player-content > .destroy-btn`, `.music-player .destroy-btn`), and the `.light-theme` / mobile `.audio-item` override layers.
-- Semantic class names (`.tailwind-react-music-player-main`, `.audio-lists-panel`, `.music-player-panel`, ...) are the library's public styling API — they stay on elements alongside utilities; do not rename them; tests and user overrides depend on them.
-- All theme values are exposed as `--rjmp-*` CSS custom properties on `:root` in `theme.css`. End users theme the player by overriding those variables — keep that mechanism intact.
-- `theme.css` values must remain plain values (no `var()` chains to other `--rjmp-*` tokens are fine — they resolve lazily, e.g. `--rjmp-lyric-color`).
-- Light theme rules use `-light` suffixed tokens; mobile uses `-mobile`.
+- v5 uses **Tailwind v4 with the `trmp` prefix** — every utility class in components is `trmp:`-prefixed (`trmp:flex`, `trmp:text-panel-text`), imported via `@import 'tailwindcss/utilities.css' prefix(trmp) source('..')` in `src/styles/index.css`. No Preflight, no `layer()` wrappers, no vendor CSS.
+- Public design tokens live in `src/styles/tokens.css` inside `@theme static { … }` — they emit `--trmp-*` custom properties AND `trmp:` utilities (`--color-panel` → `trmp:bg-panel`, `--spacing-panel` → `trmp:h-panel`). Utilities reference `var(--trmp-*)` so runtime overrides work.
+- Theming: consumers override `--trmp-*` variables. The light theme is a **token remap** on `.trmp-root[data-theme='light']`; mobile layout remaps on `.trmp-root[data-layout='mobile']` — not selector overrides.
+- `src/styles/base.css` holds scoped resets — everything under `.trmp-root` (never global): box-sizing, button/ul resets, focus-visible outline, scrollbar, `input[type=range].trmp-range` native styling (filled portion via inline `--trmp-range-fill` percentage), `prefers-reduced-motion`.
+- `src/styles/keyframes.css` holds the `trmp-*` keyframes referenced by `--animate-*` tokens.
+- Semantic class names (`trmp-icon-button`, `trmp-toast`, `trmp-cover`, …) are the public styling API — always present on the element alongside utilities; do not rename.
+- Note: `prefix()` namespaces theme variables and class names only; Tailwind's private `--tw-*` utility internals remain unprefixed (upstream limitation).
+- The legacy `--rjmp-*` system (`theme.css` et al.) was removed in Phase 3a; legacy components' visuals are expected to be broken until 3b deletes them.
 
 ### Tailwind gotchas in this codebase
 

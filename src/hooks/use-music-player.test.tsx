@@ -908,3 +908,16 @@ describe('useMusicPlayer — unmount', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 })
+
+describe('useMusicPlayer — crossOrigin', () => {
+  it('omits the attribute by default', async () => {
+    const h = await setup()
+    expect(h.audio().hasAttribute('crossorigin')).toBe(false)
+    expect(h.result().audioProps.crossOrigin).toBeUndefined()
+  })
+
+  it('forwards crossOrigin to the audio element', async () => {
+    const h = await setup({ crossOrigin: 'use-credentials' })
+    expect(h.audio().getAttribute('crossorigin')).toBe('use-credentials')
+  })
+})

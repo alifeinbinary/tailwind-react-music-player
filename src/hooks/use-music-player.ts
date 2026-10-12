@@ -328,9 +328,9 @@ export function useMusicPlayer(
       ref: bindAudio,
       src: src ?? undefined,
       preload,
-      crossOrigin: 'anonymous',
+      crossOrigin: options.crossOrigin,
     }),
-    [bindAudio, src, preload],
+    [bindAudio, src, preload, options.crossOrigin],
   )
 
   const stateOut: MusicPlayerState = {

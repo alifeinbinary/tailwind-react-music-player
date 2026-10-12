@@ -410,6 +410,8 @@ export interface UseMusicPlayerOptions extends MusicPlayerCallbacks {
   autoPlay?: boolean
   /** `preload` attribute forwarded to the audio element. Default `'none'`. */
   preload?: 'auto' | 'metadata' | 'none'
+  /** `crossOrigin` attribute forwarded to the audio element. Default: omitted. */
+  crossOrigin?: 'anonymous' | 'use-credentials'
   /** Skip to the next track on load/playback errors. Default `true`. */
   skipOnError?: boolean
   /** Prev button restarts the track when past the restart threshold. Default `false`. */
@@ -492,7 +494,7 @@ export interface MusicPlayerAudioProps {
   ref: (el: HTMLAudioElement | null) => void
   src?: string
   preload: 'auto' | 'metadata' | 'none'
-  crossOrigin?: 'anonymous'
+  crossOrigin?: 'anonymous' | 'use-credentials'
 }
 
 /** Return value of {@link useMusicPlayer}. */
@@ -501,4 +503,66 @@ export interface UseMusicPlayerResult {
   actions: MusicPlayerActions
   audioRef: RefObject<HTMLAudioElement | null>
   audioProps: MusicPlayerAudioProps
+}
+
+/** Non-audio props of the rendered `MusicPlayer` component. */
+export interface MusicPlayerUIProps {
+  className?: string
+  style?: React.CSSProperties
+  /**
+   * Portal container for the player UI. `null` renders inline (no
+   * portal); the default resolves to `document.body` in an effect.
+   */
+  container?: HTMLElement | (() => HTMLElement) | null
+  /** Locale id or partial string overrides. */
+  locale?: import('./i18n').LocaleId | Partial<import('./i18n').Locale>
+  /** Per-slot icon overrides. */
+  icons?: Partial<import('./components/icons').PlayerIcons>
+  draggable?: boolean
+  dragBounds?: string | DraggableBounds
+  defaultPosition?: {
+    top?: number | string
+    left?: number | string
+    right?: number | string
+    bottom?: number | string
+  }
+  allowModeToggle?: boolean
+  responsive?: boolean
+  seekable?: boolean
+  glassBackground?: boolean
+  hideEmptyCover?: boolean
+  showMiniCover?: boolean
+  showMiniProgress?: boolean
+  showBuffered?: boolean
+  showPlayButton?: boolean
+  showReload?: boolean
+  showDownload?: boolean
+  showPlayMode?: boolean
+  showThemeSwitch?: boolean
+  showLyric?: boolean
+  showDestroy?: boolean
+  removable?: boolean
+  sortable?: boolean | Sortable.Options
+  keyboardShortcuts?: boolean
+  /** How long a mode-change toast stays visible (ms). */
+  playModeTipDuration?: number
+  extraControls?: React.ReactNode
+  lyricClassName?: string
+  renderTrackTitle?(info: AudioInfo, isMobile: boolean): React.ReactNode
+  onCoverClick?(info: AudioInfo): void
+  onPlaylistToggle?(open: boolean): void
+  /** Return/resolve `false` to cancel destruction. */
+  onBeforeDestroy?(info: AudioInfo): boolean | void | Promise<boolean | void>
+  onDestroyed?(info: AudioInfo): void
+}
+
+/** Full prop surface of the `MusicPlayer` component. */
+export type MusicPlayerProps = UseMusicPlayerOptions & MusicPlayerUIProps
+
+/** Imperative handle exposed via `ref` on `MusicPlayer`. */
+export interface MusicPlayerHandle extends MusicPlayerActions {
+  /** The live audio element (null before mount). */
+  readonly audio: HTMLAudioElement | null
+  /** Tears down the player UI (subject to `onBeforeDestroy`). */
+  destroy(): void
 }

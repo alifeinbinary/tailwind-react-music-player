@@ -1,0 +1,117 @@
+/* Scoped resets — everything lives under .trmp-root so the player's
+   stylesheet never leaks resets into the consumer's page. */
+
+.trmp-root {
+  box-sizing: border-box;
+  font: inherit;
+}
+
+.trmp-root *,
+.trmp-root *::before,
+.trmp-root *::after {
+  box-sizing: inherit;
+}
+
+.trmp-root button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.trmp-root button:disabled {
+  cursor: default;
+}
+
+.trmp-root ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trmp-root :focus-visible {
+  outline: 2px solid var(--trmp-color-primary);
+  outline-offset: 2px;
+}
+
+.trmp-root::-webkit-scrollbar {
+  width: 8px;
+  background-color: var(--trmp-color-panel);
+}
+
+.trmp-root::-webkit-scrollbar-thumb {
+  height: 20px;
+  background-color: var(--trmp-color-primary);
+  opacity: 0.5;
+}
+
+/* Native range input used by RangeSlider. `--trmp-range-fill` (a
+   percentage set inline by the component) paints the filled portion. */
+input[type='range'].trmp-range {
+  appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
+  -webkit-appearance: none;
+  height: var(--trmp-spacing-track-h);
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type='range'].trmp-range::-webkit-slider-runnable-track {
+  height: var(--trmp-spacing-track-h);
+  border-radius: calc(var(--trmp-spacing-track-h) / 2);
+  background: linear-gradient(
+    to right,
+    var(--trmp-color-primary) var(--trmp-range-fill, 0%),
+    var(--trmp-color-track) var(--trmp-range-fill, 0%)
+  );
+}
+
+input[type='range'].trmp-range::-webkit-slider-thumb {
+  /* stylelint-disable-next-line property-no-vendor-prefix -- required for Safari */
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: calc((var(--trmp-spacing-track-h) - 14px) / 2);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--trmp-color-primary);
+}
+
+input[type='range'].trmp-range::-moz-range-track {
+  height: var(--trmp-spacing-track-h);
+  border-radius: calc(var(--trmp-spacing-track-h) / 2);
+  background: var(--trmp-color-track);
+}
+
+input[type='range'].trmp-range::-moz-range-progress {
+  height: var(--trmp-spacing-track-h);
+  border-radius: calc(var(--trmp-spacing-track-h) / 2);
+  background: var(--trmp-color-primary);
+}
+
+input[type='range'].trmp-range::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--trmp-color-primary);
+}
+
+input[type='range'].trmp-range:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trmp-root * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
