@@ -1,4 +1,4 @@
-import { TailwindReactMusicPlayerTheme } from '../types'
+import { type TailwindReactMusicPlayerTheme } from '../types'
 
 export const THEME: Record<
   'LIGHT' | 'DARK' | 'AUTO',

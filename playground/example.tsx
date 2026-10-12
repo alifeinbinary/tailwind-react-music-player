@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
 import Switch from 'rc-switch'
-import React, { ChangeEvent } from 'react'
+import React, { type ChangeEvent } from 'react'
 import pkg from '../package.json'
 import TailwindReactMusicPlayer, {
-  TailwindReactMusicPlayerAudioInfo,
-  TailwindReactMusicPlayerAudioListProps,
-  TailwindReactMusicPlayerInstance,
-  TailwindReactMusicPlayerMode,
-  TailwindReactMusicPlayerPlayMode,
-  TailwindReactMusicPlayerProps,
-  TailwindReactMusicPlayerTheme,
+  type TailwindReactMusicPlayerAudioInfo,
+  type TailwindReactMusicPlayerAudioListProps,
+  type TailwindReactMusicPlayerInstance,
+  type TailwindReactMusicPlayerMode,
+  type TailwindReactMusicPlayerPlayMode,
+  type TailwindReactMusicPlayerProps,
+  type TailwindReactMusicPlayerTheme,
 } from '../src'
 import Locale from '../src/config/locale'
 import PLAY_MODE from '../src/config/playMode'
@@ -313,7 +313,7 @@ const options: TailwindReactMusicPlayerProps = {
   },
 
   // audio play progress handle
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   onAudioProgress(_audioInfo) {
     // console.log('audio progress', audioInfo)
   },
@@ -387,7 +387,7 @@ const options: TailwindReactMusicPlayerProps = {
     console.log('onBeforeDestroy audioInfo: ', audioInfo)
     return new Promise<void>((resolve, reject) => {
       // your custom validate
-      // eslint-disable-next-line no-alert
+
       if (window.confirm('Are you confirm destroy the player?')) {
         // if resolve, player destroyed
         resolve()
@@ -458,7 +458,8 @@ interface DemoState {
 }
 
 class Demo extends React.PureComponent<object, DemoState> {
-  private audio: TailwindReactMusicPlayerInstance = {} as TailwindReactMusicPlayerInstance
+  private audio: TailwindReactMusicPlayerInstance =
+    {} as TailwindReactMusicPlayerInstance
 
   state: DemoState = {
     unmount: false,
@@ -491,7 +492,6 @@ class Demo extends React.PureComponent<object, DemoState> {
         <button
           type="button"
           onClick={() => {
-            // eslint-disable-next-line no-alert
             alert("I'm extends content")
           }}
         >
@@ -750,7 +750,7 @@ class Demo extends React.PureComponent<object, DemoState> {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/alifeinbinary/react-music-player/blob/master/example/example.js"
+            href="https://github.com/alifeinbinary/react-music-player/blob/master/playground/example.tsx"
           >
             (DEMO SOURCE)
           </a>
@@ -763,7 +763,7 @@ class Demo extends React.PureComponent<object, DemoState> {
             change to second audio list ({audioList2.length})
           </button>
           <button type="button" onClick={this.onQuietUpdateAudioList}>
-            quiet update audio list (don't interrupt current play state) (
+            quiet update audio list (do not interrupt current play state) (
             {audioList3.length})
           </button>
           <button type="button" onClick={this.onQuietUpdateAudioLis2}>

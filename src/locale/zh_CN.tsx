@@ -1,7 +1,5 @@
-/* eslint-disable camelcase */
-import React from 'react'
 import { FaHeadphonesIcon } from '../components/Icon'
-import { TailwindReactMusicPlayerCustomLocale } from '../types'
+import { type TailwindReactMusicPlayerCustomLocale } from '../types'
 
 const zh_CN: TailwindReactMusicPlayerCustomLocale = {
   playModeText: {

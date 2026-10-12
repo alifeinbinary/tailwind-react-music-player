@@ -1,11 +1,11 @@
 import cls from 'classnames'
-import React, { memo, MouseEvent } from 'react'
+import { memo, type MouseEvent } from 'react'
 import { PLAYER_KEY } from '../config/player'
 import SORTABLE_CONFIG from '../config/sortable'
 import {
-  TailwindReactMusicPlayerAudioList,
-  TailwindReactMusicPlayerCustomLocale,
-  TailwindReactMusicPlayerIcon,
+  type TailwindReactMusicPlayerAudioList,
+  type TailwindReactMusicPlayerCustomLocale,
+  type TailwindReactMusicPlayerIcon,
 } from '../types'
 
 interface PanelToggleAnimate {
@@ -53,7 +53,8 @@ const AudioListsPanel = ({
       'audio-lists-panel overflow-hidden fixed right-8.25 bottom-(--rjmp-panel-height) z-999 w-(--rjmp-lists-panel-width) h-(--rjmp-lists-panel-height) text-white/80 origin-bottom-right bg-(--rjmp-panel-bg) transform-[scale(0)] transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) rounded-t-(--rjmp-panel-border-radius)',
       panelToggleAnimate,
       {
-        'audio-lists-panel-mobile w-full! inset-0! h-auto! origin-bottom! bg-(--rjmp-panel-bg-mobile) rounded-none!': isMobile,
+        'audio-lists-panel-mobile w-full! inset-0! h-auto! origin-bottom! bg-(--rjmp-panel-bg-mobile) rounded-none!':
+          isMobile,
         'glass-bg backdrop-blur-[10px]': glassBg,
         'animate-[scaleTo_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]':
           panelToggleAnimate.show && !isMobile,
@@ -101,7 +102,8 @@ const AudioListsPanel = ({
         {
           'no-content flex items-center justify-center [&>span]:flex':
             audioLists.length < 1,
-          'w-full! h-[calc(100vh-var(--rjmp-panel-header-height))]! origin-bottom [-webkit-overflow-scrolling:touch]': isMobile,
+          'w-full! h-[calc(100vh-var(--rjmp-panel-header-height))]! origin-bottom [-webkit-overflow-scrolling:touch]':
+            isMobile,
         },
       )}
     >
@@ -118,13 +120,14 @@ const AudioListsPanel = ({
                   !playing
                     ? (locale.clickToPlayText as string)
                     : isCurrentPlaying
-                    ? (locale.clickToPauseText as string)
-                    : (locale.clickToPlayText as string)
+                      ? (locale.clickToPauseText as string)
+                      : (locale.clickToPlayText as string)
                 }
                 className={cls(
                   'audio-item border-b border-b-transparent px-5 py-0.75 leading-10 flex justify-between items-center text-sm cursor-pointer transition-colors duration-(--rjmp-animate-time) ease-(--rjmp-animate-type) odd:bg-(--rjmp-lists-item-bg) hover:bg-(--rjmp-lists-item-bg-active)! active:bg-(--rjmp-lists-item-bg-active)! [&:is(:hover,:active)_.group_svg]:text-(--rjmp-primary-color)',
                   {
-                    'playing bg-(--rjmp-lists-item-bg-playing)! text-(--rjmp-primary-color) [&_svg]:text-(--rjmp-primary-color)': isCurrentPlaying,
+                    'playing bg-(--rjmp-lists-item-bg-playing)! text-(--rjmp-primary-color) [&_svg]:text-(--rjmp-primary-color)':
+                      isCurrentPlaying,
                     pause: !playing,
                     'remove animate-[remove_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]':
                       removeId === audioId,
@@ -137,10 +140,10 @@ const AudioListsPanel = ({
                     {isCurrentPlaying && loading
                       ? icon.loading
                       : isCurrentPlaying
-                      ? playing
-                        ? icon.pause
-                        : icon.play
-                      : undefined}
+                        ? playing
+                          ? icon.pause
+                          : icon.play
+                        : undefined}
                   </span>
                 </span>
                 <span

@@ -1,7 +1,6 @@
-import React from 'react'
 import { mount, sleep } from '../utils'
 import TailwindReactMusicPlayer from '../../src'
-import lyric from '../../example/lyric'
+import lyric from '../../playground/lyric'
 
 const createPlayer = (props?: any) => (
   <TailwindReactMusicPlayer

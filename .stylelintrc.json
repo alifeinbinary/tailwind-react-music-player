@@ -1,5 +1,6 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "extends": ["stylelint-config-standard"],
+  "ignoreFiles": ["dist/**", "coverage/**", "playground/dist/**", "assets/**"],
   "rules": {
     "comment-empty-line-before": null,
     "at-rule-no-unknown": [
@@ -19,6 +20,8 @@
         ]
       }
     ],
+    "import-notation": null,
+    "keyframes-name-pattern": null,
     "no-invalid-double-slash-comments": null,
     "no-descending-specificity": null,
     "declaration-empty-line-before": null,

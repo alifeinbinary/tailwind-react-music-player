@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="logo" src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/logo.png?raw=true" width="100" max-width="100%">
+  <img alt="logo" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/logo.png?raw=true" width="100" max-width="100%">
 </p>
 
 <h1 align="center">
@@ -64,19 +64,19 @@ npm install tailwind-react-music-player --save
 
 > mini mode <br/>
 
-![mini mode](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/mini.png?raw=true)
+![mini mode](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/mini.png?raw=true)
 
 > Light Theme <br/>
 
-![light theme](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/light-theme.png?raw=true)
+![light theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/light-theme.png?raw=true)
 
 > Dark Theme <br/>
 
-![dark theme](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/dark-theme.png?raw=true)
+![dark theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/dark-theme.png?raw=true)
 
 > mobile <br/>
 
-![mobile](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/mobile.jpg?raw=true)
+![mobile](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/mobile.jpg?raw=true)
 
 ## :sparkles: Feature list
 
@@ -111,7 +111,7 @@ npm install tailwind-react-music-player --save
 
 > local example : [http://localhost:8081/](http://localhost:8081/)
 
-[Source Code](https://github.com/alifeinbinary/react-music-player/blob/master/example/example.js)
+[Source Code](https://github.com/alifeinbinary/react-music-player/blob/master/playground/example.tsx)
 
 ## :memo: Usage
 
@@ -119,7 +119,7 @@ npm install tailwind-react-music-player --save
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TailwindReactMusicPlayer from 'tailwind-react-music-player'
-import 'tailwind-react-music-player/assets/index.css'
+import 'tailwind-react-music-player/styles.css'
 
 ReactDOM.render(
   <TailwindReactMusicPlayer {...options} />,
@@ -130,7 +130,7 @@ ReactDOM.render(
 ## :clipboard: API
 
 | Name | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
+| --- | --- | --- | --- |
 | className | `string` | `-` | Additional CSS class for the root DOM node |
 | audioLists | [AudioListProps[]](#bulb-audiolistprops) | `-` | [Detail](#bulb-audiolistprops) |
 | theme | `light` \| `dark` \| `auto` | `dark` | color of the music player theme `dark`, `light`, `auto (follow system)` | `light` |
@@ -241,13 +241,13 @@ class App extends React.Component {
         <button onClick={() => this.audioInstance.play()}>play</button>
         <button onClick={() => this.audioInstance.pause()}>pause</button>
         <button onClick={() => this.audioInstance.load()}>reload</button>
-        <button onClick={() => this.audioInstance.currentTime = 40}>
+        <button onClick={() => (this.audioInstance.currentTime = 40)}>
           change current play time
         </button>
-        <button onClick={() => this.audioInstance.playbackRate = 2}>
+        <button onClick={() => (this.audioInstance.playbackRate = 2)}>
           change play back rate
         </button>
-        <button onClick={() => this.audioInstance.volume = 0.2}>
+        <button onClick={() => (this.audioInstance.volume = 0.2)}>
           change volume
         </button>
         <button onClick={() => this.audioInstance.destroy()}>
@@ -274,8 +274,8 @@ class App extends React.Component {
 ```
 
 <p>
-<img alt="glass-1" src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/glass-1.png?raw=true" width="200" max-width="49%">
-<img alt="glass-2" src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/glass-2.png?raw=true" width="200" max-width="49%">
+<img alt="glass-1" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/glass-1.png?raw=true" width="200" max-width="49%">
+<img alt="glass-2" src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/glass-2.png?raw=true" width="200" max-width="49%">
 </p>
 
 ## :bulb: Custom downloader
@@ -351,8 +351,8 @@ const onDestroyed = (currentPlayId, audioLists, audioInfo) => {
 <TailwindReactMusicPlayer showMediaSession />
 ```
 
-<img src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/media-session-destop.png" max-width="100%"/>
-<img src="https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/media-session-mobile.jpeg" width="400" max-width="100%"/>
+<img src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/media-session-destop.png" max-width="100%"/>
+<img src="https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/media-session-mobile.jpeg" width="400" max-width="100%"/>
 
 ## :bulb: Internationalization
 
@@ -409,14 +409,11 @@ const customLocale = {
 
 ## :bulb: Customize Theme
 
-The player's styles are compiled with [Tailwind CSS](https://tailwindcss.com)
-and every theme value is exposed as a plain CSS custom property. To customize
-the theme, just override the variables in your own stylesheet — no
-preprocessor or build tooling required:
+The player's styles are compiled with [Tailwind CSS](https://tailwindcss.com) and every theme value is exposed as a plain CSS custom property. To customize the theme, just override the variables in your own stylesheet — no preprocessor or build tooling required:
 
 ```jsx
 import TailwindReactMusicPlayer from 'tailwind-react-music-player'
-import 'tailwind-react-music-player/assets/index.css'
+import 'tailwind-react-music-player/styles.css'
 ```
 
 ```css
@@ -443,52 +440,50 @@ Variables can also be scoped to a single player instance:
 
 ### Theme variables
 
-Variables suffixed with `-light` or `-mobile` apply to the `light` theme and
-the mobile layout respectively; un-suffixed variables apply to the default
-(dark) theme.
+Variables suffixed with `-light` or `-mobile` apply to the `light` theme and the mobile layout respectively; un-suffixed variables apply to the default (dark) theme.
 
-| Variable                                 | Default                 | Description                          |
-| ---------------------------------------- | ----------------------- | ------------------------------------ |
-| `--rjmp-primary-color`                   | `#31c27c`               | Accent color (icons, progress, etc.) |
-| `--rjmp-primary-color-hover`             | primary + 5% white      | Accent color on hover                |
-| `--rjmp-panel-bg`                        | `rgba(0, 0, 0, 0.75)`   | Bottom player bar background         |
-| `--rjmp-panel-bg-light`                  | `#fff`                  | Bottom bar background (light)        |
-| `--rjmp-panel-bg-mobile`                 | `rgba(0, 0, 0, 0.75)`   | Mobile player background             |
-| `--rjmp-panel-color`                     | `#fff`                  | Bottom bar text color                |
-| `--rjmp-panel-color-light`               | `#7d7d7d`               | Bottom bar text color (light)        |
-| `--rjmp-panel-height`                    | `80px`                  | Bottom bar height                    |
-| `--rjmp-panel-header-height`             | `50px`                  | Audio lists panel header height      |
-| `--rjmp-panel-border-radius`             | `4px`                   | Audio lists panel corner radius      |
-| `--rjmp-player-size`                     | `80px`                  | Mini mode controller size            |
-| `--rjmp-player-size-mobile`              | `60px`                  | Mini controller size (mobile)        |
-| `--rjmp-controller-bg`                   | `#e6e6e6`               | Mini controller background           |
-| `--rjmp-controller-bg-light`             | `#fff`                  | Mini controller background (light)   |
-| `--rjmp-font-color`                      | `#444`                  | Light theme text color               |
-| `--rjmp-base-color`                      | `rgba(255,255,255,0.6)` | Muted text / slider rail color       |
-| `--rjmp-bg-color`                        | `#f7f8fa`               | Scrollbar track / button background  |
-| `--rjmp-lists-panel-width`               | `480px`                 | Audio lists panel width              |
-| `--rjmp-lists-panel-height`              | `410px`                 | Audio lists panel height             |
-| `--rjmp-lists-item-bg`                   | `rgba(0, 0, 0, 0.1)`    | Odd row background                   |
-| `--rjmp-lists-item-bg-playing`           | `rgba(0, 0, 0, 0.35)`   | Playing row background               |
-| `--rjmp-lists-item-bg-active`            | `rgba(0, 0, 0, 0.35)`   | Row hover background                 |
-| `--rjmp-lists-item-bg-mobile`            | `rgba(0, 0, 0, 0.15)`   | Row background (mobile)              |
-| `--rjmp-lists-item-bg-playing-mobile`    | `rgba(0, 0, 0, 0.75)`   | Playing row background (mobile)      |
-| `--rjmp-lists-item-bg-active-mobile`     | `rgba(0, 0, 0, 0.15)`   | Row hover background (mobile)        |
-| `--rjmp-lists-item-bg-light`             | `#fff`                  | Row background (light)               |
-| `--rjmp-lists-item-bg-playing-light`     | `#f2f2f2`               | Playing row background (light)       |
-| `--rjmp-lists-item-bg-active-light`      | `#fafafa`               | Row hover/odd background (light)     |
-| `--rjmp-lists-item-singer-color-light`   | `rgba(162,162,162,.45)` | Singer text color (light)            |
-| `--rjmp-lists-sortable-highlight-bg`     | primary at 15% alpha    | Drag-to-sort highlight color         |
-| `--rjmp-progress-bar-height`             | `5px`                   | Progress bar height                  |
-| `--rjmp-progress-bar-bg`                 | `#fff`                  | Progress rail color                  |
-| `--rjmp-progress-bar-bg-light`           | `rgba(0, 0, 0, 0.09)`   | Progress rail color (light)          |
-| `--rjmp-progress-load-bar-bg`            | `rgba(0, 0, 0, 0.11)`   | Buffered-progress bar color          |
-| `--rjmp-progress-load-bar-bg-light`      | `rgba(0, 0, 0, 0.06)`   | Buffered-progress color (light)      |
-| `--rjmp-lyric-color`                     | `var(--rjmp-primary-color)` | Floating lyric color             |
-| `--rjmp-lyric-font-size`                 | `36px`                  | Floating lyric font size             |
-| `--rjmp-lyric-font-size-mobile`          | `16px`                  | Floating lyric font size (mobile)    |
-| `--rjmp-animate-time`                    | `350ms`                 | Default transition duration          |
-| `--rjmp-animate-type`                    | `cubic-bezier(0.43, -0.1, 0.16, 1.1)` | Default easing         |
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--rjmp-primary-color` | `#31c27c` | Accent color (icons, progress, etc.) |
+| `--rjmp-primary-color-hover` | primary + 5% white | Accent color on hover |
+| `--rjmp-panel-bg` | `rgba(0, 0, 0, 0.75)` | Bottom player bar background |
+| `--rjmp-panel-bg-light` | `#fff` | Bottom bar background (light) |
+| `--rjmp-panel-bg-mobile` | `rgba(0, 0, 0, 0.75)` | Mobile player background |
+| `--rjmp-panel-color` | `#fff` | Bottom bar text color |
+| `--rjmp-panel-color-light` | `#7d7d7d` | Bottom bar text color (light) |
+| `--rjmp-panel-height` | `80px` | Bottom bar height |
+| `--rjmp-panel-header-height` | `50px` | Audio lists panel header height |
+| `--rjmp-panel-border-radius` | `4px` | Audio lists panel corner radius |
+| `--rjmp-player-size` | `80px` | Mini mode controller size |
+| `--rjmp-player-size-mobile` | `60px` | Mini controller size (mobile) |
+| `--rjmp-controller-bg` | `#e6e6e6` | Mini controller background |
+| `--rjmp-controller-bg-light` | `#fff` | Mini controller background (light) |
+| `--rjmp-font-color` | `#444` | Light theme text color |
+| `--rjmp-base-color` | `rgba(255,255,255,0.6)` | Muted text / slider rail color |
+| `--rjmp-bg-color` | `#f7f8fa` | Scrollbar track / button background |
+| `--rjmp-lists-panel-width` | `480px` | Audio lists panel width |
+| `--rjmp-lists-panel-height` | `410px` | Audio lists panel height |
+| `--rjmp-lists-item-bg` | `rgba(0, 0, 0, 0.1)` | Odd row background |
+| `--rjmp-lists-item-bg-playing` | `rgba(0, 0, 0, 0.35)` | Playing row background |
+| `--rjmp-lists-item-bg-active` | `rgba(0, 0, 0, 0.35)` | Row hover background |
+| `--rjmp-lists-item-bg-mobile` | `rgba(0, 0, 0, 0.15)` | Row background (mobile) |
+| `--rjmp-lists-item-bg-playing-mobile` | `rgba(0, 0, 0, 0.75)` | Playing row background (mobile) |
+| `--rjmp-lists-item-bg-active-mobile` | `rgba(0, 0, 0, 0.15)` | Row hover background (mobile) |
+| `--rjmp-lists-item-bg-light` | `#fff` | Row background (light) |
+| `--rjmp-lists-item-bg-playing-light` | `#f2f2f2` | Playing row background (light) |
+| `--rjmp-lists-item-bg-active-light` | `#fafafa` | Row hover/odd background (light) |
+| `--rjmp-lists-item-singer-color-light` | `rgba(162,162,162,.45)` | Singer text color (light) |
+| `--rjmp-lists-sortable-highlight-bg` | primary at 15% alpha | Drag-to-sort highlight color |
+| `--rjmp-progress-bar-height` | `5px` | Progress bar height |
+| `--rjmp-progress-bar-bg` | `#fff` | Progress rail color |
+| `--rjmp-progress-bar-bg-light` | `rgba(0, 0, 0, 0.09)` | Progress rail color (light) |
+| `--rjmp-progress-load-bar-bg` | `rgba(0, 0, 0, 0.11)` | Buffered-progress bar color |
+| `--rjmp-progress-load-bar-bg-light` | `rgba(0, 0, 0, 0.06)` | Buffered-progress color (light) |
+| `--rjmp-lyric-color` | `var(--rjmp-primary-color)` | Floating lyric color |
+| `--rjmp-lyric-font-size` | `36px` | Floating lyric font size |
+| `--rjmp-lyric-font-size-mobile` | `16px` | Floating lyric font size (mobile) |
+| `--rjmp-animate-time` | `350ms` | Default transition duration |
+| `--rjmp-animate-type` | `cubic-bezier(0.43, -0.1, 0.16, 1.1)` | Default easing |
 
 ## :bulb: Customize audio duration
 
@@ -534,7 +529,7 @@ export interface TailwindReactMusicPlayerIcon {
 <TailwindReactMusicPlayer theme="auto" />
 ```
 
-![auto-theme](https://github.com/alifeinbinary/react-music-player/blob/master/assetsImg/auto-theme.gif?raw=true)
+![auto-theme](https://github.com/alifeinbinary/react-music-player/blob/master/docs/assets/img/auto-theme.gif?raw=true)
 
 ## :bulb: Quiet update
 
@@ -580,7 +575,7 @@ function App() {
   <head>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/tailwind-react-music-player@4.18.1/assets/index.css"
+      href="https://unpkg.com/tailwind-react-music-player@5.0.0-alpha.0/styles.css"
     />
   </head>
   <body>
@@ -604,7 +599,7 @@ function App() {
 // components/Player.js
 import React from 'react'
 import TailwindReactMusicPlayer from 'tailwind-react-music-player'
-import styles from 'tailwind-react-music-player/assets/index.module.css'
+import styles from 'tailwind-react-music-player/styles.css'
 
 export const Player = () => <TailwindReactMusicPlayer />
 

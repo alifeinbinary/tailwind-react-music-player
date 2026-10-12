@@ -12,7 +12,10 @@ const g = globalThis as any
 g.IS_REACT_ACT_ENVIRONMENT = true
 
 g.window = window
-g.document = window.document
+// jsdom 27 exposes `document` as a getter-only global; it is already window.document
+if (!('document' in g)) {
+  Object.defineProperty(g, 'document', { value: window.document })
+}
 Object.defineProperty(window.navigator, 'userAgent', {
   value: 'node.js',
   configurable: true,

@@ -1,70 +1,64 @@
 {
   "name": "tailwind-react-music-player",
-  "version": "4.24.2",
-  "description": "Maybe the best beautiful HTML5 responsive player component for react",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "unpkg": "dist/tailwind-react-music-player.min.js",
-  "typings": "dist/index.d.ts",
+  "version": "5.0.0-alpha.0",
+  "description": "Accessible, themeable HTML5 music player component for React, styled with Tailwind CSS",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist",
-    "assets",
-    "LICENCE"
+    "LICENCE",
+    "MIGRATION.md"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "start": "yarn demo",
-    "build:clean": "rimraf dist assets",
+    "build:clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true})\"",
     "lint": "yarn lint:js && yarn lint:style",
     "lint:fix": "yarn lint-fix:js && yarn lint-fix:style",
-    "lint:js": "./node_modules/.bin/eslint ./src ./__tests__ --ext .ts,.tsx",
-    "lint:style": "stylelint '{example,src}/**/*.css'",
+    "lint:js": "eslint .",
+    "lint:style": "stylelint \"{playground,src}/**/*.css\"",
     "lint-fix:js": "yarn lint:js --fix",
     "lint-fix:style": "yarn lint:style --fix",
-    "typecheck": "tsc --noEmit",
-    "build:css": "tailwindcss -i src/styles/index.css -o assets/index.css --minify",
-    "build:js": "yarn build:bundle && yarn build:umd",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.build.json --noEmit",
+    "build:css": "tailwindcss -i src/styles/index.css -o dist/styles.css --minify",
     "build:bundle": "vite build",
-    "build:umd": "vite build --mode umd",
-    "build": "yarn build:clean && yarn build:js && yarn build:css && yarn copy:module-css",
-    "copy:module-css": "cp ./assets/index.css ./assets/index.module.css",
-    "build:demo": "vite build example",
-    "build:netlify": "cross-env NETLIFY=1 yarn build:demo",
-    "build:surge": "cross-env SURGE=1 yarn build:demo",
-    "demo": "vite example",
+    "build": "yarn build:clean && yarn build:bundle && yarn build:css",
+    "build:demo": "vite build playground",
+    "build:netlify": "NETLIFY=1 yarn build:demo",
+    "build:surge": "SURGE=1 yarn build:demo",
+    "demo": "vite playground",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "ci:coverage": "yarn test:coverage && codecov",
     "prepublishOnly": "yarn build",
-    "prettier": "prettier -c --write '**/*'",
-    "pretty:quick": "pretty-quick",
-    "lint-staged": "lint-staged",
+    "prettier": "prettier --check .",
+    "format": "prettier --write .",
+    "size": "size-limit",
+    "check:package": "publint --pack npm && attw --pack .",
+    "smoke:import": "node -e \"import('./dist/index.js').then(()=>console.log('ESM import OK'))\"",
     "release": "semantic-release",
-    "bundlesize": "bundlesize",
-    "prepare": "husky install"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-emoji"
-    }
-  },
-  "sideEffects": [
-    "assets/*",
-    "dist/*",
-    "*.css"
-  ],
-  "lint-staged": {
-    "*.{css,json}": [
-      "prettier --write"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "prepare": "husky"
   },
   "author": "Andrew Halliwell <andrew@alifeinbinary.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alifeinbinary/react-music-player"
+    "url": "git+https://github.com/alifeinbinary/react-music-player.git"
   },
   "homepage": "https://alifeinbinary.github.io/react-music-player",
   "bugs": {
@@ -97,66 +91,61 @@
     "react-draggable": "^4.7.2",
     "sortablejs": "^1.15.7"
   },
-  "bundlesize": [
-    {
-      "path": "./dist/tailwind-react-music-player.min.js",
-      "maxSize": "250 kB"
-    }
-  ],
   "devDependencies": {
-    "@commitlint/config-conventional": "^12.1.1",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.39.5",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@size-limit/preset-small-lib": "^14.1.0",
     "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.3.0",
     "@types/downloadjs": "^1",
-    "@types/node": "^24",
+    "@types/node": "^26.6.4",
     "@types/prop-types": "^15",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/sortablejs": "^1.15.9",
-    "@typescript-eslint/eslint-plugin": "^8",
-    "@typescript-eslint/parser": "^8",
-    "@vitejs/plugin-react": "^6.1.2",
+    "@vitejs/plugin-react": "^6.1.1",
     "@vitest/coverage-v8": "^5.0.3",
-    "bundlesize": "^0.18.1",
-    "codecov": "^3.8.3",
-    "commitizen": "^4.3.2",
-    "commitlint": "^12.1.1",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.32.0",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^6.0.0",
-    "jsdom": "^16.5.3",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.13.0",
+    "husky": "^9.1.7",
+    "jsdom": "^26",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.9",
+    "publint": "^0.3.25",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "rimraf": "^3.0.2",
-    "semantic-release": "^17.4.2",
-    "stylelint": "^13.13.1",
-    "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-standard": "^22.0.0",
+    "semantic-release": "^24.2.9",
+    "size-limit": "^14.1.0",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard": "^39.0.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~5.9.0",
-    "vite": "^8.3.4",
+    "typescript-eslint": "^8.71.0",
+    "vite": "^8.3.2",
     "vite-plugin-dts": "^5.1.2",
     "vitest": "^5.0.3"
   },
   "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
-  "resolutions": {
-    "bundlesize/brotli-size": "4.0.0"
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json,md,yml}": [
+      "prettier --write"
+    ]
   }
 }

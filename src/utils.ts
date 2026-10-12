@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable radix */
-/* eslint-disable no-bitwise */
 export function formatTime(second: number): string {
   let i = 0
   let h = 0

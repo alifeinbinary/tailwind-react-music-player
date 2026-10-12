@@ -2,71 +2,52 @@ name: CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
-
+        node: [20, 22, 24]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Get commit message
-        run: |
-          COMMIT_MESSAGE=$(git log --format=%B -n 1)
-          echo "commitmsg=${COMMIT_MESSAGE}" >> $GITHUB_ENV
-
-      - name: Show commit message
-        run: echo "$commitmsg"
-
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
+          node-version: ${{ matrix.node }}
+          cache: yarn
+      - run: yarn --frozen-lockfile
+      - run: yarn lint
+      - run: yarn typecheck
+      - run: yarn test:coverage
+      - run: yarn build
+      - run: yarn size
+      # allow-fail until Phase 3 fixes the ESM/packaging issues it reports
+      - run: yarn check:package || true
+      - name: Upload coverage
+        if: matrix.node == 22
+        uses: codecov/codecov-action@v4
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          fail_ci_if_error: false
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Lint scripts and styles
-        run: yarn lint
-
-      - name: Build, and test
-        run: |
-          yarn build
-          yarn bundlesize
-          yarn test
-          yarn ci:coverage
-        env:
-          CI: true
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-          BUNDLESIZE_GITHUB_TOKEN: ${{ secrets.BUNDLESIZE_GITHUB_TOKEN }}
-
-      - name: Build example page
-        if: github.event_name == 'push' && startsWith( env.commitmsg , 'chore(release):' ) || startsWith( env.commitmsg , 'docs:' )
-        run: yarn build:demo
-
-      - name: Deploy github pages
-        if: github.event_name == 'push' && startsWith( env.commitmsg , 'chore(release):' ) || startsWith( env.commitmsg , 'docs:' )
-        uses: peaceiris/actions-gh-pages@v3
+  deploy-pages:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn --frozen-lockfile
+      - run: yarn build:demo
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: example/dist
+          publish_dir: playground/dist

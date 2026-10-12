@@ -1,5 +1,5 @@
 import cls from 'classnames'
-import React, { memo, ReactNode } from 'react'
+import { memo, type ReactNode } from 'react'
 
 export interface PlayModeTipProps {
   prefix: string

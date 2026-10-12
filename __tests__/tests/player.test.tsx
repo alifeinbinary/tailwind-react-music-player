@@ -1,9 +1,7 @@
-/* eslint-disable no-console */
 import { fireEvent } from '@testing-library/react'
 import assert from 'assert'
-import React from 'react'
 import TailwindReactMusicPlayer, {
-  TailwindReactMusicPlayerAudioInfo,
+  type TailwindReactMusicPlayerAudioInfo,
 } from '../../src'
 import PlayerMobile from '../../src/components/PlayerMobile'
 import { SPACE_BAR_KEYCODE } from '../../src/config/keycode'

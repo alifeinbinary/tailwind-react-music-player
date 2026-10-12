@@ -1,5 +1,5 @@
 // 迷你模式进度条
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 const circleClass =
   'transform-[matrix(0,-1,1,0,0,80)] max-md:transform-[matrix(0,-1,1,0,0,60)] transition-[stroke-dasharray] duration-(--rjmp-animate-time) ease-(--rjmp-animate-type)'

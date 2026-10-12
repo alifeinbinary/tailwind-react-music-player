@@ -1,26 +1,28 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
-    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
+    // TODO(phase-3): remove with the class component
     "useDefineForClassFields": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["vitest/globals", "vite/client", "node"]
   },
   "include": [
     "src",
-    "example",
+    "playground",
     "__tests__",
     "vite.config.ts",
-    "example/vite.config.ts"
+    "playground/vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "lib", "es", "example/dist"]
+  "exclude": ["node_modules", "dist", "playground/dist"]
 }

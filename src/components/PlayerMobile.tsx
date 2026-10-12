@@ -1,8 +1,8 @@
 import cls from 'classnames'
-import React, { isValidElement, memo, ReactNode } from 'react'
+import React, { isValidElement, memo, type ReactNode } from 'react'
 import {
-  TailwindReactMusicPlayerCustomLocale,
-  TailwindReactMusicPlayerIcon,
+  type TailwindReactMusicPlayerCustomLocale,
+  type TailwindReactMusicPlayerIcon,
 } from '../types'
 import PlayModeTip from './PlayModeTip'
 
@@ -130,7 +130,8 @@ const PlayerMobile: React.FC<PlayerMobileProps> = ({
             {
               'img-rotate-pause [animation-play-state:paused]!':
                 !playing || !cover,
-              'img-rotate-reset animate-[coverReset_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]!': isResetCoverRotate,
+              'img-rotate-reset animate-[coverReset_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]!':
+                isResetCoverRotate,
             },
           )}
         />

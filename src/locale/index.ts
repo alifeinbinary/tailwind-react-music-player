@@ -1,6 +1,5 @@
-/* eslint-disable camelcase */
 import LOCALE from '../config/locale'
-import { TailwindReactMusicPlayerCustomLocale } from '../types'
+import { type TailwindReactMusicPlayerCustomLocale } from '../types'
 import en_US from './en_US'
 import en_GB from './en_GB'
 import zh_CN from './zh_CN'

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DraggableBounds } from 'react-draggable'
+import { type DraggableBounds } from 'react-draggable'
 import Sortable from 'sortablejs'
 
 export interface TailwindReactMusicPlayerAudioInfo {
@@ -26,10 +26,7 @@ export interface TailwindReactMusicPlayerAudioInfo {
 export type TailwindReactMusicPlayerTheme = 'dark' | 'light' | 'auto'
 export type TailwindReactMusicPlayerMode = 'mini' | 'full'
 export type TailwindReactMusicPlayerPlayMode =
-  | 'order'
-  | 'orderLoop'
-  | 'singleLoop'
-  | 'shufflePlay'
+  'order' | 'orderLoop' | 'singleLoop' | 'shufflePlay'
 
 export interface TailwindReactMusicPlayerAudioListProps {
   name?: React.ReactNode
@@ -41,9 +38,10 @@ export interface TailwindReactMusicPlayerAudioListProps {
   [key: string]: any
 }
 
-export type TailwindReactMusicPlayerAudioList = TailwindReactMusicPlayerAudioListProps & {
-  __PLAYER_KEY__?: string
-}
+export type TailwindReactMusicPlayerAudioList =
+  TailwindReactMusicPlayerAudioListProps & {
+    __PLAYER_KEY__?: string
+  }
 
 export interface TailwindReactMusicPlayerInstance extends HTMLAudioElement {
   destroy?: () => void
@@ -120,9 +118,7 @@ export interface TailwindReactMusicPlayerCustomLocale {
 }
 
 export type TailwindReactMusicPlayerLocale =
-  | 'zh_CN'
-  | 'en_US'
-  | TailwindReactMusicPlayerCustomLocale
+  'zh_CN' | 'en_US' | TailwindReactMusicPlayerCustomLocale
 
 export interface TransformedDownloadAudioInfo {
   src: string

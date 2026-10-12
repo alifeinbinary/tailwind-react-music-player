@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-import React from 'react'
 import assert from 'assert'
 
 import TailwindReactMusicPlayer from '../../src'

@@ -1,4 +1,4 @@
-import { TailwindReactMusicPlayerPlayMode } from '../types'
+import { type TailwindReactMusicPlayerPlayMode } from '../types'
 
 const PLAY_MODE: Record<
   TailwindReactMusicPlayerPlayMode,

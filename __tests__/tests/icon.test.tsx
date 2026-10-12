@@ -1,6 +1,5 @@
-import React from 'react'
 import { mount } from '../utils'
-import lyric from '../../example/lyric'
+import lyric from '../../playground/lyric'
 import TailwindReactMusicPlayer from '../../src'
 
 const PauseIcon = () => <div>1</div>

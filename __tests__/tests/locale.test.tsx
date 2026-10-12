@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
-import React from 'react'
 import TailwindReactMusicPlayer from '../../src'
-import { mount, PlayerWrapper } from '../utils'
+import { mount, type PlayerWrapper } from '../utils'
 
 const getTitle = (wrapper: PlayerWrapper, className: string, at?: number) => {
   const found = wrapper.find(className)

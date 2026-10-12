@@ -5,6 +5,7 @@
  * @license MIT
  */
 
+/* eslint-disable @typescript-eslint/no-unused-expressions -- TODO(phase-3): replace `x && x.y()` expressions in the class rewrite */
 import cls from 'classnames'
 import download from 'downloadjs'
 import getIsMobile from 'is-mobile'
@@ -13,13 +14,16 @@ import Switch from 'rc-switch'
 import React, {
   cloneElement,
   createRef,
-  MouseEvent,
+  type MouseEvent,
   PureComponent,
-  ReactElement,
-  ReactNode,
+  type ReactElement,
+  type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
-import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
+import Draggable, {
+  type DraggableData,
+  type DraggableEvent,
+} from 'react-draggable'
 import Sortable, { Swap } from 'sortablejs'
 import AudioListsPanel from './components/AudioListsPanel'
 import CircleProcessBar from './components/CircleProcessBar'
@@ -69,18 +73,18 @@ import {
 } from './config/player'
 import SORTABLE_CONFIG from './config/sortable'
 import LOCALE_CONFIG from './locale'
-import Lyric, { LyricHandlerParams } from './lyric'
+import Lyric, { type LyricHandlerParams } from './lyric'
 import {
-  TailwindReactMusicPlayerAudioInfo,
-  TailwindReactMusicPlayerAudioList,
-  TailwindReactMusicPlayerCustomLocale,
-  TailwindReactMusicPlayerInstance,
-  TailwindReactMusicPlayerMode,
-  TailwindReactMusicPlayerPlayMode,
-  TailwindReactMusicPlayerProps,
-  TailwindReactMusicPlayerState,
-  TailwindReactMusicPlayerTheme,
-  TransformedDownloadAudioInfo,
+  type TailwindReactMusicPlayerAudioInfo,
+  type TailwindReactMusicPlayerAudioList,
+  type TailwindReactMusicPlayerCustomLocale,
+  type TailwindReactMusicPlayerInstance,
+  type TailwindReactMusicPlayerMode,
+  type TailwindReactMusicPlayerPlayMode,
+  type TailwindReactMusicPlayerProps,
+  type TailwindReactMusicPlayerState,
+  type TailwindReactMusicPlayerTheme,
+  type TransformedDownloadAudioInfo,
 } from './types'
 import {
   adjustVolume,
@@ -315,7 +319,7 @@ export default class TailwindReactMusicPlayer extends PureComponent<
   constructor(props: TailwindReactMusicPlayerProps) {
     super(props)
 
-    this.audio = (null as unknown) as HTMLAudioElement
+    this.audio = null as unknown as HTMLAudioElement
     this.targetId = 'music-player-controller'
 
     this._PLAY_MODE_ = Object.values(PLAY_MODE)
@@ -392,8 +396,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
       preload === false || preload === 'none'
         ? {}
         : preload === true
-        ? { preload: 'auto' }
-        : { preload }
+          ? { preload: 'auto' }
+          : { preload }
 
     const panelToggleAnimate: { show: boolean; hide?: boolean } = initAnimate
       ? { show: audioListsPanelVisible, hide: !audioListsPanelVisible }
@@ -486,7 +490,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
           PLAYER_CONTENT_SCOPED_GROUP_CLASS,
           'lyric-btn [&_svg]:text-[20px]',
           {
-            'lyric-btn-active text-(--rjmp-primary-color)! [&_svg]:text-(--rjmp-primary-color)!': audioLyricVisible,
+            'lyric-btn-active text-(--rjmp-primary-color)! [&_svg]:text-(--rjmp-primary-color)!':
+              audioLyricVisible,
           },
         )}
         onClick={this.toggleAudioLyric}
@@ -669,7 +674,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
                     {
                       'img-rotate-pause [animation-play-state:paused]!':
                         !playing || !cover,
-                      'img-rotate-reset animate-[coverReset_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]!': isResetCoverRotate,
+                      'img-rotate-reset animate-[coverReset_var(--rjmp-animate-time)_var(--rjmp-animate-type)_forwards]!':
+                        isResetCoverRotate,
                     },
                   )}
                   style={{ backgroundImage: `url(${cover})` }}
@@ -1001,7 +1007,6 @@ export default class TailwindReactMusicPlayer extends PureComponent<
       canPlay,
     } = state
     if (Array.isArray(audioLists) && audioLists.length === 0) {
-      // eslint-disable-next-line no-console
       return console.warn(
         'Warning: Your playlist has no songs. and cannot play !',
       )
@@ -1012,9 +1017,13 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     const playIndex = audioLists.findIndex(
       (audio) => audio[PLAYER_KEY] === playId,
     )
-    const { name, cover, musicSrc, singer, lyric = '' } = (audioLists[
-      playIndex
-    ] || {}) as TailwindReactMusicPlayerAudioList
+    const {
+      name,
+      cover,
+      musicSrc,
+      singer,
+      lyric = '',
+    } = (audioLists[playIndex] || {}) as TailwindReactMusicPlayerAudioList
 
     const loadAudio = (originMusicSrc: string) => {
       this.setState(
@@ -1174,9 +1183,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     if (this.state.musicSrc) {
       const { customDownloader } = this.props
       const baseAudioInfo = this.getBaseAudioInfo()
-      const onBeforeAudioDownload = this.props.onBeforeAudioDownload(
-        baseAudioInfo,
-      )
+      const onBeforeAudioDownload =
+        this.props.onBeforeAudioDownload(baseAudioInfo)
       let transformedDownloadAudioInfo = {} as TransformedDownloadAudioInfo
       if (onBeforeAudioDownload && onBeforeAudioDownload.then) {
         onBeforeAudioDownload.then((info) => {
@@ -1438,28 +1446,26 @@ export default class TailwindReactMusicPlayer extends PureComponent<
       ) {
         this.setState({ currentVolumeFade: VOLUME_FADE.OUT })
         // Fade in from current volume to 0
-        const {
-          fadeInterval: fadeOutInterval,
-          updateIntervalEndVolume,
-        } = adjustVolume(
-          this.audio,
-          this.audio.volume,
-          0,
-          {
-            duration: fadeOut,
-          },
-          () => {
-            this.audio.pause()
-            this.setState({
-              currentVolumeFade: VOLUME_FADE.NONE,
-              currentVolumeFadeInterval: undefined,
-              playing: false,
-              updateIntervalEndVolume: undefined,
-            })
-            // Restore volume so slider does not reset to zero
-            this.audio.volume = this.getListeningVolume(this.state.soundValue)
-          },
-        )
+        const { fadeInterval: fadeOutInterval, updateIntervalEndVolume } =
+          adjustVolume(
+            this.audio,
+            this.audio.volume,
+            0,
+            {
+              duration: fadeOut,
+            },
+            () => {
+              this.audio.pause()
+              this.setState({
+                currentVolumeFade: VOLUME_FADE.NONE,
+                currentVolumeFadeInterval: undefined,
+                playing: false,
+                updateIntervalEndVolume: undefined,
+              })
+              // Restore volume so slider does not reset to zero
+              this.audio.volume = this.getListeningVolume(this.state.soundValue)
+            },
+          )
 
         this.setState({
           currentVolumeFadeInterval: fadeOutInterval,
@@ -1470,26 +1476,24 @@ export default class TailwindReactMusicPlayer extends PureComponent<
         // Start volume may not be 0 if interrupting a fade-out
         const startVolume = isCurrentlyFading ? this.audio.volume : 0
         const endVolume = this.getListeningVolume(this.state.soundValue)
-        const {
-          fadeInterval: fadeInInterval,
-          updateIntervalEndVolume,
-        } = adjustVolume(
-          this.audio,
-          startVolume,
-          endVolume,
-          {
-            duration: fadeIn,
-          },
-          () => {
-            this.setState({
-              currentVolumeFade: VOLUME_FADE.NONE,
-              currentVolumeFadeInterval: undefined,
-              updateIntervalEndVolume: undefined,
-            })
-            // It's possible that the volume level in the UI has changed since beginning of fade
-            this.audio.volume = this.getListeningVolume(this.state.soundValue)
-          },
-        )
+        const { fadeInterval: fadeInInterval, updateIntervalEndVolume } =
+          adjustVolume(
+            this.audio,
+            startVolume,
+            endVolume,
+            {
+              duration: fadeIn,
+            },
+            () => {
+              this.setState({
+                currentVolumeFade: VOLUME_FADE.NONE,
+                currentVolumeFadeInterval: undefined,
+                updateIntervalEndVolume: undefined,
+              })
+              // It's possible that the volume level in the UI has changed since beginning of fade
+              this.audio.volume = this.getListeningVolume(this.state.soundValue)
+            },
+          )
 
         this.setState(
           {
@@ -1697,8 +1701,9 @@ export default class TailwindReactMusicPlayer extends PureComponent<
           if (randomIndex === this.getCurrentPlayIndex()) {
             randomIndex = this.getPlayIndex(randomIndex + 1)
           }
-          const randomPlayId = ((audioLists[randomIndex] ||
-            {}) as TailwindReactMusicPlayerAudioList)[PLAYER_KEY]
+          const randomPlayId = (
+            (audioLists[randomIndex] || {}) as TailwindReactMusicPlayerAudioList
+          )[PLAYER_KEY]
           this.audioListsPlay(randomPlayId as string, true)
         }
         break
@@ -1857,8 +1862,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
     // If the dragged song is currently playing, the playId equals the index after dragging
     const _playId =
-      oldIndex === ((playId as unknown) as number)
-        ? ((newIndex as unknown) as string)
+      oldIndex === (playId as unknown as number)
+        ? (newIndex as unknown as string)
         : playId
 
     this.setState({ audioLists: _audioLists, playId: _playId })
@@ -1875,7 +1880,6 @@ export default class TailwindReactMusicPlayer extends PureComponent<
 
     // TODO: remove
     if (this.props.onAudioListsDragEnd) {
-      // eslint-disable-next-line no-console
       console.warn(
         '[Deprecated] onAudioListsDragEnd is deprecated. please use onAudioListsSortEnd(oldIndex, newIndex){}',
       )
@@ -1910,13 +1914,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
   }
 
   getLastPlayStatus = (): Partial<TailwindReactMusicPlayerState> => {
-    const {
-      theme,
-      defaultPlayMode,
-      playMode,
-      defaultPlayIndex,
-      playIndex,
-    } = this.props
+    const { theme, defaultPlayMode, playMode, defaultPlayIndex, playIndex } =
+      this.props
 
     const status: Partial<TailwindReactMusicPlayerState> = {
       currentTime: 0,
@@ -2195,7 +2194,7 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     this.defaultVolume = Math.max(0, Math.min(defaultVolume, 1))
     const { soundValue = this.defaultVolume } = this.getLastPlayStatus()
     this.setAudioVolume(
-      remember ? soundValue ?? this.defaultVolume : this.defaultVolume,
+      remember ? (soundValue ?? this.defaultVolume) : this.defaultVolume,
     )
   }
 
@@ -2347,9 +2346,8 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     const currentPlayIndex = this.getCurrentPlayIndex()
     if (playIndex !== undefined && currentPlayIndex !== playIndex) {
       this.resetAudioPlayStatus().then(() => {
-        const currentPlayAudio = this.state.audioLists[
-          this.getPlayIndex(playIndex)
-        ]
+        const currentPlayAudio =
+          this.state.audioLists[this.getPlayIndex(playIndex)]
         if (currentPlayAudio && currentPlayAudio[PLAYER_KEY]) {
           this.audioListsPlay(currentPlayAudio[PLAYER_KEY], true)
         }
@@ -2450,7 +2448,6 @@ export default class TailwindReactMusicPlayer extends PureComponent<
           position: audio.currentTime || 0,
         })
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Update media session position state failed: ', error)
       }
     }
@@ -2496,7 +2493,6 @@ export default class TailwindReactMusicPlayer extends PureComponent<
           this.updateMediaSessionPositionState()
         })
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.warn(
           'Warning! The "seekto" media session action is not supported.',
         )
@@ -2610,7 +2606,6 @@ export default class TailwindReactMusicPlayer extends PureComponent<
     // Only a real track change resets the cover rotation — on mount musicSrc
     // goes from '' to the first track, which isn't a "change".
     if (prevState.musicSrc && prevState.musicSrc !== this.state.musicSrc) {
-      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ isResetCoverRotate: true })
     }
 

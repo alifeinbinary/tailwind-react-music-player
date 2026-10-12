@@ -5,19 +5,20 @@ HTML5 music player component for React. Written in **TypeScript**, built with **
 ## Build
 
 ```bash
-yarn build        # clean + vite lib build (ESM+CJS+d.ts) + vite UMD build + tailwind css
+yarn build        # clean + vite lib build (ESM only + d.ts) + tailwind css
 ```
 
-- `yarn build:bundle` — `vite build` → `dist/index.js` (ESM) + `dist/index.cjs` (CJS) + declarations via `vite-plugin-dts`
-- `yarn build:umd` — `vite build --mode umd` → `dist/tailwind-react-music-player.min.js` (UMD, global `TailwindReactMusicPlayer`, externals: react/react-dom)
-- `yarn build:css` — Tailwind CLI: `src/styles/index.css` → `assets/index.css`
-- `yarn demo` — Vite dev server on http://localhost:8084 (config: `example/vite.config.ts`)
-- `yarn build:demo` — production demo build → `example/dist/` (base `/react-music-player/`; `/` on Netlify/Surge via env vars)
+- `yarn build:bundle` — `vite build` → `dist/index.js` (ESM only, `"use client"` banner) + declarations via `vite-plugin-dts`
+- `yarn build:css` — Tailwind CLI: `src/styles/index.css` → `dist/styles.css`
+- `yarn demo` — Vite dev server on http://localhost:8084 (config: `playground/vite.config.ts`)
+- `yarn build:demo` — production demo build → `playground/dist/` (base `/react-music-player/`; `/` on Netlify/Surge via env vars)
 - `yarn test` — `vitest run` (jsdom, Enzyme, globals on; setup: `__tests__/setup.ts`)
-- `yarn typecheck` — `tsc --noEmit`
-- `yarn lint` — eslint (`src`, `__tests__` — `.ts`/`.tsx`) + stylelint (`{example,src}/**/*.css`)
+- `yarn typecheck` — `tsc -p tsconfig.json --noEmit && tsc -p tsconfig.build.json --noEmit`
+- `yarn lint` — eslint (flat config `eslint.config.js`, whole repo) + stylelint (`{playground,src}/**/*.css`)
+- `yarn size` — size-limit on `dist/index.js` + `dist/styles.css`
+- `yarn check:package` — `publint` + `attw` (expected to report Phase-0-known issues; see MIGRATION plan)
 
-All library output goes to `dist/` — there is no `lib/` or `es/` anymore. Package entry points: `main` → `dist/index.cjs`, `module` → `dist/index.js`, `typings` → `dist/index.d.ts`, `unpkg` → the UMD bundle.
+The package is **ESM-only** (`"type": "module"`, `exports` map). All library output goes to `dist/`: `index.js`, `index.d.ts` (+ per-module `.d.ts`), `styles.css`. There is no CJS, no UMD, and no top-level `assets/` anymore — consumers import CSS via `tailwind-react-music-player/styles.css`.
 
 ## Codebase notes
 
@@ -45,6 +46,6 @@ All library output goes to `dist/` — there is no `lib/` or `es/` anymore. Pack
 
 ## Environment notes
 
-- `yarn.lock` resolves against `registry.npmmirror.com` (the original `registry.npm.taobao.org` is defunct). If installs fail with certificate errors, check the registry in the lockfile.
+- Requires Node >= 20.19 (see `engines`). `yarn.lock` resolves against the public `registry.yarnpkg.com`.
 - There is no `postcss.config.js` — Tailwind runs via the CLI (`build:css`) and `@tailwindcss/vite` (demo). Adding a PostCSS config would make Vite double-process CSS.
-- `bundlesize` resolves `brotli-size@4` via a Yarn `resolutions` entry — `brotli-size@0.1.0` pulls in `iltorb`, which cannot compile on modern Node.
+- The demo app lives in `playground/` (renamed from `example/`); docs images live in `docs/assets/`.

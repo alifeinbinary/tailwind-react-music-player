@@ -1,0 +1,12 @@
+[
+  {
+    "path": "dist/index.js",
+    "limit": "30 kB",
+    "disablePlugins": ["@size-limit/rolldown"]
+  },
+  {
+    "path": "dist/styles.css",
+    "limit": "10 kB",
+    "disablePlugins": ["@size-limit/rolldown"]
+  }
+]

@@ -1,4 +1,3 @@
-import React from 'react'
 import Sortable from 'sortablejs'
 import TailwindReactMusicPlayer from '../../src'
 import { mount } from '../utils'
