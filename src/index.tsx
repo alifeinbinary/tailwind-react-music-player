@@ -1,7 +1,7 @@
 /**
  * @name tailwind-react-music-player
- * @description Maybe the best beautiful HTML5 responsive player component for react :)
- * @author Jinke.Li <1359518268@qq.com>
+ * @description A beautiful HTML5 responsive player component for react styled with Tailwind CSS
+ * @author Andrew Halliwell <andrew@alifeinbinary.com>
  * @license MIT
  */
 
