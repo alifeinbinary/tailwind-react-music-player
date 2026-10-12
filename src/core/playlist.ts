@@ -48,7 +48,7 @@ export function removeById(
   id: string,
 ): PlaylistItem[] {
   const index = findIndexById(list, id)
-  if (index === -1) return [...list]
+  if (index === -1) return list as PlaylistItem[]
   return [...list.slice(0, index), ...list.slice(index + 1)]
 }
 

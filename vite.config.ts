@@ -64,7 +64,9 @@ export default defineConfig({
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         'src/types.ts',
+        'src/types/**',
         'src/config/locale.ts',
+        'src/test/**',
         'src/**/*.test.{ts,tsx}',
       ],
       thresholds: {
@@ -77,6 +79,12 @@ export default defineConfig({
           branches: 100,
           functions: 100,
           lines: 100,
+        },
+        'src/hooks/**': {
+          statements: 90,
+          branches: 85,
+          functions: 90,
+          lines: 90,
         },
       },
     },

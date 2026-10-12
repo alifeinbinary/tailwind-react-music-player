@@ -118,8 +118,8 @@ describe('removeById', () => {
     expect(list).toHaveLength(3)
   })
 
-  it('returns an equal list when id is absent', () => {
-    expect(removeById(list, 'zz').map((i) => i.id)).toEqual(['a', 'b', 'c'])
+  it('returns the same ref when id is absent', () => {
+    expect(removeById(list, 'zz')).toBe(list)
   })
 })
 
