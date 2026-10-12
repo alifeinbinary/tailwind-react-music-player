@@ -19,7 +19,7 @@ const styles = {
   glass:
     'trmp:absolute trmp:inset-0 trmp:-z-10 trmp:scale-[3] trmp:bg-cover trmp:bg-center trmp:blur-[80px]',
   count:
-    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-[50%] trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast',
+    'trmp:ml-1 trmp:inline-flex trmp:min-w-4 trmp:justify-center trmp:rounded-[50%] trmp:bg-primary trmp:px-1 trmp:text-[10px] trmp:leading-4 trmp:text-primary-contrast trmp:relative trmp:bottom-3 trmp:right-3',
 }
 
 /** Bottom-bar desktop player panel (mode full, desktop layout). */
@@ -117,15 +117,17 @@ export function DesktopPanel({
             {icons.lyric}
           </IconButton>
         )}
-        <IconButton
-          label={locale.playlist}
-          aria-expanded={playlistOpen}
-          aria-controls={playlistId}
-          onClick={onTogglePlaylist}
-        >
-          {icons.playlist}
+        <div className="trmp:flex trmp:items-center">
+          <IconButton
+            label={locale.playlist}
+            aria-expanded={playlistOpen}
+            aria-controls={playlistId}
+            onClick={onTogglePlaylist}
+          >
+            {icons.playlist}
+          </IconButton>
           <span className={styles.count}>{state.tracks.length}</span>
-        </IconButton>
+        </div>
         {ui.allowModeToggle && (
           <IconButton label={locale.minimize} onClick={onMinimize}>
             {icons.minimize}

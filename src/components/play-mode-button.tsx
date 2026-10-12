@@ -36,21 +36,19 @@ export function PlayModeButton() {
   }
 
   return (
-    <div className={styles.root}>
+    <>
       <IconButton
         label={locale.playMode[state.playMode]}
         onClick={onClick}
         data-play-mode={state.playMode}
       >
-        <span key={state.playMode} className={styles.icon} aria-hidden="true">
-          {iconFor(state.playMode)}
-        </span>
+        {iconFor(state.playMode)}
       </IconButton>
       {toastKey !== null && (
         <Toast key={toastKey} visible className={styles.toast}>
           {locale.playMode[state.playMode]}
         </Toast>
       )}
-    </div>
+    </>
   )
 }

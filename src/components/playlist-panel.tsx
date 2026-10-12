@@ -8,7 +8,7 @@ import { usePlayerContext } from './player-context'
 import { useFocusReturn } from './use-focus-return'
 
 const styles = {
-  root: 'trmp-playlist trmp:fixed trmp:right-0 trmp:top-0 trmp:z-50 trmp:flex trmp:h-playlist-h trmp:w-playlist-w trmp:max-w-full trmp:flex-col trmp:bg-panel trmp:text-panel-text trmp:shadow-panel trmp:animate-slide-in-right trmp:data-[open=false]:hidden',
+  root: 'trmp-playlist trmp:fixed trmp:right-0 trmp:bottom-[var(--trmp-spacing-panel)] trmp:z-50 trmp:flex trmp:h-playlist-h trmp:w-playlist-w trmp:max-w-full trmp:flex-col trmp:bg-panel trmp:text-panel-text trmp:shadow-panel trmp:animate-slide-in-right trmp:data-[open=false]:hidden',
   header:
     'trmp:flex trmp:h-panel-header trmp:items-center trmp:justify-between trmp:border-b trmp:border-panel-muted trmp:px-4',
   list: 'trmp:flex-1 trmp:overflow-y-auto',

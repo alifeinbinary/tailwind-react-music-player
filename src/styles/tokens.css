@@ -22,7 +22,7 @@
   --color-track: #fff;
   --color-track-buffered: rgb(0 0 0 / 11%);
   --color-lyric: var(--trmp-color-primary);
-  --spacing-panel: 80px;
+  --spacing-panel: 60px;
   --spacing-panel-header: 50px;
   --spacing-controller: 80px;
   --spacing-controller-mobile: 60px;
@@ -34,7 +34,7 @@
   --text-lyric-mobile: 16px;
   --ease-player: cubic-bezier(0.43, -0.1, 0.16, 1.1);
   --shadow-panel: 0 0 3px #403f3f;
-  --animate-spin: trmp-spin 2s linear infinite;
+  --animate-spin: trmp-spin 6s linear infinite;
   --animate-scale-in: trmp-scale-in var(--trmp-duration-player)
     var(--trmp-ease-player);
   --animate-scale-out: trmp-scale-out var(--trmp-duration-player)
