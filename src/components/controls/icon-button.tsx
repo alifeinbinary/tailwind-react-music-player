@@ -5,9 +5,9 @@ const styles = {
   base: 'trmp:inline-flex trmp:items-center trmp:justify-center trmp:rounded-[50%] trmp:text-panel-text trmp:transition-colors trmp:hover:text-primary',
   active: 'trmp:text-primary',
   disabled: 'trmp:opacity-40 trmp:cursor-default',
-  sm: 'trmp:size-6',
-  md: 'trmp:size-8',
-  lg: 'trmp:size-10',
+  sm: 'trmp:size-6 trmp:text-lg',
+  md: 'trmp:size-8 trmp:text-2xl',
+  lg: 'trmp:size-10 trmp:text-3xl',
 }
 
 /** Props for {@link IconButton}. */

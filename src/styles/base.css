@@ -1,52 +1,56 @@
 /* Scoped resets — everything lives under .trmp-root so the player's
-   stylesheet never leaks resets into the consumer's page. */
+   stylesheet never leaks resets into the consumer's page. Resets live
+   in @layer base so trmp: utilities (layer utilities) can override
+   them — an unlayered `font: inherit` would win otherwise. */
 
-.trmp-root {
-  box-sizing: border-box;
-  font: inherit;
-}
+@layer base {
+  .trmp-root {
+    box-sizing: border-box;
+    font: inherit;
+  }
 
-.trmp-root *,
-.trmp-root *::before,
-.trmp-root *::after {
-  box-sizing: inherit;
-}
+  .trmp-root *,
+  .trmp-root *::before,
+  .trmp-root *::after {
+    box-sizing: inherit;
+  }
 
-.trmp-root button {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
+  .trmp-root button {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
 
-.trmp-root button:disabled {
-  cursor: default;
-}
+  .trmp-root button:disabled {
+    cursor: default;
+  }
 
-.trmp-root ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .trmp-root ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-.trmp-root :focus-visible {
-  outline: 2px solid var(--trmp-color-primary);
-  outline-offset: 2px;
-}
+  .trmp-root :focus-visible {
+    outline: 2px solid var(--trmp-color-primary);
+    outline-offset: 2px;
+  }
 
-.trmp-root::-webkit-scrollbar {
-  width: 8px;
-  background-color: var(--trmp-color-panel);
-}
+  .trmp-root::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--trmp-color-panel);
+  }
 
-.trmp-root::-webkit-scrollbar-thumb {
-  height: 20px;
-  background-color: var(--trmp-color-primary);
-  opacity: 0.5;
+  .trmp-root::-webkit-scrollbar-thumb {
+    height: 20px;
+    background-color: var(--trmp-color-primary);
+    opacity: 0.5;
+  }
 }
 
 /* Native range input used by RangeSlider. `--trmp-range-fill` (a

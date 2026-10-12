@@ -8,7 +8,7 @@ import type {
 } from 'react'
 
 const styles = {
-  wrap: 'trmp:relative trmp:flex trmp:items-center',
+  wrap: 'trmp:relative trmp:flex trmp:min-w-0 trmp:flex-1 trmp:items-center',
   buffered:
     'trmp:absolute trmp:inset-y-0 trmp:left-0 trmp:my-auto trmp:rounded-[3px] trmp:bg-track-buffered trmp:pointer-events-none',
   input: 'trmp-range trmp:w-full',

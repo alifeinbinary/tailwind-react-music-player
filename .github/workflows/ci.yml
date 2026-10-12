@@ -26,9 +26,9 @@ jobs:
       - run: yarn typecheck
       - run: yarn test:coverage
       - run: yarn build
+      - run: yarn smoke:import
       - run: yarn size
-      # allow-fail until Phase 3 fixes the ESM/packaging issues it reports
-      - run: yarn check:package || true
+      - run: yarn check:package
       - name: Upload coverage
         if: matrix.node == 22
         uses: codecov/codecov-action@v4

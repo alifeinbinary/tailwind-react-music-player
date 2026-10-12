@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { formatTime } from '../../core'
 
 const styles = {
-  base: 'trmp:tabular-nums trmp:text-panel-muted trmp:text-[11px]',
+  base: 'trmp:tabular-nums trmp:text-panel-muted trmp:text-[12px]',
 }
 
 /** Props for {@link Time}. */

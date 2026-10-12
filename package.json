@@ -52,7 +52,7 @@
     "prettier": "prettier --check .",
     "format": "prettier --write .",
     "size": "size-limit",
-    "check:package": "publint --pack npm && attw --pack .",
+    "check:package": "publint --pack npm && attw --pack . --exclude-entrypoints ./styles.css --ignore-rules cjs-resolves-to-esm",
     "smoke:import": "node -e \"import('./dist/index.js').then(()=>console.log('ESM import OK'))\"",
     "release": "semantic-release",
     "prepare": "husky"
@@ -83,13 +83,7 @@
     "component"
   ],
   "dependencies": {
-    "@react-icons/all-files": "^4.1.0",
     "classnames": "^2.5.1",
-    "downloadjs": "^1.4.7",
-    "is-mobile": "^2.2.2",
-    "prop-types": "^15.8.1",
-    "rc-slider": "^11.1.8",
-    "rc-switch": "^3.2.2",
     "react-draggable": "^4.7.2",
     "sortablejs": "^1.15.7"
   },
@@ -98,6 +92,7 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.39.5",
+    "@microsoft/api-extractor": "^7.59.4",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@size-limit/preset-small-lib": "^14.1.0",
@@ -107,9 +102,7 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.7",
-    "@types/downloadjs": "^1",
     "@types/node": "^26.6.4",
-    "@types/prop-types": "^15",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/sortablejs": "^1.15.9",
@@ -125,6 +118,7 @@
     "jsdom": "^26",
     "lint-staged": "^17.6.0",
     "lucide-static": "^1.55.0",
+    "playwright": "^1.64.0",
     "prettier": "^3.9.9",
     "publint": "^0.3.25",
     "react": "19.3.0",

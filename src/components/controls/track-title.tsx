@@ -15,7 +15,8 @@ export interface TrackTitleProps {
   className?: string
 }
 
-const toText = (node: ReactNode): string => {
+/** Extracts plain text from a ReactNode (numbers/strings only). */
+export const reactNodeToText = (node: ReactNode): string => {
   if (typeof node === 'string' || typeof node === 'number') return String(node)
   return ''
 }
@@ -28,11 +29,15 @@ export function TrackTitle({
   className,
 }: TrackTitleProps) {
   const track = info.track
-  const fallback =
-    [track?.name, track?.singer].filter(Boolean).join(' - ') || ''
+  const fallback = [
+    reactNodeToText(track?.name),
+    reactNodeToText(track?.singer),
+  ]
+    .filter(Boolean)
+    .join(' - ')
   const rendered = render?.(info, isMobile)
   const content = rendered ?? fallback
-  const title = rendered ? toText(rendered) : fallback
+  const title = rendered ? reactNodeToText(rendered) : fallback
   return (
     <span
       className={classnames('trmp-track-title', styles.base, className)}

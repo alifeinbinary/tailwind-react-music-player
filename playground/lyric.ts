@@ -1,4 +1,4 @@
-const lyric = [
+export const lyric = [
   '[ti:高尚]',
   '[ar:薛之谦]',
   '[al:高尚]',
@@ -84,5 +84,3 @@ const lyric = [
   '[05:16.22]混音工程师：鲍锐@录顶技Studio',
   '[05:16.65]母带工程师：Friedemann Tishmeyer@Hambug Studio',
 ].join('\n')
-
-export default lyric

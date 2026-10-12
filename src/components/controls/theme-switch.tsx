@@ -4,7 +4,7 @@ import type { ResolvedTheme } from '../../types'
 const styles = {
   base: 'trmp:relative trmp:inline-flex trmp:items-center trmp:rounded-full trmp:border trmp:border-panel-muted trmp:text-[11px] trmp:leading-none trmp:text-panel-muted trmp:px-1 trmp:py-0.5 trmp:gap-1',
   thumb:
-    'trmp:inline-block trmp:rounded-full trmp:px-1.5 trmp:py-0.5 trmp:text-panel-text trmp:data-[on=false]:bg-transparent trmp:data-[on=true]:bg-primary',
+    'trmp:inline-block trmp:rounded-full trmp:px-1.5 trmp:py-0.5 trmp:text-panel-text/70 trmp:data-[on=true]:bg-primary trmp:data-[on=true]:text-white',
 }
 
 /** Props for {@link ThemeSwitch}. */

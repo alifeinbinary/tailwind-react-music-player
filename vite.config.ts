@@ -34,13 +34,14 @@ export default defineConfig({
     dts({
       include: ['src'],
       entryRoot: 'src',
+      bundleTypes: true,
       tsconfigPath: resolve(__dirname, './tsconfig.build.json'),
     }),
   ],
   build: {
     outDir: 'dist',
     lib: {
-      entry: resolve(__dirname, 'src/index.tsx'),
+      entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es'],
       fileName: () => 'index.js',
     },
@@ -54,26 +55,28 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['__tests__/setup.ts', 'src/test/setup.ts'],
-    include: [
-      '__tests__/tests/**/*.test.{ts,tsx,js,jsx}',
-      'src/**/*.test.{ts,tsx}',
-    ],
+    setupFiles: ['src/test/setup.ts'],
+    include: ['src/**/*.test.{ts,tsx}'],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.{ts,tsx}'],
       exclude: [
         'src/types.ts',
         'src/types/**',
-        'src/config/locale.ts',
         'src/test/**',
         'src/**/*.test.{ts,tsx}',
       ],
       thresholds: {
-        statements: 75,
-        branches: 70,
-        functions: 75,
-        lines: 75,
+        statements: 85,
+        branches: 80,
+        functions: 85,
+        lines: 85,
+        'src/components/**': {
+          statements: 85,
+          branches: 80,
+          functions: 85,
+          lines: 85,
+        },
         'src/core/**': {
           statements: 100,
           branches: 100,

@@ -10,6 +10,7 @@
     white
   );
   --color-panel: rgb(0 0 0 / 75%);
+  --color-panel-mobile: rgb(0 0 0 / 92%);
   --color-panel-text: #fff;
   --color-panel-muted: rgb(255 255 255 / 60%);
   --color-controller: #e6e6e6;
@@ -56,6 +57,7 @@
 /* Light theme = token remap on data-theme, not selector overrides. */
 .trmp-root[data-theme='light'] {
   --trmp-color-panel: #fff;
+  --trmp-color-panel-mobile: #fff;
   --trmp-color-panel-text: #7d7d7d;
   --trmp-color-panel-muted: #444;
   --trmp-color-controller: #fff;

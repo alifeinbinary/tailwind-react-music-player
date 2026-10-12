@@ -6,11 +6,10 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
-// TODO(phase-3): promote to error once UI rewrite lands
-const a11yRulesAsWarnings = Object.fromEntries(
+const a11yRulesAsErrors = Object.fromEntries(
   Object.keys(jsxA11y.flatConfigs.strict.rules ?? {}).map((rule) => [
     rule,
-    'warn',
+    'error',
   ]),
 )
 
@@ -41,7 +40,7 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      ...a11yRulesAsWarnings,
+      ...a11yRulesAsErrors,
       'no-console': ['error', { allow: ['warn', 'error'] }],
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': [
