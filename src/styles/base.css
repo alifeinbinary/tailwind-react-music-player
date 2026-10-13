@@ -3,7 +3,7 @@
    in @layer base so trmp: utilities (layer utilities) can override
    them — an unlayered `font: inherit` would win otherwise. */
 
-@layer base {
+@layer trmp-base {
   .trmp-root {
     box-sizing: border-box;
     font: inherit;
