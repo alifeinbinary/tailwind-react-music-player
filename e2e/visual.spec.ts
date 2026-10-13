@@ -19,11 +19,30 @@ const openPlayer = async (page: import('playwright/test').Page, qs: string) => {
   await expect(page.locator('.trmp-root')).toBeAttached()
   // wait until at least one fixed-position child is visible
   await expect(page.locator('.trmp-root > *').first()).toBeVisible()
+  // ?playlist=1 / ?lyric=1 are seeded by a rAF click in the demo app — wait
+  // for the requested surface to finish opening before measuring the clip.
+  if (qs.includes('playlist=1'))
+    await expect(page.locator('.trmp-playlist')).toBeVisible()
+  if (qs.includes('lyric=1'))
+    await expect(page.locator('.trmp-lyric')).toBeVisible()
 }
 
 // .trmp-root is a zero-height container (children are position:fixed), so a
 // plain element screenshot has no size — clip to the union of its visible
 // children instead. This still captures exactly the player's surface.
+const unionClip = async (page: import('playwright/test').Page) => {
+  const kids = await page.locator('.trmp-root > *:visible').all()
+  const boxes = await Promise.all(kids.map((k) => k.boundingBox()))
+  const valid = boxes.filter(
+    (b): b is NonNullable<typeof b> => !!b && b.width > 0 && b.height > 0,
+  )
+  const x0 = Math.min(...valid.map((b) => b.x))
+  const y0 = Math.min(...valid.map((b) => b.y))
+  const x1 = Math.max(...valid.map((b) => b.x + b.width))
+  const y1 = Math.max(...valid.map((b) => b.y + b.height))
+  return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 }
+}
+
 const shot = async (
   name: string,
   qs: string,
@@ -34,19 +53,19 @@ const shot = async (
     `no ${process.platform} baseline for ${name}`,
   )
   await openPlayer(page, qs)
-  const kids = await page.locator('.trmp-root > *:visible').all()
-  const boxes = await Promise.all(kids.map((k) => k.boundingBox()))
-  const valid = boxes.filter(
-    (b): b is NonNullable<typeof b> => !!b && b.width > 0 && b.height > 0,
-  )
-  expect(valid.length).toBeGreaterThan(0)
-  const x0 = Math.min(...valid.map((b) => b.x))
-  const y0 = Math.min(...valid.map((b) => b.y))
-  const x1 = Math.max(...valid.map((b) => b.x + b.width))
-  const y1 = Math.max(...valid.map((b) => b.y + b.height))
-  await expect(page).toHaveScreenshot(`${name}.png`, {
-    clip: { x: x0, y: y0, width: x1 - x0, height: y1 - y0 },
-  })
+  // The clip is fixed at capture time — wait until the union of the player's
+  // surfaces stops changing (open animations, async mounts) before shooting.
+  let prev: string | undefined
+  await expect(async () => {
+    const cur = JSON.stringify(await unionClip(page))
+    const settled = cur === prev
+    prev = cur
+    expect(settled).toBe(true)
+  }).toPass({ timeout: 5000 })
+  const clip = await unionClip(page)
+  expect(clip.width).toBeGreaterThan(0)
+  expect(clip.height).toBeGreaterThan(0)
+  await expect(page).toHaveScreenshot(`${name}.png`, { clip })
 }
 
 test.describe('visual states (desktop)', () => {

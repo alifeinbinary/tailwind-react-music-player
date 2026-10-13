@@ -173,9 +173,13 @@ export default function Demo() {
   // activating the player's own toggles once on mount.
   useEffect(() => {
     if (!flag('playlist') && !flag('lyric')) return
-    const id = requestAnimationFrame(() => {
+    let id = 0
+    const seed = () => {
       const root = document.querySelector('.trmp-root')
-      if (!root) return
+      if (!root) {
+        id = requestAnimationFrame(seed)
+        return
+      }
       if (flag('playlist')) {
         root.querySelector<HTMLElement>('button[aria-controls]')?.click()
       }
@@ -184,7 +188,8 @@ export default function Demo() {
           .querySelector<HTMLElement>('button[aria-label="Toggle lyrics"]')
           ?.click()
       }
-    })
+    }
+    id = requestAnimationFrame(seed)
     return () => cancelAnimationFrame(id)
   }, [])
 
