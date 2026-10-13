@@ -1,3 +1,10 @@
+## [5.0.2](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v5.0.1...v5.0.2) (2026-10-13)
+
+
+### Bug Fixes
+
+* **e2e:** wait for animations to settle before axe scans ([9c13577](https://github.com/alifeinbinary/tailwind-react-music-player/commit/9c13577b978efa104cdbab023bcfa8d3c3229bb0))
+
 ## [5.0.1](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v5.0.0...v5.0.1) (2026-10-13)
 
 
