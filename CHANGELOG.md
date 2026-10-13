@@ -1,3 +1,32 @@
+# [5.0.0](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v4.24.2...v5.0.0) (2026-10-13)
+
+
+* feat!: compose the v5 MusicPlayer and remove the legacy implementation ([d6cb0e7](https://github.com/alifeinbinary/tailwind-react-music-player/commit/d6cb0e7fdca5b4eab6ff83df81d64e9896c22d44))
+
+
+### Bug Fixes
+
+* **docs:** update playground URL in CN.md to match renamed repository ([b32aa0c](https://github.com/alifeinbinary/tailwind-react-music-player/commit/b32aa0cffad0678eb70e00f2f2a22f8061581902))
+* **ui:** adjust playlist badge positioning and panel spacing ([bee3c63](https://github.com/alifeinbinary/tailwind-react-music-player/commit/bee3c639205b7b31e3b358f1ebf825902e0be18d))
+
+
+### Features
+
+* add British English (en_GB) locale and migrate locale files to TypeScript ([129d8d3](https://github.com/alifeinbinary/tailwind-react-music-player/commit/129d8d39157533ab5b6e9ef1591860017b86ed96))
+* **core:** add framework-free player core modules ([7314a42](https://github.com/alifeinbinary/tailwind-react-music-player/commit/7314a427c7fb48f1d6b156ac9c56fe0db86ebb3b))
+* **hooks:** add headless useMusicPlayer and supporting hooks ([3c9ad83](https://github.com/alifeinbinary/tailwind-react-music-player/commit/3c9ad8301811cc7c526cdcbf9ff4bdcf87e76930))
+* **playground:** replace demo tracks with A Life in Binary music and update i18n ([36ad2e3](https://github.com/alifeinbinary/tailwind-react-music-player/commit/36ad2e38d682407a771a77cee1bf9dc2072a77ec))
+* **ui:** token-driven Tailwind theme, generated icons, strict i18n and accessible primitives ([a3f4a6e](https://github.com/alifeinbinary/tailwind-react-music-player/commit/a3f4a6e49d4d12f516305f7976df5489222ef219))
+
+
+### BREAKING CHANGES
+
+* see MIGRATION.md (completed in a later commit).
+
+Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+
 ## [4.24.2](https://github.com/alifeinbinary/react-music-player/compare/v4.24.1...v4.24.2) (2021-09-29)
 
 ### Bug Fixes
