@@ -25,6 +25,21 @@ const openPlayer = async (page: import('playwright/test').Page, qs: string) => {
     await expect(page.locator('.trmp-playlist')).toBeVisible()
   if (qs.includes('lyric=1'))
     await expect(page.locator('.trmp-lyric')).toBeVisible()
+  // Cover art arrives over the network — wait for fetches to quiet down so
+  // captures are stable. Audio elements only fetch metadata once playing or
+  // when preload != 'none'; skip them fast otherwise.
+  await page.waitForLoadState('networkidle')
+  await page
+    .waitForFunction(
+      () =>
+        [...document.querySelectorAll('audio')].every(
+          (a) =>
+            a.readyState >= 1 || a.networkState === 3 || a.preload === 'none',
+        ),
+      undefined,
+      { timeout: 10000 },
+    )
+    .catch(() => {})
 }
 
 // .trmp-root is a zero-height container (children are position:fixed), so a
