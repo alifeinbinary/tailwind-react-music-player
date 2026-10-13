@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v5.0.0...v5.0.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* **a11y:** meet WCAG AA contrast for playlist text in light theme ([ebe81aa](https://github.com/alifeinbinary/tailwind-react-music-player/commit/ebe81aaa032d7fab0b75bfecea76b8f95b2b5430))
+
 # [5.0.0](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v4.24.2...v5.0.0) (2026-10-13)
 
 
