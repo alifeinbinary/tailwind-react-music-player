@@ -32,7 +32,7 @@ describe('LyricOverlay', () => {
     await showLyric()
     const overlay = document.querySelector('.trmp-lyric')!
     expect(overlay).toHaveAttribute('aria-live', 'polite')
-    expect(overlay.textContent).toBe('No lyric')
+    expect(overlay.textContent).toBe('No lyrics available')
   })
 
   it('shows the current lyric line', async () => {
@@ -54,7 +54,7 @@ describe('LyricOverlay', () => {
     })
     await flushMicrotasks()
     const overlay = document.querySelector('.trmp-lyric')!
-    expect(['first line', 'No lyric']).toContain(overlay.textContent)
+    expect(['first line', 'No lyrics available']).toContain(overlay.textContent)
     void TRACKS
   })
 

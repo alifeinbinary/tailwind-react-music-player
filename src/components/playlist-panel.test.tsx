@@ -91,7 +91,7 @@ describe('PlaylistPanel', () => {
     await userEvent.click(
       screen.getByRole('button', { name: 'Clear playlist' }),
     )
-    expect(screen.getByText('No music')).not.toBeNull()
+    expect(screen.getByText('No music available')).not.toBeNull()
   })
 
   it('empty state shows the empty message', async () => {
@@ -102,7 +102,7 @@ describe('PlaylistPanel', () => {
     })
     await flushMicrotasks()
     await userEvent.click(screen.getByRole('button', { name: 'Playlist' }))
-    expect(screen.getByText('No music')).not.toBeNull()
+    expect(screen.getByText('No music available')).not.toBeNull()
     void p
   })
 
