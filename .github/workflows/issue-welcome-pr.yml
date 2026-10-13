@@ -16,5 +16,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Hello @${{ github.event.issue.user.login }}, welcome your PR. or fork the project for Implement this functionality yourself
-            你好 @${{ github.event.issue.user.login }}，期待你的PR, 而不是要求我实现这功能, 当然你也可以自行fork本仓库自行实现。
+            Hello @${{ github.event.issue.user.login }},
+
+            Welcome to the [${{ github.repository }}] repository! We're thrilled to see your contribution. 🎉
+
+            If you're new to this project, please make sure to read our [Contribution Guidelines](https://github.com/${{ github.repository }}/blob/main/CONTRIBUTING.md).
+
+            If you'd like to implement some new functionality or bug fix yourself, you can fork the project and create a PR from your fork. We're here to help if you have any questions or need guidance.
+
+            Looking forward to seeing your contributions! 🚀
