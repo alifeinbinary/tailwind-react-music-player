@@ -99,7 +99,7 @@ When adding a `MusicPlayerUIProps` key you must also add it to `UI_PROP_KEYS` in
 
 ## Environment notes
 
-- Requires Node >= 20.19 (`engines`). `yarn.lock` resolves against the public `registry.yarnpkg.com` — keep it that way.
+- Requires Node >= 22.19 (`engines`). `yarn.lock` resolves against the public `registry.yarnpkg.com` — keep it that way.
 - There is no `postcss.config.js` — Tailwind runs via the CLI (`build:css`) and `@tailwindcss/vite` (demo + browser tests). Adding a PostCSS config would make Vite double-process CSS.
 - The demo app lives in `playground/`; its GH Pages base is `/tailwind-react-music-player/` (`/` on Netlify/Surge via env vars). Docs images live in `docs/assets/`.
 - v4 → v5 breaking changes are documented in `MIGRATION.md`; CN.md still describes the v4 API (banner at the top says so).

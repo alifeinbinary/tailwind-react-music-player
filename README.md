@@ -24,7 +24,7 @@ An accessible, themeable HTML5 music player component for React, styled with Tai
 
 - **React >= 19** (`MusicPlayer` takes `ref` as a plain prop — a React 19 feature)
 - **ESM-only** — no CJS or UMD build; CJS consumers must `import()` or go through a bundler
-- **Node >= 20.19** for the build tooling (the published bundle has no runtime Node dependency)
+- **Node >= 22.19** for the build tooling (the published bundle has no runtime Node dependency)
 
 ## Install
 
