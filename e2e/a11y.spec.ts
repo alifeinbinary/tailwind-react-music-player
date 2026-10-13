@@ -3,7 +3,27 @@ import { test, expect } from 'playwright/test'
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21aa']
 
-const scan = async (page: import('playwright/test').Page) => {
+const scan = async (page: import('playwright/test').Page, qs: string) => {
+  await page.goto(`/?${qs}`)
+  await expect(page.locator('.trmp-root')).toBeAttached()
+  // ?playlist=1 / ?lyric=1 are seeded by a rAF click in the demo app — wait
+  // for the requested surface to finish opening.
+  if (qs.includes('playlist=1'))
+    await expect(page.locator('.trmp-playlist')).toBeVisible()
+  if (qs.includes('lyric=1'))
+    await expect(page.locator('.trmp-lyric')).toBeVisible()
+  // Entrance animations fade opacity 0→1 — axe blends colors through
+  // in-flight opacity and reports false contrast violations mid-animation.
+  // Wait for finite animations to settle (spin/pulse loop forever).
+  await page.waitForFunction(() =>
+    document
+      .getAnimations()
+      .every(
+        (a) =>
+          a.playState !== 'running' ||
+          (a.effect?.getComputedTiming().iterations ?? Infinity) === Infinity,
+      ),
+  )
   const results = await new AxeBuilder({ page }).withTags(TAGS).analyze()
   expect(results.violations).toEqual([])
 }
@@ -31,9 +51,7 @@ test.describe('axe scans (desktop)', () => {
 
   for (const [name, qs] of states) {
     test(`zero violations: ${name}`, async ({ page }) => {
-      await page.goto(`/?${qs}`)
-      await expect(page.locator('.trmp-root')).toBeAttached()
-      await scan(page)
+      await scan(page, qs)
     })
   }
 })
@@ -43,9 +61,7 @@ test.describe('axe scans (mobile)', () => {
 
   for (const [name, qs] of mobileStates) {
     test(`zero violations: ${name}`, async ({ page }) => {
-      await page.goto(`/?${qs}`)
-      await expect(page.locator('.trmp-root')).toBeAttached()
-      await scan(page)
+      await scan(page, qs)
     })
   }
 })
