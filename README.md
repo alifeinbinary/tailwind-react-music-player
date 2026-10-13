@@ -6,6 +6,8 @@ An accessible, themeable HTML5 music player component for React, styled with Tai
 
 ![demo](https://github.com/alifeinbinary/tailwind-react-music-player/blob/master/docs/assets/img/example.gif?raw=true)
 
+**[Live demo](https://alifeinbinary.github.io/tailwind-react-music-player/)** — try the player in your browser before installing.
+
 ## Features
 
 - Full player UI: mini controller, fixed bottom panel, mobile layout, playlist drawer, floating lyric overlay
