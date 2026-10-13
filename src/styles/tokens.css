@@ -5,6 +5,7 @@
 @theme static {
   --color-primary: #31c27c;
   --color-primary-contrast: #05301c;
+  --color-primary-text: var(--trmp-color-primary);
   --color-primary-hover: color-mix(
     in srgb,
     var(--trmp-color-primary) 85%,
@@ -59,8 +60,9 @@
 .trmp-root[data-theme='light'] {
   --trmp-color-panel: #fff;
   --trmp-color-panel-mobile: #fff;
-  --trmp-color-panel-text: #6e6e6e;
+  --trmp-color-panel-text: #565656;
   --trmp-color-panel-muted: #444;
+  --trmp-color-primary-text: #136334;
   --trmp-color-controller: #fff;
   --trmp-color-list-item: #fff;
   --trmp-color-list-item-active: #fafafa;

@@ -14,7 +14,7 @@ const styles = {
   list: 'trmp:flex-1 trmp:overflow-y-auto',
   item: 'trmp:flex trmp:w-full trmp:items-center trmp:bg-list-item trmp:data-[removing]:animate-remove',
   itemButton:
-    'trmp:flex trmp:min-w-0 trmp:flex-1 trmp:items-center trmp:gap-2 trmp:px-3 trmp:py-2 trmp:text-left trmp:hover:bg-list-item-active trmp:data-[current]:bg-list-item-playing trmp:data-[current]:text-primary',
+    'trmp:flex trmp:min-w-0 trmp:flex-1 trmp:items-center trmp:gap-2 trmp:px-3 trmp:py-2 trmp:text-left trmp:hover:bg-list-item-active trmp:data-[current]:bg-list-item-playing trmp:data-[current]:text-primary-text',
   name: 'trmp:truncate',
   singer: 'trmp:truncate trmp:text-panel-muted trmp:text-[12px]',
   statusIcon: 'trmp:text-primary',
