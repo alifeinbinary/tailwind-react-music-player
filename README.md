@@ -102,7 +102,7 @@ Most state can be **controlled** (`value` + `onChange`) or **uncontrolled** (`de
 | `mediaSession` | `boolean` | `false` | Publish Media Session metadata and action handlers |
 | `random` | `() => number` | `Math.random` | Injectable random source for shuffle (tests) |
 
-¹ `<MusicPlayer>` defaults `defaultMode` to `'mini'`; bare `useMusicPlayer` defaults to `'full'`.
+¹ `<MusicPlayer>` defaults `defaultMode` to `'mini'`; bare `useMusicPlayer` defaults to `'full'`. When uncontrolled, entering the mobile layout (on mount or when the viewport changes) collapses a `full` mode to the mini controller, so the full-screen panel only opens once the user engages. A controlled `mode` is never overridden — pass `mode="mini"` on mobile yourself if you want the same behaviour.
 
 `AudioTrack`:
 

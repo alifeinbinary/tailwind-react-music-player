@@ -4,6 +4,7 @@ import {
   useEffect,
   useId,
   useImperativeHandle,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -33,6 +34,12 @@ const styles = {
   audio:
     'trmp:absolute trmp:size-px trmp:overflow-hidden trmp:clip-path-[inset(50%)]',
 }
+
+// The pre-paint effect avoids a one-frame flash of the full mobile
+// panel on load; `useLayoutEffect` warns under SSR when
+// `container={null}` renders inline, hence the fallback.
+const useIsomorphicLayoutEffect =
+  typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 const DEFAULT_UI: PlayerContextValue['ui'] = {
   draggable: true,
@@ -209,6 +216,19 @@ export const MusicPlayer = (
 
   const isMobileLayout = state.isMobile && ui.responsive
   const layout = isMobileLayout ? 'mobile' : 'desktop'
+
+  // Entering the mobile layout (on mount or via a viewport change)
+  // collapses an uncontrolled `full` mode to the mini controller — the
+  // full-screen mobile panel must only open once the user engages. A
+  // controlled `mode` is the parent's decision and is left untouched.
+  const modeControlled = options.mode !== undefined
+  const { setMode } = actions
+  const wasMobileLayout = useRef(false)
+  useIsomorphicLayoutEffect(() => {
+    const entered = isMobileLayout && !wasMobileLayout.current
+    wasMobileLayout.current = isMobileLayout
+    if (entered && !modeControlled && state.mode === 'full') setMode('mini')
+  }, [isMobileLayout, modeControlled, state.mode, setMode])
 
   // When a full-mode panel closes, move focus to the (newly remounted)
   // mini button if nothing else holds it.

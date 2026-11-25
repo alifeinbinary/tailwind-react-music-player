@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import MusicPlayer, {
+  MEDIA_QUERY,
   useMusicPlayer,
   type AudioInfo,
   type AudioTrack,
@@ -142,8 +143,12 @@ export default function Demo() {
   const [theme, setTheme] = useState<Theme>(
     () => queryValue('theme', ['dark', 'light', 'auto']) ?? 'dark',
   )
+  // `mode` is controlled here, so the player won't collapse it on mobile —
+  // start on the mini controller there unless ?mode= says otherwise.
   const [mode, setMode] = useState<PlayerMode>(
-    () => queryValue('mode', ['mini', 'full']) ?? 'full',
+    () =>
+      queryValue('mode', ['mini', 'full']) ??
+      (window.matchMedia(MEDIA_QUERY.MOBILE).matches ? 'mini' : 'full'),
   )
   const [playMode, setPlayMode] = useState<PlayMode>(
     () =>

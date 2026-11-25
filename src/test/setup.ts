@@ -26,11 +26,13 @@ HTMLCanvasElement.prototype.getContext = (() =>
 // jsdom lacks matchMedia. Default stub reports no match; tests that need
 // a mobile layout install their own via `mockMatchMedia` below.
 const listeners = new Set<(e: MediaQueryListEvent) => void>()
+let currentMatches = false
 export const installMatchMedia = (matches = false): void => {
   listeners.clear()
+  currentMatches = matches
   window.matchMedia = (query: string) =>
     ({
-      matches,
+      matches: currentMatches,
       media: query,
       onchange: null,
       addEventListener: (_t: string, cb: (e: MediaQueryListEvent) => void) =>
@@ -42,5 +44,10 @@ export const installMatchMedia = (matches = false): void => {
         listeners.delete(cb),
       dispatchEvent: () => true,
     }) as MediaQueryList
+}
+/** Simulates a viewport change: flips every query and notifies subscribers. */
+export const setMatchMedia = (matches: boolean): void => {
+  currentMatches = matches
+  for (const cb of [...listeners]) cb({ matches } as MediaQueryListEvent)
 }
 installMatchMedia()

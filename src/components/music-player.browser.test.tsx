@@ -12,7 +12,12 @@ const audio = () => document.querySelector('audio') as HTMLAudioElement
 describe('MusicPlayer in a real browser', () => {
   it('plays for real and reports data-status', async () => {
     render(
-      <MusicPlayer audioLists={tracks} defaultMode="full" preload="auto" />,
+      <MusicPlayer
+        audioLists={tracks}
+        defaultMode="full"
+        responsive={false}
+        preload="auto"
+      />,
     )
     // wait until the source is ready — the play button is replaced by a
     // spinner while status === 'loading'
@@ -38,6 +43,7 @@ describe('MusicPlayer in a real browser', () => {
       <MusicPlayer
         audioLists={tracks}
         defaultMode="full"
+        responsive={false}
         autoPlay
         preload="auto"
       />,
@@ -73,6 +79,7 @@ describe('MusicPlayer in a real browser', () => {
       <MusicPlayer
         audioLists={tracks}
         defaultMode="full"
+        responsive={false}
         autoPlay
         keyboardShortcuts
         preload="auto"
@@ -103,7 +110,12 @@ describe('MusicPlayer in a real browser', () => {
 
   it('theme switch toggles data-theme', async () => {
     render(
-      <MusicPlayer audioLists={tracks} defaultMode="full" preload="auto" />,
+      <MusicPlayer
+        audioLists={tracks}
+        defaultMode="full"
+        responsive={false}
+        preload="auto"
+      />,
     )
     await vi.waitFor(() => expect(root()).toBeTruthy(), { timeout: 5000 })
     const initial = root().dataset.theme

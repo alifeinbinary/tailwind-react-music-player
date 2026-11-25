@@ -20,9 +20,18 @@ afterEach(() => {
 })
 
 describe('MobilePanel', () => {
-  it('renders a labelled modal dialog and moves focus into it', async () => {
-    renderPlayer({ defaultMode: 'full' })
+  // The mobile panel only opens via the mini controller — a `full`
+  // default collapses to mini on the mobile layout.
+  const openPanel = async () => {
+    const p = renderPlayer()
     await flushMicrotasks()
+    await userEvent.click(screen.getByRole('button', { name: 'Open player' }))
+    await flushMicrotasks()
+    return p
+  }
+
+  it('renders a labelled modal dialog and moves focus into it', async () => {
+    await openPanel()
     const dialog = screen.getByRole('dialog', {
       name: 'Now playing Song One',
     })
@@ -31,8 +40,7 @@ describe('MobilePanel', () => {
   })
 
   it('Escape minimizes back to the mini controller', async () => {
-    const p = renderPlayer({ defaultMode: 'full' })
-    await flushMicrotasks()
+    const p = await openPanel()
     const dialog = screen.getByRole('dialog', {
       name: 'Now playing Song One',
     })
@@ -63,8 +71,7 @@ describe('MobilePanel', () => {
   })
 
   it('omits the desktop-only volume control', async () => {
-    renderPlayer({ defaultMode: 'full' })
-    await flushMicrotasks()
+    await openPanel()
     expect(screen.queryByRole('slider', { name: 'Volume' })).toBeNull()
   })
 })

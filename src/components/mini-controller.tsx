@@ -6,7 +6,10 @@ import { CircleProgress, Cover, IconButton, reactNodeToText } from './controls'
 import { usePlayerContext } from './player-context'
 
 const styles = {
-  root: 'trmp:fixed trmp:z-50 trmp:flex trmp:items-center trmp:rounded-[50%] trmp:bg-controller trmp:shadow-panel',
+  // `touch-none` keeps the browser from claiming touch gestures for
+  // page scrolling, so Draggable's `allowMobileScroll` can leave
+  // touchstart un-cancelled and taps still synthesize `click`.
+  root: 'trmp:fixed trmp:z-50 trmp:flex trmp:items-center trmp:rounded-[50%] trmp:bg-controller trmp:shadow-panel trmp:touch-none',
   button:
     'trmp:relative trmp:flex trmp:items-center trmp:justify-center trmp:rounded-[50%] trmp:size-controller trmp:in-data-[layout=mobile]:size-controller-mobile trmp:overflow-hidden',
   spinner: 'trmp:absolute trmp:animate-spin trmp:text-primary trmp:text-xl',
@@ -30,13 +33,7 @@ export function MiniController({ onDestroy }: { onDestroy(): void }) {
 
   const progress = state.duration > 0 ? state.currentTime / state.duration : 0
   const onDrag = (_e: DraggableEvent, data: DraggableData) => {
-    dragDistance.current = Math.max(
-      dragDistance.current,
-      Math.hypot(data.x - (data.lastX ?? data.x), 0),
-      Math.abs(data.x) + Math.abs(data.y) > 0
-        ? Math.hypot(data.x - (position?.x ?? 0), data.y - (position?.y ?? 0))
-        : 0,
-    )
+    dragDistance.current += Math.hypot(data.deltaX, data.deltaY)
     setPosition({ x: data.x, y: data.y })
   }
   const onStart = () => {
@@ -103,6 +100,7 @@ export function MiniController({ onDestroy }: { onDestroy(): void }) {
       position={position}
       onStart={onStart}
       onDrag={onDrag}
+      allowMobileScroll
     >
       {controller}
     </Draggable>

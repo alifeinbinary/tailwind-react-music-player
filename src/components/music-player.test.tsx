@@ -3,7 +3,11 @@ import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { installFakeMedia } from '../test/fake-media'
 import type { FakeMediaController } from '../test/fake-media'
-import { installMatchMedia, expectNoViolations } from '../test/setup'
+import {
+  installMatchMedia,
+  expectNoViolations,
+  setMatchMedia,
+} from '../test/setup'
 import { renderPlayer, TRACKS } from '../test/render-component'
 import { flushMicrotasks } from '../test/render-player'
 import { MusicPlayer } from './music-player'
@@ -241,12 +245,71 @@ describe('MusicPlayer — theme', () => {
 })
 
 describe('MusicPlayer — responsive layout', () => {
-  it('renders the mobile dialog when matchMedia matches', async () => {
+  it('starts on the mini controller on mobile even with a full default', async () => {
     installMatchMedia(true)
     const p = renderPlayer({ defaultMode: 'full' })
     await flushMicrotasks()
     expect(p.root()).toHaveAttribute('data-layout', 'mobile')
+    expect(p.root()).toHaveAttribute('data-mode', 'mini')
+    expect(screen.queryByRole('dialog')).toBeNull()
+    // the full-screen panel only opens once the user engages
+    await userEvent.click(screen.getByRole('button', { name: 'Open player' }))
+    await flushMicrotasks()
+    expect(p.root()).toHaveAttribute('data-mode', 'full')
     expect(screen.getByRole('dialog', { name: /now playing/i })).not.toBeNull()
+  })
+
+  it('honours a controlled full mode on mobile without requesting a change', async () => {
+    installMatchMedia(true)
+    const onModeChange = vi.fn()
+    const p = renderPlayer({ mode: 'full', onModeChange })
+    await flushMicrotasks()
+    expect(p.root()).toHaveAttribute('data-layout', 'mobile')
+    expect(p.root()).toHaveAttribute('data-mode', 'full')
+    expect(screen.getByRole('dialog', { name: /now playing/i })).not.toBeNull()
+    expect(onModeChange).not.toHaveBeenCalled()
+  })
+
+  it('leaves a controlled full mode alone when the viewport turns mobile', async () => {
+    installMatchMedia(false)
+    const onModeChange = vi.fn()
+    const p = renderPlayer({ mode: 'full', onModeChange })
+    await flushMicrotasks()
+    act(() => setMatchMedia(true))
+    expect(p.root()).toHaveAttribute('data-layout', 'mobile')
+    expect(p.root()).toHaveAttribute('data-mode', 'full')
+    expect(onModeChange).not.toHaveBeenCalled()
+  })
+
+  it('collapses an uncontrolled full mode when the viewport turns mobile', async () => {
+    installMatchMedia(false)
+    const onModeChange = vi.fn()
+    const p = renderPlayer({ defaultMode: 'full', onModeChange })
+    await flushMicrotasks()
+    expect(p.root()).toHaveAttribute('data-mode', 'full')
+    act(() => setMatchMedia(true))
+    expect(p.root()).toHaveAttribute('data-layout', 'mobile')
+    expect(p.root()).toHaveAttribute('data-mode', 'mini')
+    expect(onModeChange).toHaveBeenCalledWith('mini')
+  })
+
+  it('collapses again on mobile re-entry, but not while staying mobile', async () => {
+    installMatchMedia(true)
+    const p = renderPlayer({ defaultMode: 'full' })
+    await flushMicrotasks()
+    expect(p.root()).toHaveAttribute('data-mode', 'mini')
+    // engaging on mobile opens the panel and it stays open
+    await userEvent.click(screen.getByRole('button', { name: 'Open player' }))
+    await flushMicrotasks()
+    expect(p.root()).toHaveAttribute('data-mode', 'full')
+    // leave mobile: the desktop panel shows the same full mode
+    act(() => setMatchMedia(false))
+    expect(p.root()).toHaveAttribute('data-layout', 'desktop')
+    expect(p.root()).toHaveAttribute('data-mode', 'full')
+    // re-enter mobile: collapses to mini again
+    act(() => setMatchMedia(true))
+    expect(p.root()).toHaveAttribute('data-layout', 'mobile')
+    expect(p.root()).toHaveAttribute('data-mode', 'mini')
   })
 
   it('renders desktop when matchMedia does not match', async () => {
@@ -292,6 +355,11 @@ describe('MusicPlayer — axe', () => {
     if (mobile) installMatchMedia(true)
     render(<MusicPlayer audioLists={TRACKS} container={null} {...props} />)
     await flushMicrotasks()
+    if (mobile) {
+      // mobile starts on the mini controller — open the panel to scan it
+      await userEvent.click(screen.getByRole('button', { name: 'Open player' }))
+      await flushMicrotasks()
+    }
     await expectNoViolations(
       document.querySelector('.trmp-root') as HTMLElement,
     )
