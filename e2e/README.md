@@ -20,7 +20,7 @@ To regenerate after an intentional visual change, run the suite inside the offic
 ```bash
 docker run --rm -v "$PWD":/work -w /work \
   mcr.microsoft.com/playwright:v1.64.0-noble \
-  bash -c "yarn --frozen-lockfile && yarn playwright test --update-snapshots"
+  bash -c "yarn install --immutable && yarn playwright test --update-snapshots"
 ```
 
 On non-Linux hosts, `visual.spec.ts` skips a state only when its baseline file is missing — committed Linux baselines still run and will diff against local rendering, which is expected. CI is the visual gate.

@@ -4,6 +4,7 @@ coverage
 playground/dist
 CHANGELOG.md
 yarn.lock
+.yarn
 LICENSE
 LICENCE
 netlify.toml

@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 22
           cache: yarn
-      - run: yarn --frozen-lockfile
+      - run: yarn install --immutable
       - run: yarn lint
       - run: yarn typecheck
       - run: yarn playwright install --with-deps chromium

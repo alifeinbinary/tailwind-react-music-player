@@ -5,12 +5,12 @@ Thanks for taking the time to contribute. This document covers the dev setup, te
 ## Setup
 
 - **Node >= 20.19** (see `engines` in `package.json`)
-- **Yarn 1.x** — the lockfile resolves against `registry.yarnpkg.com`; please don't regenerate it with a different registry
+- **Yarn 4** — pinned via `packageManager` and the committed `.yarn/releases/` binary (`yarnPath` in `.yarnrc.yml`), so any globally installed `yarn` (even 1.x) delegates to it; no Corepack needed. The lockfile resolves against `registry.yarnpkg.com`; please don't regenerate it with a different registry
 
 ```bash
 git clone https://github.com/alifeinbinary/tailwind-react-music-player.git
 cd tailwind-react-music-player
-yarn --frozen-lockfile
+yarn install --immutable
 ```
 
 ## Dev loop

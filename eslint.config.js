@@ -15,7 +15,7 @@ const a11yRulesAsErrors = Object.fromEntries(
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'coverage', 'playground/dist', 'node_modules'],
+    ignores: ['dist', 'coverage', 'playground/dist', 'node_modules', '.yarn'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
