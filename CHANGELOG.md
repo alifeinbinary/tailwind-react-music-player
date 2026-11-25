@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v5.0.2...v5.0.3) (2026-11-25)
+
+
+### Bug Fixes
+
+* collapse uncontrolled full player on mobile entry ([22d4e02](https://github.com/alifeinbinary/tailwind-react-music-player/commit/22d4e020e2a38500e7f9ea112eadbb36c8a4324b))
+
 ## [5.0.2](https://github.com/alifeinbinary/tailwind-react-music-player/compare/v5.0.1...v5.0.2) (2026-10-13)
 
 
